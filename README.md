@@ -1,1 +1,1 @@
-# team-system
+# tourney-system
