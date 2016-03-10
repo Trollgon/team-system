@@ -5,7 +5,7 @@
 		<packagedescription><![CDATA[Tourney system for WoltLab Community Framework™]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>1.0.0 Alpha 1</version>
-		<date>2016-03-09</date>
+		<date>2016-03-11</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -20,6 +20,7 @@
 	<instructions type="install">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="pageMenu">pagemenu.xml</instruction>
 		<instruction type="script">acp/install_de_wbbaddons_dummy_app.php</instruction>
 	</instructions>
@@ -27,6 +28,7 @@
 	<instructions type="update" fromversion="*">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="pageMenu">pagemenu.xml</instruction>
 		<instruction type="script">acp/install_de_wbbaddons_dummy_app.php</instruction>
 	</instructions>
