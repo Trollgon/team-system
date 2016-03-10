@@ -9,10 +9,10 @@ use wcf\system\WCF;
 /**
  * Application core.
  *
- * @author	Tim Düsterhus
- * @copyright	2011 - 2012 Tim Düsterhus
+ * @author	Trollgon
+ * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.wbbaddons.dummy.app
+ * @package	de.trollgon.tourneysystem
  */
 class TOURNEYSYSTEMCore extends AbstractApplication {
 	/**
