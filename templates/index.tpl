@@ -20,6 +20,21 @@
 
 {include file='userNotice'}
 
+<div class="contentNavigation">
+    {hascontent}
+        <nav>
+            <ul>
+                {content}
+                    <li><a href="{link application='tourneysystem' controller='AddTeam'}{/link}"
+                           title="{lang}tourneysystem.team.add{/lang}" class="button"><span
+                                class="icon icon16 icon-asterisk"></span>
+                        <span>{lang}tourneysystem.team.add{/lang}</span></a></li>
+                {event name='contentNavigationButtonsTop'}
+                {/content}
+            </ul>
+        </nav>
+    {/hascontent}
+</div>
 
 {include file='footer' sandbox=false}
 </body>
