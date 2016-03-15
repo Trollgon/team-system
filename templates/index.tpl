@@ -29,6 +29,10 @@
                            title="{lang}tourneysystem.team.add{/lang}" class="button"><span
                                 class="icon icon16 icon-asterisk"></span>
                         <span>{lang}tourneysystem.team.add{/lang}</span></a></li>
+					<li><a href="{link application='tourneysystem' controller='TeamPage'}{/link}"
+                           title="{lang}tourneysystem.team.page.user{/lang}" class="button"><span
+                                class="icon icon16 icon-group"></span>
+                        <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
                 {event name='contentNavigationButtonsTop'}
                 {/content}
             </ul>
