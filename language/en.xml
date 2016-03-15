@@ -4,7 +4,12 @@
 		<item name="tourneysystem.header.menu.index"><![CDATA[Tourneys]]></item>
 		<item name="tourneysystem.header.addTeam"><![CDATA[Create new team]]></item>
 	</category>
+	
 	<category name="tourneysystem.team">
 		<item name="tourneysystem.team.add"><![CDATA[create new team]]></item>
+	</category>
+	
+	<category name="tourneysystem.team.page">
+		<item name="tourneysystem.team.page.user"><![CDATA[my team]]></item>
 	</category>
 </language>
