@@ -4,7 +4,7 @@
 		<packagename>Tourney system</packagename>
 		<packagedescription><![CDATA[Tourney system for WoltLab Community Framework™]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>1.0.0 Alpha 1</version>
+		<version>1.0.0 Alpha 2</version>
 		<date>2016-03-11</date>
 	</packageinformation>
 	
