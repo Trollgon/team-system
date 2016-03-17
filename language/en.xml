@@ -5,8 +5,15 @@
 		<item name="tourneysystem.header.addTeam"><![CDATA[Create new team]]></item>
 	</category>
 	
-	<category name="tourneysystem.team">
+	<category name="tourneysystem.team.add">
 		<item name="tourneysystem.team.add"><![CDATA[create new team]]></item>
+		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team, {$user->username}.<br/> Your team is now created.]]></item>
+	</category>
+	
+	<category name="tourneysystem.team.overview">
+		<item name="tourneysystem.team.overview.basic"><![CDATA[Basic Information]]></item>
+		<item name="tourneysystem.team.overview.name"><![CDATA[Your teamname]]></item>
+		<item name="tourneysystem.team.overview.tag"><![CDATA[Your teamtag]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.page">
