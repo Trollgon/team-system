@@ -25,7 +25,7 @@
         <nav>
             <ul>
                 {content}
-                    <li><a href="{link application='tourneysystem' controller='TeamAdd'}{/link}"
+                    <li><a href="{link application='tourneysystem' controller='TeamCreate'}{/link}"
                            title="{lang}tourneysystem.team.add{/lang}" class="button"><span
                                 class="icon icon16 icon-asterisk"></span>
                         <span>{lang}tourneysystem.team.add{/lang}</span></a></li>

@@ -7,13 +7,19 @@
 	
 	<category name="tourneysystem.team.add">
 		<item name="tourneysystem.team.add"><![CDATA[create new team]]></item>
-		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team, {$user->username}.<br/> Your team is now created.]]></item>
+		<item name="tourneysystem.team.add.name.error.notValid"><![CDATA[teamname is invalid.]]></item>
+		<item name="tourneysystem.team.add.name.error.notUnique"><![CDATA[teamname is already in use.]]></item>
+		<item name="tourneysystem.team.add.tag.error.notValid"><![CDATA[teamtag is invalid.]]></item>
+		<item name="tourneysystem.team.add.tag.error.notUnique"><![CDATA[teamtag is already in use.]]></item>
+		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/> It is now created.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.overview">
 		<item name="tourneysystem.team.overview.basic"><![CDATA[Basic Information]]></item>
 		<item name="tourneysystem.team.overview.name"><![CDATA[Your teamname]]></item>
+		<item name="tourneysystem.team.overview.name.description"><![CDATA[The teamname needs to be unique and between 2 and 32 signs.]]></item>
 		<item name="tourneysystem.team.overview.tag"><![CDATA[Your teamtag]]></item>
+		<item name="tourneysystem.team.overview.tag.description"><![CDATA[Your teamtag needs to be unique and between 2 and 4 signs.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.page">
