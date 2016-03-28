@@ -3,7 +3,6 @@ namespace tourneysystem\form;
 use tourneysystem\data\team\Team;
 use tourneysystem\data\team\TeamAction;
 use tourneysystem\data\team\TeamEditor;
-use tourneysystem\form\TeamAddForm;
 use tourneysystem\util\TeamUtil;
 use wcf\form\AbstractForm;
 use wcf\page\AbstractPage;
@@ -23,6 +22,15 @@ use wcf\system\exception\UserInputException;
  */
 class TeamCreateForm extends AbstractForm {
 	
+	/**
+
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+
+	 */
+
+	public $activeMenuItem = 'tourneysystem.header.menu.teams';
+	
+	public	$platform = '';
 	public 	$teamname = '';
 	public 	$teamtag = '';
 
@@ -30,7 +38,7 @@ class TeamCreateForm extends AbstractForm {
 			'teamname' => '',
 			'teamTag' => '',
 			'leaderID' => '',
-			'leaderName' => ''
+			'platform' => '',
 		);
 
 	public function readFormParameters() {
@@ -42,7 +50,7 @@ class TeamCreateForm extends AbstractForm {
 			$this->formData['teamtag'] = StringUtil::trim($_POST['teamtag']);
 		}
 		$this->formData['leaderID'] =  WCF::getUser()->userID;
-		$this->formData['leaderName'] = WCF::getUser()->username;
+		$this->formData['platform'] = StringUtil::trim($_POST['platform']);
 	}
 	
 	/**
@@ -57,9 +65,13 @@ class TeamCreateForm extends AbstractForm {
 		if (isset($_POST['teamtag'])) {
 			$this->teamtag = StringUtil::trim($_POST['teamtag']);
 		}
+		if (isset($_POST['platform'])) {
+			$this->platform = StringUtil::trim($_POST['platform']);
+		}
 		
 		$this->validateTeamname($this->teamname);
 		$this->validateTeamtag($this->teamtag);
+		$this->validateplatform($this->platform, WCF::getUser()->userID);
 
 	} 
 	
@@ -87,7 +99,7 @@ class TeamCreateForm extends AbstractForm {
 	/**
 	 * Throws a UserInputException if the teamtag is not unique or not valid.
 	 * 
-	 * @param	string		$teamname
+	 * @param	string		$teamtag
 	 */
 	protected function validateTeamtag($teamtag) {
 		if (empty($teamtag)) {
@@ -104,34 +116,44 @@ class TeamCreateForm extends AbstractForm {
 			throw new UserInputException('teamtag', 'notUnique');
 		}
 	}
-
 	
-	public function save() {
-			parent::save();
-			
-			$data = array(
-				'data' => array(
-					'teamName'		=> $this->formData['teamname'], 
-					'teamTag'		=> $this->formData['teamtag'], 
-					'leaderID'		=> $this->formData['leaderID'],
-					'leaderName'	=> $this->formData['leaderName'],
-					
-				),
-			);
-			$action = new TeamAction(array(), 'create', $data);
-			$action->executeAction(); 
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Index', array(
-				'application' => 'tourneysystem'
-			)),WCF::getLanguage()->get('tourneysystem.team.add.successfulRedirect'), 10);				
-			exit;
+	protected function validateplatform($platform, $userID) {
+		if (empty($platform)) {
+			throw new UserInputException('platform');
+		}
+		// check if user already has a  team for this platform
+		if (!TeamUtil::isFreePlatformPlayer($platform, $userID)) {
+			throw new UserInputException('teamtag', 'notUnique');
+		}
 	}
 	
-		public function assignVariables() {
-			parent::assignVariables();
-			WCF::getTPL()->assign(array(
-				'formData' => $this->formData,
-				'teamname' => $this->teamname
-			));
+	public function save() {
+		parent::save();
+		$data = array(
+		'data' => array(
+			'teamName'		=> $this->formData['teamname'], 
+			'teamTag'		=> $this->formData['teamtag'], 
+			'leaderID'		=> $this->formData['leaderID'],
+			'platform'	=> $this->formData['platform'],
+			
+			),
+		);
+		$action = new TeamAction(array(), 'create', $data);
+		$action->executeAction();
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamsList', array(
+			'application' => 'tourneysystem'
+		)),WCF::getLanguage()->get('tourneysystem.team.add.successfulRedirect'), 10);				
+		exit;
+	}
+	
+	public function assignVariables() {
+		parent::assignVariables();
+		WCF::getTPL()->assign(array(
+			'formData' => $this->formData,
+			'teamname' => $this->teamname,
+			'teamtag' => $this->teamtag,
+			'platform' => $this->platform
+		));
 	}
 
 }

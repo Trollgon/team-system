@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'tourneysystem.header.menu.index'}{lang}tourneysystem.header.menu.index{/lang} - {/if}{PAGE_TITLE|language}</title>
+	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'tourneysystem.header.menu.teams'}{lang}tourneysystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' sandbox=false}
 </head>
@@ -22,6 +22,27 @@
 	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}tourneysystem.team.overview.basic{/lang}</legend>
+			
+			<dl{if $errorField == 'platform'} class="formError"{/if}>
+				<dt><label for="platform">{lang}tourneysystem.team.overview.platform{/lang}</label></dt>
+				<dd>
+					<select id="platform" name="platform">
+						<option value="" selected>{lang}tourneysystem.team.overview.platform.choose{/lang}</option>
+						<option value="PC" {if $platform=='PC'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.pc{/lang}</option>
+						<option value="PS4" {if $platform=='PS4'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.ps4{/lang}</option>
+						<option value="PS3" {if $platform=='PS3'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.ps3{/lang}</option>
+						<option value="'XBOX 1" {if $platform=='XBOX 1'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.xbox1{/lang}</option>
+						<option value="XBOX 360" {if $platform=='XBOX 360'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.xbox360{/lang}</option>
+					</select>
+					{if $errorField == 'platform'}
+							<small class="innerError">
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
+								{if $errorType == 'notUnique'}{lang}tourneysystem.team.add.platform.error.notUnique{/lang}{/if}
+							</small>
+						{/if}
+					<small>{lang}tourneysystem.team.overview.platform.description{/lang}</small>
+				</dd>
+			</dl>
 			
 			<dl{if $errorField == 'teamname'} class="formError"{/if}>
 				<dt><label for="teamname">{lang}tourneysystem.team.overview.name{/lang}</label></dt>

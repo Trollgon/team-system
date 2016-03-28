@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="tourneysystem.header">
-		<item name="tourneysystem.header.menu.index"><![CDATA[Tourneys]]></item>
-		<item name="tourneysystem.header.addTeam"><![CDATA[Create new team]]></item>
+	<item name="tourneysystem.header.addTeam"><![CDATA[Create new team]]></item>
+		<item name="tourneysystem.header.menu.teams"><![CDATA[Teams]]></item>
+		<item name="tourneysystem.header.menu.tourneys"><![CDATA[Tourneys]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.add">
@@ -16,10 +17,19 @@
 	
 	<category name="tourneysystem.team.overview">
 		<item name="tourneysystem.team.overview.basic"><![CDATA[Basic Information]]></item>
-		<item name="tourneysystem.team.overview.name"><![CDATA[Your teamname]]></item>
-		<item name="tourneysystem.team.overview.name.description"><![CDATA[The teamname needs to be unique and between 2 and 32 signs.]]></item>
-		<item name="tourneysystem.team.overview.tag"><![CDATA[Your teamtag]]></item>
-		<item name="tourneysystem.team.overview.tag.description"><![CDATA[Your teamtag needs to be unique and between 2 and 4 signs.]]></item>
+		<item name="tourneysystem.team.overview.name"><![CDATA[Teamname]]></item>
+		<item name="tourneysystem.team.overview.name.description"><![CDATA[Teamname must be 3 up to 25 characters long and unique.]]></item>
+		<item name="tourneysystem.team.overview.noTeams"><![CDATA[There are no teams so far.]]></item>
+		<item name="tourneysystem.team.overview.platform"><![CDATA[Platform]]></item>
+		<item name="tourneysystem.team.overview.platform.description"><![CDATA[Pick the platform your team will be competing on.]]></item>
+		<item name="tourneysystem.team.overview.platform.choose"><![CDATA[]]></item>
+		<item name="tourneysystem.team.overview.platform.pc"><![CDATA[PC]]></item>
+		<item name="tourneysystem.team.overview.platform.ps3"><![CDATA[PS3]]></item>
+		<item name="tourneysystem.team.overview.platform.ps4"><![CDATA[PS4]]></item>
+		<item name="tourneysystem.team.overview.platform.xbox1"><![CDATA[XBOX One]]></item>
+		<item name="tourneysystem.team.overview.platform.xbox360"><![CDATA[XBOX 360]]></item>
+		<item name="tourneysystem.team.overview.tag"><![CDATA[Teamtag]]></item>
+		<item name="tourneysystem.team.overview.tag.description"><![CDATA[Teamtag must be 2 up to 4 characters long and unique.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.page">

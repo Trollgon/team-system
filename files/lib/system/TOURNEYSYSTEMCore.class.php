@@ -28,10 +28,10 @@ class TOURNEYSYSTEMCore extends AbstractApplication {
 			return;
 		}
 		
-		PageMenu::getInstance()->setActiveMenuItem('tourneysystem.header.menu.index');
+		PageMenu::getInstance()->setActiveMenuItem('tourneysystem.header.menu.tourneys');
 		WCF::getBreadcrumbs()->add(new Breadcrumb(
-			WCF::getLanguage()->get('tourneysystem.header.menu.index'), 
-			LinkHandler::getInstance()->getLink('Index', array(
+			WCF::getLanguage()->get('tourneysystem.header.menu.tourneys'), 
+			LinkHandler::getInstance()->getLink('Tourneys', array(
 				'application' => 'tourneysystem'
 			))
 		));
