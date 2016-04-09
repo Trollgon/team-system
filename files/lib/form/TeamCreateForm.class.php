@@ -1,9 +1,11 @@
 <?php
 namespace tourneysystem\form;
-use tourneysystem\data\team\Team;
-use tourneysystem\data\team\TeamAction;
-use tourneysystem\data\team\TeamEditor;
 use tourneysystem\util\TeamUtil;
+use tourneysystem\data\team\PcTeamAction;
+use tourneysystem\data\team\Ps4TeamAction;
+use tourneysystem\data\team\Ps3TeamAction;
+use tourneysystem\data\team\Xb1TeamAction;
+use tourneysystem\data\team\Xb360TeamAction;
 use wcf\form\AbstractForm;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
@@ -38,7 +40,6 @@ class TeamCreateForm extends AbstractForm {
 			'teamname' => '',
 			'teamTag' => '',
 			'leaderID' => '',
-			'platform' => '',
 		);
 
 	public function readFormParameters() {
@@ -50,7 +51,6 @@ class TeamCreateForm extends AbstractForm {
 			$this->formData['teamtag'] = StringUtil::trim($_POST['teamtag']);
 		}
 		$this->formData['leaderID'] =  WCF::getUser()->userID;
-		$this->formData['platform'] = StringUtil::trim($_POST['platform']);
 	}
 	
 	/**
@@ -71,8 +71,7 @@ class TeamCreateForm extends AbstractForm {
 		
 		$this->validateTeamname($this->teamname);
 		$this->validateTeamtag($this->teamtag);
-		$this->validateplatform($this->platform, WCF::getUser()->userID);
-
+		$this->validateplatform($this->platform);
 	} 
 	
 	/**
@@ -117,13 +116,13 @@ class TeamCreateForm extends AbstractForm {
 		}
 	}
 	
-	protected function validateplatform($platform, $userID) {
+	protected function validateplatform($platform) {
 		if (empty($platform)) {
 			throw new UserInputException('platform');
 		}
 		// check if user already has a  team for this platform
-		if (!TeamUtil::isFreePlatformPlayer($platform, $userID)) {
-			throw new UserInputException('teamtag', 'notUnique');
+		if (!TeamUtil::isFreePlatformPlayer($platform, "leaderID", WCF::getUser()->userID)) {
+			throw new UserInputException('platform', 'notUnique');
 		}
 	}
 	
@@ -134,11 +133,25 @@ class TeamCreateForm extends AbstractForm {
 			'teamName'		=> $this->formData['teamname'], 
 			'teamTag'		=> $this->formData['teamtag'], 
 			'leaderID'		=> $this->formData['leaderID'],
-			'platform'	=> $this->formData['platform'],
-			
 			),
 		);
-		$action = new TeamAction(array(), 'create', $data);
+		switch ($this->platform) {
+			case 1:
+				$action = new PcTeamAction(array(), 'create', $data);
+				break;
+			case 2:
+				$action = new Ps4TeamAction(array(), 'create', $data);
+				break;
+			case 3:
+				$action = new Ps3TeamAction(array(), 'create', $data);
+				break;
+			case 4:
+				$action = new Xb1TeamAction(array(), 'create', $data);
+				break;
+			case 5:
+				$action = new Xb360TeamAction(array(), 'create', $data);
+				break;
+		}
 		$action->executeAction();
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamsList', array(
 			'application' => 'tourneysystem'

@@ -40,14 +40,34 @@ final class TeamUtil {
 	 */
 	public static function isAvailableTeamname($name) {
 		
-		$sql = "SELECT	COUNT(teamname) AS count
-			FROM	tourneysystem1_teams
-			WHERE	teamname = ?";
-			
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($name));
-		$row = $statement->fetchArray();
-		return $row['count'] == 0;
+		$databases = array(
+				"SELECT	COUNT(teamname) AS count
+						FROM	tourneysystem1_teams_pc
+						WHERE	teamname = ?",
+				"SELECT	COUNT(teamname) AS count
+						FROM	tourneysystem1_teams_ps4
+						WHERE	teamname = ?",
+				"SELECT	COUNT(teamname) AS count
+						FROM	tourneysystem1_teams_ps3
+						WHERE	teamname = ?",
+				"SELECT	COUNT(teamname) AS count
+						FROM	tourneysystem1_teams_xb1
+						WHERE	teamname = ?",
+				"SELECT	COUNT(teamname) AS count
+						FROM	tourneysystem1_teams_xb360
+						WHERE	teamname = ?"
+		);
+		
+		$row = 0;
+		
+		foreach ($databases as &$sql) {
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($name));
+			$rowAdd = $statement->fetchArray();
+			$row = $row + $rowAdd['count'];
+		}
+		
+		return $row == 0;
 	}
 
 	/**
@@ -61,22 +81,16 @@ final class TeamUtil {
 
 		// minimum length is 2 characters, maximum length is 4 characters
 		if (mb_strlen($tag) < 2 || mb_strlen($tag) > 4) {
-
 			return false;
-
 		}
 
 		// check illegal characters
 		if (!preg_match('!^[^,\n]+$!', $tag)) {
-
 			return false;
-
 		}
 		
 		return true;
 	}
-
-	
 
 	/**
 	 * Returns true if the given teamtag is available.
@@ -87,14 +101,34 @@ final class TeamUtil {
 
 	public static function isAvailableTeamtag($tag) {
 		
-		$sql = "SELECT	COUNT(teamtag) AS count
-			FROM	tourneysystem1_teams
-			WHERE	teamtag = ?";
-			
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($tag));
-		$row = $statement->fetchArray();
-		return $row['count'] == 0;
+		$databases = array(
+				"SELECT	COUNT(teamtag) AS count
+						FROM	tourneysystem1_teams_pc
+						WHERE	teamtag = ?",
+				"SELECT	COUNT(teamtag) AS count
+						FROM	tourneysystem1_teams_ps4
+						WHERE	teamtag = ?",
+				"SELECT	COUNT(teamtag) AS count
+						FROM	tourneysystem1_teams_ps3
+						WHERE	teamtag = ?",
+				"SELECT	COUNT(teamtag) AS count
+						FROM	tourneysystem1_teams_xb1
+						WHERE	teamtag = ?",
+				"SELECT	COUNT(teamtag) AS count
+						FROM	tourneysystem1_teams_xb360
+						WHERE	teamtag = ?"
+		);
+		
+		$row = 0;
+		
+		foreach ($databases as &$sql) {
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($tag));
+			$rowAdd = $statement->fetchArray();
+			$row = $row + $rowAdd['count'];
+		}
+		
+		return $row == 0;
 
 	}
 	
@@ -105,16 +139,42 @@ final class TeamUtil {
 	 * @return	boolean
 	 */
 	 
-	public static function isFreePlatformPlayer($platform, $user) {
-		 
-		$sql = "SELECT	*
-			FROM	tourneysystem1_teams
-			WHERE	platform = 4 AND (leaderID = 1 OR player2ID = 'user' OR player3ID = 'user' OR player4ID = 'user' OR sub1ID = 'user' OR sub2ID = 'user' OR sub3ID = 'user')";
-			
+	public static function isFreePlatformPlayer($platform, $role, $user) {
+		
+		switch ($platform) {
+			case 1:
+				$sql = "SELECT	COUNT(" . $role . ") AS count
+						FROM	tourneysystem1_teams_pc
+						WHERE	" . $role . " = ?";
+				break;
+			case 2:
+				$sql = "SELECT	COUNT(" . $role . ") AS count
+						FROM	tourneysystem1_teams_ps4
+						WHERE	" . $role . " = ?";
+				break;
+			case 3:
+				$sql = "SELECT	COUNT(" . $role . ") AS count
+						FROM	tourneysystem1_teams_ps3
+						WHERE	" . $role . " = ?";
+				break;
+			case 4:
+				$sql = "SELECT	COUNT(" . $role . ") AS count
+						FROM	tourneysystem1_teams_xb1
+						WHERE	" . $role . " = ?";
+				break;
+			case 5:
+				$sql = "SELECT	COUNT(" . $role . ") AS count
+						FROM	tourneysystem1_teams_xb360
+						WHERE	" . $role . " = ?";
+				break;
+		}
+		
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($platform));
+		$statement->execute(array($user));
 		$row = $statement->fetchArray();
-		return $row == 0;
+		
+		
+		return $row['count'] == 0;
 		 
 	}
 }
