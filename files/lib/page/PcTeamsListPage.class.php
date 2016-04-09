@@ -2,9 +2,10 @@
 
 namespace tourneysystem\page;
 
-use wcf\page\AbstractPage;
+use tourneysystem\data\team\PcTeamList;
 
 use wcf\system\WCF;
+use wcf\page\SortablePage;
 
 /**
 
@@ -26,23 +27,43 @@ use wcf\system\WCF;
 
  */
 
-class TeamsListPage extends AbstractPage {
+class PcTeamsListPage extends SortablePage {
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
+
 	public $activeMenuItem = 'tourneysystem.header.menu.teams';
 
 	
+	/**
+	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
+	 */
 
+	public $objectListClassName = 'tourneysystem\data\team\PcTeamList';
+	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage
 	 */
-
+	
 	public $itemsPerPage = 20;
 	
 	public $defaultSortField = 'teamName';
 	public $validSortFields = array('teamID');
+
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
+
+	public function readParameters() {
+
+		parent::readParameters();
+	
+		$list =  new PcTeamList();
+		$list->readObjects();
+		$objects = $list->getObjects(); 
+		
+	}
 
 }
 

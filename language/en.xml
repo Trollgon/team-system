@@ -8,10 +8,11 @@
 	
 	<category name="tourneysystem.team.add">
 		<item name="tourneysystem.team.add"><![CDATA[create new team]]></item>
-		<item name="tourneysystem.team.add.name.error.notValid"><![CDATA[teamname is invalid.]]></item>
-		<item name="tourneysystem.team.add.name.error.notUnique"><![CDATA[teamname is already in use.]]></item>
-		<item name="tourneysystem.team.add.tag.error.notValid"><![CDATA[teamtag is invalid.]]></item>
-		<item name="tourneysystem.team.add.tag.error.notUnique"><![CDATA[teamtag is already in use.]]></item>
+		<item name="tourneysystem.team.add.name.error.notValid"><![CDATA[Teamname is invalid.]]></item>
+		<item name="tourneysystem.team.add.name.error.notUnique"><![CDATA[Teamname is already in use.]]></item>
+		<item name="tourneysystem.team.add.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
+		<item name="tourneysystem.team.add.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
+		<item name="tourneysystem.team.add.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
 		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/> It is now created.]]></item>
 	</category>
 	

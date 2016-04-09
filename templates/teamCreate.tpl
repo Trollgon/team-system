@@ -28,11 +28,11 @@
 				<dd>
 					<select id="platform" name="platform">
 						<option value="" selected>{lang}tourneysystem.team.overview.platform.choose{/lang}</option>
-						<option value="PC" {if $platform=='PC'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.pc{/lang}</option>
-						<option value="PS4" {if $platform=='PS4'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.ps4{/lang}</option>
-						<option value="PS3" {if $platform=='PS3'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.ps3{/lang}</option>
-						<option value="'XBOX 1" {if $platform=='XBOX 1'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.xbox1{/lang}</option>
-						<option value="XBOX 360" {if $platform=='XBOX 360'}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.xbox360{/lang}</option>
+						<option value="1" {if $platform==1}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.pc{/lang}</option>
+						<option value="2" {if $platform==2}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.ps4{/lang}</option>
+						<option value="3" {if $platform==3}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.ps3{/lang}</option>
+						<option value="4" {if $platform==4}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.xbox1{/lang}</option>
+						<option value="5" {if $platform==5}selected="selected"{/if}>{lang}tourneysystem.team.overview.platform.xbox360{/lang}</option>
 					</select>
 					{if $errorField == 'platform'}
 							<small class="innerError">
@@ -63,7 +63,7 @@
 			<dl{if $errorField == 'teamtag'} class="formError"{/if}>
 				<dt><label for="teamtag">{lang}tourneysystem.team.overview.tag{/lang}</label></dt>
 				<dd>
-					<input type="text" id="teamtag" name="teamtag" class=""/>
+					<input type="text" id="teamtag" name="teamtag" value="{$teamtag}" class=""/>
 					{if $errorField == teamtag}
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
