@@ -1,5 +1,6 @@
 <?php
 namespace tourneysystem\form;
+
 use tourneysystem\util\TeamUtil;
 use tourneysystem\data\team\PcTeamAction;
 use tourneysystem\data\team\Ps4TeamAction;
@@ -131,7 +132,7 @@ class TeamCreateForm extends AbstractForm {
 		$data = array(
 		'data' => array(
 			'teamName'		=> $this->formData['teamname'], 
-			'teamTag'		=> $this->formData['teamtag'], 
+			'teamTag'		=> strtoupper($this->formData['teamtag']), 
 			'leaderID'		=> $this->formData['leaderID'],
 			),
 		);

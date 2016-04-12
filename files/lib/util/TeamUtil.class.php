@@ -85,7 +85,7 @@ final class TeamUtil {
 		}
 
 		// check illegal characters
-		if (!preg_match('!^[^,\n]+$!', $tag)) {
+		if (preg_match('!^[^,\n]+$!', $tag)) {
 			return false;
 		}
 		
