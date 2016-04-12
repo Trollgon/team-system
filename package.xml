@@ -22,6 +22,7 @@
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">sql/install.sql</instruction>
 		<instruction type="language">language/*.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
 		<instruction type="script">acp/install_de_wbbaddons_dummy_app.php</instruction>
