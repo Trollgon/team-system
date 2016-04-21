@@ -85,7 +85,7 @@ final class TeamUtil {
 		}
 
 		// check illegal characters
-		if (preg_match('!^[^,\n]+$!', $tag)) {
+		if (!preg_match('!^[^,\n]+$!', $tag)) {
 			return false;
 		}
 		
@@ -139,9 +139,9 @@ final class TeamUtil {
 	 * @return	boolean
 	 */
 	 
-	public static function isFreePlatformPlayer($platform, $role, $user) {
+	public static function isFreePlatformPlayer($platformID, $role, $user) {
 		
-		switch ($platform) {
+		switch ($platformID) {
 			case 1:
 				$sql = "SELECT	COUNT(" . $role . ") AS count
 						FROM	tourneysystem1_teams_pc
@@ -176,5 +176,44 @@ final class TeamUtil {
 		
 		return $row['count'] == 0;
 		 
+	}
+	
+	/**
+	 * Returns the Team ID of a team from a player.
+	 */
+	public function getPlayersTeamID($platformID, $userID) {
+		switch ($platformID) {
+			case 1:
+				$sql = "SELECT	teamID
+						FROM	tourneysystem1_teams_pc
+						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+				break;
+			case 2:
+				$sql = "SELECT	teamID
+						FROM	tourneysystem1_teams_ps4
+						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+				break;
+			case 3:
+				$sql = "SELECT	teamID
+						FROM	tourneysystem1_teams_ps3
+						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+				break;
+			case 4:
+				$sql = "SELECT	teamID
+						FROM	tourneysystem1_teams_xb1
+						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+				break;
+			case 5:
+				$sql = "SELECT	teamID
+						FROM	tourneysystem1_teams_xb360
+						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+				break;
+		}
+	
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($userID, $userID, $userID, $userID, $userID, $userID, $userID));
+		$value = $statement->fetchArray();
+	
+		return $value['teamID'];
 	}
 }

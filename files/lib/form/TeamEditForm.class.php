@@ -25,7 +25,7 @@ use wcf\data\user\UserAction;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.trollgon.tourneysystem
  */
-class TeamCreateForm extends AbstractForm {
+class TeamEditForm extends AbstractForm {
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
@@ -42,21 +42,18 @@ class TeamCreateForm extends AbstractForm {
 	public 	$teamtag = '';
 
 	public  $formData = array(
-			'teamname' => '',
-			'teamTag' => '',
-			'leaderID' => '',
+			'teamname' 	=> '',
+			'teamTag' 	=> '',
+			'leaderID' 	=> '',
+			'player1ID' => '',
+			'player2ID' => '',
+			'player3ID' => '',
+			'player4ID' => '',
+			'sub1ID'	=> '',
+			'sub2ID'	=> '',
+			'sub3ID'	=> '',
 		);
 	public 	$teamID = '';
-
-	/**
-	 * @see \wcf\page\AbstractPage::show()
-	 */
-	public function show() {
-		if(!WCF::getSession()->getPermission("user.teamSystem.canCreateTeam")) {
-			throw new PermissionDeniedException();
-		}
-		parent::show();
-	}
 	
 	/**
 	 * @see \wcf\form\AbstractForm::readFormParameters()

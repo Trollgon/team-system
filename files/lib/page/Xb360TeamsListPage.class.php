@@ -2,10 +2,9 @@
 
 namespace tourneysystem\page;
 
-use tourneysystem\data\team\PcTeamList;
-
 use wcf\system\WCF;
 use wcf\page\SortablePage;
+use tourneysystem\data\team\Xb360TeamList;
 
 /**
 
@@ -27,20 +26,20 @@ use wcf\page\SortablePage;
 
  */
 
-class PcTeamsListPage extends SortablePage {
+class Xb360TeamsListPage extends SortablePage {
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
 
-	public $activeMenuItem = 'tourneysystem.header.menu.teams.pc';
+	public $activeMenuItem = 'tourneysystem.header.menu.teams.xb360';
 
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 
-	public $objectListClassName = 'tourneysystem\data\team\PcTeamList';
+	public $objectListClassName = 'tourneysystem\data\team\Xb360TeamList';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage
@@ -49,7 +48,7 @@ class PcTeamsListPage extends SortablePage {
 	public $itemsPerPage = 20;
 	
 	public $defaultSortField = 'teamName';
-	public $validSortFields = array('teamName');
+	public $validSortFields = array('teamID');
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -59,7 +58,7 @@ class PcTeamsListPage extends SortablePage {
 
 		parent::readParameters();
 	
-		$list =  new PcTeamList();
+		$list =  new Xb360TeamList();
 		$list->readObjects();
 		$objects = $list->getObjects(); 
 		

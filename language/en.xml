@@ -3,6 +3,11 @@
 	<category name="tourneysystem.header">
 		<item name="tourneysystem.header.addTeam"><![CDATA[Create new team]]></item>
 		<item name="tourneysystem.header.menu.teams"><![CDATA[Teams]]></item>
+		<item name="tourneysystem.header.menu.teams.pc"><![CDATA[PC]]></item>
+		<item name="tourneysystem.header.menu.teams.ps4"><![CDATA[Playstation 4]]></item>
+		<item name="tourneysystem.header.menu.teams.ps3"><![CDATA[Playstation 3]]></item>
+		<item name="tourneysystem.header.menu.teams.xb1"><![CDATA[XBOX One]]></item>
+		<item name="tourneysystem.header.menu.teams.xb360"><![CDATA[XBOX 360]]></item>
 		<item name="tourneysystem.header.menu.tourneys"><![CDATA[Tourneys]]></item>
 	</category>
 	
@@ -14,6 +19,10 @@
 		<item name="tourneysystem.team.add.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
 		<item name="tourneysystem.team.add.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
 		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/> It is now created.]]></item>
+	</category>
+	
+	<category name="tourneysystem.team.edit">
+		<item name="tourneysystem.team.edit"><![CDATA[edit your team]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.overview">
@@ -37,10 +46,10 @@
 		<item name="tourneysystem.team.page.user"><![CDATA[my team]]></item>
 	</category>
 	
-	<category name="wcf.acp.group.option.category">
+	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.user.teamSystem"><![CDATA[Team System]]></item>
-		<item name="wcf.acp.group.option.category.user.teamSystem.canCreateTeam"><![CDATA[can create a team]]></item>
-		<item name="wcf.acp.group.option.category.user.teamSystem.canViewLists"><![CDATA[can view team lists]]></item>
-		<item name="wcf.acp.group.option.category.user.teamSystem.canViewTeamPages"><![CDATA[can view team pages]]></item>
+		<item name="wcf.acp.group.option.user.teamSystem.canCreateTeam"><![CDATA[can create a team]]></item>
+		<item name="wcf.acp.group.option.user.teamSystem.canViewLists"><![CDATA[can view team lists]]></item>
+		<item name="wcf.acp.group.option.user.teamSystem.canViewTeamPages"><![CDATA[can view team pages]]></item>
 	</category>
 </language>

@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/pagemenu.xsd">
 	<import>
-		<pagemenuitem name="tourneysystem.header.menu.tourneys">
-			<controller><![CDATA[tourneysystem\page\TourneysPage]]></controller>
-			<position>header</position>
-		</pagemenuitem>
 		<pagemenuitem name="tourneysystem.header.menu.teams">
 			<controller><![CDATA[tourneysystem\page\TeamsListPage]]></controller>
+			<position>header</position>
+		</pagemenuitem>
+		<pagemenuitem name="tourneysystem.header.menu.teams.pc">
+			<controller><![CDATA[tourneysystem\page\PcTeamsListPage]]></controller>
+			<position>header</position>
+			<parent>tourneysystem.header.menu.teams</parent>
+		</pagemenuitem>
+		<pagemenuitem name="tourneysystem.header.menu.teams.ps4">
+			<controller><![CDATA[tourneysystem\page\Ps4TeamsListPage]]></controller>
+			<position>header</position>
+			<parent>tourneysystem.header.menu.teams</parent>
+		</pagemenuitem>
+		<pagemenuitem name="tourneysystem.header.menu.teams.ps3">
+			<controller><![CDATA[tourneysystem\page\Ps3TeamsListPage]]></controller>
+			<position>header</position>
+			<parent>tourneysystem.header.menu.teams</parent>
+		</pagemenuitem>
+		<pagemenuitem name="tourneysystem.header.menu.teams.xb1">
+			<controller><![CDATA[tourneysystem\page\Xb1TeamsListPage]]></controller>
+			<position>header</position>
+			<parent>tourneysystem.header.menu.teams</parent>
+		</pagemenuitem>
+		<pagemenuitem name="tourneysystem.header.menu.teams.xb360">
+			<controller><![CDATA[tourneysystem\page\Xb360TeamsListPage]]></controller>
+			<position>header</position>
+			<parent>tourneysystem.header.menu.teams</parent>
+		</pagemenuitem>
+		<pagemenuitem name="tourneysystem.header.menu.tourneys">
+			<controller><![CDATA[tourneysystem\page\TourneysPage]]></controller>
 			<position>header</position>
 		</pagemenuitem>
 	</import>
