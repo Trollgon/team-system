@@ -10,11 +10,11 @@
 {include file='header' sandbox=false}
 
 <header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'tourneysystem.header.menu.teams.pc'}
+	{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'tourneysystem.header.menu.teams.xb1'}
 		<h1>{PAGE_TITLE|language}</h1>
 		{hascontent}<h2>{content}{PAGE_DESCRIPTION|language}{/content}</h2>{/hascontent}
 	{else}
-		<h1>{lang}tourneysystem.header.menu.teams.pc{/lang}</h1>
+		<h1>{lang}tourneysystem.header.menu.teams.xb1{/lang}</h1>
 	{/if}
 </header>
 

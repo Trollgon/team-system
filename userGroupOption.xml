@@ -12,19 +12,19 @@
 			<option name="user.teamSystem.canViewLists">
 				<categoryname>user.teamSystem</categoryname>
 				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
 			<option name="user.teamSystem.canViewTeamPages">
 				<categoryname>user.teamSystem</categoryname>
 				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
 			<option name="user.teamSystem.canCreateTeam">
 				<categoryname>user.teamSystem</categoryname>
 				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
-			<!-- /user.examplePage -->
+			<!-- /user.teamSystem -->
 		</options>
 	</import>
 </data>
