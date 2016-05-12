@@ -212,8 +212,10 @@ class TeamCreateForm extends AbstractForm {
 		}
 		$userAction = new UserAction(array(), 'update', $userdata);
 		$userAction->executeAction();
-		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Teams', array(
-			'application' => 'tourneysystem'
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
+			'application' 	=> 'tourneysystem',
+			'teamID'		=> TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID),
+			'platformID'	=> $this->platform,
 		)),WCF::getLanguage()->get('tourneysystem.team.add.successfulRedirect'), 10);				
 		exit;
 	}
