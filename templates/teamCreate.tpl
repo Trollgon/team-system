@@ -39,7 +39,7 @@
 								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
 								{if $errorType == 'notUnique'}{lang}tourneysystem.team.add.platform.error.notUnique{/lang}{/if}
 							</small>
-						{/if}
+					{/if}
 					<small>{lang}tourneysystem.team.overview.platform.description{/lang}</small>
 				</dd>
 			</dl>

@@ -17,6 +17,7 @@
 {include file='userNotice'}
 
 {include file='formError'}
+
 <div class="contentNavigation">
     {hascontent}
         <nav>
@@ -73,10 +74,33 @@
 	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}tourneysystem.team.edit.invite.players{/lang}</legend>
-			
+				<dl{if $errorType.leader|isset} class="formError"{/if}>
+			<dt><label for="leader">{lang}wcf.acp.group.leader{/lang}</label></dt>
+			<dd>
+				<input type="text" id="leader" name="leader" value="{$leader}" class="long" />
+				{if $errorType.leader|isset}
+					<small class="innerError">
+						{lang}wcf.acp.group.leader.error.{@$errorType.leader}{/lang}
+					</small>
+				{/if}
+				<small>{lang}wcf.acp.group.leader.description{/lang}</small>
+			</dd>
+		</dl>
+		
+		{event name='fields'}
+		
+		<script data-relocate="true">
+		//<![CDATA[
+			$(function() {
+				new WCF.Search.User('#leader', undefined, false, [ ], true);
+			});
+		//]]>
+		</script>
 			
 		</fieldset>	
 	</div>
+	
+	
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

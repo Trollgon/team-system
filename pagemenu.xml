@@ -2,7 +2,7 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/pagemenu.xsd">
 	<import>
 		<pagemenuitem name="tourneysystem.header.menu.teams">
-			<controller><![CDATA[tourneysystem\page\TeamsListPage]]></controller>
+			<controller><![CDATA[tourneysystem\page\TeamsPage]]></controller>
 			<position>header</position>
 		</pagemenuitem>
 		<pagemenuitem name="tourneysystem.header.menu.teams.pc">
