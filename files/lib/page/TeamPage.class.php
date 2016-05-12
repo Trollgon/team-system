@@ -37,8 +37,8 @@ class TeamPage extends AbstractPage {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		if(isset($_REQUEST['id']))
-			$this->teamID = intval($_REQUEST['id']);
+		if(isset($_REQUEST['teamID']))
+			$this->teamID = intval($_REQUEST['teamID']);
 		if(isset($_REQUEST['platformID']))
 				$this->platformID = intval($_REQUEST['platformID']);
 		if($this->teamID == 0) {
