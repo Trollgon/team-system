@@ -9,9 +9,10 @@ use tourneysystem\data\team\Ps4Team;
 use tourneysystem\data\team\Ps3Team;
 use tourneysystem\data\team\Xb1Team;
 use tourneysystem\data\team\Xb360Team;
+use wcf\page\AbstractPage;
 
 /**
- * Shows the page of a pc team.
+ * Shows the page of a team.
  *
  * @author	Trollgon
  * @copyright	Trollgon
@@ -19,22 +20,17 @@ use tourneysystem\data\team\Xb360Team;
  * @package	de.trollgon.tourneysystem
  */
 
-class TeamPage extends AbstractTeamPage {
+class TeamPage extends AbstractPage {
+	
+	public $teamID = 0;
+	public $team = null;
+	public $platformID = 0;
+	public $objectTypeID = 0;
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'tourneysystem.header.menu.teams';
-	
-	/**
-	 * @see \wcf\page\AbstractPage::show()
-	 */
-	public function show() {
-		if(!WCF::getSession()->getPermission("user.teamSystem.canViewTeamPages")) {
-			throw new PermissionDeniedException();
-		}
-		parent::show();
-	}
 	
 	/**
 	 * @see \wcf\page\AbstractPage::readParameters()
@@ -72,6 +68,21 @@ class TeamPage extends AbstractTeamPage {
 			throw new IllegalLinkException();
 		}
 	}
+	
+
+	/**
+	 * @see \wcf\page\AbstractPage::show()
+	 */
+	public function show() {
+		if(!WCF::getSession()->getPermission("user.teamSystem.canViewTeamPages")) {
+			throw new PermissionDeniedException();
+		}
+		parent::show();
+	}
+	
+	/**
+	 * @see \wcf\page\AbstractPage::assignVariables()
+	 */
 	
 	public function assignVariables() {
 		parent::assignVariables();

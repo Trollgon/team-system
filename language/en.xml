@@ -18,11 +18,31 @@
 		<item name="tourneysystem.team.add.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
 		<item name="tourneysystem.team.add.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
 		<item name="tourneysystem.team.add.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
-		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/> It is now created.]]></item>
+		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/>It is now created.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.edit">
 		<item name="tourneysystem.team.edit"><![CDATA[edit your team]]></item>
+	</category>
+	
+	<category name="tourneysystem.team.invitation">
+		<item name="tourneysystem.team.invitation"><![CDATA[Invite players to your team]]></item>
+		<item name="tourneysystem.team.invitation.form"><![CDATA[Invitation]]></item>
+		<item name="tourneysystem.team.invitation.playername"><![CDATA[Player]]></item>
+		<item name="tourneysystem.team.invitation.playername.description"><![CDATA[Name of the new player you want to invite.]]></item>
+		<item name="tourneysystem.team.invitation.playername.error.notUnique"><![CDATA[This user is already in your team.]]></item>
+		<item name="tourneysystem.team.invitation.playername.error.notValid"><![CDATA[This user does not exist.]]></item>
+		<item name="tourneysystem.team.invitation.position"><![CDATA[Position]]></item>
+		<item name="tourneysystem.team.invitation.position.choose"><![CDATA[]]></item>
+		<item name="tourneysystem.team.invitation.position.description"><![CDATA[Pick the position this player will have.]]></item>
+		<item name="tourneysystem.team.invitation.position.error.notUnique"><![CDATA[This position is already taken by an other user.]]></item>
+		<item name="tourneysystem.team.invitation.position.player2"><![CDATA[2nd Player]]></item>
+		<item name="tourneysystem.team.invitation.position.player3"><![CDATA[3rd Player]]></item>
+		<item name="tourneysystem.team.invitation.position.player4"><![CDATA[4th Player]]></item>
+		<item name="tourneysystem.team.invitation.position.sub1"><![CDATA[1st Substitute]]></item>
+		<item name="tourneysystem.team.invitation.position.sub2"><![CDATA[2nd Substitute]]></item>
+		<item name="tourneysystem.team.invitation.position.sub3"><![CDATA[3rd Substitute]]></item>
+		<item name="tourneysystem.team.invitation.successfulRedirect"><![CDATA[The user has been invited.</br>He/She will join the team when he accepts it.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.overview">

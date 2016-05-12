@@ -37,6 +37,8 @@ class TeamCreateForm extends AbstractForm {
 	 */
 	public $loginRequired = true;
 	
+	public 	$teamID = '';
+	
 	public	$platform = '';
 	public 	$teamname = '';
 	public 	$teamtag = '';
@@ -46,7 +48,6 @@ class TeamCreateForm extends AbstractForm {
 			'teamTag' => '',
 			'leaderID' => '',
 		);
-	public 	$teamID = '';
 
 	/**
 	 * @see \wcf\page\AbstractPage::show()
@@ -145,6 +146,9 @@ class TeamCreateForm extends AbstractForm {
 		}
 	}
 	
+	/**
+	 * @see \wcf\form\AbstractForm::save()
+	 */
 	public function save() {
 		parent::save();
 		$data = array(
@@ -208,7 +212,7 @@ class TeamCreateForm extends AbstractForm {
 		}
 		$userAction = new UserAction(array(), 'update', $userdata);
 		$userAction->executeAction();
-		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamsList', array(
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Teams', array(
 			'application' => 'tourneysystem'
 		)),WCF::getLanguage()->get('tourneysystem.team.add.successfulRedirect'), 10);				
 		exit;
@@ -217,10 +221,10 @@ class TeamCreateForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
-			'formData' => $this->formData,
-			'teamname' => $this->teamname,
-			'teamtag' => $this->teamtag,
-			'platform' => $this->platform
+			'formData' 	=> $this->formData,
+			'teamname'	=> $this->teamname,
+			'teamtag' 	=> $this->teamtag,
+			'platform' 	=> $this->platform
 		));
 	}
 
