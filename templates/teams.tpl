@@ -34,31 +34,31 @@
                         <span>{lang}tourneysystem.team.add{/lang}</span></a></li>
 				{/if}
 				{if $pcTeamID != NULL}
-					<li><a href="{link application='tourneysystem' controller='Team' id=$pcTeamID platformID='1'}{/link}"
+					<li><a href="{link application='tourneysystem' controller='Team' teamID=$pcTeamID platformID='1'}{/link}"
                            title="{lang}tourneysystem.team.page.user{/lang}" class="button"><span
                                 class="icon icon16 icon-group"></span>
                         <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
                 {/if}
                 {if $ps4TeamID != NULL}
-                    <li><a href="{link application='tourneysystem' controller='Team' id=$ps4TeamID platformID='2'}{/link}"
+                    <li><a href="{link application='tourneysystem' controller='Team' teamID=$ps4TeamID platformID='2'}{/link}"
                            title="{lang}tourneysystem.team.page.user{/lang}" class="button"><span
                                 class="icon icon16 icon-group"></span>
                         <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
                 {/if}
                 {if $id=$ps3TeamID != NULL}
-                    <li><a href="{link application='tourneysystem' controller='Team' id=$ps3TeamID platformID='3'}{/link}"
+                    <li><a href="{link application='tourneysystem' controller='Team' teamID=$ps3TeamID platformID='3'}{/link}"
                            title="{lang}tourneysystem.team.page.user{/lang}" class="button"><span
                                 class="icon icon16 icon-group"></span>
                         <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
                 {/if}
                 {if $id=$xb1TeamID != NULL}
-                    <li><a href="{link application='tourneysystem' controller='Team' id=$xb1TeamID platformID='4'}{/link}"
+                    <li><a href="{link application='tourneysystem' controller='Team' teamID=$xb1TeamID platformID='4'}{/link}"
                            title="{lang}tourneysystem.team.page.user{/lang}" class="button"><span
                                 class="icon icon16 icon-group"></span>
                         <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
                 {/if}
                 {if $xb360TeamID != NULL}
-                    <li><a href="{link application='tourneysystem' controller='Team' id=$xb360TeamID platformID='5'}{/link}"
+                    <li><a href="{link application='tourneysystem' controller='Team' teamID=$xb360TeamID platformID='5'}{/link}"
                            title="{lang}tourneysystem.team.page.user{/lang}" class="button"><span
                                 class="icon icon16 icon-group"></span>
                         <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
