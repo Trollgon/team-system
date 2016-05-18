@@ -47,6 +47,7 @@ class TeamCreateForm extends AbstractForm {
 			'teamname' => '',
 			'teamTag' => '',
 			'leaderID' => '',
+			'leaderName' => ''
 		);
 
 	/**
@@ -70,7 +71,8 @@ class TeamCreateForm extends AbstractForm {
 		if (isset($_POST['teamtag'])) {
 			$this->formData['teamtag'] = StringUtil::trim($_POST['teamtag']);
 		}
-		$this->formData['leaderID'] =  WCF::getUser()->userID;
+		$this->formData['leaderID'] =  WCF::getUser()->getUserID();
+		$this->formData['leaderName'] = WCF::getUser()->getUsername();
 	}
 	
 	/**
@@ -156,6 +158,7 @@ class TeamCreateForm extends AbstractForm {
 			'teamName'		=> $this->formData['teamname'], 
 			'teamTag'		=> strtoupper($this->formData['teamtag']), 
 			'leaderID'		=> $this->formData['leaderID'],
+			'leaderName'	=> $this->formData['leaderName'],
 			),
 		);
 		switch ($this->platform) {
@@ -210,7 +213,7 @@ class TeamCreateForm extends AbstractForm {
 				);
 				break;
 		}
-		$userAction = new UserAction(array(), 'update', $userdata);
+		$userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
 		$userAction->executeAction();
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
 			'application' 	=> 'tourneysystem',

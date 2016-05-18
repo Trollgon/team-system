@@ -63,6 +63,10 @@
                                 class="icon icon16 icon-group"></span>
                         <span>{lang}tourneysystem.team.page.user{/lang}</span></a></li>
                 {/if}
+				<li><a href="{link application='tourneysystem' controller='InvitationList'}{/link}"
+                      title="{lang}tourneysystem.team.invitations{/lang}" class="button"><span
+                            class="icon icon16 icon-envelope"></span>
+                    <span>{lang}tourneysystem.team.invitations{/lang}</span></a></li>
                 {event name='contentNavigationButtonsTop'}
                 {/content}
             </ul>
