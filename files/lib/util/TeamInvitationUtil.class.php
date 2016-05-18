@@ -76,27 +76,27 @@ final class TeamInvitationUtil {
 			case 1:
 				$sql = "SELECT	*
 						FROM	tourneysystem1_teams_pc
-						WHERE	(teamID = ?) AND (leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 				break;
 			case 2:
 				$sql = "SELECT	*
 						FROM	tourneysystem1_teams_ps4
-						WHERE	(teamID = ?) AND (leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 				break;
 			case 3:
 				$sql = "SELECT	*
 						FROM	tourneysystem1_teams_ps3
-						WHERE	(teamID = ?) AND (leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 				break;
 			case 4:
 				$sql = "SELECT	*
 						FROM	tourneysystem1_teams_xb1
-						WHERE	(teamID = ?) AND (leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 				break;
 			case 5:
 				$sql = "SELECT	*
 						FROM	tourneysystem1_teams_xb360
-						WHERE	(teamID = ?) AND (leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
+						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 				break;
 		}
 		
