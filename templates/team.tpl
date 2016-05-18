@@ -30,6 +30,12 @@
                                 class="icon icon16 icon-plus"></span>
                         <span>{lang}tourneysystem.team.invitation{/lang}</span></a></li>
 				{/if}
+				{if $team->isTeamMember()}
+					<li><a href="{link application='tourneysystem' controller='TeamLeave' teamID=$teamID platformID=$platformID}{/link}"
+                           title="{lang}tourneysystem.team.invitation.leave{/lang}" class="button"><span
+                                class="icon icon16 icon-signout"></span>
+                        <span>{lang}tourneysystem.team.leave{/lang}</span></a></li>
+				{/if}
                 {event name='contentNavigationButtonsTop'}
                 {/content}
             </ul>
