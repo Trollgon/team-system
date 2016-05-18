@@ -168,7 +168,8 @@ class TeamCreateForm extends AbstractForm {
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemPcTeamID' => $userTeamID,
+								'tourneysystemPcTeamID' 		=> $userTeamID,
+								'tourneysystemPcTeamPositionID' => 0,
 						)
 				);
 				break;
@@ -178,7 +179,8 @@ class TeamCreateForm extends AbstractForm {
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemPs4TeamID' => $userTeamID,
+								'tourneysystemPs4TeamID' 			=> $userTeamID,
+								'tourneysystemPs4TeamPositionID' 	=> 0,
 						)
 				);
 				break;
@@ -188,7 +190,8 @@ class TeamCreateForm extends AbstractForm {
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemPs3TeamID' => $userTeamID,
+								'tourneysystemPs3TeamID'		 => $userTeamID,
+								'tourneysystemPs3TeamPositionID' => 0,
 						)
 				);
 				break;
@@ -198,7 +201,8 @@ class TeamCreateForm extends AbstractForm {
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemXb1TeamID' => $userTeamID,
+								'tourneysystemXb1TeamID'		 => $userTeamID,
+								'tourneysystemXb1TeamPositionID' => 0,
 						)
 				);
 				break;
@@ -208,7 +212,8 @@ class TeamCreateForm extends AbstractForm {
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemXb360TeamID' => $userTeamID,
+								'tourneysystemXb360TeamID'			 => $userTeamID,
+								'tourneysystemXb360TeamPositionID'	 => 0,
 						)
 				);
 				break;
@@ -217,7 +222,7 @@ class TeamCreateForm extends AbstractForm {
 		$userAction->executeAction();
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
 			'application' 	=> 'tourneysystem',
-			'teamID'		=> TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID),
+			'id'			=> TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID),
 			'platformID'	=> $this->platform,
 		)),WCF::getLanguage()->get('tourneysystem.team.add.successfulRedirect'), 10);				
 		exit;

@@ -53,6 +53,11 @@ class InvitationForm extends AbstractForm {
 	public $activeMenuItem = 'tourneysystem.header.menu.teams';
 	
 	/**
+	 * @see \wcf\page\AbstractPage::$loginRequired
+	 */
+	public	$loginRequired = true;
+	
+	/**
 	 * @see \wcf\page\AbstractPage::readParameters()
 	 */
 	public function readParameters() {
@@ -214,7 +219,8 @@ class InvitationForm extends AbstractForm {
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemPcTeamID' => $userTeamID,
+									'tourneysystemPcTeamID' 		=> $userTeamID,
+									'tourneysystemPcTeamPositionID' => $this->positionID,
 							)
 					);
 					break;
@@ -224,7 +230,8 @@ class InvitationForm extends AbstractForm {
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemPs4TeamID' => $userTeamID,
+									'tourneysystemPs4TeamID' 			=> $userTeamID,
+									'tourneysystemPs4TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
@@ -234,7 +241,8 @@ class InvitationForm extends AbstractForm {
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemPs3TeamID' => $userTeamID,
+									'tourneysystemPs3TeamID' 			=> $userTeamID,
+									'tourneysystemPs3TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
@@ -244,7 +252,8 @@ class InvitationForm extends AbstractForm {
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemXb1TeamID' => $userTeamID,
+									'tourneysystemXb1TeamID' 			=> $userTeamID,
+									'tourneysystemXb1TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
@@ -254,7 +263,8 @@ class InvitationForm extends AbstractForm {
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemXb360TeamID' => $userTeamID,
+									'tourneysystemXb360TeamID' 			=> $userTeamID,
+									'tourneysystemXb360TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
@@ -267,7 +277,7 @@ class InvitationForm extends AbstractForm {
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
 					'application' 	=> 'tourneysystem',
-					'teamID'		=> TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID),
+					'id'			=> TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID),
 					'platformID'	=> $this->platformID,
 			)),WCF::getLanguage()->get('tourneysystem.team.join.successfulRedirect'), 10);
 			exit;

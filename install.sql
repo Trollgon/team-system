@@ -189,10 +189,15 @@ ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub2Name) REFERENCES wcf
 ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
 
 ALTER TABLE wcf1_user ADD tourneysystemPcTeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD tourneysystemPcTeamPositionID INT(10) DEFAULT NULL;
 ALTER TABLE wcf1_user ADD tourneysystemPs4TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD tourneysystemPs4TeamPositionID INT(10) DEFAULT NULL;
 ALTER TABLE wcf1_user ADD tourneysystemPs3TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD tourneysystemPs3TeamPositionID INT(10) DEFAULT NULL;
 ALTER TABLE wcf1_user ADD tourneysystemXb1TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD tourneysystemXb1TeamPositionID INT(10) DEFAULT NULL;
 ALTER TABLE wcf1_user ADD tourneysystemXb360TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD tourneysystemXb360TeamPositionID INT(10) DEFAULT NULL;
 
 ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemPcTeamID) REFERENCES tourneysystem1_teams_pc (teamID) ON DELETE SET NULL;
 ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemPs4TeamID) REFERENCES tourneysystem1_teams_ps4 (teamID) ON DELETE SET NULL;
