@@ -21,10 +21,10 @@
             <ul>
                 {content}
                 {if $team->isTeamLeader()}
-					<li><a href="{link application='tourneysystem' controller='TeamEdit' teamID=$teamID platformID=$platformID}{/link}"
-                           title="{lang}tourneysystem.team.edit{/lang}" class="button"><span
-                                class="icon icon16 icon-pencil"></span>
-                        <span>{lang}tourneysystem.team.edit{/lang}</span></a></li>
+			<li><a href="{link application='tourneysystem' controller='TeamDelete' teamID=$teamID platformID=$platformID}{/link}"
+                           title="{lang}tourneysystem.team.invitation.delete{/lang}" class="button"><span
+                                class="icon icon16 icon-remove"></span>
+                        <span>{lang}tourneysystem.team.delete{/lang}</span></a></li>
                     <li><a href="{link application='tourneysystem' controller='TeamInvitation' teamID=$teamID platformID=$platformID}{/link}"
                            title="{lang}tourneysystem.team.invitation.send{/lang}" class="button"><span
                                 class="icon icon16 icon-plus"></span>
