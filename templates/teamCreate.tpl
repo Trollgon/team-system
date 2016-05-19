@@ -11,7 +11,7 @@
 {include file='header' sandbox=false}
 
 <header class="boxHeadline">
-		<h1>{lang}tourneysystem.header.addTeam{/lang}</h1>
+		<h1>{lang}tourneysystem.header.createTeam{/lang}</h1>
 </header>
 
 {include file='userNotice'}
@@ -37,7 +37,7 @@
 					{if $errorField == 'platform'}
 							<small class="innerError">
 								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-								{if $errorType == 'notUnique'}{lang}tourneysystem.team.add.platform.error.notUnique{/lang}{/if}
+								{if $errorType == 'notUnique'}{lang}tourneysystem.team.create.platform.error.notUnique{/lang}{/if}
 							</small>
 					{/if}
 					<small>{lang}tourneysystem.team.overview.platform.description{/lang}</small>
@@ -51,8 +51,8 @@
 					{if $errorField == teamname}
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'notValid'}{lang}tourneysystem.team.add.name.error.notValid{/lang}{/if}
-							{if $errorType == 'notUnique'}{lang}tourneysystem.team.add.name.error.notUnique{/lang}{/if}
+							{if $errorType == 'notValid'}{lang}tourneysystem.team.create.name.error.notValid{/lang}{/if}
+							{if $errorType == 'notUnique'}{lang}tourneysystem.team.create.name.error.notUnique{/lang}{/if}
 						</small>
 					{/if}
 					<small>{lang}tourneysystem.team.overview.name.description{/lang}</small>
@@ -67,8 +67,8 @@
 					{if $errorField == teamtag}
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'notValid'}{lang}tourneysystem.team.add.tag.error.notValid{/lang}{/if}
-							{if $errorType == 'notUnique'}{lang}tourneysystem.team.add.tag.error.notUnique{/lang}{/if}
+							{if $errorType == 'notValid'}{lang}tourneysystem.team.create.tag.error.notValid{/lang}{/if}
+							{if $errorType == 'notUnique'}{lang}tourneysystem.team.create.tag.error.notUnique{/lang}{/if}
 						</small>
 					{/if}
 					<small>{lang}tourneysystem.team.overview.tag.description{/lang}</small>
