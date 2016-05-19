@@ -29,9 +29,9 @@
                 {content}
                 {if $__wcf->getSession()->getPermission('user.teamSystem.canCreateTeam')}
 					<li><a href="{link application='tourneysystem' controller='TeamCreate'}{/link}"
-                           title="{lang}tourneysystem.team.add{/lang}" class="button"><span
+                           title="{lang}tourneysystem.team.create{/lang}" class="button"><span
                                 class="icon icon16 icon-asterisk"></span>
-                        <span>{lang}tourneysystem.team.add{/lang}</span></a></li>
+                        <span>{lang}tourneysystem.team.create{/lang}</span></a></li>
 				{/if}
 				{if $pcTeamID != NULL}
 					<li><a href="{link application='tourneysystem' controller='Team' id=$pcTeamID platformID='1'}{/link}"

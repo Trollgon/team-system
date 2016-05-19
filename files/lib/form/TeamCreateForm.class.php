@@ -224,7 +224,7 @@ class TeamCreateForm extends AbstractForm {
 			'application' 	=> 'tourneysystem',
 			'id'			=> TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID),
 			'platformID'	=> $this->platform,
-		)),WCF::getLanguage()->get('tourneysystem.team.add.successfulRedirect'), 10);				
+		)),WCF::getLanguage()->get('tourneysystem.team.create.successfulRedirect'), 10);				
 		exit;
 	}
 	

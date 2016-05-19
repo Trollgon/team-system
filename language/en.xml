@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="tourneysystem.header">
-		<item name="tourneysystem.header.addTeam"><![CDATA[Create new team]]></item>
+		<item name="tourneysystem.header.createTeam"><![CDATA[Create new team]]></item>
 		<item name="tourneysystem.header.menu.teams"><![CDATA[Teams]]></item>
 		<item name="tourneysystem.header.menu.teams.pc"><![CDATA[PC]]></item>
 		<item name="tourneysystem.header.menu.teams.ps4"><![CDATA[Playstation 4]]></item>
@@ -11,14 +11,14 @@
 		<item name="tourneysystem.header.menu.tourneys"><![CDATA[Tourneys]]></item>
 	</category>
 	
-	<category name="tourneysystem.team.add">
-		<item name="tourneysystem.team.add"><![CDATA[create new team]]></item>
-		<item name="tourneysystem.team.add.name.error.notValid"><![CDATA[Teamname is invalid.]]></item>
-		<item name="tourneysystem.team.add.name.error.notUnique"><![CDATA[Teamname is already in use.]]></item>
-		<item name="tourneysystem.team.add.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
-		<item name="tourneysystem.team.add.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
-		<item name="tourneysystem.team.add.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
-		<item name="tourneysystem.team.add.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/>It is now created.]]></item>
+	<category name="tourneysystem.team.create">
+		<item name="tourneysystem.team.create"><![CDATA[create new team]]></item>
+		<item name="tourneysystem.team.create.name.error.notValid"><![CDATA[Teamname is invalid.]]></item>
+		<item name="tourneysystem.team.create.name.error.notUnique"><![CDATA[Teamname is already in use.]]></item>
+		<item name="tourneysystem.team.create.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
+		<item name="tourneysystem.team.create.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
+		<item name="tourneysystem.team.create.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
+		<item name="tourneysystem.team.create.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/>It is now created.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.edit">
