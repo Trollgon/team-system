@@ -1,5 +1,5 @@
 <?php
-namespace tourneysystem\util;
+namespace teamsystem\util;
 use wcf\system\WCF;
 
 /**
@@ -40,34 +40,15 @@ final class TeamUtil {
 	 */
 	public static function isAvailableTeamname($name) {
 		
-		$databases = array(
-				"SELECT	COUNT(teamname) AS count
-						FROM	tourneysystem1_teams_pc
-						WHERE	teamname = ?",
-				"SELECT	COUNT(teamname) AS count
-						FROM	tourneysystem1_teams_ps4
-						WHERE	teamname = ?",
-				"SELECT	COUNT(teamname) AS count
-						FROM	tourneysystem1_teams_ps3
-						WHERE	teamname = ?",
-				"SELECT	COUNT(teamname) AS count
-						FROM	tourneysystem1_teams_xb1
-						WHERE	teamname = ?",
-				"SELECT	COUNT(teamname) AS count
-						FROM	tourneysystem1_teams_xb360
-						WHERE	teamname = ?"
-		);
+		$sql =		"SELECT	COUNT(teamname) AS count
+						FROM	teamsystem1_teams
+						WHERE	teamname = ?";
 		
-		$row = 0;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($name));
+		$row = $statement->fetchArray();
 		
-		foreach ($databases as &$sql) {
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($name));
-			$rowAdd = $statement->fetchArray();
-			$row = $row + $rowAdd['count'];
-		}
-		
-		return $row == 0;
+		return $row['count'] == 0;
 	}
 
 	/**
@@ -101,34 +82,15 @@ final class TeamUtil {
 
 	public static function isAvailableTeamtag($tag) {
 		
-		$databases = array(
-				"SELECT	COUNT(teamtag) AS count
-						FROM	tourneysystem1_teams_pc
-						WHERE	teamtag = ?",
-				"SELECT	COUNT(teamtag) AS count
-						FROM	tourneysystem1_teams_ps4
-						WHERE	teamtag = ?",
-				"SELECT	COUNT(teamtag) AS count
-						FROM	tourneysystem1_teams_ps3
-						WHERE	teamtag = ?",
-				"SELECT	COUNT(teamtag) AS count
-						FROM	tourneysystem1_teams_xb1
-						WHERE	teamtag = ?",
-				"SELECT	COUNT(teamtag) AS count
-						FROM	tourneysystem1_teams_xb360
-						WHERE	teamtag = ?"
-		);
+		$sql =		"SELECT	COUNT(teamtag) AS count
+						FROM	teamsystem1_teams
+						WHERE	teamtag = ?";
 		
-		$row = 0;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($tag));
+		$row = $statement->fetchArray();
 		
-		foreach ($databases as &$sql) {
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($tag));
-			$rowAdd = $statement->fetchArray();
-			$row = $row + $rowAdd['count'];
-		}
-		
-		return $row == 0;
+		return $row['count'] == 0;
 
 	}
 	
@@ -141,36 +103,12 @@ final class TeamUtil {
 	 
 	public static function isFreePlatformPlayer($platformID, $role, $user) {
 		
-		switch ($platformID) {
-			case 1:
-				$sql = "SELECT	COUNT(" . $role . ") AS count
-						FROM	tourneysystem1_teams_pc
-						WHERE	" . $role . " = ?";
-				break;
-			case 2:
-				$sql = "SELECT	COUNT(" . $role . ") AS count
-						FROM	tourneysystem1_teams_ps4
-						WHERE	" . $role . " = ?";
-				break;
-			case 3:
-				$sql = "SELECT	COUNT(" . $role . ") AS count
-						FROM	tourneysystem1_teams_ps3
-						WHERE	" . $role . " = ?";
-				break;
-			case 4:
-				$sql = "SELECT	COUNT(" . $role . ") AS count
-						FROM	tourneysystem1_teams_xb1
-						WHERE	" . $role . " = ?";
-				break;
-			case 5:
-				$sql = "SELECT	COUNT(" . $role . ") AS count
-						FROM	tourneysystem1_teams_xb360
-						WHERE	" . $role . " = ?";
-				break;
-		}
+		$sql = "SELECT	COUNT(" . $role . ") AS count
+				FROM	teamsystem1_teams
+				WHERE	(" . $role . " = ?) AND (platformID = ?)";
 		
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($user));
+		$statement->execute(array($user, $platformID));
 		$row = $statement->fetchArray();
 		
 		
@@ -182,36 +120,14 @@ final class TeamUtil {
 	 * Returns the Team ID of a team from a player.
 	 */
 	public function getPlayersTeamID($platformID, $userID) {
-		switch ($platformID) {
-			case 1:
-				$sql = "SELECT	teamID
-						FROM	tourneysystem1_teams_pc
-						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
-				break;
-			case 2:
-				$sql = "SELECT	teamID
-						FROM	tourneysystem1_teams_ps4
-						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
-				break;
-			case 3:
-				$sql = "SELECT	teamID
-						FROM	tourneysystem1_teams_ps3
-						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
-				break;
-			case 4:
-				$sql = "SELECT	teamID
-						FROM	tourneysystem1_teams_xb1
-						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
-				break;
-			case 5:
-				$sql = "SELECT	teamID
-						FROM	tourneysystem1_teams_xb360
-						WHERE	(leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?)";
-				break;
-		}
+		
+		$sql = "SELECT	teamID
+				FROM	teamsystem1_teams
+				WHERE	(platformID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
+
 	
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($userID, $userID, $userID, $userID, $userID, $userID, $userID));
+		$statement->execute(array($platformID, $userID, $userID, $userID, $userID, $userID, $userID, $userID));
 		$value = $statement->fetchArray();
 	
 		return $value['teamID'];

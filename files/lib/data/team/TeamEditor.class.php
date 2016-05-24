@@ -1,11 +1,11 @@
 <?php
 
-namespace tourneysystem\data\team;
+namespace teamsystem\data\team;
 use wcf\data\DatabaseObjectEditor;
 
 class TeamEditor extends DatabaseObjectEditor {
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'tourneysystem\data\team\Team';
+	protected static $baseClass = 'teamsystem\data\team\Team';
 }

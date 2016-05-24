@@ -1,11 +1,11 @@
 <?php
 
-namespace tourneysystem\data\team;
+namespace teamsystem\data\team;
 use wcf\data\AbstractDatabaseObjectAction;
 
 class TeamAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	public $className = 'tourneysystem\data\team\TeamEditor';
+	public $className = 'teamsystem\data\team\TeamEditor';
 }

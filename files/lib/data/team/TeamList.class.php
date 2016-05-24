@@ -1,5 +1,5 @@
 <?php
-namespace tourneysystem\data\team;
+namespace teamsystem\data\team;
 use wcf\data\DatabaseObjectList;
 use wcf\system\WCF;
 
@@ -15,5 +15,5 @@ class TeamList extends DatabaseObjectList {
 	/**
 	 * @see    \wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'tourneysystem\data\team\Team';
+	public $className = 'teamsystem\data\team\Team';
 }

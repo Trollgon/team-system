@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.trollgon.tourneysystem" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/package.xsd">
+<package name="de.trollgon.teamsystem" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/package.xsd">
 	<packageinformation>
-		<packagename>Tourney system</packagename>
-		<packagedescription><![CDATA[Tourney system for WoltLab Community Framework™]]></packagedescription>
+		<packagename>Team system</packagename>
+		<packagedescription><![CDATA[Team system for WoltLab Community Framework™]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>1.0.0 Alpha 7</version>
+		<version>1.0.0 Alpha 8</version>
 		<date>2016-03-11</date>
 	</packageinformation>
 	
@@ -33,6 +33,7 @@
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">sql/install.sql</instruction>
 		<instruction type="language">language/*.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
 		<instruction type="script">acp/install_de_wbbaddons_dummy_app.php</instruction>

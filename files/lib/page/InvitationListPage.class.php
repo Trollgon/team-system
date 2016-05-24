@@ -1,10 +1,10 @@
 <?php
 
-namespace tourneysystem\page;
+namespace teamsystem\page;
 
 use wcf\system\WCF;
 use wcf\page\SortablePage;
-use tourneysystem\data\invitations\InvitationList;
+use teamsystem\data\invitations\InvitationList;
 
 /**
 
@@ -32,14 +32,14 @@ class InvitationListPage extends SortablePage {
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
 
-	public $activeMenuItem = 'tourneysystem.header.menu.teams';
+	public $activeMenuItem = 'teamsystem.header.menu.teams';
 
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 
-	public $objectListClassName = 'tourneysystem\data\invitations\InvitationList';
+	public $objectListClassName = 'teamsystem\data\invitations\InvitationList';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage

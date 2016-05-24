@@ -1,28 +1,20 @@
 <?php
-namespace tourneysystem\form;
+namespace teamsystem\form;
 
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\WCF;
 use wcf\data\user\UserAction;
-use tourneysystem\data\team\PcTeam;
-use tourneysystem\data\team\Ps4Team;
-use tourneysystem\data\team\Ps3Team;
-use tourneysystem\data\team\Xb1Team;
-use tourneysystem\data\team\Xb360Team;
-use tourneysystem\data\team\PcTeamAction;
-use tourneysystem\data\team\Ps4TeamAction;
-use tourneysystem\data\team\Ps3TeamAction;
-use tourneysystem\data\team\Xb1TeamAction;
-use tourneysystem\data\team\Xb360TeamAction;
 use wcf\page\AbstractPage;
-use tourneysystem\data\invitations\Invitation;
+use teamsystem\data\invitations\Invitation;
 use wcf\form\AbstractForm;
-use tourneysystem\util\TeamInvitationUtil;
+use teamsystem\util\TeamInvitationUtil;
 use wcf\util\HeaderUtil;
 use wcf\system\request\LinkHandler;
-use tourneysystem\util\TeamUtil;
-use tourneysystem\data\invitations\InvitationAction;
+use teamsystem\util\TeamUtil;
+use teamsystem\data\invitations\InvitationAction;
+use teamsystem\data\team\Team;
+use teamsystem\data\team\TeamAction;
 
 /**
  * Shows the page of an invitation.
@@ -30,7 +22,7 @@ use tourneysystem\data\invitations\InvitationAction;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.tourneysystem
+ * @package	de.trollgon.teamsystem
  */
 
 class InvitationForm extends AbstractForm {
@@ -50,7 +42,7 @@ class InvitationForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'tourneysystem.header.menu.teams';
+	public $activeMenuItem = 'teamsystem.header.menu.teams';
 	
 	/**
 	 * @see \wcf\page\AbstractPage::$loginRequired
@@ -74,23 +66,7 @@ class InvitationForm extends AbstractForm {
 		$this->playerID 	= $this->invitation->getPlayerID();
 		$this->positionID	= $this->invitation->getPositionID();
 		
-		switch ($this->platformID) {
-			case 1:
-				$this->team = new PcTeam($this->teamID);
-				break;
-			case 2:
-				$this->team = new Ps4Team($this->teamID);
-				break;
-			case 3:
-				$this->team = new Ps3Team($this->teamID);
-				break;
-			case 4:
-				$this->team = new Xb1Team($this->teamID);
-				break;
-			case 5:
-				$this->team = new Xb360Team($this->teamID);
-				break;
-		}
+		$this->team = new Team($this->teamID);
 		if($this->team->teamID == null || $this->team->teamID == 0) {
 			throw new IllegalLinkException();
 		}
@@ -126,10 +102,10 @@ class InvitationForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 		
-		if (TeamInvitationUtil::isEmptyPosition($this->platformID, $this->teamID, $this->positionID)) {
+		if (TeamInvitationUtil::isEmptyPosition($this->teamID, $this->positionID)) {
 			$this->positionNotEmpty = true;
 		}
-		if (TeamInvitationUtil::isNotInTeam($this->platformID, $this->teamID, $this->playerID)) {
+		if (TeamInvitationUtil::isNotInTeam($this->teamID, $this->playerID)) {
 			$this->playerNotInThisTeam = true;
 		}
 	}
@@ -146,8 +122,8 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('InvitationList', array(
-					'application' 	=> 'tourneysystem',
-			)),WCF::getLanguage()->get('tourneysystem.team.join.unsuccessfulRedirect.positionNotEmpty'), 10, 'error');
+					'application' 	=> 'teamsystem',
+			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.positionNotEmpty'), 10, 'error');
 		}
 		
 		elseif ($this->playerNotInThisTeam == false) {
@@ -156,8 +132,8 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('InvitationList', array(
-					'application' 	=> 'tourneysystem',
-			)),WCF::getLanguage()->get('tourneysystem.team.join.unsuccessfulRedirect.playerNotInThisTeam'), 10, 'error');
+					'application' 	=> 'teamsystem',
+			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeam'), 10, 'error');
 		}
 		
 		else {
@@ -167,7 +143,6 @@ class InvitationForm extends AbstractForm {
 					$data = array(
 						'data' => array(
 							'player2ID'		=> WCF::getUser()->getUserID(),
-							'player2Name'	=> WCF::getUser()->getUsername(),
 							),
 						);
 					break;
@@ -175,7 +150,6 @@ class InvitationForm extends AbstractForm {
 					$data = array(
 						'data' => array(
 							'player3ID'		=> WCF::getUser()->getUserID(),
-							'player3Name'	=> WCF::getUser()->getUsername(),
 							),
 						);
 					break;
@@ -183,7 +157,6 @@ class InvitationForm extends AbstractForm {
 					$data = array(
 						'data' => array(
 							'player4ID'		=> WCF::getUser()->getUserID(),
-							'player4Name'	=> WCF::getUser()->getUsername(),
 							),
 						);
 					break;
@@ -191,7 +164,6 @@ class InvitationForm extends AbstractForm {
 					$data = array(
 						'data' => array(
 							'sub1ID'	=> WCF::getUser()->getUserID(),
-							'sub1Name'	=> WCF::getUser()->getUsername(),
 							),
 						);
 					break;
@@ -199,72 +171,63 @@ class InvitationForm extends AbstractForm {
 					$data = array(
 						'data' => array(
 							'sub2ID'	=> WCF::getUser()->getUserID(),
-							'sub2Name'	=> WCF::getUser()->getUsername(),
 							),
 						);
 				case 6:
 					$data = array(
 						'data' => array(
 							'sub3ID'	=> WCF::getUser()->getUserID(),
-							'sub3Name'	=> WCF::getUser()->getUsername(),
 							),
 						);
 					break;
 			}
 			
+			$action = new TeamAction(array($this->teamID), 'update', $data);
+			$action->executeAction();
+			
 			switch ($this->platformID) {
 				case 1:
-					$action = new PcTeamAction(array($this->teamID), 'update', $data);
-					$action->executeAction();
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemPcTeamID' 		=> $userTeamID,
-									'tourneysystemPcTeamPositionID' => $this->positionID,
+									'teamsystemPcTeamID' 		=> $userTeamID,
+									'teamsystemPcTeamPositionID' => $this->positionID,
 							)
 					);
 					break;
 				case 2:
-					$action = new Ps4TeamAction(array($this->teamID), 'update', $data);
-					$action->executeAction();
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemPs4TeamID' 			=> $userTeamID,
-									'tourneysystemPs4TeamPositionID' 	=> $this->positionID,
+									'teamsystemPs4TeamID' 			=> $userTeamID,
+									'teamsystemPs4TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
 				case 3:
-					$action = new Ps3TeamAction(array($this->teamID), 'update', $data);
-					$action->executeAction();
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemPs3TeamID' 			=> $userTeamID,
-									'tourneysystemPs3TeamPositionID' 	=> $this->positionID,
+									'teamsystemPs3TeamID' 			=> $userTeamID,
+									'teamsystemPs3TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
 				case 4:
-					$action = new Xb1TeamAction(array($this->teamID), 'update', $data);
-					$action->executeAction();
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemXb1TeamID' 			=> $userTeamID,
-									'tourneysystemXb1TeamPositionID' 	=> $this->positionID,
+									'teamsystemXb1TeamID' 			=> $userTeamID,
+									'teamsystemXb1TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
 				case 5:
-					$action = new Xb360TeamAction(array($this->teamID), 'update', $data);
-					$action->executeAction();
 					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
 					$userdata = array(
 							'data' => array(
-									'tourneysystemXb360TeamID' 			=> $userTeamID,
-									'tourneysystemXb360TeamPositionID' 	=> $this->positionID,
+									'teamsystemXb360TeamID' 			=> $userTeamID,
+									'teamsystemXb360TeamPositionID' 	=> $this->positionID,
 							)
 					);
 					break;
@@ -276,10 +239,9 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
-					'application' 	=> 'tourneysystem',
+					'application' 	=> 'teamsystem',
 					'id'			=> TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID),
-					'platformID'	=> $this->platformID,
-			)),WCF::getLanguage()->get('tourneysystem.team.join.successfulRedirect'), 10);
+			)),WCF::getLanguage()->get('teamsystem.team.join.successfulRedirect'), 10);
 			exit;
 		}
 		

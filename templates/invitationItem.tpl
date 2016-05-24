@@ -1,13 +1,34 @@
 <li data-object-id="{@$invitation->invitationID}">
 	<div class="box48">
-		<a href="{link application='tourneysystem' controller='Invitation' object=$invitation}{/link}" >{@$invitation->getTeamName()}</a>
+		<a href="{link application='teamsystem' controller='Invitation' object=$invitation}{/link}" >{@$invitation->getAvatar()->getImageTag(48)}</a>
 		
 		<div class="details userInformation">
-			{if $invitation->getPositionID() < 5}
-				{lang}tourneysystem.team.position.player{/lang}
-			{else}
-				{lang}tourneysystem.team.position.sub{/lang}
-			{/if}
+			<div class="containerHeadline">
+				<h3><a href="{link application='teamsystem' controller='Invitation' object=$invitation}{/link}">[{$invitation->getTeamTag()}] - {$invitation->getTeamName()}</a></h3>
+			</div>
+			
+			<ul class="dataList userFacts">
+
+				<li>
+					{lang}teamsystem.team.invitation.position{/lang}: 
+						{if $invitation->getPositionID() < 5}
+							{lang}teamsystem.team.position.player{/lang}
+						{else}
+							{lang}teamsystem.team.position.sub{/lang}
+						{/if}
+				</li>
+
+				{event name='userData'}
+			</ul>
 		</div>
+		
+			<dl class="inlineDataList userStats">
+
+				{event name='statistics'}	
+
+					<dd>{lang}teamsystem.team.invitationList.platform{/lang}</dd>
+
+
+			</dl>
 	</div>
 </li>

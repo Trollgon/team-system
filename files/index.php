@@ -1,3 +1,3 @@
 <?php
 require_once('./global.php');
-wcf\system\request\RequestHandler::getInstance()->handle('tourneysystem');
+wcf\system\request\RequestHandler::getInstance()->handle('teamsystem');
