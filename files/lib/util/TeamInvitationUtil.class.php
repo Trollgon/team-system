@@ -1,5 +1,5 @@
 <?php
-namespace tourneysystem\util;
+namespace teamsystem\util;
 use wcf\system\WCF;
 
 /**
@@ -14,7 +14,7 @@ use wcf\system\WCF;
  */
 final class TeamInvitationUtil {
 	
-	public function isEmptyPosition($platformID, $teamID, $positionID) {
+	public function isEmptyPosition($teamID, $positionID) {
 		switch ($positionID) {
 			case 1:
 				$role = "player2ID";
@@ -36,33 +36,9 @@ final class TeamInvitationUtil {
 				break;			
 		}
 		
-		switch ($platformID) {
-			case 1:
-				$sql = "SELECT	" . $positionID . "
-						FROM	tourneysystem1_teams_pc
-						WHERE	" . $role . " = ?";
-				break;
-			case 2:
-				$sql = "SELECT	" . $positionID . "
-						FROM	tourneysystem1_teams_ps4
-						WHERE	" . $role . " = ?";
-				break;
-			case 3:
-				$sql = "SELECT	" . $positionID . "
-						FROM	tourneysystem1_teams_ps3
-						WHERE	" . $role . " = ?";
-				break;
-			case 4:
-				$sql = "SELECT	" . $positionID . "
-						FROM	tourneysystem1_teams_xb1
-						WHERE	" . $role . " = ?";
-				break;
-			case 5:
-				$sql = "SELECT	" . $positionID . "
-						FROM	tourneysystem1_teams_xb360
-						WHERE	" . $role . " = ?";
-				break;
-		}
+		$sql = "SELECT	" . $positionID . "
+				FROM	teamsystem1_teams
+				WHERE	" . $role . " = ?";
 		
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array("NULL"));
@@ -71,34 +47,10 @@ final class TeamInvitationUtil {
 		return $row == 0;
 	}
 	
-	public function isNotInTeam($platformID, $teamID, $userID) {
-		switch ($platformID) {
-			case 1:
-				$sql = "SELECT	*
-						FROM	tourneysystem1_teams_pc
-						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
-				break;
-			case 2:
-				$sql = "SELECT	*
-						FROM	tourneysystem1_teams_ps4
-						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
-				break;
-			case 3:
-				$sql = "SELECT	*
-						FROM	tourneysystem1_teams_ps3
-						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
-				break;
-			case 4:
-				$sql = "SELECT	*
-						FROM	tourneysystem1_teams_xb1
-						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
-				break;
-			case 5:
-				$sql = "SELECT	*
-						FROM	tourneysystem1_teams_xb360
-						WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
-				break;
-		}
+	public function isNotInTeam($teamID, $userID) {
+		$sql = "SELECT	*
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 		
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($teamID, $userID, $userID, $userID, $userID, $userID, $userID, $userID));

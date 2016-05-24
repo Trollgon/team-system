@@ -13,6 +13,6 @@ if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
 		SET	optionValue = ?
 		WHERE	optionName = ?";
 	$statement = \wcf\system\WCF::getDB()->prepareStatement($sql);
-	$statement->execute(array('Tourney System', 'page_title'));
+	$statement->execute(array('Team System', 'page_title'));
 	\wcf\data\option\OptionEditor::resetCache();
 }

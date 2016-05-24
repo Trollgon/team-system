@@ -1,12 +1,7 @@
 <?php
-namespace tourneysystem\form;
+namespace teamsystem\form;
 
-use tourneysystem\util\TeamUtil;
-use tourneysystem\data\team\PcTeamAction;
-use tourneysystem\data\team\Ps4TeamAction;
-use tourneysystem\data\team\Ps3TeamAction;
-use tourneysystem\data\team\Xb1TeamAction;
-use tourneysystem\data\team\Xb360TeamAction;
+use teamsystem\util\TeamUtil;
 use wcf\form\AbstractForm;
 use wcf\page\AbstractPage;
 use wcf\util\HeaderUtil;
@@ -16,6 +11,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\data\user\UserAction;
+use teamsystem\data\team\TeamAction;
 
 /**
  * Shows the Form to create a new team.
@@ -23,14 +19,14 @@ use wcf\data\user\UserAction;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.tourneysystem
+ * @package	de.trollgon.teamsystem
  */
 class TeamCreateForm extends AbstractForm {
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'tourneysystem.header.menu.teams';
+	public $activeMenuItem = 'teamsystem.header.menu.teams';
 	
 	/**
 	 * @see    \wcf\page\AbstractPage::$loginRequired
@@ -47,7 +43,6 @@ class TeamCreateForm extends AbstractForm {
 			'teamname' => '',
 			'teamTag' => '',
 			'leaderID' => '',
-			'leaderName' => ''
 		);
 
 	/**
@@ -157,63 +152,56 @@ class TeamCreateForm extends AbstractForm {
 		'data' => array(
 			'teamName'		=> $this->formData['teamname'], 
 			'teamTag'		=> strtoupper($this->formData['teamtag']), 
+			'platformID'	=> $this->platform,
 			'leaderID'		=> $this->formData['leaderID'],
-			'leaderName'	=> $this->formData['leaderName'],
+			'contactID'		=> $this->formData['leaderID'],
 			),
 		);
+		$action = new TeamAction(array(), 'create', $data);
+		$action->executeAction();
 		switch ($this->platform) {
 			case 1:
-				$action = new PcTeamAction(array(), 'create', $data);
-				$action->executeAction();
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemPcTeamID' 		=> $userTeamID,
-								'tourneysystemPcTeamPositionID' => 0,
+								'teamsystemPcTeamID' 		=> $userTeamID,
+								'teamsystemPcTeamPositionID' => 0,
 						)
 				);
 				break;
 			case 2:
-				$action = new Ps4TeamAction(array(), 'create', $data);
-				$action->executeAction();
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemPs4TeamID' 			=> $userTeamID,
-								'tourneysystemPs4TeamPositionID' 	=> 0,
+								'teamsystemPs4TeamID' 			=> $userTeamID,
+								'teamsystemPs4TeamPositionID' 	=> 0,
 						)
 				);
 				break;
 			case 3:
-				$action = new Ps3TeamAction(array(), 'create', $data);
-				$action->executeAction();
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemPs3TeamID'		 => $userTeamID,
-								'tourneysystemPs3TeamPositionID' => 0,
+								'teamsystemPs3TeamID'		 => $userTeamID,
+								'teamsystemPs3TeamPositionID' => 0,
 						)
 				);
 				break;
 			case 4:
-				$action = new Xb1TeamAction(array(), 'create', $data);
-				$action->executeAction();
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemXb1TeamID'		 => $userTeamID,
-								'tourneysystemXb1TeamPositionID' => 0,
+								'teamsystemXb1TeamID'		 => $userTeamID,
+								'teamsystemXb1TeamPositionID' => 0,
 						)
 				);
 				break;
 			case 5:
-				$action = new Xb360TeamAction(array(), 'create', $data);
-				$action->executeAction();
 				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
 				$userdata = array(
 						'data' => array(
-								'tourneysystemXb360TeamID'			 => $userTeamID,
-								'tourneysystemXb360TeamPositionID'	 => 0,
+								'teamsystemXb360TeamID'			 => $userTeamID,
+								'teamsystemXb360TeamPositionID'	 => 0,
 						)
 				);
 				break;
@@ -221,10 +209,9 @@ class TeamCreateForm extends AbstractForm {
 		$userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
 		$userAction->executeAction();
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
-			'application' 	=> 'tourneysystem',
+			'application' 	=> 'teamsystem',
 			'id'			=> TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID),
-			'platformID'	=> $this->platform,
-		)),WCF::getLanguage()->get('tourneysystem.team.create.successfulRedirect'), 10);				
+		)),WCF::getLanguage()->get('teamsystem.team.create.successfulRedirect'), 10);				
 		exit;
 	}
 	
@@ -234,7 +221,7 @@ class TeamCreateForm extends AbstractForm {
 			'formData' 	=> $this->formData,
 			'teamname'	=> $this->teamname,
 			'teamtag' 	=> $this->teamtag,
-			'platform' 	=> $this->platform
+			'platform' 	=> $this->platform,
 		));
 	}
 

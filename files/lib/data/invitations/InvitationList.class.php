@@ -1,5 +1,5 @@
 <?php
-namespace tourneysystem\data\invitations;
+namespace teamsystem\data\invitations;
 use wcf\data\DatabaseObjectList;
 use wcf\system\WCF;
 
@@ -15,5 +15,5 @@ class InvitationList extends DatabaseObjectList {
 	/**
 	 * @see    \wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'tourneysystem\data\invitations\Invitation';
+	public $className = 'teamsystem\data\invitations\Invitation';
 }

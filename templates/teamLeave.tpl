@@ -1,13 +1,16 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'tourneysystem.header.menu.teams'}{lang}tourneysystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
+	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'teamsystem.header.menu.teams'}{lang}teamsystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' sandbox=false}
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
-{include file='header' sandbox=false}
+
+{include file='teamSidebar'  application='teamsystem' assign='sidebar'}
+
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<h1>You are about to leave [{$team->getTeamTag()}] - {$team->getTeamName()}</h1>
@@ -17,13 +20,15 @@
 
 {include file='formError'}
 
-<form method="post" action="{link application='tourneysystem' controller='TeamLeave' teamID=$teamID platformID=$platformID}{/link}">
+<p class="warning">{lang}teamsystem.team.leave.warning{/lang}</p>
+
+<form method="post" action="{link application='teamsystem' controller='TeamLeave' teamID=$teamID}{/link}">
 
 	<div class="formSubmit">
 
 		<input type="submit" value="{lang}wcf.user.register.disclaimer.accept{/lang}" accesskey="s" />
 
-		<a class="button" href="{link application='tourneysystem' controller='InvitationList'}{/link}">{lang}wcf.user.register.disclaimer.decline{/lang}</a>
+		<a class="button" href="{link application='teamsystem' controller='InvitationList'}{/link}">{lang}wcf.user.register.disclaimer.decline{/lang}</a>
 
 		{@SECURITY_TOKEN_INPUT_TAG}
 

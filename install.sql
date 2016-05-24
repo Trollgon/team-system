@@ -1,212 +1,51 @@
-DROP TABLE IF EXISTS tourneysystem1_teams_pc;
-CREATE TABLE tourneysystem1_teams_pc (
+DROP TABLE IF EXISTS teamsystem1_teams;
+CREATE TABLE teamsystem1_teams (
   teamID int(10) NOT NULL AUTO_INCREMENT,
+  platformID int(10) NOT NULL,
   teamName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   teamTag varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  leaderID int(10),
-  leaderName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  avatarID INT(10),
+  leaderID int(10) NOT NULL,
   player2ID int(10),
-  player2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   player3ID int(10),
-  player3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   player4ID int(10),
-  player4Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   sub1ID int(10),
-  sub1Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   sub2ID int(10),
-  sub2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   sub3ID int(10),
-  sub3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  contactID int(10),
+  teamDescription MEDIUMTEXT,
   PRIMARY KEY (teamID),
   UNIQUE KEY teamID (teamID),
 );
 
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (leaderName) REFERENCES wcf1_user (username) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (player2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (player3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (player4Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (sub1Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (sub2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_pc ADD FOREIGN KEY (sub3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (contactID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 
-DROP TABLE IF EXISTS tourneysystem1_teams_ps4;
-CREATE TABLE tourneysystem1_teams_ps4 (
-  teamID int(10) NOT NULL AUTO_INCREMENT,
-  teamName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  teamTag varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  leaderID int(10),
-  leaderName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player2ID int(10),
-  player2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player3ID int(10),
-  player3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player4ID int(10),
-  player4Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub1ID int(10),
-  sub1Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub2ID int(10),
-  sub2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub3ID int(10),
-  sub3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (teamID),
-  UNIQUE KEY teamID (teamID),
-);
+ALTER TABLE wcf1_user ADD teamsystemPcTeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemPcTeamPositionID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemPs4TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemPs4TeamPositionID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemPs3TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemPs3TeamPositionID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemXb1TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemXb1TeamPositionID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemXb360TeamID INT(10) DEFAULT NULL;
+ALTER TABLE wcf1_user ADD teamsystemXb360TeamPositionID INT(10) DEFAULT NULL;
 
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (leaderName) REFERENCES wcf1_user (username) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (player2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (player3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (player4Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (sub1Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (sub2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps4 ADD FOREIGN KEY (sub3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
+ALTER TABLE wcf1_user ADD FOREIGN KEY (teamsystemPcTeamID) REFERENCES teamsystem1_teams (teamID) ON DELETE SET NULL;
+ALTER TABLE wcf1_user ADD FOREIGN KEY (teamsystemPs4TeamID) REFERENCES teamsystem1_teams (teamID) ON DELETE SET NULL;
+ALTER TABLE wcf1_user ADD FOREIGN KEY (teamsystemPs3TeamID) REFERENCES teamsystem1_teams (teamID) ON DELETE SET NULL;
+ALTER TABLE wcf1_user ADD FOREIGN KEY (teamsystemXb1TeamID) REFERENCES teamsystem1_teams (teamID) ON DELETE SET NULL;
+ALTER TABLE wcf1_user ADD FOREIGN KEY (teamsystemXb360TeamID) REFERENCES teamsystem1_teams (teamID) ON DELETE SET NULL;
 
-DROP TABLE IF EXISTS tourneysystem1_teams_ps3;
-CREATE TABLE tourneysystem1_teams_ps3 (
-  teamID int(10) NOT NULL AUTO_INCREMENT,
-  teamName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  teamTag varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  leaderID int(10),
-  leaderName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player2ID int(10),
-  player2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player3ID int(10),
-  player3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player4ID int(10),
-  player4Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub1ID int(10),
-  sub1Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub2ID int(10),
-  sub2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub3ID int(10),
-  sub3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (teamID),
-  UNIQUE KEY teamID (teamID),
-);
-
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (leaderName) REFERENCES wcf1_user (username) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (player2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (player3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (player4Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (sub1Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (sub2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_ps3 ADD FOREIGN KEY (sub3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-
-DROP TABLE IF EXISTS tourneysystem1_teams_xb1;
-CREATE TABLE tourneysystem1_teams_xb1 (
-  teamID int(10) NOT NULL AUTO_INCREMENT,
-  teamName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  teamTag varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  leaderID int(10),
-  leaderName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player2ID int(10),
-  player2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player3ID int(10),
-  player3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player4ID int(10),
-  player4Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub1ID int(10),
-  sub1Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub2ID int(10),
-  sub2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub3ID int(10),
-  sub3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (teamID),
-  UNIQUE KEY teamID (teamID),
-);
-
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (leaderName) REFERENCES wcf1_user (username) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (player2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (player3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (player4Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (sub1Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (sub2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb1 ADD FOREIGN KEY (sub3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-
-DROP TABLE IF EXISTS tourneysystem1_teams_xb360;
-CREATE TABLE tourneysystem1_teams_xb360 (
-  teamID int(10) NOT NULL AUTO_INCREMENT,
-  teamName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  teamTag varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  leaderID int(10),
-  leaderName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player2ID int(10),
-  player2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player3ID int(10),
-  player3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  player4ID int(10),
-  player4Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub1ID int(10),
-  sub1Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub2ID int(10),
-  sub2Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  sub3ID int(10),
-  sub3Name varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (teamID),
-  UNIQUE KEY teamID (teamID),
-);
-
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (leaderName) REFERENCES wcf1_user (username) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (player2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (player3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (player4Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub1Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub2Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-ALTER TABLE tourneysystem1_teams_xb360 ADD FOREIGN KEY (sub3Name) REFERENCES wcf1_user (username) ON DELETE SET NULL;
-
-ALTER TABLE wcf1_user ADD tourneysystemPcTeamID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemPcTeamPositionID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemPs4TeamID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemPs4TeamPositionID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemPs3TeamID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemPs3TeamPositionID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemXb1TeamID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemXb1TeamPositionID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemXb360TeamID INT(10) DEFAULT NULL;
-ALTER TABLE wcf1_user ADD tourneysystemXb360TeamPositionID INT(10) DEFAULT NULL;
-
-ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemPcTeamID) REFERENCES tourneysystem1_teams_pc (teamID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemPs4TeamID) REFERENCES tourneysystem1_teams_ps4 (teamID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemPs3TeamID) REFERENCES tourneysystem1_teams_ps3 (teamID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemXb1TeamID) REFERENCES tourneysystem1_teams_xb1 (teamID) ON DELETE SET NULL;
-ALTER TABLE wcf1_user ADD FOREIGN KEY (tourneysystemXb360TeamID) REFERENCES tourneysystem1_teams_xb360 (teamID) ON DELETE SET NULL;
-
-DROP TABLE IF EXISTS tourneysystem1_invitations;
-CREATE TABLE tourneysystem1_invitations (
+DROP TABLE IF EXISTS teamsystem1_invitations;
+CREATE TABLE teamsystem1_invitations (
   invitationID int(10) AUTO_INCREMENT,
   platformID int(10),
   teamID int(10),
@@ -216,4 +55,20 @@ CREATE TABLE tourneysystem1_invitations (
   UNIQUE KEY invitationID (invitationID),
 )
 
-ALTER TABLE tourneysystem1_invitations ADD FOREIGN KEY (playerID) REFERENCES (wcf1_user) ON DELETE CASCADE
+ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (playerID) REFERENCES (wcf1_user) ON DELETE CASCADE
+
+DROP TABLE IF EXISTS teamsystem1_team_avatar;
+CREATE TABLE teamsystem1_team_avatar (
+	avatarID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	avatarName VARCHAR(255) NOT NULL DEFAULT '',
+	avatarExtension VARCHAR(7) NOT NULL DEFAULT '',
+	width SMALLINT(5) NOT NULL DEFAULT 0,
+	height SMALLINT(5) NOT NULL DEFAULT 0,
+	teamID INT(10),
+	fileHash VARCHAR(40) NOT NULL DEFAULT '',
+	cropX SMALLINT(5) NOT NULL DEFAULT 0,
+	cropY SMALLINT(5) NOT NULL DEFAULT 0
+)
+
+ALTER TABLE teamsystem1_team_avatar ADD FOREIGN KEY (teamID) REFERENCES teamsystem1_teams (teamID) ON DELETE CASCADE;
+ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (avatarID) REFERENCES teamsystem1_team_avatar (avatarID) ON DELETE SET NULL;

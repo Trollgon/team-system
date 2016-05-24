@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'tourneysystem.header.menu.teams'}{lang}tourneysystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
+	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'teamsystem.header.menu.teams'}{lang}teamsystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' sandbox=false}
 </head>
@@ -12,11 +12,11 @@
 {include file='header' sandbox=false}
 
 <header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'tourneysystem.header.menu.teams'}
+	{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'teamsystem.header.menu.teams'}
 		<h1>{PAGE_TITLE|language}</h1>
 		{hascontent}<h2>{content}{PAGE_DESCRIPTION|language}{/content}</h2>{/hascontent}
 	{else}
-		<h1>{lang}tourneysystem.header.menu.teams{/lang}</h1>
+		<h1>{lang}teamsystem.header.menu.teams{/lang}</h1>
 	{/if}
 </header>
 
@@ -26,12 +26,12 @@
 	<div class="container marginTop">
 		<ol class="containerList userList">
 			{foreach from=$objects item=invitation}
-  			   	{include file='invitationItem' application='tourneysystem'}
+  			   	{include file='invitationItem' application='teamsystem'}
 			{/foreach}
 		</ol>
 	</div>
 {else}
-    <p class="info">{lang}tourneysystem.team.invitations.noInvitations{/lang}</p>
+    <p class="info">{lang}teamsystem.team.invitations.noInvitations{/lang}</p>
 {/if}
 
 <div class="contentNavigation">
