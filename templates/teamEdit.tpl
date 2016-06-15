@@ -28,7 +28,7 @@
 			<dl>
 				<dt><label for="contactForm">{lang}teamsystem.team.page.contact{/lang}</label></dt>
 				<dd>
-					<select id="contactForm" name="contactForm">
+					<select id="contact" name="contact">
 						<option value="0" {if $contactForm==0}selected="selected"{/if}>{@$team->getLeaderName()}</option>
 						{if ($team->player2ID != NULL)}<option value="1" {if $contactForm==1}selected="selected"{/if}>{@$team->getPlayer2Name()}</option>{/if}
 						{if ($team->player3ID != NULL)}<option value="2" {if $contactForm==2}selected="selected"{/if}>{@$team->getPlayer3Name()}</option>{/if}
