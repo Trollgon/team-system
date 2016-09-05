@@ -50,7 +50,7 @@ class TeamAvatar extends TEAMSYSTEMDatabaseObject implements IUserAvatar {
 	 * @return	string
 	 */
 	public function getLocation($size = null) {
-		return WCF_DIR . 'images/avatars/' . $this->getFilename($size);
+		return WCF::getPath('teamsystem') . 'images/avatars/' . $this->getFilename($size);
 	}
 	
 	/**
@@ -88,7 +88,7 @@ class TeamAvatar extends TEAMSYSTEMDatabaseObject implements IUserAvatar {
 			if ($size >= $this->width || $size >= $this->height) $size = null;
 		}
 		
-		return WCF::getPath() . 'images/avatars/' . $this->getFilename($size);
+		return WCF::getPath('teamsystem') . 'images/avatars/' . $this->getFilename($size);
 	}
 	
 	/**

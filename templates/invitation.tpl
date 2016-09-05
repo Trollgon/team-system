@@ -7,7 +7,10 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
-{include file='header' sandbox=false}
+
+{include file='teamSidebar'  application='teamsystem' assign='sidebar'}
+
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<h1>{lang}teamsystem.team.invitation.title{/lang}</h1>

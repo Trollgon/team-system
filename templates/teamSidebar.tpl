@@ -6,19 +6,12 @@
 
 	<div class="userAvatar">
 
-		{if $team->isTeamLeader()}
-
-			<a href="{link application='teamsystem' controller='TeamAvatarEdit'}{/link}" class="framed jsTooltip" title="{lang}teamsystem.team.avatar.edit{/lang}">{@$team->getAvatar()->getImageTag()}</a>
-
-		{else}
-
 			<span class="framed">{@$team->getAvatar()->getImageTag()}</span>
-
-		{/if}
 
 	</div>
 
 </fieldset>
+
 <div>
     <fieldset>
         <legend>{lang}teamsystem.team.page.contact{/lang}</legend>
@@ -38,6 +31,28 @@
         </div>
     </fieldset>
 </div>
+
+{if ($playerList != NULL)}
+<div>
+	<fieldset class="dashboardBox">
+        <legend>{lang}teamsystem.team.page.gamertags{/lang}</legend>
+       		<div>
+                <ol class="sidebarNestedCategoryList">
+                    {foreach from=$playerList item=player}
+                    	{if ($player != NULL)}
+                        <li>
+                            <a href="{link controller='User' object=$player}{/link}" class="userLink"
+                           data-user-id="{@$player->userID}">{@$player->getUsername()}</a>
+                            <span class="badge">{@$player->getUserOption($userOption)}</span>
+                        </li>
+                        {/if}
+                    {/foreach}
+                </ol>
+            </div>
+    </fieldset>
+</div>
+{/if}
+
 {if ($team->teamDescription != NULL)}
 <div class="dashboardBox">
 	<fieldset>

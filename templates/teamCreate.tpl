@@ -8,8 +8,6 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='teamSidebar'  application='teamsystem' assign='sidebar'}
-
 {include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
@@ -30,11 +28,11 @@
 				<dd>
 					<select id="platform" name="platform">
 						<option value="" selected>{lang}teamsystem.team.overview.platform.choose{/lang}</option>
-						<option value="1" {if $platform==1}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.pc{/lang}</option>
-						<option value="2" {if $platform==2}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.ps4{/lang}</option>
-						<option value="3" {if $platform==3}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.ps3{/lang}</option>
-						<option value="4" {if $platform==4}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.xbox1{/lang}</option>
-						<option value="5" {if $platform==5}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.xbox360{/lang}</option>
+						{if TEAMSYSTEM_PLATFORMS_PC == true}<option value="1" {if $platform==1}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.pc{/lang}</option>{/if}
+						{if TEAMSYSTEM_PLATFORMS_PS4 == true}<option value="2" {if $platform==2}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.ps4{/lang}</option>{/if}
+						{if TEAMSYSTEM_PLATFORMS_PS3 == true}<option value="3" {if $platform==3}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.ps3{/lang}</option>{/if}
+						{if TEAMSYSTEM_PLATFORMS_XB1 == true}<option value="4" {if $platform==4}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.xbox1{/lang}</option>{/if}
+						{if TEAMSYSTEM_PLATFORMS_XB360 == true}<option value="5" {if $platform==5}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.xbox360{/lang}</option>{/if}
 					</select>
 					{if $errorField == 'platform'}
 							<small class="innerError">

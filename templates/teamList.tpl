@@ -64,9 +64,9 @@
                         <span>{lang}teamsystem.team.page.user{/lang}</span></a></li>
                 {/if}
 				<li><a href="{link application='teamsystem' controller='InvitationList'}{/link}"
-                      title="{lang}teamsystem.team.invitations{/lang}" class="button"><span
+                      title="{lang}teamsystem.team.invitation{/lang}" class="button"><span
                             class="icon icon16 icon-envelope"></span>
-                    <span>{lang}teamsystem.team.invitations{/lang}</span></a></li>
+                    <span>{lang}teamsystem.team.invitation{/lang}</span></a></li>
                 {event name='contentNavigationButtonsTop'}
                 {/content}
             </ul>

@@ -34,6 +34,23 @@
 
 {include file='formError'}
 
+<div class="contentNavigation">
+    {hascontent}
+        <nav>
+            <ul>
+                {content}
+                {if $team->isTeamLeader()}
+                	<li><a href="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.edit{/lang}" class="button"><span
+                                class="icon icon16 icon-pencil"></span>
+                        <span>{lang}teamsystem.team.page.edit{/lang}</span></a></li>
+				{/if}
+				{/content}
+            </ul>
+        </nav>
+    {/hascontent}
+</div>
+
 <form method="post" action="{link application='teamsystem' controller='TeamInvitation' teamID=$teamID}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -44,12 +61,8 @@
 				<dd>
 					<select id="positionID" name="positionID">
 						<option value="" selected>{lang}teamsystem.team.invitation.position.choose{/lang}</option>
-						<option value="1" {if $positionID==1}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.player2{/lang}</option>
-						<option value="2" {if $positionID==2}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.player3{/lang}</option>
-						<option value="3" {if $positionID==3}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.player4{/lang}</option>
-						<option value="4" {if $positionID==4}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.sub1{/lang}</option>
-						<option value="5" {if $positionID==5}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.sub2{/lang}</option>
-						<option value="6" {if $positionID==6}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.sub3{/lang}</option>
+						<option value="1" {if $positionID==1}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.player{/lang}</option>
+						<option value="2" {if $positionID==2}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.sub{/lang}</option>
 					</select>
 					{if $errorField == 'positionID'}
 							<small class="innerError">

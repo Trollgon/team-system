@@ -11,7 +11,7 @@
 
 				<li>
 					{lang}teamsystem.team.invitation.position{/lang}: 
-						{if $invitation->getPositionID() < 5}
+						{if $invitation->getPositionID() == 1}
 							{lang}teamsystem.team.position.player{/lang}
 						{else}
 							{lang}teamsystem.team.position.sub{/lang}

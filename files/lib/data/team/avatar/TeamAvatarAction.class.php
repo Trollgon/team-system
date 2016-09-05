@@ -1,8 +1,6 @@
 <?php
 namespace teamsystem\data\team\avatar;
 use wcf\data\user\User;
-use wcf\data\user\UserEditor;
-use wcf\data\user\UserProfile;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -10,10 +8,9 @@ use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\image\ImageHandler;
 use wcf\system\upload\AvatarUploadFileValidationStrategy;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\FileUtil;
-use wcf\util\HTTPRequest;
+use wcf\util\HTTPRequest;use teamsystem\data\team\Team;use teamsystem\data\team\TeamEditor;use teamsystem\data\team\avatar\TeamAvatarEditor;
 
 /**
  * Executes avatar-related actions.
@@ -28,30 +25,21 @@ use wcf\util\HTTPRequest;
 class TeamAvatarAction extends AbstractDatabaseObjectAction {
 	/**
 	 * currently edited avatar
-	 * @var	\wcf\data\user\avatar\UserAvatarEditor
-	 */
-	public $avatar = null;
+	 * @var	\teamsystem\data\team\avatar\TeamAvatarEditor
+	 */		/**	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className	 */	public $className = 'teamsystem\data\team\avatar\TeamAvatarEditor';
+	public $avatar = null;	public $team = null;		public function getDatabaseTableIndexName() {		return TeamAvatar::getDatabaseTableIndexName();	}
 	
 	/**
 	 * Validates the upload action.
 	 */
 	public function validateUpload() {
-		$this->readInteger('userID', true);
+		$this->readInteger('teamID', true);
 		
-		if ($this->parameters['userID']) {
-			if (!WCF::getSession()->getPermission('admin.user.canEditUser')) {
-				throw new PermissionDeniedException();
-			}
-			
-			$user = new User($this->parameters['userID']);
-			if (!$user->userID) {
+		if ($this->parameters['teamID']) {
+			$this->team = new Team($this->parameters['teamID']);
+			if (!$team->teamID) {
 				throw new IllegalLinkException();
 			}
-		}
-		
-		// check upload permissions
-		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar') || WCF::getUser()->disableAvatar) {
-			throw new PermissionDeniedException();
 		}
 		
 		if (count($this->parameters['__files']->getFiles()) != 1) {
@@ -67,9 +55,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 	 */
 	public function upload() {
 		// save files
-		$files = $this->parameters['__files']->getFiles();
-		$teamID = (!empty($this->parameters['teamID']) ? intval($this->parameters['teamID']) : WCF::getUser()->userID);
-		$user = ($userID != WCF::getUser()->userID ? new User($userID) : WCF::getUser());
+		$files = $this->parameters['__files']->getFiles();				$this->teamID = $this->team->teamID;				$team = new Team($this->team->teamID);
 		$file = $files[0];
 		
 		try {
@@ -88,7 +74,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 				);
 				
 				// create avatar
-				$avatar = UserAvatarEditor::create($data);
+				$avatar = TeamAvatarEditor::create($data);
 				
 				// check avatar directory
 				// and create subdirectory if necessary
@@ -102,24 +88,23 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 					@unlink($fileLocation);
 					
 					// create thumbnails
-					$action = new UserAvatarAction(array($avatar), 'generateThumbnails');
+					$action = new TeamAvatarAction(array($avatar), 'generateThumbnails');
 					$action->executeAction();
 					
 					// delete old avatar
-					if ($user->avatarID) {
-						$action = new UserAvatarAction(array($user->avatarID), 'delete');
+					if ($this->team->avatarID) {
+						$action = new TeamAvatarAction(array($this->team->avatarID), 'delete');
 						$action->executeAction();
 					}
 					
-					// update user
-					$userEditor = new UserEditor($user);
-					$userEditor->update(array(
+					// update team
+					$teamEditor = new TeamEditor($this->team->teamID);
+					$teamEditor->update(array(
 						'avatarID' => $avatar->avatarID,
-						'enableGravatar' => 0
 					));
 					
 					// reset user storage
-					UserStorageHandler::getInstance()->reset(array($userID), 'avatar');
+					// UserStorageHandler::getInstance()->reset(array($userID), 'avatar');
 					
 					// return result
 					return array(
@@ -130,7 +115,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 				}
 				else {
 					// moving failed; delete avatar
-					$editor = new UserAvatarEditor($avatar);
+					$editor = new TeamAvatarEditor($avatar);
 					$editor->delete();
 					throw new UserInputException('avatar', 'uploadFailed');
 				}
@@ -155,7 +140,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 			$adapter = ImageHandler::getInstance()->getAdapter();
 			$adapter->loadFile($avatar->getLocation());
 			
-			foreach (UserAvatar::$avatarThumbnailSizes as $size) {
+			foreach (TeamAvatar::$avatarThumbnailSizes as $size) {
 				if ($avatar->width <= $size && $avatar->height <= $size) break 2;
 				
 				$thumbnail = $adapter->createThumbnail($size, $size, false);
@@ -219,12 +204,12 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 			'avatarExtension' => $tmp['extension'],
 			'width' => $imageData[0],
 			'height' => $imageData[1],
-			'userID' => $this->parameters['userEditor']->userID,
+			'teamID' => $this->team->teamID,
 			'fileHash' => sha1_file($filename)
 		);
 		
 		// create avatar
-		$avatar = UserAvatarEditor::create($data);
+		$avatar = TeamAvatarEditor::create($data);
 		
 		// check avatar directory
 		// and create subdirectory if necessary
@@ -238,7 +223,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 			@unlink($filename);
 			
 			// create thumbnails
-			$action = new UserAvatarAction(array($avatar), 'generateThumbnails');
+			$action = new TeamAvatarAction(array($avatar), 'generateThumbnails');
 			$action->executeAction();
 			
 			$avatarID = $avatar->avatarID;
@@ -247,26 +232,25 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 			@unlink($filename);
 			
 			// moving failed; delete avatar
-			$editor = new UserAvatarEditor($avatar);
+			$editor = new TeamAvatarEditor($avatar);
 			$editor->delete();
 		}
 		
 		// update user
 		if ($avatarID) {
-			$this->parameters['userEditor']->update(array(
+			$this->parameters['TeamEditor']->update(array(
 				'avatarID' => $avatarID,
-				'enableGravatar' => 0
 			));
 			
 			// delete old avatar
-			if ($this->parameters['userEditor']->avatarID) {
-				$action = new UserAvatarAction(array($this->parameters['userEditor']->avatarID), 'delete');
+			if ($this->parameters['TeamEditor']->avatarID) {
+				$action = new TeamAvatarAction(array($this->parameters['TeamEditor']->avatarID), 'delete');
 				$action->executeAction();
 			}
 		}
 		
 		// reset user storage
-		UserStorageHandler::getInstance()->reset(array($this->parameters['userEditor']->userID), 'avatar');
+		// UserStorageHandler::getInstance()->reset(array($this->parameters['userEditor']->userID), 'avatar');
 	}
 	
 	/**
@@ -334,23 +318,18 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 	public function validateCropAvatar() {
 		$this->avatar = $this->getSingleObject();
 		
-		// check if user can edit the given avatar
-		if ($this->avatar->userID != WCF::getUser()->userID && !WCF::getSession()->getPermission('admin.user.canEditUser')) {
+		// check if user can edit the given avatar				$teamcheck = new Team($this->avatar->teamID);
+		if ($teamcheck->getLeaderID() != WCF::getUser()->userID) {
 			throw new PermissionDeniedException();
-		}
-		
-		if (!WCF::getSession()->getPermission('user.profile.avatar.canUploadAvatar') || UserProfile::getUserProfile($this->avatar->userID)->disableAvatar) {
-			throw new PermissionDeniedException();
-		}
-		
+		}	
 		// check parameters
 		$this->readInteger('cropX', true);
 		$this->readInteger('cropY', true);
 		
-		if ($this->parameters['cropX'] < 0 || $this->parameters['cropX'] > $this->avatar->width - UserAvatar::$maxThumbnailSize) {
+		if ($this->parameters['cropX'] < 0 || $this->parameters['cropX'] > $this->avatar->width - TeamAvatar::$maxThumbnailSize) {
 			throw new UserInputException('cropX');
 		}
-		if ($this->parameters['cropY'] < 0 || $this->parameters['cropY'] > $this->avatar->height - UserAvatar::$maxThumbnailSize) {
+		if ($this->parameters['cropY'] < 0 || $this->parameters['cropY'] > $this->avatar->height - TeamAvatar::$maxThumbnailSize) {
 			throw new UserInputException('cropY');
 		}
 	}
@@ -362,10 +341,10 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 		// created clipped avatar as base for new thumbnails
 		$adapter = ImageHandler::getInstance()->getAdapter();
 		$adapter->loadFile($this->avatar->getLocation());
-		$adapter->clip($this->parameters['cropX'], $this->parameters['cropY'], UserAvatar::$maxThumbnailSize, UserAvatar::$maxThumbnailSize);
+		$adapter->clip($this->parameters['cropX'], $this->parameters['cropY'], TeamAvatar::$maxThumbnailSize, TeamAvatar::$maxThumbnailSize);
 		
 		// update thumbnails
-		foreach (UserAvatar::$avatarThumbnailSizes as $size) {
+		foreach (TeamAvatar::$avatarThumbnailSizes as $size) {
 			$thumbnail = $adapter->createThumbnail($size, $size);
 			$adapter->writeImage($thumbnail, $this->avatar->getLocation($size));
 		}

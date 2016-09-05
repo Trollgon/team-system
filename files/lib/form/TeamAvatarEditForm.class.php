@@ -2,16 +2,14 @@
 
 namespace teamsystem\form;
 
-use wcf\data\user\avatar\Gravatar;
-use wcf\data\user\avatar\UserAvatarAction;
-use wcf\data\user\UserAction;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
-use wcf\system\menu\user\UserMenu;
-use wcf\system\user\group\assignment\UserGroupAssignmentHandler;
-use wcf\system\user\UserProfileHandler;
 use wcf\system\WCF;
 use wcf\form\AbstractForm;
+use teamsystem\data\team\avatar\TeamAvatarAction;
+use teamsystem\data\team\TeamAction;
+use teamsystem\data\team\Team;
+use wcf\data\user\User;
 
 
 
@@ -63,7 +61,15 @@ class TeamAvatarEditForm extends AbstractForm {
 
 	 */
 
-	public $templateName = 'avatarEdit';
+	public $templateName = 'teamAvatarEdit';
+	
+	public 	$team = null;
+	public 	$teamID = '';
+	public	$platform = '';
+	public 	$contact = 0;
+	public 	$contactID = 0;
+	public	$playerList = null;
+	public	$userOption = '';
 
 	
 
@@ -77,7 +83,62 @@ class TeamAvatarEditForm extends AbstractForm {
 
 	public $avatarType = 'none';
 
-	
+	/**
+	 * @see \wcf\page\AbstractPage::readParameters()
+	 */
+	public function readParameters() {
+		parent::readParameters();
+		if(isset($_REQUEST['teamID']))
+			$this->teamID = intval($_REQUEST['teamID']);
+			if($this->teamID == 0) {
+				throw new IllegalLinkException();
+			}
+			$this->team = new Team($this->teamID);
+			$this->platformID = $this->team->getPlatformID();
+			switch ($this->platformID) {
+				case 1:
+					$this->userOption = "uplayName";
+					break;
+				case 2:
+					$this->userOption = "psnID";
+					break;
+				case 3:
+					$this->userOption = "psnID";
+					break;
+				case 4:
+					$this->userOption = "xboxLiveID";
+					break;
+				case 5:
+					$this->userOption = "xboxLiveID";
+					break;
+			}
+			$leader = new User($this->team->leaderID);
+			if ($leader->getUserOption($this->userOption) == NULL) {$leader = NULL;}
+			if ($this->team->player2ID != NULL) {$player2 = new User($this->team->player2ID); if ($player2->getUserOption($this->userOption) == NULL) {$player2 = NULL;}} else {$player2 = null;}
+			if ($this->team->player3ID != NULL) {$player3 = new User($this->team->player3ID); if ($player3->getUserOption($this->userOption) == NULL) {$player3 = NULL;}} else {$player3 = null;}
+			if ($this->team->player4ID != NULL) {$player4 = new User($this->team->player4ID); if ($player4->getUserOption($this->userOption) == NULL) {$player4 = NULL;}} else {$player4 = null;}
+			if ($this->team->sub1ID != NULL) {$sub1 = new User($this->team->sub1ID); if ($sub1->getUserOption($this->userOption) == NULL) {$sub1 = NULL;}} else {$sub1 = null;}
+			if ($this->team->sub2ID != NULL) {$sub2 = new User($this->team->sub2ID); if ($sub2->getUserOption($this->userOption) == NULL) {$sub2 = NULL;}} else {$sub2 = null;}
+			if ($this->team->sub3ID != NULL) {$sub3 = new User($this->team->sub3ID); if ($sub3->getUserOption($this->userOption) == NULL) {$sub3 = NULL;}} else {$sub3 = null;}
+			if ($leader != NULL || $player2 != NULL || $player3 != NULL || $player4 != NULL || $sub1 != NULL || $sub2 != NULL || $sub3 != NULL) {
+				$this->playerList = array(
+						0	=>	$leader,
+						1	=>	$player2,
+						2	=>	$player3,
+						3	=>	$player4,
+						4	=>	$sub1,
+						5	=>	$sub2,
+						6	=>	$sub3,
+				);
+			}
+			else {
+				$this->playerList = NULL;
+			}
+			$this->description = $this->team->teamDescription;
+			if($this->team->teamID == null || $this->team->teamID == 0) {
+				throw new IllegalLinkException();
+			}
+	}
 
 	/**
 
@@ -106,52 +167,19 @@ class TeamAvatarEditForm extends AbstractForm {
 	public function validate() {
 
 		parent::validate();
+		
+
+		if ($this->avatarType != 'custom') $this->avatarType = 'none';
 
 		
 
-		if (WCF::getUser()->disableAvatar) throw new PermissionDeniedException();
+		if ($this->avatarType == 'custom') {
 
-		
-
-		if ($this->avatarType != 'custom' && $this->avatarType != 'gravatar') $this->avatarType = 'none';
-
-		
-
-		switch ($this->avatarType) {
-
-			case 'custom':
-
-				if (!WCF::getUser()->avatarID) {
+				if (!$this->team->avatarID) {
 
 					throw new UserInputException('custom');
 
 				}
-
-			break;
-
-				
-
-			case 'gravatar':
-
-				if (!MODULE_GRAVATAR) {
-
-					$this->avatarType = 'none';
-
-					break;
-
-				}
-
-				
-
-				// test gravatar
-
-				if (!Gravatar::test(WCF::getUser()->email)) {
-
-					throw new UserInputException('gravatar', 'notFound');
-
-				}
-
-			break;
 
 		}
 
@@ -175,9 +203,9 @@ class TeamAvatarEditForm extends AbstractForm {
 
 			// delete custom avatar
 
-			if (WCF::getUser()->avatarID) {
+			if ($this->team->avatarID) {
 
-				$action = new UserAvatarAction(array(WCF::getUser()->avatarID), 'delete');
+				$action = new TeamAvatarAction(array($this->team->avatarID), 'delete');
 
 				$action->executeAction();
 
@@ -189,89 +217,23 @@ class TeamAvatarEditForm extends AbstractForm {
 
 		// update user
 
-		switch ($this->avatarType) {
-
-			case 'none':
+		if ($this->avatarType == 'none') {
 
 				$data = array(
-
-					'avatarID' => null,
-
-					'enableGravatar' => 0
+						'data' => array(
+								'avatarID' => null,
+						),
 
 				);
 
-			break;
-
-				
-
-			case 'custom':
-
-				$data = array(
-
-					'enableGravatar' => 0
-
-				);
-
-			break;
-
-				
-
-			case 'gravatar':
-
-				$data = array(
-
-					'avatarID' => null,
-
-					'enableGravatar' => 1
-
-				);
-
-			break;
 
 		}
 
-		$this->objectAction = new UserAction(array(WCF::getUser()), 'update', array(
-
-			'data' => array_merge($this->additionalFields, $data)
-
-		));
+		$this->objectAction = new TeamAction(array($this->teamID), 'update', $data);
 
 		$this->objectAction->executeAction();
 
-		
-
-		// check if the user will be automatically added to new user groups
-
-		// because of the changed avatar
-
-		UserGroupAssignmentHandler::getInstance()->checkUsers(array(WCF::getUser()->userID));
-
-		
-
-		// reset gravatar cache
-
-		if ($this->avatarType == 'gravatar') {
-
-			$pattern = WCF_DIR . sprintf(Gravatar::GRAVATAR_CACHE_LOCATION, md5(mb_strtolower(WCF::getUser()->email)), '*', '*');
-
-			$files = glob($pattern);
-
-			if (!empty($files)) {
-
-				foreach ($files as $file) {
-
-					@unlink($file);
-
-				}
-
-			}
-
-		}
-
-		
-
-		UserProfileHandler::getInstance()->reloadUserProfile();
+		$this->team = new Team($this->teamID);
 
 		
 
@@ -297,9 +259,7 @@ class TeamAvatarEditForm extends AbstractForm {
 
 		if (empty($_POST)) {
 
-			if (WCF::getUser()->avatarID) $this->avatarType = 'custom';
-
-			else if (MODULE_GRAVATAR && WCF::getUser()->enableGravatar) $this->avatarType = 'gravatar';
+			if ($this->team->avatarID) $this->avatarType = 'custom';
 
 		}
 
@@ -321,7 +281,15 @@ class TeamAvatarEditForm extends AbstractForm {
 
 		WCF::getTPL()->assign(array(
 
-			'avatarType' => $this->avatarType
+			'avatarType'	=> $this->avatarType,
+			'team'			=> $this->team,
+			'teamID'		=> $this->teamID,
+			'platform' 		=> $this->platform,
+			'contactForm'	=> $this->team->getPositionID($this->team->contactID, $this->team->getPlatformID(), $this->teamID),
+			'contact'		=> $this->team->getContactProfile(),
+			'user'			=> $this->team->getContactProfile(),
+			'playerList'	=> $this->playerList,
+			'userOption'	=> $this->userOption,
 
 		));
 
@@ -336,13 +304,8 @@ class TeamAvatarEditForm extends AbstractForm {
 	 */
 
 	public function show() {
-
-		// set active tab
-
-		UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.profile.avatar');
-
-		
-
+		if(!$this->team->isTeamLeader() || !WCF::getSession()->getPermission("mod.teamSystem.canEditTeams"))
+			throw new PermissionDeniedException();
 		parent::show();
 
 	}

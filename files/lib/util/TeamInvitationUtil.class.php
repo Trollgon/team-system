@@ -17,34 +17,22 @@ final class TeamInvitationUtil {
 	public function isEmptyPosition($teamID, $positionID) {
 		switch ($positionID) {
 			case 1:
-				$role = "player2ID";
+				$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND ((player2ID IS NULL) OR (player3ID IS NULL) OR (player4ID IS NULL))";
 				break;
 			case 2:
-				$role = "player3ID";
-				break;
-			case 3:
-				$role = "player4ID";
-				break;
-			case 4:
-				$role = "sub1ID";
-				break;
-			case 5:
-				$role = "sub2ID";
-				break;
-			case 6:
-				$role = "sub3ID";
+				$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND ((sub1ID IS NULL) OR (sub2ID IS NULL) OR (sub3ID IS NULL))";
 				break;			
 		}
 		
-		$sql = "SELECT	" . $positionID . "
-				FROM	teamsystem1_teams
-				WHERE	" . $role . " = ?";
-		
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array("NULL"));
+		$statement->execute(array($teamID));
 		$row = $statement->fetchArray();
 		
-		return $row == 0;
+		return $row['count'] != 0;
 	}
 	
 	public function isNotInTeam($teamID, $userID) {
@@ -57,6 +45,93 @@ final class TeamInvitationUtil {
 		$value = $statement->fetchArray();
 		
 		return $value['teamID'] == 0;
+	}
+	
+	public function getFreePositionID($teamID, $position) {
+		switch ($position) {
+			case 1:
+				$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND (player2ID IS NULL)";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($teamID));
+				$row = $statement->fetchArray();
+				
+				if ($row['count'] == 1) {
+					$backEndPositionID = 1;
+					break;
+				}
+				
+				$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND (player3ID IS NULL)";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($teamID));
+				$row = $statement->fetchArray();
+				
+				if ($row['count'] == 1) {
+					$backEndPositionID = 2;
+					break;
+				}
+				
+						$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND (player4ID IS NULL)";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($teamID,));
+				$row = $statement->fetchArray();
+				
+				if ($row['count'] == 1) {
+					$backEndPositionID = 3;
+					break;
+				}
+				
+				break;
+			case 2:
+				$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND (sub1ID IS NULL)";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($teamID));
+				$row = $statement->fetchArray();
+				
+				if ($row['count'] == 1) {
+					$backEndPositionID = 4;
+					break;
+				}
+				
+		$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND (sub2ID IS NULL)";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($teamID));
+				$row = $statement->fetchArray();
+				
+				if ($row['count'] == 1) {
+					$backEndPositionID = 5;
+					break;
+				}
+				
+				$sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND (sub3ID IS NULL)";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($teamID));
+				$row = $statement->fetchArray();
+				
+				if ($row['count'] == 1) {
+					$backEndPositionID = 6;
+					break;
+				}
+		}
+		
+		return $backEndPositionID;
 	}
 	
 }

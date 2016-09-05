@@ -9,6 +9,8 @@ use wcf\data\user\User;
 use wcf\page\SortablePage;
 use wcf\data\user\UserProfileList;
 use teamsystem\data\team\Team;
+use teamsystem\util\TeamInvitationUtil;
+use teamsystem\util\TeamContactsUtil;
 
 /**
  * Shows the page of a team.
@@ -28,6 +30,10 @@ class TeamPage extends SortablePage {
 	
 	public $playerObjects = null;
 	public $subObjects = null;
+	public $playerList = null;
+	public $userOption = '';
+	public $missingContactInfo = false;
+	public $playerMissingContactInfo = false;
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
@@ -52,6 +58,45 @@ class TeamPage extends SortablePage {
 		}
 		$this->team = new Team($this->teamID);
 		$this->platformID = $this->team->getPlatformID();
+		switch ($this->platformID) {
+			case 1:
+				$this->userOption = "uplayName";
+				break;
+			case 2:
+				$this->userOption = "psnID";
+				break;
+			case 3:
+				$this->userOption = "psnID";
+				break;
+			case 4:
+				$this->userOption = "xboxLiveID";
+				break;
+			case 5:
+				$this->userOption = "xboxLiveID";
+				break;
+		}
+		$leader = new User($this->team->leaderID);
+		if ($leader->getUserOption($this->userOption) == NULL) {$leader = NULL; if ($this->team->leaderID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true; $this->missingContactInfo = true;}}
+		if ($this->team->player2ID != NULL) {$player2 = new User($this->team->player2ID); if ($player2->getUserOption($this->userOption) == NULL) {$player2 = NULL; $this->missingContactInfo = true; if ($this->team->player2ID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true;}}} else {$player2 = null;}
+		if ($this->team->player3ID != NULL) {$player3 = new User($this->team->player3ID); if ($player3->getUserOption($this->userOption) == NULL) {$player3 = NULL; $this->missingContactInfo = true; if ($this->team->player3ID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true;}}} else {$player3 = null;}
+		if ($this->team->player4ID != NULL) {$player4 = new User($this->team->player4ID); if ($player4->getUserOption($this->userOption) == NULL) {$player4 = NULL; $this->missingContactInfo = true; if ($this->team->player4ID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true;}}} else {$player4 = null;}
+		if ($this->team->sub1ID != NULL) {$sub1 = new User($this->team->sub1ID); if ($sub1->getUserOption($this->userOption) == NULL) {$sub1 = NULL; $this->missingContactInfo = true; if ($this->team->sub1ID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true;}}} else {$sub1 = null;}
+		if ($this->team->sub2ID != NULL) {$sub2 = new User($this->team->sub2ID); if ($sub2->getUserOption($this->userOption) == NULL) {$sub2 = NULL; $this->missingContactInfo = true; if ($this->team->sub2ID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true;}}} else {$sub2 = null;}
+		if ($this->team->sub3ID != NULL) {$sub3 = new User($this->team->sub3ID); if ($sub3->getUserOption($this->userOption) == NULL) {$sub3 = NULL; $this->missingContactInfo = true; if ($this->team->sub2ID == WCF::getUser()->getUserID()) {$this->playerMissingContactInfo = true;}}} else {$sub3 = null;}
+		if ($leader != NULL || $player2 != NULL || $player3 != NULL || $player4 != NULL || $sub1 != NULL || $sub2 != NULL || $sub3 != NULL) {
+			$this->playerList = array(
+					0	=>	$leader,
+					1	=>	$player2,
+					2	=>	$player3,
+					3	=>	$player4,
+					4	=>	$sub1,
+					5	=>	$sub2,
+					6	=>	$sub3,
+			);
+		}
+		else {
+			$this->playerList = NULL;
+		}
 		if($this->team->teamID == null || $this->team->teamID == 0) {
 			throw new IllegalLinkException();
 		}
@@ -136,17 +181,22 @@ class TeamPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-
-		
+		$memberMissing = TeamInvitationUtil::isEmptyPosition($this->teamID, 1);
+		$subMissing = TeamContactsUtil::hasMissingSub($this->teamID);
 		WCF::getTPL()->assign(array(
-				'team' 				=> $this->team,
-				'teamID'			=> $this->teamID,
-				'platformID'		=> $this->platformID,
-				'playerObjects'		=> $this->playerObjects,
-				'subObjects'		=> $this->subObjects,
-				'contact'			=> $this->team->getContactProfile(),
-				'user'				=> $this->team->getContactProfile(),
-
+				'team' 						=> $this->team,
+				'teamID'					=> $this->teamID,
+				'platformID'				=> $this->platformID,
+				'playerObjects'				=> $this->playerObjects,
+				'subObjects'				=> $this->subObjects,
+				'contact'					=> $this->team->getContactProfile(),
+				'user'						=> $this->team->getContactProfile(),
+				'playerList'				=> $this->playerList,
+				'userOption'				=> $this->userOption,
+				'memberMissing'				=> $memberMissing,
+				'subMissing'				=> $subMissing,
+				'missingContactInfo'		=> $this->missingContactInfo,
+				'playerMissingContactInfo'	=> $this->playerMissingContactInfo,
 		));
 	}
 	

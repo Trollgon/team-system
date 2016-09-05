@@ -20,6 +20,48 @@
 
 {include file='formError'}
 
+<div class="contentNavigation">
+    {hascontent}
+        <nav>
+            <ul>
+                {content}
+                {if $team->isTeamLeader()}
+                	<li><a href="{link application='teamsystem' controller='TeamKickList' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.kick{/lang}" class="button"><span
+                                class="icon icon16 icon-minus"></span>
+                        <span>{lang}teamsystem.team.page.kick{/lang}</span></a></li>
+                    {if $teamIsFull != true}
+                    <li><a href="{link application='teamsystem' controller='TeamInvitation' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.invitation{/lang}" class="button"><span
+                                class="icon icon16 icon-plus"></span>
+                        <span>{lang}teamsystem.team.page.invitation{/lang}</span></a></li>
+                    {/if}
+					<li><a href="{link application='teamsystem' controller='TeamDelete' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.delete{/lang}" class="button"><span
+                                class="icon icon16 icon-remove"></span>
+                        <span>{lang}teamsystem.team.page.delete{/lang}</span></a></li>
+				{/if}
+				{if $__wcf->getSession()->getPermission('mod.teamSystem.canEditTeams')}
+                	<li><a href="{link application='teamsystem' controller='TeamKickList' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.kick.mod{/lang}" class="button"><span
+                                class="icon icon16 icon-minus"></span>
+                        <span>{lang}teamsystem.team.page.kick.mod{/lang}</span></a></li>
+                    <li><a href="{link application='teamsystem' controller='TeamInvitation' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.invitation.mod{/lang}" class="button"><span
+                                class="icon icon16 icon-plus"></span>
+                        <span>{lang}teamsystem.team.page.invitation.mod{/lang}</span></a></li>
+					<li><a href="{link application='teamsystem' controller='TeamDelete' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.delete.mod{/lang}" class="button"><span
+                                class="icon icon16 icon-remove"></span>
+                        <span>{lang}teamsystem.team.page.delete.mod{/lang}</span></a></li>
+				{/if}
+                {event name='contentNavigationButtonsTop'}
+                {/content}
+            </ul>
+        </nav>
+    {/hascontent}
+</div>
+
 <form method="post" action="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
@@ -45,6 +87,11 @@
 				<dt><label for="description">{lang}teamsystem.team.page.description{/lang}</label></dt>
 				<dd>
 					<textarea id="description" name="description" rows="20" cols="40">{$description}</textarea>
+					{if $errorField == 'description'}
+							<small class="innerError">
+								{lang}teamsystem.team.page.description.error.length{/lang}
+							</small>
+					{/if}
 					<small>{lang}teamsystem.team.edit.description.description{/lang}</small>
 				</dd>
 			</dl>					
