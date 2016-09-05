@@ -31,7 +31,7 @@
 		</ol>
 	</div>
 {else}
-    <p class="info">{lang}teamsystem.team.invitations.noInvitations{/lang}</p>
+    <p class="info">{lang}teamsystem.team.invitation.noInvitations{/lang}</p>
 {/if}
 
 <div class="contentNavigation">

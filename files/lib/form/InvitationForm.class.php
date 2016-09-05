@@ -15,6 +15,7 @@ use teamsystem\util\TeamUtil;
 use teamsystem\data\invitations\InvitationAction;
 use teamsystem\data\team\Team;
 use teamsystem\data\team\TeamAction;
+use wcf\data\user\User;
 
 /**
  * Shows the page of an invitation.
@@ -38,6 +39,8 @@ class InvitationForm extends AbstractForm {
 	public $teamID = 0;
 	public $playerID = 0;
 	public $positionID = 0;
+	public $playerList = null;
+	public $userOption = '';
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
@@ -67,6 +70,46 @@ class InvitationForm extends AbstractForm {
 		$this->positionID	= $this->invitation->getPositionID();
 		
 		$this->team = new Team($this->teamID);
+		$this->platformID = $this->team->getPlatformID();
+		switch ($this->platformID) {
+			case 1:
+				$this->userOption = "uplayName";
+				break;
+			case 2:
+				$this->userOption = "psnID";
+				break;
+			case 3:
+				$this->userOption = "psnID";
+				break;
+			case 4:
+				$this->userOption = "xboxLiveID";
+				break;
+			case 5:
+				$this->userOption = "xboxLiveID";
+				break;
+		}
+		$leader = new User($this->team->leaderID);
+		if ($leader->getUserOption($this->userOption) == NULL) {$leader = NULL;}
+		if ($this->team->player2ID != NULL) {$player2 = new User($this->team->player2ID); if ($player2->getUserOption($this->userOption) == NULL) {$player2 = NULL;}} else {$player2 = null;}
+		if ($this->team->player3ID != NULL) {$player3 = new User($this->team->player3ID); if ($player3->getUserOption($this->userOption) == NULL) {$player3 = NULL;}} else {$player3 = null;}
+		if ($this->team->player4ID != NULL) {$player4 = new User($this->team->player4ID); if ($player4->getUserOption($this->userOption) == NULL) {$player4 = NULL;}} else {$player4 = null;}
+		if ($this->team->sub1ID != NULL) {$sub1 = new User($this->team->sub1ID); if ($sub1->getUserOption($this->userOption) == NULL) {$sub1 = NULL;}} else {$sub1 = null;}
+		if ($this->team->sub2ID != NULL) {$sub2 = new User($this->team->sub2ID); if ($sub2->getUserOption($this->userOption) == NULL) {$sub2 = NULL;}} else {$sub2 = null;}
+		if ($this->team->sub3ID != NULL) {$sub3 = new User($this->team->sub3ID); if ($sub3->getUserOption($this->userOption) == NULL) {$sub3 = NULL;}} else {$sub3 = null;}
+		if ($leader != NULL || $player2 != NULL || $player3 != NULL || $player4 != NULL || $sub1 != NULL || $sub2 != NULL || $sub3 != NULL) {
+			$this->playerList = array(
+					0	=>	$leader,
+					1	=>	$player2,
+					2	=>	$player3,
+					3	=>	$player4,
+					4	=>	$sub1,
+					5	=>	$sub2,
+					6	=>	$sub3,
+			);
+		}
+		else {
+			$this->playerList = NULL;
+		}
 		if($this->team->teamID == null || $this->team->teamID == 0) {
 			throw new IllegalLinkException();
 		}
@@ -136,9 +179,19 @@ class InvitationForm extends AbstractForm {
 			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeam'), 10, 'error');
 		}
 		
+		elseif (!TeamUtil::isFreePlatformPlayer($this->platformID, WCF::getUser()->userID)) {
+			$invitationAction = new InvitationAction(array($this->invitationID), 'delete');
+			$invitationAction->executeAction();
+			
+			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('InvitationList', array(
+					'application' 	=> 'teamsystem',
+			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam'), 10, 'error');
+		}
+		
 		else {
 			
-			switch ($this->positionID) {
+			$backendPositionID = TeamInvitationUtil::getFreePositionID($this->teamID, $this->positionID);
+			switch ($backendPositionID) {
 				case 1:
 					$data = array(
 						'data' => array(
@@ -173,6 +226,7 @@ class InvitationForm extends AbstractForm {
 							'sub2ID'	=> WCF::getUser()->getUserID(),
 							),
 						);
+					break;
 				case 6:
 					$data = array(
 						'data' => array(
@@ -191,7 +245,7 @@ class InvitationForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemPcTeamID' 		=> $userTeamID,
-									'teamsystemPcTeamPositionID' => $this->positionID,
+									'teamsystemPcTeamPositionID' => $backendPositionID
 							)
 					);
 					break;
@@ -200,7 +254,7 @@ class InvitationForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemPs4TeamID' 			=> $userTeamID,
-									'teamsystemPs4TeamPositionID' 	=> $this->positionID,
+									'teamsystemPs4TeamPositionID' 	=> $backendPositionID
 							)
 					);
 					break;
@@ -209,7 +263,7 @@ class InvitationForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemPs3TeamID' 			=> $userTeamID,
-									'teamsystemPs3TeamPositionID' 	=> $this->positionID,
+									'teamsystemPs3TeamPositionID' 	=> $backendPositionID
 							)
 					);
 					break;
@@ -218,7 +272,7 @@ class InvitationForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemXb1TeamID' 			=> $userTeamID,
-									'teamsystemXb1TeamPositionID' 	=> $this->positionID,
+									'teamsystemXb1TeamPositionID' 	=> $backendPositionID
 							)
 					);
 					break;
@@ -227,7 +281,7 @@ class InvitationForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemXb360TeamID' 			=> $userTeamID,
-									'teamsystemXb360TeamPositionID' 	=> $this->positionID,
+									'teamsystemXb360TeamPositionID' 	=> $backendPositionID
 							)
 					);
 					break;
@@ -261,6 +315,10 @@ class InvitationForm extends AbstractForm {
 				'invitationID'	=> $this->invitationID,
 				'playerID'		=> $this->playerID,
 				'positionID'	=> $this->positionID,
+				'contact'		=> $this->team->getContactProfile(),
+				'user'			=> $this->team->getContactProfile(),
+				'playerList'	=> $this->playerList,
+				'userOption'	=> $this->userOption,
 		));
 	}
 	

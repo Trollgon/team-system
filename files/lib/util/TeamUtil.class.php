@@ -101,18 +101,71 @@ final class TeamUtil {
 	 * @return	boolean
 	 */
 	 
-	public static function isFreePlatformPlayer($platformID, $role, $user) {
+	public function isFreePlatformPlayer($platformID, $user) {
 		
-		$sql = "SELECT	COUNT(" . $role . ") AS count
-				FROM	teamsystem1_teams
-				WHERE	(" . $role . " = ?) AND (platformID = ?)";
-		
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($user, $platformID));
-		$row = $statement->fetchArray();
-		
-		
-		return $row['count'] == 0;
+		switch ($platformID) {
+			
+			case 1:
+				
+				$sql = "SELECT	teamsystemPcTeamID
+				FROM	wcf1_user
+				WHERE	userID = ?";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($user));
+				$row = $statement->fetchArray();
+				
+				return $row['teamsystemPcTeamID'] == NULL;
+			
+			case 2:
+				
+				$sql = "SELECT	teamsystemPs4TeamID
+				FROM	wcf1_user
+				WHERE	userID = ?";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($user));
+				$row = $statement->fetchArray();
+								
+				return $row['teamsystemPs4TeamID'] == NULL;
+				
+			case 3:
+				
+				$sql = "SELECT	teamsystemPs3TeamID
+				FROM	wcf1_user
+				WHERE	userID = ?";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($user));
+				$row = $statement->fetchArray();
+				
+				return $row['teamsystemPs3TeamID'] == NULL;
+				
+			case 4:
+				
+				$sql = "SELECT	teamsystemXb1TeamID
+				FROM	wcf1_user
+				WHERE	userID = ?";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($user));
+				$row = $statement->fetchArray();
+				
+				return $row['teamsystemXb1TeamID'] == NULL;
+				
+			case 5:
+				
+				$sql = "SELECT	teamsystemXb360TeamID
+				FROM	wcf1_user
+				WHERE	userID = ?";
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($user));
+				$row = $statement->fetchArray();
+				
+				return $row['teamsystemXb360TeamID'] == NULL;
+				
+		}
 		 
 	}
 	

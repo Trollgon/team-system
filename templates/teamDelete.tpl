@@ -13,7 +13,7 @@
 {include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
-	<h1>You are about to delete [{$team->getTeamTag()}] - {$team->getTeamName()}</h1>
+	<h1>{lang}teamsystem.team.delete.header{/lang}</h1>
 </header>
 
 {include file='userNotice'}

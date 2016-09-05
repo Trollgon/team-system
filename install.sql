@@ -47,15 +47,16 @@ ALTER TABLE wcf1_user ADD FOREIGN KEY (teamsystemXb360TeamID) REFERENCES teamsys
 DROP TABLE IF EXISTS teamsystem1_invitations;
 CREATE TABLE teamsystem1_invitations (
   invitationID int(10) AUTO_INCREMENT,
-  platformID int(10),
-  teamID int(10),
-  playerID int(10),
-  positionID int(10),
+  platformID int(10) NOT NULL,
+  teamID int(10) NOT NULL,
+  playerID int(10) NOT NULL,
+  positionID int(10) NOT NULL,
   PRIMARY KEY (invitationID),
   UNIQUE KEY invitationID (invitationID),
 )
 
-ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (playerID) REFERENCES (wcf1_user) ON DELETE CASCADE
+ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (playerID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (teamID) REFERENCES teamsystem1_teams (teamID) ON DELETE CASCADE;
 
 DROP TABLE IF EXISTS teamsystem1_team_avatar;
 CREATE TABLE teamsystem1_team_avatar (

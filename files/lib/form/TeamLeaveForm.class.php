@@ -11,6 +11,7 @@ use wcf\system\request\LinkHandler;
 use wcf\data\user\UserAction;
 use teamsystem\data\team\Team;
 use teamsystem\data\team\TeamAction;
+use wcf\data\user\User;
 
 /**
  * Shows the Form to leave a team.
@@ -29,6 +30,8 @@ class TeamLeaveForm extends AbstractForm {
 	public $teamID = 0;
 	public $playerID = 0;
 	public $positionID = 0;
+	public $playerList = null;
+	public $userOption = '';
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
@@ -53,6 +56,45 @@ class TeamLeaveForm extends AbstractForm {
 		}
 		$this->team = new Team($this->teamID);
 		$this->platformID = $this->team->getPlatformID();
+		switch ($this->platformID) {
+			case 1:
+				$this->userOption = "uplayName";
+				break;
+			case 2:
+				$this->userOption = "psnID";
+				break;
+			case 3:
+				$this->userOption = "psnID";
+				break;
+			case 4:
+				$this->userOption = "xboxLiveID";
+				break;
+			case 5:
+				$this->userOption = "xboxLiveID";
+				break;
+		}
+		$leader = new User($this->team->leaderID);
+		if ($leader->getUserOption($this->userOption) == NULL) {$leader = NULL;}
+		if ($this->team->player2ID != NULL) {$player2 = new User($this->team->player2ID); if ($player2->getUserOption($this->userOption) == NULL) {$player2 = NULL;}} else {$player2 = null;}
+		if ($this->team->player3ID != NULL) {$player3 = new User($this->team->player3ID); if ($player3->getUserOption($this->userOption) == NULL) {$player3 = NULL;}} else {$player3 = null;}
+		if ($this->team->player4ID != NULL) {$player4 = new User($this->team->player4ID); if ($player4->getUserOption($this->userOption) == NULL) {$player4 = NULL;}} else {$player4 = null;}
+		if ($this->team->sub1ID != NULL) {$sub1 = new User($this->team->sub1ID); if ($sub1->getUserOption($this->userOption) == NULL) {$sub1 = NULL;}} else {$sub1 = null;}
+		if ($this->team->sub2ID != NULL) {$sub2 = new User($this->team->sub2ID); if ($sub2->getUserOption($this->userOption) == NULL) {$sub2 = NULL;}} else {$sub2 = null;}
+		if ($this->team->sub3ID != NULL) {$sub3 = new User($this->team->sub3ID); if ($sub3->getUserOption($this->userOption) == NULL) {$sub3 = NULL;}} else {$sub3 = null;}
+		if ($leader != NULL || $player2 != NULL || $player3 != NULL || $player4 != NULL || $sub1 != NULL || $sub2 != NULL || $sub3 != NULL) {
+			$this->playerList = array(
+					0	=>	$leader,
+					1	=>	$player2,
+					2	=>	$player3,
+					3	=>	$player4,
+					4	=>	$sub1,
+					5	=>	$sub2,
+					6	=>	$sub3,
+			);
+		}
+		else {
+			$this->playerList = NULL;
+		}
 		$this->playerID = WCF::getUser()->getUserID();
 		$this->positionID = $this->team->getPositionID($this->playerID, $this->platformID, $this->teamID);
 		if($this->team->teamID == null || $this->team->teamID == 0) {
@@ -65,8 +107,14 @@ class TeamLeaveForm extends AbstractForm {
 	 * @see \wcf\page\AbstractPage::show()
 	 */
 	public function show() {
-		if(!$this->team->isTeamMember())
-			throw new PermissionDeniedException();
+		if (!$this->team->isTeamMember()) {
+				WCF::getSession()->checkPermissions(array("mod.teamSystem.canEditTeams"));
+			}
+		else {
+			if (TEAMSYSTEM_LOCK_TEAMEDIT == true) {
+				throw new PermissionDeniedException();
+			}
+		}
 		parent::show();
 	}
 	
@@ -86,55 +134,48 @@ class TeamLeaveForm extends AbstractForm {
 	 */
 	public function save() {
 		parent::save();
-		switch ($this->positionID) {
-				case 1:
-					$data = array(
-						'data' => array(
+		if ($this->team->player2ID == $this->playerID) {
+			$data = array(
+					'data' => array(
 							'player2ID'		=> NULL,
-							'player2Name'	=> NULL,
-							),
-						);
-					break;
-				case 2:
-					$data = array(
-						'data' => array(
+					),
+			);
+		}
+		if ($this->team->player3ID == $this->playerID) {
+			$data = array(
+					'data' => array(
 							'player3ID'		=> NULL,
-							'player3Name'	=> NULL,
-							),
-						);
-					break;
-				case 3:
-					$data = array(
-						'data' => array(
+					),
+			);
+		}
+		if ($this->team->player4ID == $this->playerID) {
+			$data = array(
+					'data' => array(
 							'player4ID'		=> NULL,
-							'player4Name'	=> NULL,
-							),
-						);
-					break;
-				case 4:
-					$data = array(
-						'data' => array(
-							'sub1ID'	=> NULL,
-							'sub1Name'	=> NULL,
-							),
-						);
-					break;
-				case 5:
-					$data = array(
-						'data' => array(
-							'sub2ID'	=> NULL,
-							'sub2Name'	=> NULL,
-							),
-						);
-				case 6:
-					$data = array(
-						'data' => array(
-							'sub3ID'	=> NULL,
-							'sub3Name'	=> NULL,
-							),
-						);
-					break;
-			}
+					),
+			);
+		}
+		if ($this->team->sub1ID == $this->playerID) {
+			$data = array(
+					'data' => array(
+							'sub1ID'		=> NULL,
+					),
+			);
+		}
+		if ($this->team->sub2ID == $this->playerID) {
+			$data = array(
+					'data' => array(
+							'sub2ID'		=> NULL,
+					),
+			);
+		}
+		if ($this->team->sub3ID == $this->playerID) {
+			$data = array(
+					'data' => array(
+							'sub3ID'		=> NULL,
+					),
+			);
+		}
 			
 			$action = new TeamAction(array($this->teamID), 'update', $data);
 			$action->executeAction();
@@ -144,7 +185,6 @@ class TeamLeaveForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemPcTeamID' 		=> NULL,
-									'teamsystemPcTeamPositionID' => NULL,
 							)
 					);
 					break;
@@ -152,7 +192,6 @@ class TeamLeaveForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemPs4TeamID' 			=> NULL,
-									'teamsystemPs4TeamPositionID' 	=> NULL,
 							)
 					);
 					break;
@@ -160,7 +199,6 @@ class TeamLeaveForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemPs3TeamID' 			=> NULL,
-									'teamsystemPs3TeamPositionID' 	=> NULL,
 							)
 					);
 					break;
@@ -168,7 +206,6 @@ class TeamLeaveForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemXb1TeamID' 			=> NULL,
-									'teamsystemXb1TeamPositionID' 	=> NULL,
 							)
 					);
 					break;
@@ -176,7 +213,6 @@ class TeamLeaveForm extends AbstractForm {
 					$userdata = array(
 							'data' => array(
 									'teamsystemXb360TeamID' 			=> NULL,
-									'teamsystemXb360TeamPositionID' 	=> NULL,
 							)
 					);
 					break;
@@ -204,6 +240,8 @@ class TeamLeaveForm extends AbstractForm {
 				'positionID'	=> $this->positionID,
 				'contact'		=> $this->team->getContactProfile(),
 				'user'			=> $this->team->getContactProfile(),
+				'playerList'	=> $this->playerList,
+				'userOption'	=> $this->userOption,
 		));
 	}
 	

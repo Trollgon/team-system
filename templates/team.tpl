@@ -26,24 +26,26 @@
             <ul>
                 {content}
                 {if $team->isTeamLeader()}
+                	{if TEAMSYSTEM_LOCK_TEAMEDIT == false}
                 	<li><a href="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}"
                            title="{lang}teamsystem.team.page.edit{/lang}" class="button"><span
                                 class="icon icon16 icon-pencil"></span>
                         <span>{lang}teamsystem.team.page.edit{/lang}</span></a></li>
-                    <li><a href="{link application='teamsystem' controller='TeamInvitation' teamID=$teamID}{/link}"
-                           title="{lang}teamsystem.team.page.invitation{/lang}" class="button"><span
-                                class="icon icon16 icon-plus"></span>
-                        <span>{lang}teamsystem.team.page.invitation{/lang}</span></a></li>
-					<li><a href="{link application='teamsystem' controller='TeamDelete' teamID=$teamID}{/link}"
-                           title="{lang}teamsystem.team.page.delete{/lang}" class="button"><span
-                                class="icon icon16 icon-remove"></span>
-                        <span>{lang}teamsystem.team.page.delete{/lang}</span></a></li>
+                    {/if}
 				{/if}
+				{if $__wcf->getSession()->getPermission('mod.teamSystem.canEditTeams')}
+                	<li><a href="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}"
+                           title="{lang}teamsystem.team.page.edit.mod{/lang}" class="button"><span
+                                class="icon icon16 icon-pencil"></span>
+                        <span>{lang}teamsystem.team.page.edit.mod{/lang}</span></a></li>
+					{/if}
 				{if $team->isTeamMember()}
+					{if TEAMSYSTEM_LOCK_TEAMEDIT == false}
 					<li><a href="{link application='teamsystem' controller='TeamLeave' teamID=$teamID}{/link}"
                            title="{lang}teamsystem.team.page.leave{/lang}" class="button"><span
                                 class="icon icon16 icon-signout"></span>
                         <span>{lang}teamsystem.team.page.leave{/lang}</span></a></li>
+                    {/if}
 				{/if}
                 {event name='contentNavigationButtonsTop'}
                 {/content}
@@ -52,6 +54,28 @@
     {/hascontent}
 </div>
 
+{/if}
+	
+{if $team->isTeamMember()}
+	{if $playerMissingContactInfo == true}
+		<p class="warning">{lang}teamsystem.team.page.missingContactinfo.player{/lang}</p>
+	{/if}
+{/if}
+
+{if $team->isTeamLeader()}
+	{if $memberMissing == true}
+		<p class="warning">{lang}teamsystem.team.page.notEnoughMembers{/lang}</p>
+	{else}
+		{if $subMissing == true}
+			<p class="info">{lang}teamsystem.team.page.noSubs{/lang}</p>
+		{/if}
+	{/if}
+	{if $missingContactInfo == true}
+		<p class="warning">{lang}teamsystem.team.page.missingContactinfo{/lang}</p>
+	{/if}
+	{if $playerMissingContactInfo == true}
+		<p class="warning">{lang}teamsystem.team.page.missingContactinfo.player{/lang}</p>
+	{/if}
 {/if}
 
 <header class="boxHeadline boxSubHeadline">

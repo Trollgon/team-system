@@ -24,5 +24,37 @@
 	<dd>{$__teamsystem->getPackage()->packageVersion}</dd>
 </dl>]]></templatecode>
 		</templatelistener>
+		
+		<templatelistener name="deWbbEliteNewsCopyright">
+			<environment>user</environment>
+			<templatename>footer</templatename>
+			<eventname>copyright</eventname>
+			<templatecode><![CDATA[{include file='__copyright' application='teamsystem'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="teamsystemJavascriptInclude">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[<script data-relocate="true" src="{@$__wcf->getPath('teamsystem')}js/TEAMSYSTEM.js?v={@LAST_UPDATE_TIME}"></script>]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="teamsystemJavascriptInit">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInit</eventname>
+			<templatecode><![CDATA[{if $templateName == 'teamAvatarEdit'}
+			
+			{if $team->getAvatar()->canCrop()}
+
+				new TEAMSYSTEM.Avatar.Upload(0, new TEAMSYSTEM.Avatar.Crop({@$team->getAvatar()->avatarID}));
+
+			{else}
+
+				new TEAMSYSTEM.Avatar.Upload();
+
+			{/if}
+			{/if}]]></templatecode>
+		</templatelistener>
 	</import>
 </data>

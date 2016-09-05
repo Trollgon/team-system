@@ -17,13 +17,12 @@ class TeamAvatarEditor extends DatabaseObjectEditor {
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'wcf\data\user\avatar\UserAvatar';
-	
+	protected static $baseClass = 'teamsystem\data\team\avatar\TeamAvatar';		/**	 * @see    \wcf\data\IStorableObject::getDatabaseTableName()	 */	public static function getDatabaseTableName() {		return 'teamsystem1_'.static:: $databaseTableName;	}
 	/**
 	 * @see	\wcf\data\IEditableObject::delete()
 	 */
 	public function delete() {
-		$sql = "DELETE FROM	wcf".WCF_N."_user_avatar
+		$sql = "DELETE FROM	teamsystem1_team_avatar
 			WHERE		avatarID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->avatarID));
@@ -36,7 +35,7 @@ class TeamAvatarEditor extends DatabaseObjectEditor {
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		$sql = "SELECT	*
-			FROM	wcf".WCF_N."_user_avatar
+			FROM	teamsystem1_team_avatar
 			WHERE	avatarID IN (".str_repeat('?,', count($objectIDs) - 1)."?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($objectIDs);
@@ -52,7 +51,7 @@ class TeamAvatarEditor extends DatabaseObjectEditor {
 	 * Deletes avatar files.
 	 */
 	public function deleteFiles() {
-		foreach (UserAvatar::$avatarThumbnailSizes as $size) {
+		foreach (TeamAvatar::$avatarThumbnailSizes as $size) {
 			if ($this->width < $size && $this->height < $size) break;
 			
 			@unlink($this->getLocation($size));

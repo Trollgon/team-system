@@ -138,7 +138,7 @@ class TeamCreateForm extends AbstractForm {
 			throw new UserInputException('platform');
 		}
 		// check if user already has a  team for this platform
-		if (!TeamUtil::isFreePlatformPlayer($platform, "leaderID", WCF::getUser()->userID)) {
+		if (!TeamUtil::isFreePlatformPlayer($platform, WCF::getUser()->userID)) {
 			throw new UserInputException('platform', 'notUnique');
 		}
 	}
