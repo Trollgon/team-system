@@ -27,6 +27,12 @@
         <nav>
             <ul>
                 {content}
+				{if $__wcf->getSession()->getPermission('mod.teamSystem.canCreateDummyTeams')}
+					<li><a href="{link application='teamsystem' controller='TeamCreateDummy'}{/link}"
+						   title="{lang}teamsystem.team.create.dummy{/lang}" class="button"><span
+									class="icon icon16 icon-wrench"></span>
+							<span>{lang}teamsystem.team.create.dummy{/lang}</span></a></li>
+				{/if}
                 {if $__wcf->getSession()->getPermission('user.teamSystem.canCreateTeam')}
 					<li><a href="{link application='teamsystem' controller='TeamCreate'}{/link}"
                            title="{lang}teamsystem.team.create{/lang}" class="button"><span

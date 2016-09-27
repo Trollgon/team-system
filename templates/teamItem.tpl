@@ -19,7 +19,7 @@
 
 				{event name='statistics'}	
 
-					<dd>{lang}teamsystem.team.teamList.platform{/lang}</dd>
+					<dd>{if $team->dummyTeam == 0}{lang}teamsystem.team.teamList.platform{/lang}{else}DUMMYTEAM{/if}</dd>
 
 
 			</dl>

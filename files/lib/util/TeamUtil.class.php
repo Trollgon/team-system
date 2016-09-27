@@ -28,6 +28,11 @@ final class TeamUtil {
 		if (!preg_match('!^[^,\n]+$!', $name)) {
 			return false;
 		}
+
+        // check if not using dummy team name
+        if (preg_match('/(D|d)(U|u)(M|m)(M|m)(Y|y)([0-9]){0,2}/i', $name)) {
+            return false;
+        }
 		
 		return true;
 	}
@@ -69,6 +74,11 @@ final class TeamUtil {
 		if (!preg_match('!^[^,\n]+$!', $tag)) {
 			return false;
 		}
+
+        // check if not using dummy team tag
+        if (preg_match('/(D|d)(Y|y)([0-9]){0,2}/i', $tag)) {
+            return false;
+        }
 		
 		return true;
 	}
@@ -93,13 +103,15 @@ final class TeamUtil {
 		return $row['count'] == 0;
 
 	}
-	
-	/**
-	 * Returns true if the player is not already in a team on the given platform.
-	 * 
-	 * @param	string		$platform
-	 * @return	boolean
-	 */
+
+    /**
+     * Returns true if the player is not already in a team on the given platform.
+     *
+     * @param $platformID
+     * @param $user
+     * @return bool
+     * @internal param string $platform
+     */
 	 
 	public function isFreePlatformPlayer($platformID, $user) {
 		
@@ -168,7 +180,19 @@ final class TeamUtil {
 		}
 		 
 	}
-	
+
+	public function getTeamIDByName($name) {
+        $sql =		"SELECT	teamID 
+						FROM	teamsystem1_teams
+						WHERE	teamname = ?";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($name));
+        $row = $statement->fetchArray();
+
+        return $row['teamID'];
+    }
+
 	/**
 	 * Returns the Team ID of a team from a player.
 	 */
@@ -185,4 +209,48 @@ final class TeamUtil {
 	
 		return $value['teamID'];
 	}
+
+    /**
+     * @return string
+     */
+    public function getDummyTeamName() {
+
+        $sql =		"SELECT	COUNT(teamname) AS count
+						FROM	teamsystem1_teams
+						WHERE	teamname LIKE 'DUMMY%'";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array());
+        $row = $statement->fetchArray();
+        $index = $row['count'] + 1;
+
+        return "DUMMY{$index}";
+    }
+
+    /**
+     * @return string
+     */
+    public function getDummyTeamTag() {
+
+        $sql =		"SELECT	COUNT(teamname) AS count
+						FROM	teamsystem1_teams
+						WHERE	teamname LIKE 'DUMMY%'";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array());
+        $row = $statement->fetchArray();
+        $index = $row['count'] + 1;
+
+        return "DY{$index}";
+    }
+
+    public function getDummyTeamID() {
+        $sql =		"SELECT	COUNT(teamname) AS count
+						FROM	teamsystem1_teams
+						WHERE	teamname LIKE 'DUMMY%'";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array());
+        $row = $statement->fetchArray();
+    }
 }

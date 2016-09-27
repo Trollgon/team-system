@@ -17,6 +17,7 @@
 	
 	<category name="teamsystem.team.create">
 		<item name="teamsystem.team.create"><![CDATA[Create new team]]></item>
+		<item name="teamsystem.team.create.dummy"><![CDATA[Create new dummy team]]></item>
 		<item name="teamsystem.team.create.name.error.notValid"><![CDATA[Teamname is invalid.]]></item>
 		<item name="teamsystem.team.create.name.error.notUnique"><![CDATA[Teamname is already in use.]]></item>
 		<item name="teamsystem.team.create.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
@@ -110,6 +111,7 @@
 		<item name="teamsystem.team.page.delete.mod"><![CDATA[Delete this team]]></item>		
 		<item name="teamsystem.team.page.description"><![CDATA[About Us]]></item>
 		<item name="teamsystem.team.page.description.error.length"><![CDATA[Your description contains more than 400 characters.]]></item>
+		<item name="teamsystem.team.page.dummy"><![CDATA[This team is a dummy and only used for testing functions of the website.]]></item>
 		<item name="teamsystem.team.page.edit"><![CDATA[Edit your team]]></item>
 		<item name="teamsystem.team.page.edit.mod"><![CDATA[Edit this team]]></item>
 		<item name="teamsystem.team.page.gamertags"><![CDATA[Gamertags]]></item>

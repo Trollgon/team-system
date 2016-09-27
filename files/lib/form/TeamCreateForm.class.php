@@ -155,6 +155,7 @@ class TeamCreateForm extends AbstractForm {
 			'platformID'	=> $this->platform,
 			'leaderID'		=> $this->formData['leaderID'],
 			'contactID'		=> $this->formData['leaderID'],
+            'dummyTeam'		=> 0,
 			),
 		);
 		$action = new TeamAction(array(), 'create', $data);

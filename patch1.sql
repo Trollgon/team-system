@@ -1,0 +1,1 @@
+ALTER TABLE teamsystem1_teams ADD dummyTeam BOOLEAN DEFAULT 0;

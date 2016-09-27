@@ -2,7 +2,6 @@
 namespace teamsystem\form;
 
 use wcf\form\AbstractForm;
-use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -133,57 +132,58 @@ class TeamDeleteForm extends AbstractForm {
 
 		$action = new TeamAction(array($this->teamID), 'delete');
 		$action->executeAction();
-			switch ($this->platformID) {
-				case 1:
-					$userdata = array(
-							'data' => array(
-									'teamsystemPcTeamID' 		=> NULL,
-									'teamsystemPcTeamPositionID' => NULL,
-							)
-					);
-					break;
-				case 2:
-					$userdata = array(
-							'data' => array(
-									'teamsystemPs4TeamID' 			=> NULL,
-									'teamsystemPs4TeamPositionID' 	=> NULL,
-							)
-					);
-					break;
-				case 3:
-					$userdata = array(
-							'data' => array(
-									'teamsystemPs3TeamID' 			=> NULL,
-									'teamsystemPs3TeamPositionID' 	=> NULL,
-							)
-					);
-					break;
-				case 4:
-					$userdata = array(
-							'data' => array(
-									'teamsystemXb1TeamID' 			=> NULL,
-									'teamsystemXb1TeamPositionID' 	=> NULL,
-							)
-					);
-					break;
-				case 5:
-					$userdata = array(
-							'data' => array(
-									'teamsystemXb360TeamID' 			=> NULL,
-									'teamsystemXb360TeamPositionID' 	=> NULL,
-							)
-					);
-					break;
-			}
-			$userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
-			$userAction->executeAction();
+        if ($this->team->dummyTeam == 0) {
+            switch ($this->platformID) {
+                case 1:
+                    $userdata = array(
+                        'data' => array(
+                            'teamsystemPcTeamID' => NULL,
+                            'teamsystemPcTeamPositionID' => NULL,
+                        )
+                    );
+                    break;
+                case 2:
+                    $userdata = array(
+                        'data' => array(
+                            'teamsystemPs4TeamID' => NULL,
+                            'teamsystemPs4TeamPositionID' => NULL,
+                        )
+                    );
+                    break;
+                case 3:
+                    $userdata = array(
+                        'data' => array(
+                            'teamsystemPs3TeamID' => NULL,
+                            'teamsystemPs3TeamPositionID' => NULL,
+                        )
+                    );
+                    break;
+                case 4:
+                    $userdata = array(
+                        'data' => array(
+                            'teamsystemXb1TeamID' => NULL,
+                            'teamsystemXb1TeamPositionID' => NULL,
+                        )
+                    );
+                    break;
+                case 5:
+                    $userdata = array(
+                        'data' => array(
+                            'teamsystemXb360TeamID' => NULL,
+                            'teamsystemXb360TeamPositionID' => NULL,
+                        )
+                    );
+                    break;
+            }
+            $userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
+            $userAction->executeAction();
+        }
 			
-			
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamList', array(
-					'application' 	=> 'teamsystem',
-			)),WCF::getLanguage()->get('teamsystem.team.delete.successfulRedirect'), 10);
-			exit;
-		}
+        HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamList', array(
+				'application' 	=> 'teamsystem',
+		)),WCF::getLanguage()->get('teamsystem.team.delete.successfulRedirect'), 10);
+		exit;
+    }
 	
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()
