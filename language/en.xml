@@ -87,7 +87,7 @@
 	<category name="teamsystem.team.join">
 		<item name="teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeams"><![CDATA[You are already in this team. The invitation got deleted.]]></item>
 		<item name="teamsystem.team.join.unsuccessfulRedirect.positionNotEmpty"><![CDATA[The position you got invited to has already been filled. The invitation got deleted.]]></item>
-		<item name="teamsystem.team.join.successfulRedirect"><![CDATA[You successfully joined {$team->getTeamName()}]]></item>
+		<item name="teamsystem.team.join.successfulRedirect"><![CDATA[You successfully joined the team.]]></item>
 		<item name="teamsystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam"><![CDATA[You already have a team on this platform. The invitation got deleted.]]></item>
 	</category>
 	
