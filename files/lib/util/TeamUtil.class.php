@@ -113,7 +113,7 @@ final class TeamUtil {
      * @internal param string $platform
      */
 	 
-	public function isFreePlatformPlayer($platformID, $user) {
+	public static function isFreePlatformPlayer($platformID, $user) {
 		
 		switch ($platformID) {
 			
@@ -196,7 +196,7 @@ final class TeamUtil {
 	/**
 	 * Returns the Team ID of a team from a player.
 	 */
-	public function getPlayersTeamID($platformID, $userID) {
+	public static function getPlayersTeamID($platformID, $userID) {
 		
 		$sql = "SELECT	teamID
 				FROM	teamsystem1_teams
