@@ -40,8 +40,7 @@
                            title="{lang}teamsystem.team.page.delete{/lang}" class="button"><span
                                 class="icon icon16 icon-remove"></span>
                         <span>{lang}teamsystem.team.page.delete{/lang}</span></a></li>
-				{/if}
-				{if $__wcf->getSession()->getPermission('mod.teamSystem.canEditTeams')}
+				{elseif $__wcf->getSession()->getPermission('mod.teamSystem.canEditTeams')}
                 	<li><a href="{link application='teamsystem' controller='TeamKickList' teamID=$teamID}{/link}"
                            title="{lang}teamsystem.team.page.kick.mod{/lang}" class="button"><span
                                 class="icon icon16 icon-minus"></span>

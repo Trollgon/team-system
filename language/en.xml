@@ -123,7 +123,7 @@
 		<item name="teamsystem.team.page.invitation.mod"><![CDATA[Invite players]]></item>
 		<item name="teamsystem.team.page.kick"><![CDATA[Kick a player]]></item>
 		<item name="teamsystem.team.page.kick.header"><![CDATA[Kick a player from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.page.kick.mod"><![CDATA[Kick a player from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="teamsystem.team.page.kick.mod"><![CDATA[Kick a player]]></item>
 		<item name="teamsystem.team.page.leave"><![CDATA[Leave the team]]></item>
 		<item name="teamsystem.team.page.members"><![CDATA[Member]]></item>
 		<item name="teamsystem.team.page.missingContactinfo"><![CDATA[At least one of your players did not set his/her gamertag on his profile.</br> 
