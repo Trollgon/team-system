@@ -14,7 +14,11 @@
 		<item name="teamsystem.team.position.player"><![CDATA[Player]]></item>
 		<item name="teamsystem.team.position.sub"><![CDATA[Substitute]]></item>
 	</category>
-	
+
+	<category name="teamsystem.team.avatar">
+		<item name="teamsystem.team.avatar.edit"><![CDATA[Teamavatar Management]]></item>
+	</category>
+
 	<category name="teamsystem.team.create">
 		<item name="teamsystem.team.create"><![CDATA[Create new team]]></item>
 		<item name="teamsystem.team.create.dummy"><![CDATA[Create new dummy team]]></item>
@@ -64,7 +68,7 @@
 		<item name="teamsystem.team.invitation"><![CDATA[My invitations]]></item>
 		<item name="teamsystem.team.invitation.noInvitations"><![CDATA[There are no invitations for you.]]></item>
 		<item name="teamsystem.team.invitation.form"><![CDATA[Invitation]]></item>
-		<item name="teamsystem.team.invitation.form.title"><![CDATA[Invite players to your team]]></item>
+		<item name="teamsystem.team.invitation.form.title"><![CDATA[Invite players to [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
 		<item name="teamsystem.team.invitation.playername"><![CDATA[Player]]></item>
 		<item name="teamsystem.team.invitation.playername.description"><![CDATA[Name of the new player you want to invite.]]></item>
 		<item name="teamsystem.team.invitation.playername.error.notUnique"><![CDATA[This user is already in your team.]]></item>
@@ -118,8 +122,8 @@
 		<item name="teamsystem.team.page.invitation"><![CDATA[Invite players]]></item>
 		<item name="teamsystem.team.page.invitation.mod"><![CDATA[Invite players]]></item>
 		<item name="teamsystem.team.page.kick"><![CDATA[Kick a player]]></item>
-		<item name="teamsystem.team.page.kick.header"><![CDATA[Kick a player]]></item>
-		<item name="teamsystem.team.page.kick.mod"><![CDATA[Kick a player]]></item>
+		<item name="teamsystem.team.page.kick.header"><![CDATA[Kick a player from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="teamsystem.team.page.kick.mod"><![CDATA[Kick a player from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
 		<item name="teamsystem.team.page.leave"><![CDATA[Leave the team]]></item>
 		<item name="teamsystem.team.page.members"><![CDATA[Member]]></item>
 		<item name="teamsystem.team.page.missingContactinfo"><![CDATA[At least one of your players did not set his/her gamertag on his profile.</br> 

@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-    <title>{lang}teamsystem.header.menu.teams{/lang} - {PAGE_TITLE|language}</title>
+    <title>{lang}teamsystem.team.create.dummy{/lang} - {PAGE_TITLE|language}</title>
 
     {include file='headInclude' sandbox=false}
 </head>
