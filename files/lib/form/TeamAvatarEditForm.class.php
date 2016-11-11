@@ -11,9 +11,11 @@ use teamsystem\data\team\avatar\TeamAvatarAction;
 use teamsystem\data\team\Team;
 use teamsystem\data\team\TeamAction;
 use wcf\data\user\User;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\form\AbstractForm;
 
@@ -230,7 +232,6 @@ class TeamAvatarEditForm extends AbstractForm {
     }
 
 
-
     /**
 
      * @see	\wcf\page\IPage::readData()
@@ -241,7 +242,10 @@ class TeamAvatarEditForm extends AbstractForm {
 
         parent::readData();
 
-
+        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
+            'application' 	=> 'teamsystem',
+            'id'            => $this->teamID
+        ))));
 
         if (empty($_POST)) {
 

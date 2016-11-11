@@ -1,8 +1,10 @@
 <?php
 namespace teamsystem\page;
 
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\page\AbstractPage;
 use wcf\data\user\User;
@@ -89,6 +91,19 @@ class TeamKickListPage extends AbstractPage {
 			throw new IllegalLinkException();
 		}
 	}
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData()
+    {
+        parent::readData();
+
+        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
+            'application' 	=> 'teamsystem',
+            'id'            => $this->teamID
+        ))));
+    }
 
 	/**
 	 * @see \wcf\page\AbstractPage::show()

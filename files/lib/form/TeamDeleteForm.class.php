@@ -2,6 +2,7 @@
 namespace teamsystem\form;
 
 use wcf\form\AbstractForm;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -96,9 +97,22 @@ class TeamDeleteForm extends AbstractForm {
 			throw new IllegalLinkException();
 		}
 	}
-	
 
-	/**
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+	public function readData()
+    {
+        parent::readData();
+
+        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
+            'application' 	=> 'teamsystem',
+            'id'            => $this->teamID
+        ))));
+    }
+
+
+    /**
 	 * @see \wcf\page\AbstractPage::show()
 	 */
 	public function show() {

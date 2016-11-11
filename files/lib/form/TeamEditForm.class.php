@@ -3,6 +3,7 @@ namespace teamsystem\form;
 
 use wcf\form\AbstractForm;
 use wcf\page\AbstractPage;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
@@ -117,6 +118,19 @@ class TeamEditForm extends AbstractForm {
 				throw new IllegalLinkException();
 			}
 	}
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData()
+    {
+        parent::readData();
+
+        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
+            'application' 	=> 'teamsystem',
+            'id'            => $this->teamID
+        ))));
+    }
 	
 	/**
 	 * @see \wcf\form\AbstractForm::readFormParameters()
