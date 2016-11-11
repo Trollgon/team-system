@@ -206,6 +206,7 @@ class TeamKickForm extends AbstractForm {
 							'sub2ID'	=> NULL,
 							),
 						);
+                    break;
 				case 6:
 					$data = array(
 						'data' => array(
@@ -264,9 +265,9 @@ class TeamKickForm extends AbstractForm {
 			$userAction->executeAction();
 			
 			
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
+			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamKickList', array(
 					'application' 	=> 'teamsystem',
-					'id'			=> $this->teamID,
+					'teamID'		=> $this->teamID,
 			)),WCF::getLanguage()->get('teamsystem.team.kick.successfulRedirect'), 10);
 			exit;
 		}
@@ -287,7 +288,7 @@ class TeamKickForm extends AbstractForm {
 				'user'			=> $this->team->getContactProfile(),
 				'playerList'	=> $this->playerList,
 				'userOption'	=> $this->userOption,
-				'playername'		=> $this->player->getUsername(),
+				'playername'	=> $this->player->getUsername(),
 		));
 	}
 	
