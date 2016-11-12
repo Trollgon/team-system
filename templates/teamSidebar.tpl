@@ -39,7 +39,7 @@
        		<div>
                 <ol class="sidebarNestedCategoryList">
                     {foreach from=$playerList item=player}
-                    	{if ($player != NULL)}
+                    	{if ($player->getUserOption($userOption) != NULL)}
                         <li>
                             <a href="{link controller='User' object=$player}{/link}" class="userLink"
                            data-user-id="{@$player->userID}">{@$player->getUsername()}</a>

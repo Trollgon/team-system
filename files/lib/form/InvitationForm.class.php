@@ -1,6 +1,7 @@
 <?php
 namespace teamsystem\form;
 
+use wcf\data\user\UserProfileList;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -89,31 +90,99 @@ class InvitationForm extends AbstractForm {
 				$this->userOption = "xboxLiveID";
 				break;
 		}
-		$leader = new User($this->team->leaderID);
-		if ($leader->getUserOption($this->userOption) == NULL) {$leader = NULL;}
-		if ($this->team->player2ID != NULL) {$player2 = new User($this->team->player2ID); if ($player2->getUserOption($this->userOption) == NULL) {$player2 = NULL;}} else {$player2 = null;}
-		if ($this->team->player3ID != NULL) {$player3 = new User($this->team->player3ID); if ($player3->getUserOption($this->userOption) == NULL) {$player3 = NULL;}} else {$player3 = null;}
-		if ($this->team->player4ID != NULL) {$player4 = new User($this->team->player4ID); if ($player4->getUserOption($this->userOption) == NULL) {$player4 = NULL;}} else {$player4 = null;}
-		if ($this->team->sub1ID != NULL) {$sub1 = new User($this->team->sub1ID); if ($sub1->getUserOption($this->userOption) == NULL) {$sub1 = NULL;}} else {$sub1 = null;}
-		if ($this->team->sub2ID != NULL) {$sub2 = new User($this->team->sub2ID); if ($sub2->getUserOption($this->userOption) == NULL) {$sub2 = NULL;}} else {$sub2 = null;}
-		if ($this->team->sub3ID != NULL) {$sub3 = new User($this->team->sub3ID); if ($sub3->getUserOption($this->userOption) == NULL) {$sub3 = NULL;}} else {$sub3 = null;}
-		if ($leader != NULL || $player2 != NULL || $player3 != NULL || $player4 != NULL || $sub1 != NULL || $sub2 != NULL || $sub3 != NULL) {
-			$this->playerList = array(
-					0	=>	$leader,
-					1	=>	$player2,
-					2	=>	$player3,
-					3	=>	$player4,
-					4	=>	$sub1,
-					5	=>	$sub2,
-					6	=>	$sub3,
-			);
-		}
-		else {
-			$this->playerList = NULL;
-		}
-		if($this->team->teamID == null || $this->team->teamID == 0) {
-			throw new IllegalLinkException();
-		}
+
+        // checking if players set their gamertags
+
+        $leader = new User($this->team->leaderID);
+        if ($leader->getUserOption($this->userOption) == NULL && $this->team->leaderID == WCF::getUser()->getUserID()) {
+            $this->missingContactInfo = true;
+            $this->playerMissingContactInfo = true;
+        }
+
+        if ($this->team->player2ID != NULL) {
+            $player2 = new User($this->team->player2ID);
+            if ($player2->getUserOption($this->userOption) == NULL) {
+                $this->missingContactInfo = true;
+            }
+            elseif ($this->team->player2ID == WCF::getUser()->getUserID()) {
+                $this->playerMissingContactInfo = true;
+            }
+        }
+
+        if ($this->team->player3ID != NULL) {
+            $player3 = new User($this->team->player3ID);
+            if ($player3->getUserOption($this->userOption) == NULL) {
+                $this->missingContactInfo = true;
+            }
+            elseif ($this->team->player3ID == WCF::getUser()->getUserID()) {
+                $this->playerMissingContactInfo = true;
+            }
+        }
+
+        if ($this->team->player4ID != NULL) {
+            $player4 = new User($this->team->player4ID);
+            if ($player4->getUserOption($this->userOption) == NULL) {
+                $this->missingContactInfo = true;
+            }
+            elseif ($this->team->player4ID == WCF::getUser()->getUserID()) {
+                $this->playerMissingContactInfo = true;
+            }
+        }
+
+        if ($this->team->sub1ID != NULL) {
+            $sub1 = new User($this->team->sub1ID);
+            if ($sub1->getUserOption($this->userOption) == NULL) {
+                $this->missingContactInfo = true;
+            }
+            elseif ($this->team->sub1ID == WCF::getUser()->getUserID()) {
+                $this->playerMissingContactInfo = true;
+            }
+        }
+
+        if ($this->team->sub2ID != NULL) {
+            $sub2 = new User($this->team->sub2ID);
+            if ($sub2->getUserOption($this->userOption) == NULL) {
+                $this->missingContactInfo = true;
+            }
+            elseif ($this->team->sub2ID == WCF::getUser()->getUserID()) {
+                $this->playerMissingContactInfo = true;
+            }
+        }
+
+        if ($this->team->sub3ID != NULL) {
+            $sub3 = new User($this->team->sub3ID);
+            if ($sub3->getUserOption($this->userOption) == NULL) {
+                $this->missingContactInfo = true;
+            }
+            elseif ($this->team->sub3ID == WCF::getUser()->getUserID()) {
+                $this->playerMissingContactInfo = true;
+            }
+        }
+
+        $this->playerList = new UserProfileList();
+        switch ($this->platformID) {
+            case 1:
+                $this->playerList->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
+                break;
+            case 2:
+                $this->playerList->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
+                break;
+            case 3:
+                $this->playerList->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
+                break;
+            case 4:
+                $this->playerList->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
+                break;
+            case 5:
+                $this->playerList->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
+                break;
+        }
+
+        $this->playerList->readObjects();
+
+        if($this->team->teamID == null || $this->team->teamID == 0) {
+            throw new IllegalLinkException();
+        }
 	}
 
     /**
