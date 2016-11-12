@@ -9,7 +9,7 @@
 			
 			<ul class="dataList userFacts">
 
-				<li>{lang}teamsystem.team.teamList.leader{/lang} <a href="{link controller='User' object=$team->getLeaderProfile()}{/link}" class="userLink" data-user-id="{$team->leaderID}">{$team->getLeaderName()}</a></li>
+				<li>{lang}teamsystem.team.page.contact{/lang}: <a href="{link controller='User' object=$team->getContactProfile()}{/link}" class="userLink" data-user-id="{$team->leaderID}">{$team->getLeaderName()}</a></li>
 
 				{event name='userData'}
 			</ul>
