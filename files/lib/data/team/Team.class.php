@@ -3,6 +3,7 @@
 namespace teamsystem\data\team;
 
 use wcf\data\DatabaseObject;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\system\request\IRouteController;
 use wcf\data\user\User;

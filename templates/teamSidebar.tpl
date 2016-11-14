@@ -6,7 +6,15 @@
 
 	<div class="userAvatar">
 
-			<span class="framed">{@$team->getAvatar()->getImageTag()}</span>
+        {if $user->userID == $__wcf->user->userID}
+
+            <a href="{link application='teamsystem' controller='TeamAvatarEdit' teamID=$teamID}{/link}" class="framed jsTooltip" title="{lang}wcf.user.avatar.edit{/lang}">{@$team->getAvatar()->getImageTag()}</a>
+
+        {else}
+
+            <span class="framed">{@$team->getAvatar()->getImageTag()}</span>
+
+        {/if}
 
 	</div>
 

@@ -53,7 +53,7 @@ class TeamAvatarEditForm extends AbstractForm {
 
     public $teamID = '';
     public $team = '';
-    public $platform = '';
+    public $platformID = '';
     public $contact = 0;
     public $contactID = 0;
     public $playerList = null;
@@ -84,8 +84,8 @@ class TeamAvatarEditForm extends AbstractForm {
             throw new IllegalLinkException();
         }
         $this->team = new Team($this->teamID);
-        $this->platform = $this->team->getPlatformID();
-        switch ($this->platform) {
+        $this->platformID = $this->team->getPlatformID();
+        switch ($this->platformID) {
             case 1:
                 $this->userOption = "uplayName";
                 break;
@@ -116,18 +116,12 @@ class TeamAvatarEditForm extends AbstractForm {
             if ($player2->getUserOption($this->userOption) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->player2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
         }
 
         if ($this->team->player3ID != NULL) {
             $player3 = new User($this->team->player3ID);
             if ($player3->getUserOption($this->userOption) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
             }
         }
 
@@ -136,18 +130,12 @@ class TeamAvatarEditForm extends AbstractForm {
             if ($player4->getUserOption($this->userOption) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->player4ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
         }
 
         if ($this->team->sub1ID != NULL) {
             $sub1 = new User($this->team->sub1ID);
             if ($sub1->getUserOption($this->userOption) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub1ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
             }
         }
 
@@ -156,18 +144,12 @@ class TeamAvatarEditForm extends AbstractForm {
             if ($sub2->getUserOption($this->userOption) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->sub2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
         }
 
         if ($this->team->sub3ID != NULL) {
             $sub3 = new User($this->team->sub3ID);
             if ($sub3->getUserOption($this->userOption) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
             }
         }
 
@@ -195,6 +177,18 @@ class TeamAvatarEditForm extends AbstractForm {
         if($this->team->teamID == null || $this->team->teamID == 0) {
             throw new IllegalLinkException();
         }
+    }
+
+    /**
+
+     * @see	\wcf\page\IPage::show()
+
+     */
+
+    public function show() {
+        parent::show();
+        if(!$this->team->isTeamLeader() || !WCF::getSession()->getPermission("mod.teamSystem.canEditTeams"))
+            throw new PermissionDeniedException();
     }
 
     /**
@@ -284,10 +278,14 @@ class TeamAvatarEditForm extends AbstractForm {
 
         }
 
+        else {
+            $data = array();
+        }
+
         /** @var  $data */
         $this->objectAction = new TeamAction(array($this->team), 'update', array(
 
-            'data' => $data,
+            'data' => array_merge($this->additionalFields, $data),
 
         ));
 
@@ -342,7 +340,7 @@ class TeamAvatarEditForm extends AbstractForm {
             'avatarType'    => $this->avatarType,
             'team'			=> $this->team,
 			'teamID'		=> $this->teamID,
-			'platform' 		=> $this->platform,
+			'platform' 		=> $this->platformID,
 			'contactForm'	=> $this->team->getPositionID($this->team->contactID, $this->team->getPlatformID(), $this->teamID),
 			'contact'		=> $this->team->getContactProfile(),
 			'user'			=> $this->team->getContactProfile(),
@@ -351,20 +349,6 @@ class TeamAvatarEditForm extends AbstractForm {
 
         ));
 
-    }
-
-
-
-    /**
-
-     * @see	\wcf\page\IPage::show()
-
-     */
-
-    public function show() {
-        parent::show();
-        if(!$this->team->isTeamLeader() || !WCF::getSession()->getPermission("mod.teamSystem.canEditTeams"))
-            throw new PermissionDeniedException();
     }
 
 }

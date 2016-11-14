@@ -36,7 +36,7 @@ TEAMSYSTEM.Avatar.Upload = WCF.Upload.extend({
 
 	/**
 
-	 * user id of avatar owner
+	 * team id of avatar owner
 
 	 * @var	integer
 
