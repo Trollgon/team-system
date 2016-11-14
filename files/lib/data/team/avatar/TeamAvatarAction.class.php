@@ -54,7 +54,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 	public function upload() {
 		// save files
 		$files = $this->parameters['__files']->getFiles();
-        $teamID = 11;
+        $teamID = intval($this->parameters['teamID']);;
         $team = new Team($teamID);
 		$file = $files[0];
 		try {
