@@ -32,6 +32,7 @@ class TeamPage extends SortablePage {
 	public $subObjects = null;
 	public $playerList = array();
 	public $userOption = '';
+    public $userOptionPlain = '';
 	public $missingContactInfo = false;
 	public $playerMissingContactInfo = false;
 	
@@ -75,6 +76,24 @@ class TeamPage extends SortablePage {
 				$this->userOption = "xboxLiveID";
 				break;
 		}
+
+        switch ($this->platformID) {
+            case 1:
+                $this->userOptionPlain = "Uplay";
+                break;
+            case 2:
+                $this->userOptionPlain = "PSN ID";
+                break;
+            case 3:
+                $this->userOptionPlain = "PSN ID";
+                break;
+            case 4:
+                $this->userOptionPlain = "XBOX Live ID";
+                break;
+            case 5:
+                $this->userOptionPlain = "XBOX Live ID";
+                break;
+        }
 
 		// checking if players set their gamertags
 
@@ -261,6 +280,7 @@ class TeamPage extends SortablePage {
 				'user'						=> $this->team->getContactProfile(),
 				'playerList'				=> $this->playerList,
 				'userOption'				=> $this->userOption,
+                'userOptionPlain'           => $this->userOptionPlain,
 				'memberMissing'				=> $memberMissing,
 				'subMissing'				=> $subMissing,
 				'missingContactInfo'		=> $this->missingContactInfo,

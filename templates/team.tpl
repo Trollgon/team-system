@@ -99,7 +99,7 @@
 			<ul class="containerList userList">
 				<ol class="containerList userList">
 					{foreach from=$playerObjects item=user}
-						{include file='userListItem'}
+						{include file='playerItem' application='teamsystem'}
 					{/foreach}
 				</ol>
 			</ul>
@@ -115,7 +115,7 @@
 			<ul class="containerList userList">
 				<ol class="containerList userList">
 					{foreach from=$subObjects item=user}
-						{include file='userListItem'}
+						{include file='playerItem' application='teamsystem'}
 					{/foreach}
 				</ol>
 			</ul>
