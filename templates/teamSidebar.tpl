@@ -40,27 +40,6 @@
     </fieldset>
 </div>
 
-{if ($playerList != NULL)}
-<div>
-	<fieldset class="dashboardBox">
-        <legend>{lang}teamsystem.team.page.gamertags{/lang}</legend>
-       		<div>
-                <ol class="sidebarNestedCategoryList">
-                    {foreach from=$playerList item=player}
-                    	{if ($player->getUserOption($userOption) != NULL)}
-                        <li>
-                            <a href="{link controller='User' object=$player}{/link}" class="userLink"
-                           data-user-id="{@$player->userID}">{@$player->getUsername()}</a>
-                            <span class="badge">{@$player->getUserOption($userOption)}</span>
-                        </li>
-                        {/if}
-                    {/foreach}
-                </ol>
-            </div>
-    </fieldset>
-</div>
-{/if}
-
 {if ($team->teamDescription != NULL)}
 <div class="dashboardBox">
 	<fieldset>
