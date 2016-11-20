@@ -56,6 +56,7 @@ class TeamLeaveForm extends AbstractForm {
 		if($this->teamID == 0) {
 			throw new IllegalLinkException();
 		}
+		$this->playerID = WCF::getUser()->getUserID();
 		$this->team = new Team($this->teamID);
 		$this->platformID = $this->team->getPlatformID();
 		switch ($this->platformID) {
