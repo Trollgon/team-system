@@ -14,32 +14,6 @@
 		</categories>
 		
 		<options>
-			<option name="teamsystem_platforms_pc">
-				<categoryname>teamsystem.platforms</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
-			<option name="teamsystem_platforms_ps4">
-				<categoryname>teamsystem.platforms</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
-			<option name="teamsystem_platforms_ps3">
-				<categoryname>teamsystem.platforms</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-			</option>
-			<option name="teamsystem_platforms_xb1">
-				<categoryname>teamsystem.platforms</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
-			<option name="teamsystem_platforms_xb360">
-				<categoryname>teamsystem.platforms</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-			</option>
-			
 			<option name="teamsystem_lock_teamEdit">
 				<categoryname>teamsystem.general</categoryname>
 				<optiontype>boolean</optiontype>

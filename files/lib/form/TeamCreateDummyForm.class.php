@@ -16,8 +16,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 
-class TeamCreateDummyForm extends AbstractForm
-{
+class TeamCreateDummyForm extends AbstractForm {
     public $accept = false;
 
     /**

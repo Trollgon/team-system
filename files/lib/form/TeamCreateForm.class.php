@@ -1,9 +1,10 @@
 <?php
 namespace teamsystem\form;
 
+use teamsystem\data\platform\PlatformList;
 use teamsystem\util\TeamUtil;
 use wcf\form\AbstractForm;
-use wcf\page\AbstractPage;
+use wcf\system\exception\IllegalLinkException;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
@@ -35,7 +36,8 @@ class TeamCreateForm extends AbstractForm {
 	
 	public 	$teamID = '';
 	
-	public	$platform = '';
+	public	$platformID = '';
+    public  $platformArray = array();
 	public 	$teamname = '';
 	public 	$teamtag = '';
 
@@ -45,13 +47,26 @@ class TeamCreateForm extends AbstractForm {
 			'leaderID' => '',
 		);
 
-	/**
-	 * @see \wcf\page\AbstractPage::show()
+    /**
+     * @see \wcf\form\AbstractForm::readParameters()
+     */
+    public function readParameters(){
+        parent::readParameters();
+        $this->platformArray = new PlatformList();
+        $this->platformArray->setObjectIDs(TeamUtil::getAllPlatforms());
+        $this->platformArray->readObjects();
+    }
+
+    /**
+	 * @see \wcf\form\AbstractForm::show()
 	 */
 	public function show() {
-		if(!WCF::getSession()->getPermission("user.teamSystem.canCreateTeam")) {
+		if (!WCF::getSession()->getPermission("user.teamSystem.canCreateTeam")) {
 			throw new PermissionDeniedException();
 		}
+		if (count(TeamUtil::getAllPlatforms()) == 0) {
+            throw new IllegalLinkException();
+        }
 		parent::show();
 	}
 	
@@ -71,7 +86,7 @@ class TeamCreateForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see	wcf\form\IForm::validate()
+	 * @see	\wcf\form\AbstractForm::validate()
 	*/
 	public function validate() {
 		parent::validate();
@@ -82,20 +97,19 @@ class TeamCreateForm extends AbstractForm {
 		if (isset($_POST['teamtag'])) {
 			$this->teamtag = StringUtil::trim($_POST['teamtag']);
 		}
-		if (isset($_POST['platform'])) {
-			$this->platform = StringUtil::trim($_POST['platform']);
+		if (isset($_POST['platformID'])) {
+			$this->platformID = StringUtil::trim($_POST['platformID']);
 		}
 		
 		$this->validateTeamname($this->teamname);
 		$this->validateTeamtag($this->teamtag);
-		$this->validateplatform($this->platform);
-	} 
-	
-	/**
-	 * Throws a UserInputException if the teamname is not unique or not valid.
-	 * 
-	 * @param	string		$teamname
-	 */
+		$this->validateplatform($this->platformID);
+	}
+
+    /**
+     * @param $teamname
+     * @throws UserInputException
+     */
 	protected function validateTeamname($teamname) {
 		if (empty($teamname)) {
 			throw new UserInputException('teamname');
@@ -111,12 +125,11 @@ class TeamCreateForm extends AbstractForm {
 			throw new UserInputException('teamname', 'notUnique');
 		}
 	}
-	
-	/**
-	 * Throws a UserInputException if the teamtag is not unique or not valid.
-	 * 
-	 * @param	string		$teamtag
-	 */
+
+    /**
+     * @param $teamtag
+     * @throws UserInputException
+     */
 	protected function validateTeamtag($teamtag) {
 		if (empty($teamtag)) {
 			throw new UserInputException('teamtag');
@@ -132,13 +145,17 @@ class TeamCreateForm extends AbstractForm {
 			throw new UserInputException('teamtag', 'notUnique');
 		}
 	}
-	
-	protected function validateplatform($platform) {
-		if (empty($platform)) {
+
+    /**
+     * @param $platformID
+     * @throws UserInputException
+     */
+	protected function validateplatform($platformID) {
+		if (empty($platformID)) {
 			throw new UserInputException('platform');
 		}
-		// check if user already has a  team for this platform
-		if (!TeamUtil::isFreePlatformPlayer($platform, WCF::getUser()->userID)) {
+		// check if user already has a team for this platform
+		if (!TeamUtil::isFreePlatformPlayer($platformID, WCF::getUser()->userID)) {
 			throw new UserInputException('platform', 'notUnique');
 		}
 	}
@@ -152,7 +169,7 @@ class TeamCreateForm extends AbstractForm {
 		'data' => array(
 			'teamName'		=> $this->formData['teamname'], 
 			'teamTag'		=> strtoupper($this->formData['teamtag']), 
-			'platformID'	=> $this->platform,
+			'platformID'	=> $this->platformID,
 			'leaderID'		=> $this->formData['leaderID'],
 			'contactID'		=> $this->formData['leaderID'],
             'dummyTeam'		=> 0,
@@ -160,58 +177,14 @@ class TeamCreateForm extends AbstractForm {
 		);
 		$action = new TeamAction(array(), 'create', $data);
 		$action->executeAction();
-		switch ($this->platform) {
-			case 1:
-				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
-				$userdata = array(
-						'data' => array(
-								'teamsystemPcTeamID' 		=> $userTeamID,
-								'teamsystemPcTeamPositionID' => 0,
-						)
-				);
-				break;
-			case 2:
-				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
-				$userdata = array(
-						'data' => array(
-								'teamsystemPs4TeamID' 			=> $userTeamID,
-								'teamsystemPs4TeamPositionID' 	=> 0,
-						)
-				);
-				break;
-			case 3:
-				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
-				$userdata = array(
-						'data' => array(
-								'teamsystemPs3TeamID'		 => $userTeamID,
-								'teamsystemPs3TeamPositionID' => 0,
-						)
-				);
-				break;
-			case 4:
-				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
-				$userdata = array(
-						'data' => array(
-								'teamsystemXb1TeamID'		 => $userTeamID,
-								'teamsystemXb1TeamPositionID' => 0,
-						)
-				);
-				break;
-			case 5:
-				$userTeamID = TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID);
-				$userdata = array(
-						'data' => array(
-								'teamsystemXb360TeamID'			 => $userTeamID,
-								'teamsystemXb360TeamPositionID'	 => 0,
-						)
-				);
-				break;
-		}
-		$userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
-		$userAction->executeAction();
+        $sql = "INSERT INTO teamsystem1_user_to_team_to_position_to_platform (userID, teamID, platformID, positionID)
+                  VALUES (?, ?, ?, ?)";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array(WCF::getSession()->getUser()->getUserID(), TeamUtil::getPlayersTeamID($this->platformID, WCF::getSession()->getUser()->getUserID()), $this->platformID, 0));
+
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
 			'application' 	=> 'teamsystem',
-			'id'			=> TeamUtil::getPlayersTeamID($this->platform, WCF::getUser()->userID),
+			'id'			=> TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID),
 		)),WCF::getLanguage()->get('teamsystem.team.create.successfulRedirect'), 10);				
 		exit;
 	}
@@ -219,10 +192,11 @@ class TeamCreateForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
-			'formData' 	=> $this->formData,
-			'teamname'	=> $this->teamname,
-			'teamtag' 	=> $this->teamtag,
-			'platform' 	=> $this->platform,
+			'formData' 	    =>  $this->formData,
+			'teamname'	    =>  $this->teamname,
+			'teamtag' 	    =>  $this->teamtag,
+			'platformID' 	=>  $this->platformID,
+            'platformArray' =>  $this->platformArray,
 		));
 	}
 

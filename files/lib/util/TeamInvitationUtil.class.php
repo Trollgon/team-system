@@ -3,9 +3,9 @@ namespace teamsystem\util;
 use wcf\system\WCF;
 
 /**
- * Contains user-related functions.
+ * Contains team-related functions.
  * 
- * @author	Marcel Werk
+ * @author	Trollgon
  * @copyright	2001-2015 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf

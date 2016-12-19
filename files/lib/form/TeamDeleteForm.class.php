@@ -33,17 +33,17 @@ class TeamDeleteForm extends AbstractForm {
 	public $userOption = '';
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @see	\wcf\form\AbstractForm::$activeMenuItem
 	 */
 	public $activeMenuItem = 'teamsystem.header.menu.teams';
 	
 	/**
-	 * @see \wcf\page\AbstractPage::$loginRequired
+	 * @see \wcf\form\AbstractForm::$loginRequired
 	 */
 	public	$loginRequired = true;
 	
 	/**
-	 * @see \wcf\page\AbstractPage::readParameters()
+	 * @see \wcf\form\AbstractForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -142,24 +142,7 @@ class TeamDeleteForm extends AbstractForm {
         }
 
         $this->playerList = new UserProfileList();
-        switch ($this->platformID) {
-            case 1:
-                $this->playerList->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-                break;
-            case 2:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-                break;
-            case 3:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-                break;
-            case 4:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-                break;
-            case 5:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-                break;
-        }
-
+        $this->playerList->setObjectIDs($this->team->getPlayerIDs());
         $this->playerList->readObjects();
 
         if($this->team->teamID == null || $this->team->teamID == 0) {
@@ -168,10 +151,9 @@ class TeamDeleteForm extends AbstractForm {
 	}
 
     /**
-     * @see \wcf\page\AbstractPage::readData()
+     * @see \wcf\form\AbstractForm::readData()
      */
-	public function readData()
-    {
+	public function readData(){
         parent::readData();
 
         WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
@@ -182,7 +164,7 @@ class TeamDeleteForm extends AbstractForm {
 
 
     /**
-	 * @see \wcf\page\AbstractPage::show()
+	 * @see \wcf\form\AbstractForm::show()
 	 */
 	public function show() {
 		if (!$this->team->isTeamLeader()) {
@@ -215,52 +197,6 @@ class TeamDeleteForm extends AbstractForm {
 
 		$action = new TeamAction(array($this->teamID), 'delete');
 		$action->executeAction();
-        if ($this->team->dummyTeam == 0) {
-            switch ($this->platformID) {
-                case 1:
-                    $userdata = array(
-                        'data' => array(
-                            'teamsystemPcTeamID' => NULL,
-                            'teamsystemPcTeamPositionID' => NULL,
-                        )
-                    );
-                    break;
-                case 2:
-                    $userdata = array(
-                        'data' => array(
-                            'teamsystemPs4TeamID' => NULL,
-                            'teamsystemPs4TeamPositionID' => NULL,
-                        )
-                    );
-                    break;
-                case 3:
-                    $userdata = array(
-                        'data' => array(
-                            'teamsystemPs3TeamID' => NULL,
-                            'teamsystemPs3TeamPositionID' => NULL,
-                        )
-                    );
-                    break;
-                case 4:
-                    $userdata = array(
-                        'data' => array(
-                            'teamsystemXb1TeamID' => NULL,
-                            'teamsystemXb1TeamPositionID' => NULL,
-                        )
-                    );
-                    break;
-                case 5:
-                    $userdata = array(
-                        'data' => array(
-                            'teamsystemXb360TeamID' => NULL,
-                            'teamsystemXb360TeamPositionID' => NULL,
-                        )
-                    );
-                    break;
-            }
-            $userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
-            $userAction->executeAction();
-        }
 			
         HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamList', array(
 				'application' 	=> 'teamsystem',
@@ -269,7 +205,7 @@ class TeamDeleteForm extends AbstractForm {
     }
 	
 	/**
-	 * @see \wcf\page\AbstractPage::assignVariables()
+	 * @see \wcf\form\AbstractForm::assignVariables()
 	 */
 	
 	public function assignVariables() {
