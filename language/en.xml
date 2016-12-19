@@ -99,11 +99,6 @@
 		<item name="teamsystem.team.overview.platform"><![CDATA[Platform]]></item>
 		<item name="teamsystem.team.overview.platform.description"><![CDATA[Pick the platform your team will be competing on.]]></item>
 		<item name="teamsystem.team.overview.platform.choose"><![CDATA[]]></item>
-		<item name="teamsystem.team.overview.platform.pc"><![CDATA[PC]]></item>
-		<item name="teamsystem.team.overview.platform.ps3"><![CDATA[PS3]]></item>
-		<item name="teamsystem.team.overview.platform.ps4"><![CDATA[PS4]]></item>
-		<item name="teamsystem.team.overview.platform.xbox1"><![CDATA[XBOX One]]></item>
-		<item name="teamsystem.team.overview.platform.xbox360"><![CDATA[XBOX 360]]></item>
 		<item name="teamsystem.team.overview.tag"><![CDATA[Teamtag]]></item>
 		<item name="teamsystem.team.overview.tag.description"><![CDATA[Teamtag must be 2 up to 4 characters long and unique.]]></item>
 	</category>
@@ -148,17 +143,5 @@
 		<item name="wcf.acp.option.category.teamsystem.platforms"><![CDATA[Platforms]]></item>
 		<item name="wcf.acp.option.category.teamsystem.general"><![CDATA[General]]></item>
 		<item name="wcf.acp.option.teamsystem_lock_teamEdit"><![CDATA[disable team edits by users]]></item>
-		<item name="wcf.acp.option.teamsystem_platforms_pc"><![CDATA[enable PC]]></item>
-		<item name="wcf.acp.option.teamsystem_platforms_ps4"><![CDATA[enable PS4]]></item>
-		<item name="wcf.acp.option.teamsystem_platforms_ps3"><![CDATA[enable PS3]]></item>
-		<item name="wcf.acp.option.teamsystem_platforms_xb1"><![CDATA[enable Xbox 1]]></item>
-		<item name="wcf.acp.option.teamsystem_platforms_xb360"><![CDATA[enable Xbox 360]]></item>
-	</category>
-	
-	<category name="wcf.user.option">
-		<item name="wcf.user.option.psnID"><![CDATA[PSN ID]]></item>
-		<item name="wcf.user.option.uplayName"><![CDATA[Uplay Name]]></item>
-		<item name="wcf.user.option.uplayLegacyName"><![CDATA[Uplay Legacy Name]]></item>
-		<item name="wcf.user.option.xboxLiveID"><![CDATA[XBox Live ID]]></item>
 	</category>
 </language>

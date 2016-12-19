@@ -160,24 +160,7 @@ class InvitationForm extends AbstractForm {
         }
 
         $this->playerList = new UserProfileList();
-        switch ($this->platformID) {
-            case 1:
-                $this->playerList->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-                break;
-            case 2:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-                break;
-            case 3:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-                break;
-            case 4:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-                break;
-            case 5:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-                break;
-        }
-
+        $this->playerList->setObjectIDs($this->team->getPlayerIDs());
         $this->playerList->readObjects();
 
         if($this->team->teamID == null || $this->team->teamID == 0) {
@@ -188,8 +171,7 @@ class InvitationForm extends AbstractForm {
     /**
      * @see \wcf\page\AbstractPage::readData()
      */
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
 
         WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
@@ -320,58 +302,14 @@ class InvitationForm extends AbstractForm {
 			
 			$action = new TeamAction(array($this->teamID), 'update', $data);
 			$action->executeAction();
-			
-			switch ($this->platformID) {
-				case 1:
-					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
-					$userdata = array(
-							'data' => array(
-									'teamsystemPcTeamID' 		=> $userTeamID,
-									'teamsystemPcTeamPositionID' => $backendPositionID
-							)
-					);
-					break;
-				case 2:
-					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
-					$userdata = array(
-							'data' => array(
-									'teamsystemPs4TeamID' 			=> $userTeamID,
-									'teamsystemPs4TeamPositionID' 	=> $backendPositionID
-							)
-					);
-					break;
-				case 3:
-					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
-					$userdata = array(
-							'data' => array(
-									'teamsystemPs3TeamID' 			=> $userTeamID,
-									'teamsystemPs3TeamPositionID' 	=> $backendPositionID
-							)
-					);
-					break;
-				case 4:
-					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
-					$userdata = array(
-							'data' => array(
-									'teamsystemXb1TeamID' 			=> $userTeamID,
-									'teamsystemXb1TeamPositionID' 	=> $backendPositionID
-							)
-					);
-					break;
-				case 5:
-					$userTeamID = TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID);
-					$userdata = array(
-							'data' => array(
-									'teamsystemXb360TeamID' 			=> $userTeamID,
-									'teamsystemXb360TeamPositionID' 	=> $backendPositionID
-							)
-					);
-					break;
-			}
-			$userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
-			$userAction->executeAction();
-			
-			$invitationAction = new InvitationAction(array($this->invitationID), 'delete');
+
+            $sql = "INSERT INTO teamsystem1_user_to_team_to_position_to_platform (userID, teamID, platformID, positionID)
+                  VALUES (?, ?, ?, ?)";
+            $statement = WCF::getDB()->prepareStatement($sql);
+            $statement->execute(array(WCF::getSession()->getUser()->getUserID(), TeamUtil::getPlayersTeamID($this->platformID, WCF::getSession()->getUser()->getUserID()), $this->platformID, $backendPositionID));
+
+
+            $invitationAction = new InvitationAction(array($this->invitationID), 'delete');
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(

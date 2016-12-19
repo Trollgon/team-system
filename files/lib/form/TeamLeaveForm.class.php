@@ -146,24 +146,7 @@ class TeamLeaveForm extends AbstractForm {
         }
 
         $this->playerList = new UserProfileList();
-        switch ($this->platformID) {
-            case 1:
-                $this->playerList->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-                break;
-            case 2:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-                break;
-            case 3:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-                break;
-            case 4:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-                break;
-            case 5:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-                break;
-        }
-
+        $this->playerList->setObjectIDs($this->team->getPlayerIDs());
         $this->playerList->readObjects();
 
         if($this->team->teamID == null || $this->team->teamID == 0) {
@@ -174,8 +157,7 @@ class TeamLeaveForm extends AbstractForm {
     /**
      * @see \wcf\page\AbstractPage::readData()
      */
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
 
         WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
@@ -258,55 +240,19 @@ class TeamLeaveForm extends AbstractForm {
 			);
 		}
 			
-			$action = new TeamAction(array($this->teamID), 'update', $data);
-			$action->executeAction();
-			
-			switch ($this->platformID) {
-				case 1:
-					$userdata = array(
-							'data' => array(
-									'teamsystemPcTeamID' 		=> NULL,
-							)
-					);
-					break;
-				case 2:
-					$userdata = array(
-							'data' => array(
-									'teamsystemPs4TeamID' 			=> NULL,
-							)
-					);
-					break;
-				case 3:
-					$userdata = array(
-							'data' => array(
-									'teamsystemPs3TeamID' 			=> NULL,
-							)
-					);
-					break;
-				case 4:
-					$userdata = array(
-							'data' => array(
-									'teamsystemXb1TeamID' 			=> NULL,
-							)
-					);
-					break;
-				case 5:
-					$userdata = array(
-							'data' => array(
-									'teamsystemXb360TeamID' 			=> NULL,
-							)
-					);
-					break;
-			}
-			$userAction = new UserAction(array(WCF::getUser()->getUserID()), 'update', $userdata);
-			$userAction->executeAction();
-			
-			
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamList', array(
-					'application' 	=> 'teamsystem',
-			)),WCF::getLanguage()->get('teamsystem.team.leave.successfulRedirect'), 10);
-			exit;
-		}
+        $action = new TeamAction(array($this->teamID), 'update', $data);
+        $action->executeAction();
+
+        $sql = "DELETE FROM teamsystem1_user_to_team_to_position_to_platform 
+                  WHERE userID = ? AND teamID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array(WCF::getUser()->getUserID(), $this->teamID));
+
+		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamList', array(
+				'application' 	=> 'teamsystem',
+		)),WCF::getLanguage()->get('teamsystem.team.leave.successfulRedirect'), 10);
+		exit;
+    }
 	
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()

@@ -164,24 +164,7 @@ class TeamPage extends SortablePage {
         }
 
         $this->playerList = new UserProfileList();
-        switch ($this->platformID) {
-            case 1:
-                $this->playerList->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-                break;
-            case 2:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-                break;
-            case 3:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-                break;
-            case 4:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-                break;
-            case 5:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-                break;
-        }
-
+        $this->playerList->setObjectIDs($this->team->getPlayerIDs());
         $this->playerList->readObjects();
 
 		if($this->team->teamID == null || $this->team->teamID == 0) {
@@ -194,59 +177,37 @@ class TeamPage extends SortablePage {
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
-	
-		$this->playerObjects = new UserProfileList();
-		
-		switch ($this->platformID) {
-			case 1:
-				$this->playerObjects->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-				$this->playerObjects->getConditionBuilder()->add("teamsystemPcTeamPositionID < ?", array("4"));
-				break;
-			case 2:
-				$this->playerObjects->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-				$this->playerObjects->getConditionBuilder()->add("teamsystemPs4TeamPositionID < ?", array("4"));
-				break;
-			case 3:
-				$this->playerObjects->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-				$this->playerObjects->getConditionBuilder()->add("teamsystemPs3TeamPositionID < ?", array("4"));
-				break;
-			case 4:
-				$this->playerObjects->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-				$this->playerObjects->getConditionBuilder()->add("teamsystemXb1TeamPositionID < ?", array("4"));
-				break;
-			case 5:
-				$this->playerObjects->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-				$this->playerObjects->getConditionBuilder()->add("teamsystemXb360TeamPositionID < ?", array("4"));
-				break;
-		}
-		
+
+        $sql = /** @lang MySQL */
+            "SELECT userID
+                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  WHERE teamID = ? AND positionID < 4";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->teamID));
+        $playerArray = array();
+        while($row = $statement->fetchArray()) {
+            $playerArray[] = $row['userID'];
+        }
+
+        $this->playerObjects = new UserProfileList();
+        $this->playerObjects->setObjectIDs($playerArray);
 		$this->playerObjects->readObjects();
-		
-		$this->subObjects = new UserProfileList();
-		
-		switch ($this->platformID) {
-			case 1:
-				$this->subObjects->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-				$this->subObjects->getConditionBuilder()->add("teamsystemPcTeamPositionID > ?", array("3"));
-				break;
-			case 2:
-				$this->subObjects->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-				$this->subObjects->getConditionBuilder()->add("teamsystemPs4TeamPositionID > ?", array("3"));
-				break;
-			case 3:
-				$this->subObjects->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-				$this->subObjects->getConditionBuilder()->add("teamsystemPs3TeamPositionID > ?", array("3"));
-				break;
-			case 4:
-				$this->subObjects->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-				$this->subObjects->getConditionBuilder()->add("teamsystemXb1TeamPositionID > ?", array("3"));
-				break;
-			case 5:
-				$this->subObjects->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-				$this->subObjects->getConditionBuilder()->add("teamsystemXb360TeamPositionID > ?", array("3"));
-				break;
-		}
-		
+
+        $sql = /** @lang MySQL */
+            "SELECT userID
+                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  WHERE teamID = ? AND positionID > 3";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->teamID));
+        $subArray = array();
+        while($row = $statement->fetchArray()) {
+            $subArray[] = $row['userID'];
+        }
+
+        $this->subObjects = new UserProfileList();
+        $this->subObjects->setObjectIDs($subArray);
 		$this->subObjects->readObjects();
 		
 	}

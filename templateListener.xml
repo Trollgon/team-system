@@ -20,7 +20,7 @@
 			<templatename>index</templatename>
 			<eventname>softwareVersions</eventname>
 			<templatecode><![CDATA[<dl>
-	<dt>{lang}wcf.acp.index.system.software.appVersion{/lang}</dt>
+	<dt>{lang}teamsystem.acp.index.system.software.appVersion{/lang}</dt>
 	<dd>{$__teamsystem->getPackage()->packageVersion}</dd>
 </dl>]]></templatecode>
 		</templatelistener>

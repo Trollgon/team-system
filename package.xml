@@ -4,7 +4,7 @@
 		<packagename>Team system</packagename>
 		<packagedescription><![CDATA[Team system for WoltLab Community Framework™]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>1.1.0 Beta 1</version>
+		<version>1.0.0 Beta 1</version>
 		<date>2016-03-11</date>
 	</packageinformation>
 	
@@ -28,28 +28,5 @@
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
 		<instruction type="script">acp/install_de_wbbaddons_dummy_app.php</instruction>
-	</instructions>
-	
-	<instructions type="update" fromversion="1.0.*">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="userOption">xml/userOption.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
-		<instruction type="sql">sql/patch1.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.*">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="userOption">xml/userOption.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
 	</instructions>
 </package>

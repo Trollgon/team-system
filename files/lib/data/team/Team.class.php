@@ -2,6 +2,7 @@
 
 namespace teamsystem\data\team;
 
+use teamsystem\data\platform\Platform;
 use wcf\data\DatabaseObject;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
@@ -75,23 +76,8 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	 * Returns the platform.
 	 */
 	public function getPlatform() {
-		switch ($this->platformID) {
-			case 1:
-				return "PC";
-				break;
-			case 2:
-				return "PlayStation 4";
-				break;
-			case 3:
-				return "PlayStation 3";
-				break;
-			case 4:
-				return "Xbox One";
-				break;
-			case 5:
-				return "Xbox 360";
-				break;
-		}
+        $platform = new Platform($this->getPlatformID());
+        return $platform->getPlatformName();
 	}
 	
 	/**
@@ -107,106 +93,186 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	public function isTeamMember() {
 		return (WCF::getUser()->getUserID() == $this->player2ID || WCF::getUser()->getUserID() == $this->player3ID || WCF::getUser()->getUserID() == $this->player4ID || WCF::getUser()->getUserID() == $this->sub1ID ||  WCF::getUser()->getUserID() == $this->sub2ID || WCF::getUser()->getUserID() == $this->sub3ID);
 	}
-	
-	/**
-	 * Returns the positionID of the given player.
-	 */
-	public function getPositionID($playerID, $platformID, $teamID) {
-		$user = new User($playerID);
-	
-		switch ($platformID) {
-			case 1:
-				if ($user->teamsystemPcTeamID == $teamID) {
-					return $user->teamsystemPcTeamPositionID;
-				}
-				break;
-			case 2:
-				if ($user->teamsystemPs4TeamID == $teamID) {
-					return $user->teamsystemPs4TeamPositionID;
-				}
-				break;
-			case 3:
-				if ($user->teamsystemPs3TeamID == $teamID) {
-					return $user->teamsystemPs3TeamPositionID;
-				}
-				break;
-			case 4:
-				if ($user->teamsystemXb1TeamID == $teamID) {
-					return $user->teamsystemXb1TeamPositionID;
-				}
-				break;
-			case 5:
-				if ($user->teamsystemXb360TeamID == $teamID) {
-					return $user->teamsystemXb360TeamPositionID;
-				}
-				break;
-		}
-	
+
+    /**
+     * Returns the positionID of the given player.
+     *
+     * @param $userID
+     * @param $platformID
+     * @param $teamID
+     * @return int
+     */
+	public function getPositionID($userID, $platformID, $teamID) {
+        $sql =      "SELECT positionID
+                        FROM teamsystem1_user_to_team_to_position_to_platform 
+                        WHERE userID = ? AND platformID = ? AND teamID = ?";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($userID, $platformID, $teamID));
+
+        $row = $statement->fetchArray();
+
+        return $row['positionID'];
 	}
-	
+
+    /**
+     * Returns the userID of the team leader.
+     *
+     * @return int
+     */
 	public function getLeaderID()  {
 		return $this->leaderID;
 	}
-	
+
+    /**
+     * Returns the name of the team leader.
+     *
+     * @return string
+     */
 	public function getLeaderName() {
 		$leader = new User($this->leaderID);
 		return $leader;
 	}
-	
+
+    /**
+     * Returns the userID of player 2.
+     *
+     * @return int
+     */
 	public function getPlayer2ID() {
 		return $this->player2ID;
 	}
-	
+
+    /**
+     * Returns the name of player 2.
+     *
+     * @return string
+     */
 	public function getPlayer2Name() {
 		$user = new User($this->player2ID);
 		return $user;
 	}
-	
+
+    /**
+     * Returns the userID of player 3.
+     *
+     * @return int
+     */
 	public function getPlayer3ID() {
 		return $this->player3ID;
 	}
-	
+
+    /**
+     * Returns the name of player 3.
+     *
+     * @return string
+     */
 	public function getPlayer3Name() {
 		$user = new User($this->player3ID);
 		return $user;
 	}
-	
+
+    /**
+     * Returns the userID of player 4.
+     *
+     * @return int
+     */
 	public function getPlayer4ID() {
 		return $this->player4ID;
 	}
-	
+
+    /**
+     * Returns the name of player 4.
+     *
+     * @return string
+     */
 	public function getPlayer4Name() {
 		$user = new User($this->player4ID);
 		return $user;
 	}
-	
+
+    /**
+     * Returns the userID of sub 1.
+     *
+     * @return int
+     */
 	public function getSub1ID() {
 		return $this->sub1ID;
 	}
-	
+
+    /**
+     * Returns the name of sub 1.
+     *
+     * @return string
+     */
 	public function getSub1Name() {
 		$user = new User($this->sub1ID);
 		return $user;
 	}
-	
+
+    /**
+     * Returns the userID of sub 2.
+     *
+     * @return int
+     */
 	public function getSub2ID() {
 		return $this->sub2ID;
 	}
-	
+
+    /**
+     * Returns the name of sub 2.
+     *
+     * @return string
+     */
 	public function getSub2Name() {
 		$user = new User($this->sub2ID);
 		return $user;
 	}
-	
+
+    /**
+     * Returns the userID of sub 3.
+     *
+     * @return int
+     */
 	public function getSub3ID() {
 		return $this->sub3ID;
 	}
-	
+
+    /**
+     * Returns the name of sub 3.
+     *
+     * @return string
+     */
 	public function getSub3Name() {
 		$user = new User($this->sub3ID);
 		return $user;
 	}
-	
+
+    /**
+     * Returns an array of ids from all players of the team.
+     * @return array of match IDs
+     */
+	public function getPlayerIDs() {
+        $sql = /** @lang MySQL */
+            "SELECT userID
+                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  WHERE teamID = ?";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->getTeamID()));
+        $array = array();
+        while($row = $statement->fetchArray()) {
+            $array[] = $row['userID'];
+        }
+
+        return $array;
+    }
+
+    /**
+     * Returns the team's avatar.
+     *
+     * @return DefaultTeamAvatar|TeamAvatar
+     */
 	public function getAvatar() {
 	
 		if ($this->avatar === null) {
@@ -259,6 +325,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	
 	/**
 	 * Returns the leader from this team
+     *
 	 * @return    \wcf\data\user\User
 	 */
 	public function getLeader() {
@@ -267,6 +334,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	
 	/**
 	 * Returns the user profile from this teams leader.
+     *
 	 * @return    \wcf\data\user\UserProfile
 	 */
 	public function getLeaderProfile() {
@@ -275,6 +343,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	
 	/**
 	 * Returns the contact from this team
+     *
 	 * @return    \wcf\data\user\User
 	 */
 	public function getContact() {
@@ -282,7 +351,8 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	}
 	
 	/**
-	 * Returns the user profile from this teams leader.
+	 * Returns the user profile from this teams contact.
+     *
 	 * @return    \wcf\data\user\UserProfile
 	 */
 	public function getContactProfile() {

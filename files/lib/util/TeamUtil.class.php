@@ -108,79 +108,30 @@ final class TeamUtil {
      * Returns true if the player is not already in a team on the given platform.
      *
      * @param $platformID
-     * @param $user
+     * @param $userID
      * @return bool
      * @internal param string $platform
      */
 	 
-	public static function isFreePlatformPlayer($platformID, $user) {
-		
-		switch ($platformID) {
-			
-			case 1:
-				
-				$sql = "SELECT	teamsystemPcTeamID
-				FROM	wcf1_user
-				WHERE	userID = ?";
-				
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($user));
-				$row = $statement->fetchArray();
-				
-				return $row['teamsystemPcTeamID'] == NULL;
-			
-			case 2:
-				
-				$sql = "SELECT	teamsystemPs4TeamID
-				FROM	wcf1_user
-				WHERE	userID = ?";
-				
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($user));
-				$row = $statement->fetchArray();
-								
-				return $row['teamsystemPs4TeamID'] == NULL;
-				
-			case 3:
-				
-				$sql = "SELECT	teamsystemPs3TeamID
-				FROM	wcf1_user
-				WHERE	userID = ?";
-				
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($user));
-				$row = $statement->fetchArray();
-				
-				return $row['teamsystemPs3TeamID'] == NULL;
-				
-			case 4:
-				
-				$sql = "SELECT	teamsystemXb1TeamID
-				FROM	wcf1_user
-				WHERE	userID = ?";
-				
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($user));
-				$row = $statement->fetchArray();
-				
-				return $row['teamsystemXb1TeamID'] == NULL;
-				
-			case 5:
-				
-				$sql = "SELECT	teamsystemXb360TeamID
-				FROM	wcf1_user
-				WHERE	userID = ?";
-				
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($user));
-				$row = $statement->fetchArray();
-				
-				return $row['teamsystemXb360TeamID'] == NULL;
-				
-		}
-		 
+	public static function isFreePlatformPlayer($platformID, $userID) {
+        $sql =      "SELECT COUNT(teamID) AS count 
+                        FROM teamsystem1_user_to_team_to_position_to_platform 
+                        WHERE userID = ? AND platformID = ?";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($userID, $platformID));
+
+        $row = $statement->fetchArray();
+
+        return $row['count'] == 0;
 	}
 
+    /**
+     * Returns the Team ID of a team using its name.
+     *
+     * @param $name
+     * @return int
+     */
 	public function getTeamIDByName($name) {
         $sql =		"SELECT	teamID 
 						FROM	teamsystem1_teams
@@ -193,9 +144,13 @@ final class TeamUtil {
         return $row['teamID'];
     }
 
-	/**
-	 * Returns the Team ID of a team from a player.
-	 */
+    /**
+     * Returns the Team ID of a team from a player.
+     *
+     * @param $platformID
+     * @param $userID
+     * @return int
+     */
 	public static function getPlayersTeamID($platformID, $userID) {
 		
 		$sql = "SELECT	teamID
@@ -244,6 +199,9 @@ final class TeamUtil {
         return "DY{$index}";
     }
 
+    /**
+     * @return int
+     */
     public function getDummyTeamID() {
         $sql =		"SELECT	COUNT(teamname) AS count
 						FROM	teamsystem1_teams
@@ -252,5 +210,27 @@ final class TeamUtil {
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array());
         $row = $statement->fetchArray();
+
+        return $row;
+    }
+
+    /**
+     * Returns an array of ids from all platforms.
+     *
+     * @return array
+     */
+    public static function getAllPlatforms() {
+        $sql = /** @lang MySQL */
+            "SELECT platformID
+                  FROM teamsystem1_platforms";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array());
+        $array = array();
+        while($row = $statement->fetchArray()) {
+            $array[] = $row['platformID'];
+        }
+
+        return $array;
     }
 }
