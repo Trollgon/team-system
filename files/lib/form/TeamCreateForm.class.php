@@ -5,6 +5,7 @@ use teamsystem\data\platform\PlatformList;
 use teamsystem\util\TeamUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\page\PageLocationManager;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
@@ -23,16 +24,6 @@ use teamsystem\data\team\TeamAction;
  * @package	de.trollgon.teamsystem
  */
 class TeamCreateForm extends AbstractForm {
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'teamsystem.header.menu.teams';
-	
-	/**
-	 * @see    \wcf\page\AbstractPage::$loginRequired
-	 */
-	public $loginRequired = true;
 	
 	public 	$teamID = '';
 	
@@ -53,6 +44,7 @@ class TeamCreateForm extends AbstractForm {
     public function readParameters(){
         parent::readParameters();
         $this->platformArray = new PlatformList();
+        $this->platformArray->sqlOrderBy = "platformName";
         $this->platformArray->setObjectIDs(TeamUtil::getAllPlatforms());
         $this->platformArray->readObjects();
     }
@@ -69,6 +61,15 @@ class TeamCreateForm extends AbstractForm {
         }
 		parent::show();
 	}
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+    }
 	
 	/**
 	 * @see \wcf\form\AbstractForm::readFormParameters()
@@ -167,12 +168,13 @@ class TeamCreateForm extends AbstractForm {
 		parent::save();
 		$data = array(
 		'data' => array(
-			'teamName'		=> $this->formData['teamname'], 
-			'teamTag'		=> strtoupper($this->formData['teamtag']), 
-			'platformID'	=> $this->platformID,
-			'leaderID'		=> $this->formData['leaderID'],
-			'contactID'		=> $this->formData['leaderID'],
-            'dummyTeam'		=> 0,
+			'teamName'		    => $this->formData['teamname'],
+			'teamTag'		    => strtoupper($this->formData['teamtag']),
+			'platformID'	    => $this->platformID,
+			'leaderID'		    => $this->formData['leaderID'],
+			'contactID'		    => $this->formData['leaderID'],
+            'registrationDate'  => TIME_NOW,
+            'dummyTeam'		    => 0,
 			),
 		);
 		$action = new TeamAction(array(), 'create', $data);

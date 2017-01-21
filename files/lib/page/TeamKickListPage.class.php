@@ -1,10 +1,12 @@
 <?php
 namespace teamsystem\page;
 
+use teamsystem\data\platform\Platform;
 use wcf\data\user\UserProfileList;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\page\AbstractPage;
@@ -49,91 +51,8 @@ class TeamKickListPage extends AbstractPage {
 		}
 		$this->team = new Team($this->teamID);
 		$this->platformID = $this->team->getPlatformID();
-		switch ($this->platformID) {
-			case 1:
-				$this->userOption = "uplayName";
-				break;
-			case 2:
-				$this->userOption = "psnID";
-				break;
-			case 3:
-				$this->userOption = "psnID";
-				break;
-			case 4:
-				$this->userOption = "xboxLiveID";
-				break;
-			case 5:
-				$this->userOption = "xboxLiveID";
-				break;
-		}
-
-        // checking if players set their gamertags
-
-        $leader = new User($this->team->leaderID);
-        if ($leader->getUserOption($this->userOption) == NULL && $this->team->leaderID == WCF::getUser()->getUserID()) {
-            $this->missingContactInfo = true;
-            $this->playerMissingContactInfo = true;
-        }
-
-        if ($this->team->player2ID != NULL) {
-            $player2 = new User($this->team->player2ID);
-            if ($player2->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->player3ID != NULL) {
-            $player3 = new User($this->team->player3ID);
-            if ($player3->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->player4ID != NULL) {
-            $player4 = new User($this->team->player4ID);
-            if ($player4->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player4ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub1ID != NULL) {
-            $sub1 = new User($this->team->sub1ID);
-            if ($sub1->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub1ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub2ID != NULL) {
-            $sub2 = new User($this->team->sub2ID);
-            if ($sub2->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub3ID != NULL) {
-            $sub3 = new User($this->team->sub3ID);
-            if ($sub3->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
+        $platform = new Platform($this->platformID);
+        $this->userOption = $platform->getPlatformUserOption();
 
         $this->playerList = new UserProfileList();
         $this->playerList->setObjectIDs($this->team->getPlayerIDs());
@@ -147,13 +66,11 @@ class TeamKickListPage extends AbstractPage {
     /**
      * @see \wcf\page\AbstractPage::readData()
      */
-    public function readData(){
+    public function readData() {
         parent::readData();
 
-        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
-            'application' 	=> 'teamsystem',
-            'id'            => $this->teamID
-        ))));
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
     }
 
 	/**
@@ -163,6 +80,9 @@ class TeamKickListPage extends AbstractPage {
 		if(!WCF::getSession()->getPermission("user.teamSystem.canCreateTeam")) {
 			throw new PermissionDeniedException();
 		}
+		if ($this->team->countMembers() < 2) {
+            throw new PermissionDeniedException();
+        }
 		if (!$this->team->isTeamLeader()) {
 				WCF::getSession()->checkPermissions(array("mod.teamSystem.canEditTeams"));
 			}

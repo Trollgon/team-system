@@ -6,29 +6,19 @@
 			<div class="containerHeadline">
 				<h3><a href="{link application='teamsystem' controller='Invitation' object=$invitation}{/link}">[{$invitation->getTeamTag()}] - {$invitation->getTeamName()}</a></h3>
 			</div>
-			
-			<ul class="dataList userFacts">
 
+			<ul class="inlineList commaSeparated">
+				<li>{lang}teamsystem.team.invitationList.platform{/lang}</li>
 				<li>
-					{lang}teamsystem.team.invitation.position{/lang}: 
-						{if $invitation->getPositionID() == 1}
-							{lang}teamsystem.team.position.player{/lang}
-						{else}
-							{lang}teamsystem.team.position.sub{/lang}
-						{/if}
+					{lang}teamsystem.team.invitation.position{/lang}:
+					{if $invitation->getPositionID() == 1}
+						{lang}teamsystem.team.position.player{/lang}
+					{else}
+						{lang}teamsystem.team.position.sub{/lang}
+					{/if}
 				</li>
-
 				{event name='userData'}
 			</ul>
-		</div>
-		
-			<dl class="inlineDataList userStats">
 
-				{event name='statistics'}	
-
-					<dd>{lang}teamsystem.team.invitationList.platform{/lang}</dd>
-
-
-			</dl>
 	</div>
 </li>

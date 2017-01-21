@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/vortex/page.xsd">
+    <import>
+        <!-- Pages -->
+        <page identifier="de.trollgon.teamsystem.TeamList">
+            <pageType>system</pageType>
+            <controller>teamsystem\page\TeamListPage</controller>
+            <handler>teamsystem\system\page\handler\TeamListPageHandler</handler>
+            <name language="en">Teams</name>
+
+            <content language="en">
+                <title>Teams</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.InvitationList">
+            <pageType>system</pageType>
+            <controller>teamsystem\page\InvitationListPage</controller>
+            <handler>teamsystem\system\page\handler\InvitationListPageHandler</handler>
+            <name language="en">Invitation list</name>
+
+            <content language="en">
+                <title>Invitations</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamPage">
+            <pageType>system</pageType>
+            <controller>teamsystem\page\TeamPage</controller>
+            <name language="en">Team</name>
+
+            <content language="en">
+                <title>Team</title>
+            </content>
+
+            <requireObjectID>1</requireObjectID>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamKickList">
+            <pageType>system</pageType>
+            <controller>teamsystem\page\TeamKickListPage</controller>
+            <name language="en">Management of team members</name>
+
+            <content language="en">
+                <title>Kick a player from your team.</title>
+            </content>
+        </page>
+
+        <!-- Forms -->
+        <page identifier="de.trollgon.teamsystem.Invitation">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\InvitationForm</controller>
+            <name language="en">Teaminvitation</name>
+
+            <content language="en">
+                <title>Your invitation</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamAvatarEdit">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamAvatarEditForm</controller>
+            <name language="en">Teamavatar Management</name>
+
+            <content language="en">
+                <title>Teamavatar Management</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamCreateDummy">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamCreateDummyForm</controller>
+            <name language="en">create a dummyteam</name>
+
+            <content language="en">
+                <title>Create a dummyteam</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamCreate">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamCreateForm</controller>
+            <name language="en">create new team</name>
+
+            <content language="en">
+                <title>Create new team</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamDelete">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamDeleteForm</controller>
+            <name language="en">Team delete</name>
+
+            <content language="en">
+                <title>Delete your team</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamEdit">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamEditForm</controller>
+            <name language="en">edit team</name>
+
+            <content language="en">
+                <title>Edit your team</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamInvitation">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamInvitationForm</controller>
+            <name language="en">send team invites</name>
+
+            <content language="en">
+                <title>Invite a player</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamKick">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamKickForm</controller>
+            <name language="en">jemanden vom Team entfernen</name>
+
+            <content language="en">
+                <title>Kick a player from your team</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.teamsystem.TeamLeave">
+            <pageType>system</pageType>
+            <controller>teamsystem\form\TeamLeaveForm</controller>
+            <name language="en">leave a team</name>
+
+            <content language="en">
+                <title>You are about to leave your team.</title>
+            </content>
+        </page>
+    </import>
+</data>
+

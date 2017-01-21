@@ -1,9 +1,10 @@
 <?php
 namespace teamsystem\page;
 
-use wcf\data\user\UserList;
+use teamsystem\data\platform\Platform;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\data\user\User;
 use wcf\page\SortablePage;
@@ -37,11 +38,6 @@ class TeamPage extends SortablePage {
 	public $playerMissingContactInfo = false;
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'teamsystem.header.menu.teams';
-	
-	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	
@@ -52,113 +48,81 @@ class TeamPage extends SortablePage {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		if(isset($_REQUEST['id']))
+        if(isset($_REQUEST['id']))
 			$this->teamID = intval($_REQUEST['id']);
 		if($this->teamID == 0) {
 			throw new IllegalLinkException();
 		}
 		$this->team = new Team($this->teamID);
 		$this->platformID = $this->team->getPlatformID();
-		switch ($this->platformID) {
-			case 1:
-				$this->userOption = "uplayName";
-				break;
-			case 2:
-				$this->userOption = "psnID";
-				break;
-			case 3:
-				$this->userOption = "psnID";
-				break;
-			case 4:
-				$this->userOption = "xboxLiveID";
-				break;
-			case 5:
-				$this->userOption = "xboxLiveID";
-				break;
-		}
-
-        switch ($this->platformID) {
-            case 1:
-                $this->userOptionPlain = "Uplay";
-                break;
-            case 2:
-                $this->userOptionPlain = "PSN ID";
-                break;
-            case 3:
-                $this->userOptionPlain = "PSN ID";
-                break;
-            case 4:
-                $this->userOptionPlain = "XBOX Live ID";
-                break;
-            case 5:
-                $this->userOptionPlain = "XBOX Live ID";
-                break;
-        }
+        $platform = new Platform($this->platformID);
+        $this->userOption = $platform->getPlatformUserOption();
+        $userOptionName = $this->userOption->optionName;
 
 		// checking if players set their gamertags
 
 		$leader = new User($this->team->leaderID);
-		if ($leader->getUserOption($this->userOption) == NULL && $this->team->leaderID == WCF::getUser()->getUserID()) {
+		if ($leader->getUserOption($userOptionName) == NULL && $this->team->leaderID == WCF::getUser()->getUserID()) {
             $this->missingContactInfo = true;
             $this->playerMissingContactInfo = true;
 		}
 
 		if ($this->team->player2ID != NULL) {
             $player2 = new User($this->team->player2ID);
-            if ($player2->getUserOption($this->userOption) == NULL) {
+            if ($player2->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->player2ID == WCF::getUser()->getUserID()) {
+            if ($this->team->player2ID == WCF::getUser()->getUserID()) {
                 $this->playerMissingContactInfo = true;
             }
         }
 
         if ($this->team->player3ID != NULL) {
             $player3 = new User($this->team->player3ID);
-            if ($player3->getUserOption($this->userOption) == NULL) {
+            if ($player3->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->player3ID == WCF::getUser()->getUserID()) {
+            if ($this->team->player3ID == WCF::getUser()->getUserID()) {
                 $this->playerMissingContactInfo = true;
             }
         }
 
         if ($this->team->player4ID != NULL) {
             $player4 = new User($this->team->player4ID);
-            if ($player4->getUserOption($this->userOption) == NULL) {
+            if ($player4->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->player4ID == WCF::getUser()->getUserID()) {
+            if ($this->team->player4ID == WCF::getUser()->getUserID()) {
                 $this->playerMissingContactInfo = true;
             }
         }
 
 		if ($this->team->sub1ID != NULL) {
 		    $sub1 = new User($this->team->sub1ID);
-            if ($sub1->getUserOption($this->userOption) == NULL) {
+            if ($sub1->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->sub1ID == WCF::getUser()->getUserID()) {
+            if ($this->team->sub1ID == WCF::getUser()->getUserID()) {
                 $this->playerMissingContactInfo = true;
             }
 		}
 
         if ($this->team->sub2ID != NULL) {
             $sub2 = new User($this->team->sub2ID);
-            if ($sub2->getUserOption($this->userOption) == NULL) {
+            if ($sub2->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->sub2ID == WCF::getUser()->getUserID()) {
+            if ($this->team->sub2ID == WCF::getUser()->getUserID()) {
                 $this->playerMissingContactInfo = true;
             }
         }
 
         if ($this->team->sub3ID != NULL) {
             $sub3 = new User($this->team->sub3ID);
-            if ($sub3->getUserOption($this->userOption) == NULL) {
+            if ($sub3->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
             }
-            elseif ($this->team->sub3ID == WCF::getUser()->getUserID()) {
+            if ($this->team->sub3ID == WCF::getUser()->getUserID()) {
                 $this->playerMissingContactInfo = true;
             }
         }
@@ -221,6 +185,15 @@ class TeamPage extends SortablePage {
 		}
 		parent::show();
 	}
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+    }
 	
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()
@@ -239,13 +212,13 @@ class TeamPage extends SortablePage {
 				'subObjects'				=> $this->subObjects,
 				'contact'					=> $this->team->getContactProfile(),
 				'user'						=> $this->team->getContactProfile(),
+                'userOption'                => $this->userOption,
 				'playerList'				=> $this->playerList,
-				'userOption'				=> $this->userOption,
-                'userOptionPlain'           => $this->userOptionPlain,
 				'memberMissing'				=> $memberMissing,
 				'subMissing'				=> $subMissing,
 				'missingContactInfo'		=> $this->missingContactInfo,
 				'playerMissingContactInfo'	=> $this->playerMissingContactInfo,
+                'teamIsFull'	            => (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2))
 		));
 	}
 	

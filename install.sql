@@ -13,6 +13,7 @@ CREATE TABLE teamsystem1_teams (
   sub2ID int(10),
   sub3ID int(10),
   contactID int(10),
+  registrationDate int(10),
   teamDescription MEDIUMTEXT,
   dummyTeam BOOLEAN DEFAULT 0,
   PRIMARY KEY (teamID),
@@ -23,6 +24,7 @@ DROP TABLE IF EXISTS teamsystem1_platforms;
 CREATE TABLE teamsystem1_platforms (
   platformID int(10) NOT NULL AUTO_INCREMENT,
   platformName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  optionID int(10) NOT NULL,
   PRIMARY KEY (platformID),
   UNIQUE KEY platformID (platformID),
 );
@@ -69,6 +71,8 @@ ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (use
 ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (contactID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (platformID) REFERENCES teamsystem1_platforms (platformID) ON DELETE CASCADE;
 ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (avatarID) REFERENCES teamsystem1_team_avatar (avatarID) ON DELETE SET NULL;
+
+ALTER TABLE teamsystem1_platforms ADD FOREIGN KEY (optionID) REFERENCES wcf1_user_option (optionID) ON DELETE CASCADE;
 
 ALTER TABLE teamsystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE teamsystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (teamID) REFERENCES teamsystem1_teams (teamID) ON DELETE CASCADE;

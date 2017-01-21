@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
+	<category name="teamsystem.acp">
+		<item name="teamsystem.acp.index.system.software.appVersion"><![CDATA[Teamsystem Version]]></item>
+		<item name="teamsystem.acp.platform.error.notUnique"><![CDATA[Name is already in use.]]></item>
+		<item name="teamsystem.acp.platform.noContent"><![CDATA[No Content.]]></item>
+		<item name="teamsystem.acp.platform.save"><![CDATA[Platform has been saved.]]></item>
+		<item name="teamsystem.acp.platform.sure"><![CDATA[Do you really want to delete this platform?]]></item>
+		<item name="teamsystem.acp.platform.title"><![CDATA[Name]]></item>
+		<item name="teamsystem.acp.userOption.title"><![CDATA[Required contact field]]></item>
+	</category>
+
 	<category name="teamsystem.copyright">
 		<item name="teamsystem.copyright.text"><![CDATA[<a href="https://www.ac-whispers.com/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>Software: <strong>Team System {@PACKAGE_VERSION}</strong>, developed by <strong>Trollgon</strong></a>]]></item>
 	</category>
@@ -61,7 +71,7 @@
 	
 	<category name="teamsystem.team.teamList">
 		<item name="teamsystem.team.teamList.leader"><![CDATA[Team leader:]]></item>
-		<item name="teamsystem.team.teamList.platform"><![CDATA[Plays on {$team->getPlatform()}]]></item>
+		<item name="teamsystem.team.teamList.platform"><![CDATA[Platform: {$team->getPlatform()}]]></item>
 	</category>
 	
 	<category name="teamsystem.team.invitation">
@@ -85,7 +95,7 @@
 	</category>
 	
 	<category name="teamsystem.team.join">
-		<item name="teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeams"><![CDATA[You are already in this team. The invitation got deleted.]]></item>
+		<item name="teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeam"><![CDATA[You are already in this team. The invitation got deleted.]]></item>
 		<item name="teamsystem.team.join.unsuccessfulRedirect.positionNotEmpty"><![CDATA[The position you got invited to has already been filled. The invitation got deleted.]]></item>
 		<item name="teamsystem.team.join.successfulRedirect"><![CDATA[You successfully joined the team.]]></item>
 		<item name="teamsystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam"><![CDATA[You already have a team on this platform. The invitation got deleted.]]></item>
@@ -127,15 +137,29 @@
 		<item name="teamsystem.team.page.noSubs"><![CDATA[You did not list any substitutes. This means your main team will be online during the whole tournament.]]></item>
 		<item name="teamsystem.team.page.missingContactinfo.player"><![CDATA[You did not set your gamertag on your profile!</br>
 		This means you are not able to participate in a tournament.]]></item>
+		<item name="teamsystem.team.page.registrationDate"><![CDATA[Registered since {@$team->registrationDate|date}]]></item>
 		<item name="teamsystem.team.page.subs"><![CDATA[Substitute]]></item>
+		<item name="teamsystem.team.page.team"><![CDATA[Team]]></item>
 		<item name="teamsystem.team.page.user"><![CDATA[My team]]></item>
+		<item name="teamsystem.team.page.user.many"><![CDATA[My teams]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.user.teamSystem"><![CDATA[Team System]]></item>
-		<item name="wcf.acp.group.option.user.teamSystem.canCreateTeam"><![CDATA[can create a team]]></item>
-		<item name="wcf.acp.group.option.user.teamSystem.canViewLists"><![CDATA[can view team lists]]></item>
-		<item name="wcf.acp.group.option.user.teamSystem.canViewTeamPages"><![CDATA[can view team pages]]></item>
+		<item name="wcf.acp.group.option.user.teamSystem.canCreateTeam"><![CDATA[Can create a team]]></item>
+		<item name="wcf.acp.group.option.user.teamSystem.canViewLists"><![CDATA[Can view team lists]]></item>
+		<item name="wcf.acp.group.option.user.teamSystem.canViewTeamPages"><![CDATA[Can view team pages]]></item>
+		<item name="wcf.acp.group.option.category.mod.teamSystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.mod.teamSystem.canEditTeams"><![CDATA[Can create a team]]></item>
+		<item name="wcf.acp.group.option.mod.teamSystem.canCreateDummyTeams"><![CDATA[Can create a dummy team]]></item>
+		<item name="wcf.acp.group.option.category.admin.teamSystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.admin.teamSystem.canEditPlatforms"><![CDATA[Can edit platforms]]></item>
+	</category>
+
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.teamsystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.menu.link.platform.add"><![CDATA[Add platform]]></item>
+		<item name="wcf.acp.menu.link.platform.list"><![CDATA[Show platforms]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -143,5 +167,12 @@
 		<item name="wcf.acp.option.category.teamsystem.platforms"><![CDATA[Platforms]]></item>
 		<item name="wcf.acp.option.category.teamsystem.general"><![CDATA[General]]></item>
 		<item name="wcf.acp.option.teamsystem_lock_teamEdit"><![CDATA[disable team edits by users]]></item>
+	</category>
+
+	<category name="wcf.user.option">
+		<item name="wcf.user.option.psnID"><![CDATA[PSN ID]]></item>
+		<item name="wcf.user.option.uplayLegacyName"><![CDATA[Uplay Legacy]]></item>
+		<item name="wcf.user.option.uplayName"><![CDATA[Uplay]]></item>
+		<item name="wcf.user.option.xboxLiveID"><![CDATA[XBOX Live ID]]></item>
 	</category>
 </language>

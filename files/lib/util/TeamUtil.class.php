@@ -233,4 +233,41 @@ final class TeamUtil {
 
         return $array;
     }
+
+    /**
+     * Returns true if the given player is not in the given team.
+     *
+     * @param $teamID
+     * @param $userID
+     * @return bool
+     */
+    public static function isNotInTeam($teamID, $userID) {
+        $sql = "SELECT	*
+				FROM	teamsystem1_teams
+				WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($teamID, $userID, $userID, $userID, $userID, $userID, $userID, $userID));
+        $value = $statement->fetchArray();
+
+        return $value['teamID'] == 0;
+    }
+
+    /**
+     * Returns the number of teams.
+     *
+     * @return int
+     */
+    public static function countTeams() {
+
+        $sql = "SELECT	COUNT(teamID) AS count
+				FROM	teamsystem1_teams";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array());
+        $row = $statement->fetchArray();
+
+        return $row['count'];
+
+    }
 }

@@ -4,6 +4,8 @@ namespace teamsystem\data\team;
 
 use teamsystem\data\platform\Platform;
 use wcf\data\DatabaseObject;
+use wcf\data\ITitledLinkObject;
+use wcf\system\request\LinkHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\system\request\IRouteController;
@@ -13,7 +15,7 @@ use teamsystem\data\team\avatar\DefaultTeamAvatar;
 use teamsystem\data\team\avatar\TeamAvatar;
 use wcf\data\user\UserProfile;
 
-class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
+class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitledLinkObject {
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
@@ -81,14 +83,14 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	}
 	
 	/**
-	 * Returns true if the player is the team leader.
+	 * Returns true if the user is the team leader.
 	 */
 	public function isTeamLeader() {
 		return WCF::getUser()->userID == $this->leaderID;
 	}
 	
 	/**
-	 * Returns true if the player is a team member.
+	 * Returns true if the user is a team member.
 	 */
 	public function isTeamMember() {
 		return (WCF::getUser()->getUserID() == $this->player2ID || WCF::getUser()->getUserID() == $this->player3ID || WCF::getUser()->getUserID() == $this->player4ID || WCF::getUser()->getUserID() == $this->sub1ID ||  WCF::getUser()->getUserID() == $this->sub2ID || WCF::getUser()->getUserID() == $this->sub3ID);
@@ -249,7 +251,29 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	}
 
     /**
+     * Returns the number of members of a team.
+     *
+     * @return int
+     */
+	public function countMembers() {
+        $sql = /** @lang MySQL */
+            "SELECT userID
+                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  WHERE teamID = ?";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->getTeamID()));
+        $int = 0;
+        while($row = $statement->fetchArray()) {
+            $int = $int + 1;
+        }
+
+        return $int;
+    }
+
+    /**
      * Returns an array of ids from all players of the team.
+     *
      * @return array of match IDs
      */
 	public function getPlayerIDs() {
@@ -274,53 +298,28 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
      * @return DefaultTeamAvatar|TeamAvatar
      */
 	public function getAvatar() {
-	
 		if ($this->avatar === null) {
-	
-	
-					if ($this->avatarID) {
-	
-						if (!$this->fileHash) {
-	
-							$data = UserStorageHandler::getInstance()->getField('avatar', $this->teamID);
-	
-							if ($data === null) {
-	
-								$this->avatar = new TeamAvatar($this->avatarID);
-	
-								UserStorageHandler::getInstance()->update($this->teamID, 'avatar', serialize($this->avatar));
-	
-							}
-	
-							else {
-	
-								$this->avatar = unserialize($data);
-	
-							}
-	
-						}
-	
-						else {
-	
-							$this->avatar = new TeamAvatar(null, $this->getDecoratedObject()->data);
-	
-						}
-	
-					}
-	
-			}
-	
-				
-	
+            if ($this->avatarID) {
+                if (!$this->fileHash) {
+                    $data = UserStorageHandler::getInstance()->getField('avatar', $this->teamID);
+                    if ($data === null) {
+                        $this->avatar = new TeamAvatar($this->avatarID);
+                        UserStorageHandler::getInstance()->update($this->teamID, 'avatar', serialize($this->avatar));
+                    }
+                    else {
+                        $this->avatar = unserialize($data);
+                    }
+                }
+                else {
+                    $this->avatar = new TeamAvatar(null, $this->getDecoratedObject()->data);
+                }
+            }
+        }
 			// use default avatar
 			if ($this->avatar === null) {
-	
 				$this->avatar = new DefaultTeamAvatar();
-	
 			}
-	
 		return $this->avatar;
-	
 	}
 	
 	/**
@@ -358,4 +357,17 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController{
 	public function getContactProfile() {
 		return new UserProfile($this->getContact());
 	}
+
+    /**
+     * Returns the link to the object.
+     *
+     * @return    string
+     */
+    public function getLink() {
+        return LinkHandler::getInstance()->getLink('Team', [
+            'application' => 'teamsystem',
+            'object' => $this,
+            'forceFrontend' => true
+        ]);
+    }
 }

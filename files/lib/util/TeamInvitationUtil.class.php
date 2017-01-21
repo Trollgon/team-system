@@ -3,7 +3,7 @@ namespace teamsystem\util;
 use wcf\system\WCF;
 
 /**
- * Contains team-related functions.
+ * Contains team-invitation-related functions.
  * 
  * @author	Trollgon
  * @copyright	2001-2015 WoltLab GmbH
@@ -13,7 +13,14 @@ use wcf\system\WCF;
  * @category	Community Framework
  */
 final class TeamInvitationUtil {
-	
+
+    /**
+     * Checks if the given position is empty.
+     *
+     * @param $teamID
+     * @param $positionID
+     * @return bool
+     */
 	public static function isEmptyPosition($teamID, $positionID) {
 		switch ($positionID) {
 			case 1:
@@ -34,19 +41,14 @@ final class TeamInvitationUtil {
 		
 		return $row['count'] != 0;
 	}
-	
-	public static function isNotInTeam($teamID, $userID) {
-		$sql = "SELECT	*
-				FROM	teamsystem1_teams
-				WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
-		
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($teamID, $userID, $userID, $userID, $userID, $userID, $userID, $userID));
-		$value = $statement->fetchArray();
-		
-		return $value['teamID'] == 0;
-	}
-	
+
+    /**
+     * Returns the positionID used in the database.
+     *
+     * @param $teamID
+     * @param $position
+     * @return int
+     */
 	public static function getFreePositionID($teamID, $position) {
 		switch ($position) {
 			case 1:
@@ -133,5 +135,45 @@ final class TeamInvitationUtil {
 		
 		return $backEndPositionID;
 	}
-	
+
+    /**
+     * Returns true if there isn't already an invitation from the given team for the given user.
+     *
+     * @param $teamID
+     * @param $userID
+     * @return bool
+     */
+	public static function checkDoubleInvitations($teamID, $userID) {
+
+        $sql = "SELECT	COUNT(invitationID) AS count
+				FROM	teamsystem1_invitations
+				WHERE	(teamID = ?) AND (playerID = ?)";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($teamID, $userID));
+        $row = $statement->fetchArray();
+
+        return $row['count'] == 0;
+
+    }
+
+    /**
+     * Returns the number of invitations for a given player.
+     *
+     * @param $userID
+     * @return int
+     */
+    public static function countInvitations($userID) {
+
+        $sql = "SELECT	COUNT(invitationID) AS count
+				FROM	teamsystem1_invitations
+				WHERE	(playerID = ?)";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($userID));
+        $row = $statement->fetchArray();
+
+        return $row['count'];
+
+    }
 }

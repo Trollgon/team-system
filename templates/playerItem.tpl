@@ -26,9 +26,9 @@
 
             <ul class="dataList userFacts">
 
-                {if ($user->getUserOption($userOption) != NULL)}
+                {if ($user->getUserOption($userOption->optionName) != NULL)}
                     <li>
-                        {@$userOptionPlain}: {@$user->getUserOption($userOption)}
+                        {lang}wcf.user.option.{@$userOption->optionName}{/lang}: {@$user->getUserOption($userOption->optionName)}
                     </li>
                 {/if}
 

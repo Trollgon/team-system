@@ -1,12 +1,15 @@
 <?php
 namespace teamsystem\form;
 
+use teamsystem\data\platform\Platform;
+use teamsystem\util\TeamUtil;
 use wcf\data\user\User;
 use wcf\data\user\UserProfileList;
 use wcf\form\AbstractForm;
 use wcf\page\AbstractPage;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
@@ -26,16 +29,6 @@ use wcf\system\exception\PermissionDeniedException;
  * @package	de.trollgon.teamsystem
  */
 class TeamInvitationForm extends AbstractForm {
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public	$activeMenuItem = 'teamsystem.header.menu.teams';
-	
-	/**
-	 * @see \wcf\page\AbstractPage::$loginRequired
-	 */
-	public	$loginRequired = true;
 	
 	public	$team = '';
 	
@@ -67,91 +60,8 @@ class TeamInvitationForm extends AbstractForm {
 			}
 		$this->team = new Team($this->teamID);
 		$this->platformID = $this->team->getPlatformID();
-	switch ($this->platformID) {
-			case 1:
-				$this->userOption = "uplayName";
-				break;
-			case 2:
-				$this->userOption = "psnID";
-				break;
-			case 3:
-				$this->userOption = "psnID";
-				break;
-			case 4:
-				$this->userOption = "xboxLiveID";
-				break;
-			case 5:
-				$this->userOption = "xboxLiveID";
-				break;
-		}
-
-        // checking if players set their gamertags
-
-        $leader = new User($this->team->leaderID);
-        if ($leader->getUserOption($this->userOption) == NULL && $this->team->leaderID == WCF::getUser()->getUserID()) {
-            $this->missingContactInfo = true;
-            $this->playerMissingContactInfo = true;
-        }
-
-        if ($this->team->player2ID != NULL) {
-            $player2 = new User($this->team->player2ID);
-            if ($player2->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->player3ID != NULL) {
-            $player3 = new User($this->team->player3ID);
-            if ($player3->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->player4ID != NULL) {
-            $player4 = new User($this->team->player4ID);
-            if ($player4->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player4ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub1ID != NULL) {
-            $sub1 = new User($this->team->sub1ID);
-            if ($sub1->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub1ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub2ID != NULL) {
-            $sub2 = new User($this->team->sub2ID);
-            if ($sub2->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub3ID != NULL) {
-            $sub3 = new User($this->team->sub3ID);
-            if ($sub3->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
+        $platform = new Platform($this->platformID);
+        $this->userOption = $platform->getPlatformUserOption();
 
         $this->playerList = new UserProfileList();
         $this->playerList->setObjectIDs($this->team->getPlayerIDs());
@@ -165,14 +75,11 @@ class TeamInvitationForm extends AbstractForm {
     /**
      * @see \wcf\page\AbstractPage::readData()
      */
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
 
-        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
-            'application' 	=> 'teamsystem',
-            'id'            => $this->teamID
-        ))));
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
     }
 	
 	/**
@@ -237,7 +144,7 @@ class TeamInvitationForm extends AbstractForm {
 		$this->formData['playerID'] = $this->player->getUserID();
 				
 		// check if the player is not already in the team
-		if (!TeamInvitationUtil::isNotInTeam($this->teamID, $this->playerID)) {
+		if (!TeamUtil::isNotInTeam($this->teamID, $this->playerID)) {
 			throw new UserInputException('playername', 'notUnique');
 		}
 	}

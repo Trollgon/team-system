@@ -1,25 +1,10 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{lang}teamsystem.header.createTeam{/lang} - {PAGE_TITLE|language}</title>
-	
-	{include file='headInclude' sandbox=false}
-</head>
-
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='header' sidebarOrientation='left'}
-
-<header class="boxHeadline">
-		<h1>{lang}teamsystem.header.createTeam{/lang}</h1>
-</header>
-
-{include file='userNotice'}
+{include file='header' sandbox='false'}
 
 {include file='formError'}
 
 <form method="post" action="{link application='teamsystem' controller='TeamCreate'}{/link}">
-	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}teamsystem.team.overview.basic{/lang}</legend>
 			
@@ -74,8 +59,6 @@
 			</dl>			
 					
 		</fieldset>
-		
-	</div>
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

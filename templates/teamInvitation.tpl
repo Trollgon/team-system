@@ -1,55 +1,36 @@
-{include file='documentHeader'}
+{capture assign='pageTitle'}[{$team->getTeamTag()}] - {$team->getTeamName()}{/capture}
 
-<head>
-	<title>{if $team->getTeamID() == 0}{lang}teamsystem.header.menu.teams{/lang} - {else} {lang}teamsystem.team.invitation.form.title{/lang} - {/if}{PAGE_TITLE|language}</title>
-	
-	{include file='headInclude' sandbox=false}
-	
-	<script data-relocate="true">
+{capture assign='contentHeader'}
+	<header class="contentHeader articleContentHeader">
+		<div class="contentHeaderTitle">
+			<h1 class="contentTitle" itemprop="name headline">{lang}teamsystem.team.invitation.form.title{/lang}</h1>
+		</div>
 
-		//<![CDATA[
-
-		$(function() {
-
-			new WCF.Search.User('#playername', null, false, [ ], false);
-
-		});
-
-		//]]>
-
-	</script>
-</head>
+		{hascontent}
+			<nav>
+				<ul>
+					{content}
+					{if $team->isTeamLeader()}
+						<li><a href="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}"
+							   title="{lang}teamsystem.team.page.edit{/lang}" class="button"><span
+										class="icon icon16 fa-pencil"></span>
+								<span>{lang}teamsystem.team.page.edit{/lang}</span></a></li>
+					{/if}
+					{event name='contentHeaderNavigation'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
+	</header>
+{/capture}
 
 <body id="tpl{$templateName|ucfirst}">
 
 {include file='teamSidebar'  application='teamsystem' assign='sidebar'}
 
-{include file='header' sidebarOrientation='left'}
-
-<header class="boxHeadline">
-		<h1>{lang}teamsystem.team.invitation.form.title{/lang}</h1>
-</header>
-
-{include file='userNotice'}
+{include file='header' sidebarOrientation='right'}
 
 {include file='formError'}
-
-<div class="contentNavigation">
-    {hascontent}
-        <nav>
-            <ul>
-                {content}
-                {if $team->isTeamLeader()}
-                	<li><a href="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}"
-                           title="{lang}teamsystem.team.page.edit{/lang}" class="button"><span
-                                class="icon icon16 icon-pencil"></span>
-                        <span>{lang}teamsystem.team.page.edit{/lang}</span></a></li>
-				{/if}
-				{/content}
-            </ul>
-        </nav>
-    {/hascontent}
-</div>
 
 <form method="post" action="{link application='teamsystem' controller='TeamInvitation' teamID=$teamID}{/link}">
 	<div class="container containerPadding marginTop">
@@ -99,6 +80,14 @@
 		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
+
+<script data-relocate="true">
+	$(function() {
+		new WCF.Search.User($('#playername'), function(data) {
+			$('#playername').val(data.label);//.focus();
+		});
+	});
+</script>
 
 {include file='footer' sandbox=false}
 </body>

@@ -1,29 +1,9 @@
-{include file='documentHeader'}
+{capture assign='contentTitle'}{$__wcf->getActivePage()->getTitle()} <span class="badge">{#$items}</span>{/capture}
 
-<head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'teamsystem.header.menu.teams'}{lang}teamsystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
-	
-	{include file='headInclude' sandbox=false}
-</head>
-
-
-
-<body id="tpl{$templateName|ucfirst}">
-{include file='header' sandbox=false}
-
-<header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'teamsystem.header.menu.teams'}
-		<h1>{PAGE_TITLE|language}</h1>
-		{hascontent}<h2>{content}{PAGE_DESCRIPTION|language}{/content}</h2>{/hascontent}
-	{else}
-		<h1>{lang}teamsystem.header.menu.teams{/lang}</h1>
-	{/if}
-</header>
-
-{include file='userNotice'}
+{include file='header'}
 
 {if $objects|count > 0}
-	<div class="container marginTop">
+	<div class="section sectionContainerList">
 		<ol class="containerList userList">
 			{foreach from=$objects item=invitation}
   			   	{include file='invitationItem' application='teamsystem'}
@@ -47,9 +27,6 @@
 </div>
 
 {include file='footer'}
-
-</body>
-</html>
 
 
 

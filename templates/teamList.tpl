@@ -1,97 +1,66 @@
-{include file='documentHeader'}
+{capture assign='contentHeader'}
+    <header class="contentHeader articleContentHeader">
+        <div class="contentHeaderTitle">
+            <h1 class="contentTitle" itemprop="name headline">{lang}teamsystem.header.menu.teams{/lang} <span class="badge">{@$teamsCount}</span></h1>
+        </div>
 
-<head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'teamsystem.header.menu.teams'}{lang}teamsystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
-	
-	{include file='headInclude' sandbox=false}
-</head>
+        {if $__wcf->getUser()->getUserID() != 0}
+            {hascontent}
+                <nav class="contentHeaderNavigation">
+                    <ul>
+                        {content}
+                        {if $__wcf->getSession()->getPermission('user.teamSystem.canCreateTeam')}
+                            <li><a href="{link application='teamsystem' controller='TeamCreate'}{/link}"
+                                   title="{lang}teamsystem.team.create{/lang}" class="button"><span
+                                            class="icon icon16 fa-asterisk"></span>
+                                    <span>{lang}teamsystem.team.create{/lang}</span></a></li>
+                        {/if}
+                        {if $teamList|count > 1}
+                            <li class="dropdown">
+                                <a class="dropdownToggle boxFlag box24 button">
+                                    <span class="icon icon16 fa-group"></span>
+                                    <span>{lang}teamsystem.team.page.user.many{/lang}</span>
+                                </a>
+                                <ul class="dropdownMenu">
+                                    {foreach from=$teamList item=team}
+                                        <li class="boxFlag"><a href="{link application='teamsystem' controller='Team' id=$team->teamID}{/link}"
+                                               title="{$team->teamName}" class="box24"><span
+                                                        class="icon icon16 fa-group"></span>
+                                                <span>{$team->teamName}</span></a>
+                                        </li>
+                                    {/foreach}
+                                </ul>
+                            </li>
+                        {elseif $teamList|count > 0}
+                            {foreach from=$teamList item=team}
+                                <li><a href="{link application='teamsystem' controller='Team' id=$team->teamID}{/link}"
+                                       title="{lang}teamsystem.team.page.user{/lang}: {$team->teamName}" class="button"><span
+                                                class="icon icon16 fa-group"></span>
+                                        <span>{lang}teamsystem.team.page.user{/lang}: {$team->teamName}</span></a>
+                                </li>
+                            {/foreach}
+                        {/if}
+                        {event name='contentHeaderNavigation'}
+                        {/content}
+                    </ul>
+                </nav>
+            {/hascontent}
+        {/if}
+    </header>
+{/capture}
 
-<body id="tpl{$templateName|ucfirst}">
-{include file='header' sandbox=false}
-
-<header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItem == 'teamsystem.header.menu.teams'}
-		<h1>{PAGE_TITLE|language}</h1>
-		{hascontent}<h2>{content}{PAGE_DESCRIPTION|language}{/content}</h2>{/hascontent}
-	{else}
-		<h1>{lang}teamsystem.header.menu.teams{/lang}</h1>
-	{/if}
-</header>
-
-{include file='userNotice'}
-
-{if $__wcf->getUser()->getUserID() != 0}
-	
-<div class="contentNavigation">
-    {hascontent}
-        <nav>
-            <ul>
-                {content}
-				{if $__wcf->getSession()->getPermission('mod.teamSystem.canCreateDummyTeams')}
-					<li><a href="{link application='teamsystem' controller='TeamCreateDummy'}{/link}"
-						   title="{lang}teamsystem.team.create.dummy{/lang}" class="button"><span
-									class="icon icon16 icon-wrench"></span>
-							<span>{lang}teamsystem.team.create.dummy{/lang}</span></a></li>
-				{/if}
-                {if $__wcf->getSession()->getPermission('user.teamSystem.canCreateTeam')}
-					<li><a href="{link application='teamsystem' controller='TeamCreate'}{/link}"
-                           title="{lang}teamsystem.team.create{/lang}" class="button"><span
-                                class="icon icon16 icon-asterisk"></span>
-                        <span>{lang}teamsystem.team.create{/lang}</span></a></li>
-				{/if}
-				{if $pcTeamID != NULL}
-					<li><a href="{link application='teamsystem' controller='Team' id=$pcTeamID}{/link}"
-                           title='{lang}teamsystem.team.page.user{/lang}: "{@$pcTeamName}"' class="button"><span
-                                class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$pcTeamName}"</span></a></li>
-                {/if}
-                {if $ps4TeamID != NULL}
-                    <li><a href="{link application='teamsystem' controller='Team' id=$ps4TeamID}{/link}"
-                           title='{lang}teamsystem.team.page.user{/lang}: "{@$ps4TeamName}"' class="button"><span
-                                class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$ps4TeamName}"</span></a></li>
-                {/if}
-                {if $id=$ps3TeamID != NULL}
-                    <li><a href="{link application='teamsystem' controller='Team' id=$ps3TeamID}{/link}"
-                           title='{lang}teamsystem.team.page.user{/lang}: "{@$ps3TeamName}"' class="button"><span
-                                class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$ps3TeamName}"</span></a></li>
-                {/if}
-                {if $id=$xb1TeamID != NULL}
-                    <li><a href="{link application='teamsystem' controller='Team' id=$xb1TeamID}{/link}"
-                           title='{lang}teamsystem.team.page.user{/lang}: "{@$xb1TeamName}"' class="button"><span
-                                class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$xb1TeamName}"</span></a></li>
-                {/if}
-                {if $xb360TeamID != NULL}
-                    <li><a href="{link application='teamsystem' controller='Team' id=$xb360TeamID}{/link}"
-                           title='{lang}teamsystem.team.page.user{/lang}: "{@$xb360TeamName}"' class="button"><span
-                                class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$xb360TeamName}"</span></a></li>
-                {/if}
-				<li><a href="{link application='teamsystem' controller='InvitationList'}{/link}"
-                      title="{lang}teamsystem.team.invitation{/lang}" class="button"><span
-                            class="icon icon16 icon-envelope"></span>
-                    <span>{lang}teamsystem.team.invitation{/lang}</span></a></li>
-                {event name='contentNavigationButtonsTop'}
-                {/content}
-            </ul>
-        </nav>
-    {/hascontent}
-</div>
-
-{/if}
+{include file='header'}
 
 {if $objects|count > 0}
-	<div class="container marginTop">
-		<ol class="containerList userList">
-			{foreach from=$objects item=team}
-  			   	{include file='teamItem' application='teamsystem'}
-			{/foreach}
-		</ol>
-	</div>
+    <div class="section sectionContainerList">
+        <ol class="containerList userList">
+            {foreach from=$objects item=team}
+                {include file='teamItem' application='teamsystem'}
+            {/foreach}
+        </ol>
+    </div>
 {else}
-        <p class="info">{lang}teamsystem.team.overview.noTeams{/lang}</p>
+    <p class="info">{lang}teamsystem.team.overview.noTeams{/lang}</p>
 {/if}
 
 <div class="contentNavigation">
@@ -107,6 +76,3 @@
 </div>
 
 {include file='footer'}
-
-</body>
-</html>

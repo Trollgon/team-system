@@ -9,6 +9,7 @@ namespace teamsystem\data\platform;
 
 
 use teamsystem\data\TEAMSYSTEMDatabaseObject;
+use wcf\data\user\option\UserOption;
 
 class Platform extends TEAMSYSTEMDatabaseObject {
     /**
@@ -21,7 +22,18 @@ class Platform extends TEAMSYSTEMDatabaseObject {
      */
     protected static $databaseTableIndexName = 'platformID';
 
+    /**
+     * @return string
+     */
     public function getPlatformName() {
         return $this->platformName;
+    }
+
+    /**
+     * @return UserOption
+     */
+    public function getPlatformUserOption() {
+        $option = new UserOption($this->optionID);
+        return $option;
     }
 }
