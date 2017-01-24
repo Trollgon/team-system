@@ -15,6 +15,10 @@ use teamsystem\data\team\avatar\DefaultTeamAvatar;
 use teamsystem\data\team\avatar\TeamAvatar;
 use wcf\data\user\UserProfile;
 
+/**
+ * Class Team
+ * @package teamsystem\data\team
+ */
 class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitledLinkObject {
 	
 	/**
@@ -301,14 +305,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitled
 		if ($this->avatar === null) {
             if ($this->avatarID) {
                 if (!$this->fileHash) {
-                    $data = UserStorageHandler::getInstance()->getField('avatar', $this->teamID);
-                    if ($data === null) {
-                        $this->avatar = new TeamAvatar($this->avatarID);
-                        UserStorageHandler::getInstance()->update($this->teamID, 'avatar', serialize($this->avatar));
-                    }
-                    else {
-                        $this->avatar = unserialize($data);
-                    }
+                    $this->avatar = new TeamAvatar($this->avatarID);
                 }
                 else {
                     $this->avatar = new TeamAvatar(null, $this->getDecoratedObject()->data);
