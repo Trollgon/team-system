@@ -47,11 +47,11 @@
 			
 			{if $team->getAvatar()->canCrop()}
 
-				new TEAMSYSTEM.Avatar.Upload(0, new TEAMSYSTEM.Avatar.Crop({@$team->getAvatar()->avatarID}));
+				new TEAMSYSTEM.Avatar.Upload({@$team->teamID}, new TEAMSYSTEM.Avatar.Crop({@$team->getAvatar()->avatarID}));
 
 			{else}
 
-				new TEAMSYSTEM.Avatar.Upload();
+				new TEAMSYSTEM.Avatar.Upload({@$team->teamID});
 
 			{/if}
 			{/if}]]></templatecode>

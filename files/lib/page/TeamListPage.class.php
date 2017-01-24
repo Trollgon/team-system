@@ -2,6 +2,7 @@
 
 namespace teamsystem\page;
 
+use teamsystem\data\team\Team;
 use wcf\page\AbstractPage;
 
 use wcf\system\WCF;
@@ -46,16 +47,26 @@ class TeamListPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 		$pcTeamID = TeamUtil::getPlayersTeamID(1, WCF::getUser()->userID);
+        $pcTeam = new Team($pcTeamID);
 		$ps4TeamID = TeamUtil::getPlayersTeamID(2, WCF::getUser()->userID);
+        $ps4Team = new Team($ps4TeamID);
 		$ps3TeamID = TeamUtil::getPlayersTeamID(3, WCF::getUser()->userID);
+        $ps3Team = new Team($ps3TeamID);
 		$xb1TeamID = TeamUtil::getPlayersTeamID(4, WCF::getUser()->userID);
+        $xb1Team = new Team($xb1TeamID);
 		$xb360TeamID = TeamUtil::getPlayersTeamID(5, WCF::getUser()->userID);
+        $xb360Team = new Team($xb1TeamID);
 		WCF::getTPL()->assign(array(
 			'pcTeamID' 		=> $pcTeamID,
+            'pcTeamName'    => $pcTeam->getTeamName(),
 			'ps4TeamID'		=> $ps4TeamID,
+            'ps4TeamName'   => $ps4Team->getTeamName(),
 			'ps3TeamID'		=> $ps3TeamID,
+            'ps3TeamName'   => $ps3Team->getTeamName(),
 			'xb1TeamID'		=> $xb1TeamID,
+            'xb1TeamName'   => $xb1Team->getTeamName(),
 			'xb360TeamID'	=> $xb360TeamID,
+            'xb360TeamName' => $xb360Team->getTeamName(),
 		));
 	}
 

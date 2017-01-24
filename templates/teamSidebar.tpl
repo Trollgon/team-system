@@ -6,7 +6,15 @@
 
 	<div class="userAvatar">
 
-			<span class="framed">{@$team->getAvatar()->getImageTag()}</span>
+        {if $user->userID == $__wcf->user->userID}
+
+            <a href="{link application='teamsystem' controller='TeamAvatarEdit' teamID=$teamID}{/link}" class="framed jsTooltip" title="{lang}wcf.user.avatar.edit{/lang}">{@$team->getAvatar()->getImageTag()}</a>
+
+        {else}
+
+            <span class="framed">{@$team->getAvatar()->getImageTag()}</span>
+
+        {/if}
 
 	</div>
 
@@ -31,27 +39,6 @@
         </div>
     </fieldset>
 </div>
-
-{if ($playerList != NULL)}
-<div>
-	<fieldset class="dashboardBox">
-        <legend>{lang}teamsystem.team.page.gamertags{/lang}</legend>
-       		<div>
-                <ol class="sidebarNestedCategoryList">
-                    {foreach from=$playerList item=player}
-                    	{if ($player != NULL)}
-                        <li>
-                            <a href="{link controller='User' object=$player}{/link}" class="userLink"
-                           data-user-id="{@$player->userID}">{@$player->getUsername()}</a>
-                            <span class="badge">{@$player->getUserOption($userOption)}</span>
-                        </li>
-                        {/if}
-                    {/foreach}
-                </ol>
-            </div>
-    </fieldset>
-</div>
-{/if}
 
 {if ($team->teamDescription != NULL)}
 <div class="dashboardBox">

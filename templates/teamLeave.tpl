@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'teamsystem.header.menu.teams'}{lang}teamsystem.header.menu.teams{/lang} - {/if}{PAGE_TITLE|language}</title>
+	<title>{if $team->getTeamID() == 0}{lang}teamsystem.header.menu.teams{/lang} - {else} {lang}teamsystem.team.leave.header{/lang} - {/if}{PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' sandbox=false}
 </head>

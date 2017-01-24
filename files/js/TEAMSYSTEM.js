@@ -36,7 +36,7 @@ TEAMSYSTEM.Avatar.Upload = WCF.Upload.extend({
 
 	/**
 
-	 * user id of avatar owner
+	 * team id of avatar owner
 
 	 * @var	integer
 
@@ -63,7 +63,7 @@ TEAMSYSTEM.Avatar.Upload = WCF.Upload.extend({
 
 		this._super($('#avatarUpload > dd > div'), undefined, 'teamsystem\\data\\team\\avatar\\TeamAvatarAction');
 
-		this._teamID = teamID || 0;
+		this._teamID = teamID;
 
 		this._avatarCrop = avatarCrop;
 

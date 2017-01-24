@@ -14,7 +14,7 @@ use wcf\system\WCF;
  */
 final class TeamInvitationUtil {
 	
-	public function isEmptyPosition($teamID, $positionID) {
+	public static function isEmptyPosition($teamID, $positionID) {
 		switch ($positionID) {
 			case 1:
 				$sql = "SELECT	COUNT(teamID) AS count
@@ -35,7 +35,7 @@ final class TeamInvitationUtil {
 		return $row['count'] != 0;
 	}
 	
-	public function isNotInTeam($teamID, $userID) {
+	public static function isNotInTeam($teamID, $userID) {
 		$sql = "SELECT	*
 				FROM	teamsystem1_teams
 				WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
@@ -47,7 +47,7 @@ final class TeamInvitationUtil {
 		return $value['teamID'] == 0;
 	}
 	
-	public function getFreePositionID($teamID, $position) {
+	public static function getFreePositionID($teamID, $position) {
 		switch ($position) {
 			case 1:
 				$sql = "SELECT	COUNT(teamID) AS count

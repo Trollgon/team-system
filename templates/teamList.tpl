@@ -41,33 +41,33 @@
 				{/if}
 				{if $pcTeamID != NULL}
 					<li><a href="{link application='teamsystem' controller='Team' id=$pcTeamID}{/link}"
-                           title="{lang}teamsystem.team.page.user{/lang}" class="button"><span
+                           title='{lang}teamsystem.team.page.user{/lang}: "{@$pcTeamName}"' class="button"><span
                                 class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}</span></a></li>
+                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$pcTeamName}"</span></a></li>
                 {/if}
                 {if $ps4TeamID != NULL}
                     <li><a href="{link application='teamsystem' controller='Team' id=$ps4TeamID}{/link}"
-                           title="{lang}teamsystem.team.page.user{/lang}" class="button"><span
+                           title='{lang}teamsystem.team.page.user{/lang}: "{@$ps4TeamName}"' class="button"><span
                                 class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}</span></a></li>
+                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$ps4TeamName}"</span></a></li>
                 {/if}
                 {if $id=$ps3TeamID != NULL}
                     <li><a href="{link application='teamsystem' controller='Team' id=$ps3TeamID}{/link}"
-                           title="{lang}teamsystem.team.page.user{/lang}" class="button"><span
+                           title='{lang}teamsystem.team.page.user{/lang}: "{@$ps3TeamName}"' class="button"><span
                                 class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}</span></a></li>
+                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$ps3TeamName}"</span></a></li>
                 {/if}
                 {if $id=$xb1TeamID != NULL}
                     <li><a href="{link application='teamsystem' controller='Team' id=$xb1TeamID}{/link}"
-                           title="{lang}teamsystem.team.page.user{/lang}" class="button"><span
+                           title='{lang}teamsystem.team.page.user{/lang}: "{@$xb1TeamName}"' class="button"><span
                                 class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}</span></a></li>
+                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$xb1TeamName}"</span></a></li>
                 {/if}
                 {if $xb360TeamID != NULL}
                     <li><a href="{link application='teamsystem' controller='Team' id=$xb360TeamID}{/link}"
-                           title="{lang}teamsystem.team.page.user{/lang}" class="button"><span
+                           title='{lang}teamsystem.team.page.user{/lang}: "{@$xb360TeamName}"' class="button"><span
                                 class="icon icon16 icon-group"></span>
-                        <span>{lang}teamsystem.team.page.user{/lang}</span></a></li>
+                        <span>{lang}teamsystem.team.page.user{/lang}: "{@$xb360TeamName}"</span></a></li>
                 {/if}
 				<li><a href="{link application='teamsystem' controller='InvitationList'}{/link}"
                       title="{lang}teamsystem.team.invitation{/lang}" class="button"><span
