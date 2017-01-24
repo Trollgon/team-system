@@ -1,135 +1,61 @@
 <?php
-
 namespace teamsystem\data\team\avatar;
-
 use wcf\data\DatabaseObjectEditor;
-
 use wcf\system\WCF;
 
-
-
 /**
-
- * Provides functions to edit avatars.
-
- * 
-
- * @author	Alexander Ebert
-
- * @copyright	2001-2015 WoltLab GmbH
-
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
-
- * @package	com.woltlab.wcf
-
- * @subpackage	data.user.avatar
-
- * @category	Community Framework
-
+ * Class TeamAvatarEditor
+ * @package teamsystem\data\team\avatar
  */
-
 class TeamAvatarEditor extends DatabaseObjectEditor {
 
-	/**
+    /**
+     * @inheritDoc
+     */
+    protected static $baseClass = TeamAvatar::class;
 
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
-
-	 */
-
-	protected static $baseClass = 'teamsystem\data\team\avatar\TeamAvatar';
-	
-	/**
-	 * @see    \wcf\data\IStorableObject::getDatabaseTableName()
-	 */
-	public static function getDatabaseTableName() {
-		return 'teamsystem1_team_avatar';
-	}
-
-	/**
-
-	 * @see	\wcf\data\IEditableObject::delete()
-
-	 */
-
-	public function delete() {
-
-		$sql = "DELETE FROM	teamsystem1_team_avatar
-
+    /**
+     * @inheritDoc
+     */
+    public function delete() {
+        $sql = "DELETE FROM	teamsystem_team_avatar
 			WHERE		avatarID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute([$this->avatarID]);
 
-		$statement = WCF::getDB()->prepareStatement($sql);
+        $this->deleteFiles();
+    }
 
-		$statement->execute(array($this->avatarID));
-
-		
-
-		$this->deleteFiles();
-
-	}
-
-	
-
-	/**
-
-	 * @see	\wcf\data\IEditableObject::deleteAll()
-
-	 */
-
-	public static function deleteAll(array $objectIDs = array()) {
-
-		$sql = "SELECT	*
-
+    /**
+     * @inheritDoc
+     */
+    public static function deleteAll(array $objectIDs = []) {
+        $sql = "SELECT	*
 			FROM	teamsystem1_team_avatar
-
 			WHERE	avatarID IN (".str_repeat('?,', count($objectIDs) - 1)."?)";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute($objectIDs);
+        while ($avatar = $statement->fetchObject(self::$baseClass)) {
+            $editor = new TeamAvatarEditor($avatar);
+            $editor->deleteFiles();
+        }
 
-		$statement = WCF::getDB()->prepareStatement($sql);
+        return parent::deleteAll($objectIDs);
+    }
 
-		$statement->execute($objectIDs);
+    /**
+     * Deletes avatar files.
+     */
+    public function deleteFiles() {
+        // delete wcf2.1 files
+        foreach (TeamAvatar::$avatarThumbnailSizes as $size) {
+            if ($this->width < $size && $this->height < $size) break;
 
-		while ($avatar = $statement->fetchObject(self::$baseClass)) {
+            @unlink($this->getLocation($size));
+        }
+        @unlink($this->getLocation('resize'));
 
-			$editor = new TeamAvatarEditor($avatar);
-
-			$editor->deleteFiles();
-
-		}
-
-		
-
-		return parent::deleteAll($objectIDs);
-
-	}
-
-	
-
-	/**
-
-	 * Deletes avatar files.
-
-	 */
-
-	public function deleteFiles() {
-
-		foreach (TeamAvatar::$avatarThumbnailSizes as $size) {
-
-			if ($this->width < $size && $this->height < $size) break;
-
-			
-
-			@unlink($this->getLocation($size));
-
-		}
-
-		@unlink($this->getLocation('resize'));
-
-		
-
-		// delete original size
-
-		@unlink($this->getLocation());
-
-	}
-
+        // delete original size
+        @unlink($this->getLocation());
+    }
 }
-

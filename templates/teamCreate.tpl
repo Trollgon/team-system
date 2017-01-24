@@ -1,38 +1,21 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{lang}teamsystem.header.createTeam{/lang} - {PAGE_TITLE|language}</title>
-	
-	{include file='headInclude' sandbox=false}
-</head>
-
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='header' sidebarOrientation='left'}
-
-<header class="boxHeadline">
-		<h1>{lang}teamsystem.header.createTeam{/lang}</h1>
-</header>
-
-{include file='userNotice'}
+{include file='header' sandbox='false'}
 
 {include file='formError'}
 
 <form method="post" action="{link application='teamsystem' controller='TeamCreate'}{/link}">
-	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}teamsystem.team.overview.basic{/lang}</legend>
 			
 			<dl{if $errorField == 'platform'} class="formError"{/if}>
-				<dt><label for="platform">{lang}teamsystem.team.overview.platform{/lang}</label></dt>
+				<dt><label for="platformID">{lang}teamsystem.team.overview.platform{/lang}</label></dt>
 				<dd>
-					<select id="platform" name="platform">
-						<option value="" selected>{lang}teamsystem.team.overview.platform.choose{/lang}</option>
-						{if TEAMSYSTEM_PLATFORMS_PC == true}<option value="1" {if $platform==1}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.pc{/lang}</option>{/if}
-						{if TEAMSYSTEM_PLATFORMS_PS4 == true}<option value="2" {if $platform==2}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.ps4{/lang}</option>{/if}
-						{if TEAMSYSTEM_PLATFORMS_PS3 == true}<option value="3" {if $platform==3}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.ps3{/lang}</option>{/if}
-						{if TEAMSYSTEM_PLATFORMS_XB1 == true}<option value="4" {if $platform==4}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.xbox1{/lang}</option>{/if}
-						{if TEAMSYSTEM_PLATFORMS_XB360 == true}<option value="5" {if $platform==5}selected="selected"{/if}>{lang}teamsystem.team.overview.platform.xbox360{/lang}</option>{/if}
+					<select id="platformID" name="platformID">
+						<option value="">{lang}teamsystem.team.overview.platform.choose{/lang}</option>
+						{foreach from=$platformArray item=platform}
+							<option value="{$platform->platformID}" {if $platformID == $platform->platformID} selected="selected" {/if}>{$platform->platformName}</option>
+						{/foreach}
 					</select>
 					{if $errorField == 'platform'}
 							<small class="innerError">
@@ -76,8 +59,6 @@
 			</dl>			
 					
 		</fieldset>
-		
-	</div>
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

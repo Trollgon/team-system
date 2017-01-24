@@ -1,22 +1,16 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{if $team->getTeamID() == 0}{lang}teamsystem.header.menu.teams{/lang} - {else} {lang}teamsystem.team.page.kick.header{/lang} - {/if}{PAGE_TITLE|language}</title>
-	
-	{include file='headInclude' sandbox=false}
-</head>
+{capture assign='contentHeader'}
+	<header class="contentHeader articleContentHeader">
+		<div class="contentHeaderTitle">
+			<h1 class="contentTitle" itemprop="name headline">{lang}teamsystem.team.kick.header{/lang}</h1>
+		</div>
+	</header>
+{/capture}
 
 <body id="tpl{$templateName|ucfirst}">
 
 {include file='teamSidebar'  application='teamsystem' assign='sidebar'}
 
-{include file='header' sidebarOrientation='left'}
-
-<header class="boxHeadline">
-	<h1>{lang}teamsystem.team.kick.header{/lang}</h1>
-</header>
-
-{include file='userNotice'}
+{include file='header' sidebarOrientation='right'}
 
 {include file='formError'}
 
@@ -25,12 +19,13 @@
 <form method="post" action="{link application='teamsystem' controller='TeamKick' teamID=$teamID positionID=$positionID}{/link}">
 
 	<div class="formSubmit">
+		<fieldset>
+			<input type="submit" value="{lang}wcf.user.register.disclaimer.accept{/lang}" accesskey="s" />
 
-		<input type="submit" value="{lang}wcf.user.register.disclaimer.accept{/lang}" accesskey="s" />
+			<a class="button" href="{link application='teamsystem' controller='Team' id=$teamID}{/link}">{lang}wcf.user.register.disclaimer.decline{/lang}</a>
 
-		<a class="button" href="{link application='teamsystem' controller='Team' id=$teamID}{/link}">{lang}wcf.user.register.disclaimer.decline{/lang}</a>
-
-		{@SECURITY_TOKEN_INPUT_TAG}
+			{@SECURITY_TOKEN_INPUT_TAG}
+		</fieldset>
 
 	</div>
 
@@ -38,4 +33,3 @@
 
 {include file='footer' sandbox=false}
 </body>
-</html>

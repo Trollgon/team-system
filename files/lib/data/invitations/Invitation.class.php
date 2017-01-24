@@ -2,6 +2,7 @@
 
 namespace teamsystem\data\invitations;
 
+use teamsystem\data\platform\Platform;
 use wcf\data\DatabaseObject;
 use wcf\system\WCF;
 use wcf\system\request\IRouteController;
@@ -53,23 +54,8 @@ class Invitation extends TEAMSYSTEMDatabaseObject implements IRouteController {
 	 * Returns the platform.
 	 */
 	public function getPlatform() {
-		switch ($this->platformID) {
-			case 1:
-				return "PC";
-				break;
-			case 2:
-				return "PlayStation 4";
-				break;
-			case 3:
-				return "PlayStation 3";
-				break;
-			case 4:
-				return "Xbox One";
-				break;
-			case 5:
-				return "Xbox 360";
-				break;
-		}
+		$platform = new Platform($this->getTeamPlatformID());
+        return $platform->getPlatformName();
 	}
 	
 	public function getPlayerID() {

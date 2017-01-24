@@ -1,10 +1,7 @@
 <?php
 namespace teamsystem\system;
 use wcf\system\application\AbstractApplication;
-use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\menu\page\PageMenu;
-use wcf\system\request\LinkHandler;
-use wcf\system\WCF;
+use wcf\system\page\PageLocationManager;
 
 /**
  * Application core.
@@ -27,13 +24,7 @@ class TEAMSYSTEMCore extends AbstractApplication {
 		if (!$this->isActiveApplication()) {
 			return;
 		}
-		
-		PageMenu::getInstance()->setActiveMenuItem('teamsystem.header.menu.teams');
-		WCF::getBreadcrumbs()->add(new Breadcrumb(
-			WCF::getLanguage()->get('teamsystem.header.menu.teams'), 
-			LinkHandler::getInstance()->getLink('TeamList', array(
-				'application' => 'teamsystem'
-			))
-		));
+
+		PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
 	}
 }

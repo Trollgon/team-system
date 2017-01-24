@@ -2,38 +2,21 @@
 
 namespace teamsystem\page;
 
+use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\page\SortablePage;
 use teamsystem\data\invitations\InvitationList;
 
 /**
-
- * Shows members page.
-
- * 
-
- * @author	Marcel Werk
-
- * @copyright	2001-2015 WoltLab GmbH
-
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
-
- * @package	com.woltlab.wcf
-
- * @subpackage	page
-
- * @category	Community Framework
-
+ * Lists Invitations for a user.
+ *
+ * @author	Trollgon
+ * @copyright	Trollgon
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.trollgon.teamsystem
  */
 
 class InvitationListPage extends SortablePage {
-
-	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-
-	public $activeMenuItem = 'teamsystem.header.menu.teams';
-
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
@@ -50,6 +33,15 @@ class InvitationListPage extends SortablePage {
 	public $defaultSortField = 'teamID';
 	public $validSortFields = array('teamID');
 
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+    }
+
 	/**
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
@@ -58,6 +50,5 @@ class InvitationListPage extends SortablePage {
 		
 		$this->objectList->getConditionBuilder()->add("invitations.playerID = ?", array(WCF::getUser()->getUserID()));
 	}
-
 }
 

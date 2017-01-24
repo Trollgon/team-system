@@ -1,10 +1,12 @@
 <?php
 namespace teamsystem\form;
 
+use teamsystem\data\platform\Platform;
 use wcf\data\user\UserProfileList;
 use wcf\form\AbstractForm;
 use wcf\page\AbstractPage;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\page\PageLocationManager;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
@@ -74,111 +76,11 @@ class TeamEditForm extends AbstractForm {
         }
         $this->team = new Team($this->teamID);
         $this->platformID = $this->team->getPlatformID();
-        switch ($this->platformID) {
-            case 1:
-                $this->userOption = "uplayName";
-                break;
-            case 2:
-                $this->userOption = "psnID";
-                break;
-            case 3:
-                $this->userOption = "psnID";
-                break;
-            case 4:
-                $this->userOption = "xboxLiveID";
-                break;
-            case 5:
-                $this->userOption = "xboxLiveID";
-                break;
-        }
-
-        // checking if players set their gamertags
-
-        $leader = new User($this->team->leaderID);
-        if ($leader->getUserOption($this->userOption) == NULL && $this->team->leaderID == WCF::getUser()->getUserID()) {
-            $this->missingContactInfo = true;
-            $this->playerMissingContactInfo = true;
-        }
-
-        if ($this->team->player2ID != NULL) {
-            $player2 = new User($this->team->player2ID);
-            if ($player2->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->player3ID != NULL) {
-            $player3 = new User($this->team->player3ID);
-            if ($player3->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->player4ID != NULL) {
-            $player4 = new User($this->team->player4ID);
-            if ($player4->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->player4ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub1ID != NULL) {
-            $sub1 = new User($this->team->sub1ID);
-            if ($sub1->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub1ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub2ID != NULL) {
-            $sub2 = new User($this->team->sub2ID);
-            if ($sub2->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
-
-        if ($this->team->sub3ID != NULL) {
-            $sub3 = new User($this->team->sub3ID);
-            if ($sub3->getUserOption($this->userOption) == NULL) {
-                $this->missingContactInfo = true;
-            }
-            elseif ($this->team->sub3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
-            }
-        }
+        $platform = new Platform($this->platformID);
+        $this->userOption = $platform->getPlatformUserOption();
 
         $this->playerList = new UserProfileList();
-        switch ($this->platformID) {
-            case 1:
-                $this->playerList->getConditionBuilder()->add("teamsystemPcTeamID = ?", array($this->teamID));
-                break;
-            case 2:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs4TeamID = ?", array($this->teamID));
-                break;
-            case 3:
-                $this->playerList->getConditionBuilder()->add("teamsystemPs3TeamID = ?", array($this->teamID));
-                break;
-            case 4:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb1TeamID = ?", array($this->teamID));
-                break;
-            case 5:
-                $this->playerList->getConditionBuilder()->add("teamsystemXb360TeamID = ?", array($this->teamID));
-                break;
-        }
-
+        $this->playerList->setObjectIDs($this->team->getPlayerIDs());
         $this->playerList->readObjects();
 
         if($this->team->teamID == null || $this->team->teamID == 0) {
@@ -189,14 +91,11 @@ class TeamEditForm extends AbstractForm {
     /**
      * @see \wcf\page\AbstractPage::readData()
      */
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
 
-        WCF::getBreadcrumbs()->add(new Breadcrumb($this->team->teamName, LinkHandler::getInstance()->getLink('Team', array(
-            'application' 	=> 'teamsystem',
-            'id'            => $this->teamID
-        ))));
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
     }
 	
 	/**
@@ -213,7 +112,7 @@ class TeamEditForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see	wcf\form\IForm::validate()
+	 * @see	wcf\form\AbstractForm::validate()
 	*/
 	public function validate() {
 		parent::validate();
@@ -278,7 +177,6 @@ class TeamEditForm extends AbstractForm {
 			'user'			=> $this->team->getContactProfile(),
 			'playerList'	=> $this->playerList,
 			'userOption'	=> $this->userOption,
-			'teamIsFull'	=> (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2))
 		));
 	}
 

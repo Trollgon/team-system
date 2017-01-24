@@ -1,53 +1,60 @@
-<fieldset>
+{if ($templateName != 'team')}
+    <section class="box">
+        <h2 class="boxTitle">{lang}teamsystem.team.page.team{/lang}</h2>
+        <div class="boxContent">
+            <div class="box96">
+                <a href="{link controller='Team' application='teamsystem' object=$team}{/link}"
+                   data-user-id="{@$team->teamID}">{@$team->getAvatar()->getImageTag(96)}</a>
+                <div>
+                    <div class="containerHeadline">
+                        <h3><a href="{link controller='Team' application='teamsystem' object=$team}{/link}">{$team->teamName}</a></h3>
+                    </div>
 
-	<legend class="invisible">{lang}teamsystem.team.avatar{/lang}</legend>
-
-	
-
-	<div class="userAvatar">
-
-        {if $user->userID == $__wcf->user->userID}
-
-            <a href="{link application='teamsystem' controller='TeamAvatarEdit' teamID=$teamID}{/link}" class="framed jsTooltip" title="{lang}wcf.user.avatar.edit{/lang}">{@$team->getAvatar()->getImageTag()}</a>
-
-        {else}
-
-            <span class="framed">{@$team->getAvatar()->getImageTag()}</span>
-
-        {/if}
-
-	</div>
-
-</fieldset>
-
-<div>
-    <fieldset>
-        <legend>{lang}teamsystem.team.page.contact{/lang}</legend>
-        </br>
-        <div class="box96 framed">
-            <a href="{link controller='User' object=$contact}{/link}"
-                           data-user-id="{@$contact->userID}">{@$contact->getAvatar()->getImageTag(96)}</a>
-            <div>
-                <div class="containerHeadline">
-                    <h3><a href="{link controller='User' object=$contact}{/link}" class="userLink"
-                           data-user-id="{@$contact->userID}">{@$contact->getFormattedUsername()}</a></h3>
-                    {if MODULE_USER_RANK && $contact->getUserTitle()}<p
-                            class="badge userTitleBadge{if $contact->getRank() && $contact->getRank()->cssClassName} {@$contact->getRank()->cssClassName}{/if}">{$contact->getUserTitle()}{/if}</p>
+                    <dl class="plain dataList containerContent small">
+                        {event name='statistics'}
+                        <p>{lang}teamsystem.team.page.registrationDate{/lang}</p>
+                        <p>{lang}teamsystem.team.teamList.platform{/lang}</p>
+                    </dl>
                 </div>
-                {include file='userInformationStatistics'}
             </div>
         </div>
-    </fieldset>
-</div>
+    </section>
+{/if}
+
+{* TODO: add leader box and check if leader == contact for contact box *}
+
+<section class="box">
+    <h2 class="boxTitle">{lang}teamsystem.team.page.contact{/lang}</h2>
+    <div class="boxContent">
+        <div class="box96">
+            <a href="{link controller='User' object=$contact}{/link}"
+               data-user-id="{@$contact->userID}">{@$contact->getAvatar()->getImageTag(96)}</a>
+            <div>
+                <div class="containerHeadline">
+                    <h3><a href="{link controller='User' object=$contact}{/link}">{$contact->username}</a></h3>
+                    {if MODULE_USER_RANK}
+                        {if $contact->getUserTitle()}
+                            <p><span class="badge userTitleBadge{if $contact->getRank() && $contact->getRank()->cssClassName} {@$contact->getRank()->cssClassName}{/if}">{$contact->getUserTitle()}</span></p>
+                        {/if}
+                        {if $contact->getRank() && $contact->getRank()->rankImage}
+                            <p><span class="userRankImage">{@$contact->getRank()->getImage()}</span></p>
+                        {/if}
+                    {/if}
+                </div>
+
+                <dl class="plain dataList containerContent small">
+                    {include file='userInformationStatistics' user=$contact}
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
 
 {if ($team->teamDescription != NULL)}
-<div class="dashboardBox">
-	<fieldset>
-        <legend>{lang}teamsystem.team.page.description{/lang}</legend>
-        </br>
-        <div>
-        	<center>{@$team->teamDescription}</center>
+    <section class="box">
+        <h2 class="boxTitle">{lang}teamsystem.team.page.description{/lang}</h2>
+        <div class="boxContent">
+            <center>{@$team->teamDescription}</center>
         </div>
-    </fieldset>
-</div>
+    </section>
 {/if}

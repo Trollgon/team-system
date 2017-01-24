@@ -2,6 +2,9 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userGroupOption.xsd">
 	<import>
 		<categories>
+			<category name="admin.teamSystem">
+				<parent>admin</parent>
+			</category>
 			<category name="mod.teamSystem">
 				<parent>mod</parent>
 			</category>
@@ -41,6 +44,14 @@
 				<defaultvalue>0</defaultvalue>
 			</option>
 			<!-- /mod.teamSystem -->
+
+			<!-- admin.teamSystem -->
+			<option name="admin.teamSystem.canEditPlatforms">
+				<categoryname>admin.teamSystem</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<!-- /admin.teamSystem -->
 		</options>
 	</import>
 </data>
