@@ -4,8 +4,8 @@
 		<packagename>Team system</packagename>
 		<packagedescription>Team system for WoltLab Community Framework™</packagedescription>
 		<isapplication>1</isapplication>
-		<version>1.0.0 Beta 3</version>
-		<date>2016-12-19</date>
+		<version>1.0.0</version>
+		<date>2017-01-24</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -27,20 +27,6 @@
 		<instruction type="acpTemplate"/>
 		<instruction type="acpMenu"/>
 		<instruction type="sql"/>
-		<instruction type="language"/>
-		<instruction type="userGroupOption"/>
-		<instruction type="userOption"/>
-		<instruction type="option"/>
-		<instruction type="templateListener"/>
-		<instruction type="page"/>
-		<instruction type="menuItem"/>
-	</instructions>
-
-	<instructions type="update" fromversion="*">
-		<instruction type="file"/>
-		<instruction type="template"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="acpMenu"/>
 		<instruction type="language"/>
 		<instruction type="userGroupOption"/>
 		<instruction type="userOption"/>
