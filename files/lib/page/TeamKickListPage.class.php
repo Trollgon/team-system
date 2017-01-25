@@ -1,17 +1,14 @@
 <?php
-namespace teamsystem\page;
+namespace tourneysystem\page;
 
-use teamsystem\data\platform\Platform;
+use tourneysystem\data\platform\Platform;
 use wcf\data\user\UserProfileList;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\page\AbstractPage;
-use wcf\data\user\User;
-use teamsystem\data\team\Team;
+use tourneysystem\data\team\Team;
 
 /**
  * Shows the page of a team.
@@ -19,9 +16,8 @@ use teamsystem\data\team\Team;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
-
 class TeamKickListPage extends AbstractPage {
 	
 	public $teamID = 0;
@@ -33,11 +29,6 @@ class TeamKickListPage extends AbstractPage {
 	public $subObjects = null;
 	public $playerList = null;
 	public $userOption = '';
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'teamsystem.header.menu.teams';
 	
 	/**
 	 * @see \wcf\page\AbstractPage::readParameters()
@@ -69,25 +60,25 @@ class TeamKickListPage extends AbstractPage {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
     }
 
 	/**
 	 * @see \wcf\page\AbstractPage::show()
 	 */
 	public function show() {
-		if(!WCF::getSession()->getPermission("user.teamSystem.canCreateTeam")) {
+		if(!WCF::getSession()->getPermission("user.tourneySystem.canCreateTeam")) {
 			throw new PermissionDeniedException();
 		}
 		if ($this->team->countMembers() < 2) {
             throw new PermissionDeniedException();
         }
 		if (!$this->team->isTeamLeader()) {
-				WCF::getSession()->checkPermissions(array("mod.teamSystem.canEditTeams"));
+				WCF::getSession()->checkPermissions(array("mod.tourneySystem.canEditTeams"));
 			}
 		else {
-			if (TEAMSYSTEM_LOCK_TEAMEDIT == true) {
+			if (TOURNEYSYSTEM_LOCK_TEAMEDIT == true) {
 				throw new PermissionDeniedException();
 			}
 		}

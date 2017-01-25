@@ -1,60 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/templatelistener.xsd">
 	<import>
-		<templatelistener name="headerLogo">
-			<environment>user</environment>
-			<templatename>header</templatename>
-			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[{if $__teamsystem->isActiveApplication()}{if !$__wcf->getStyleHandler()->getStyle()->getPageLogo()}<img src="{$__wcf->getPath('teamsystem')}images/logo.png" alt="" />{/if}{/if}]]></templatecode>
-		</templatelistener>
-		
-		<templatelistener name="headerLogo">
-			<environment>admin</environment>
-			<templatename>header</templatename>
-			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[{if $__teamsystem->isActiveApplication()}<img src="{$__wcf->getPath('teamsystem')}images/logo.png" alt="" />{/if}]]></templatecode>
-		</templatelistener>
-		
 		<templatelistener name="softwareVersions">
 			<environment>admin</environment>
 			<templatename>index</templatename>
 			<eventname>softwareVersions</eventname>
 			<templatecode><![CDATA[<dl>
-	<dt>{lang}teamsystem.acp.index.system.software.appVersion{/lang}</dt>
-	<dd>{$__teamsystem->getPackage()->packageVersion}</dd>
+	<dt>{lang}tourneysystem.acp.index.system.software.appVersion{/lang}</dt>
+	<dd>{$__tourneysystem->getPackage()->packageVersion}</dd>
 </dl>]]></templatecode>
 		</templatelistener>
 		
-		<templatelistener name="deWbbEliteNewsCopyright">
+		<templatelistener name="deTrollgonTourneysystemCopyright">
 			<environment>user</environment>
 			<templatename>footer</templatename>
 			<eventname>copyright</eventname>
-			<templatecode><![CDATA[{include file='__copyright' application='teamsystem'}]]></templatecode>
+			<templatecode><![CDATA[{include file='__copyright' application='tourneysystem'}]]></templatecode>
 		</templatelistener>
 		
-		<templatelistener name="teamsystemJavascriptInclude">
+		<templatelistener name="tourneysystemJavascriptInclude">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script data-relocate="true" src="{@$__wcf->getPath('teamsystem')}js/TEAMSYSTEM.js?v={@LAST_UPDATE_TIME}"></script>]]></templatecode>
-		</templatelistener>
-		
-		<templatelistener name="teamsystemJavascriptInit">
-			<environment>user</environment>
-			<templatename>headInclude</templatename>
-			<eventname>javascriptInit</eventname>
-			<templatecode><![CDATA[{if $templateName == 'teamAvatarEdit'}
-			
-			{if $team->getAvatar()->canCrop()}
-
-				new TEAMSYSTEM.Avatar.Upload({@$team->teamID}, new TEAMSYSTEM.Avatar.Crop({@$team->getAvatar()->avatarID}));
-
-			{else}
-
-				new TEAMSYSTEM.Avatar.Upload({@$team->teamID});
-
-			{/if}
-			{/if}]]></templatecode>
+			<templatecode><![CDATA[<script data-relocate="true" src="{@$__wcf->getPath('tourneysystem')}js/TOURNEYSYSTEM.js?v={@LAST_UPDATE_TIME}"></script>]]></templatecode>
 		</templatelistener>
 	</import>
 </data>

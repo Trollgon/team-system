@@ -1,19 +1,19 @@
 {if ($templateName != 'team')}
     <section class="box">
-        <h2 class="boxTitle">{lang}teamsystem.team.page.team{/lang}</h2>
+        <h2 class="boxTitle">{lang}tourneysystem.team.page.team{/lang}</h2>
         <div class="boxContent">
             <div class="box96">
-                <a href="{link controller='Team' application='teamsystem' object=$team}{/link}"
+                <a href="{link controller='Team' application='tourneysystem' object=$team}{/link}"
                    data-user-id="{@$team->teamID}">{@$team->getAvatar()->getImageTag(96)}</a>
                 <div>
                     <div class="containerHeadline">
-                        <h3><a href="{link controller='Team' application='teamsystem' object=$team}{/link}">{$team->teamName}</a></h3>
+                        <h3><a href="{link controller='Team' application='tourneysystem' object=$team}{/link}">{$team->teamName}</a></h3>
                     </div>
 
                     <dl class="plain dataList containerContent small">
                         {event name='statistics'}
-                        <p>{lang}teamsystem.team.page.registrationDate{/lang}</p>
-                        <p>{lang}teamsystem.team.teamList.platform{/lang}</p>
+                        <p>{lang}tourneysystem.team.page.registrationDate{/lang}</p>
+                        <p>{lang}tourneysystem.team.teamList.platform{/lang}</p>
                     </dl>
                 </div>
             </div>
@@ -21,10 +21,8 @@
     </section>
 {/if}
 
-{* TODO: add leader box and check if leader == contact for contact box *}
-
 <section class="box">
-    <h2 class="boxTitle">{lang}teamsystem.team.page.contact{/lang}</h2>
+    <h2 class="boxTitle">{lang}tourneysystem.team.page.contact{/lang}</h2>
     <div class="boxContent">
         <div class="box96">
             <a href="{link controller='User' object=$contact}{/link}"
@@ -52,7 +50,7 @@
 
 {if ($team->teamDescription != NULL)}
     <section class="box">
-        <h2 class="boxTitle">{lang}teamsystem.team.page.description{/lang}</h2>
+        <h2 class="boxTitle">{lang}tourneysystem.team.page.description{/lang}</h2>
         <div class="boxContent">
             <center>{@$team->teamDescription}</center>
         </div>

@@ -1,15 +1,15 @@
 <?php
 
-namespace teamsystem\data\invitations;
+namespace tourneysystem\data\invitations;
 
-use teamsystem\data\platform\Platform;
+use tourneysystem\data\platform\Platform;
+use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use wcf\data\DatabaseObject;
 use wcf\system\WCF;
 use wcf\system\request\IRouteController;
-use teamsystem\data\team\Team;
-use teamsystem\data\TEAMSYSTEMDatabaseObject;
+use tourneysystem\data\team\Team;
 
-class Invitation extends TEAMSYSTEMDatabaseObject implements IRouteController {
+class Invitation extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName

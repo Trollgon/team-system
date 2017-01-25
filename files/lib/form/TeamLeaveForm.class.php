@@ -1,21 +1,17 @@
 <?php
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
-use teamsystem\data\platform\Platform;
+use tourneysystem\data\platform\Platform;
 use wcf\data\user\UserProfileList;
 use wcf\form\AbstractForm;
-use wcf\page\AbstractPage;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\system\request\LinkHandler;
-use wcf\data\user\UserAction;
-use teamsystem\data\team\Team;
-use teamsystem\data\team\TeamAction;
-use wcf\data\user\User;
+use tourneysystem\data\team\Team;
+use tourneysystem\data\team\TeamAction;
 
 /**
  * Shows the Form to leave a team.
@@ -23,7 +19,7 @@ use wcf\data\user\User;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
 class TeamLeaveForm extends AbstractForm {
 	
@@ -36,16 +32,6 @@ class TeamLeaveForm extends AbstractForm {
 	public $positionID = 0;
 	public $playerList = null;
 	public $userOption = '';
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'teamsystem.header.menu.teams';
-	
-	/**
-	 * @see \wcf\page\AbstractPage::$loginRequired
-	 */
-	public	$loginRequired = true;
 	
 	/**
 	 * @see \wcf\page\AbstractPage::readParameters()
@@ -79,8 +65,8 @@ class TeamLeaveForm extends AbstractForm {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
     }
 
 	/**
@@ -88,10 +74,10 @@ class TeamLeaveForm extends AbstractForm {
 	 */
 	public function show() {
 		if (!$this->team->isTeamMember()) {
-				WCF::getSession()->checkPermissions(array("mod.teamSystem.canEditTeams"));
+				WCF::getSession()->checkPermissions(array("mod.tourneySystem.canEditTeams"));
 			}
 		else {
-			if (TEAMSYSTEM_LOCK_TEAMEDIT == true) {
+			if (TOUNEYSYSTEM_LOCK_TEAMEDIT == true) {
 				throw new PermissionDeniedException();
 			}
 		}
@@ -160,14 +146,14 @@ class TeamLeaveForm extends AbstractForm {
         $action = new TeamAction(array($this->teamID), 'update', $data);
         $action->executeAction();
 
-        $sql = "DELETE FROM teamsystem1_user_to_team_to_position_to_platform 
+        $sql = "DELETE FROM tourneysystem1_user_to_team_to_position_to_platform 
                   WHERE userID = ? AND teamID = ?";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array(WCF::getUser()->getUserID(), $this->teamID));
 
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('TeamList', array(
-				'application' 	=> 'teamsystem',
-		)),WCF::getLanguage()->get('teamsystem.team.leave.successfulRedirect'), 10);
+				'application' 	=> 'tourneysystem',
+		)),WCF::getLanguage()->get('tourneysystem.team.leave.successfulRedirect'), 10);
 		exit;
     }
 	

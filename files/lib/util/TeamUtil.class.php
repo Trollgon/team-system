@@ -1,18 +1,13 @@
 <?php
-namespace teamsystem\util;
+namespace tourneysystem\util;
 use wcf\system\WCF;
 
 /**
- * Contains user-related functions.
- * 
- * @author	Marcel Werk
- * @copyright	2001-2015 WoltLab GmbH
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf
- * @subpackage	util
- * @category	Community Framework
+ * Class TeamUtil
+ * @package tourneysystem\util
  */
 final class TeamUtil {
+
 	/**
 	 * Returns true if the given name is a valid username.
 	 * 
@@ -46,7 +41,7 @@ final class TeamUtil {
 	public static function isAvailableTeamname($name) {
 		
 		$sql =		"SELECT	COUNT(teamname) AS count
-						FROM	teamsystem1_teams
+						FROM	tourneysystem1_team
 						WHERE	teamname = ?";
 		
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -93,7 +88,7 @@ final class TeamUtil {
 	public static function isAvailableTeamtag($tag) {
 		
 		$sql =		"SELECT	COUNT(teamtag) AS count
-						FROM	teamsystem1_teams
+						FROM	tourneysystem1_team
 						WHERE	teamtag = ?";
 		
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -115,7 +110,7 @@ final class TeamUtil {
 	 
 	public static function isFreePlatformPlayer($platformID, $userID) {
         $sql =      "SELECT COUNT(teamID) AS count 
-                        FROM teamsystem1_user_to_team_to_position_to_platform 
+                        FROM tourneysystem1_user_to_team_to_position_to_platform 
                         WHERE userID = ? AND platformID = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -134,7 +129,7 @@ final class TeamUtil {
      */
 	public function getTeamIDByName($name) {
         $sql =		"SELECT	teamID 
-						FROM	teamsystem1_teams
+						FROM	tourneysystem1_team
 						WHERE	teamname = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -154,7 +149,7 @@ final class TeamUtil {
 	public static function getPlayersTeamID($platformID, $userID) {
 		
 		$sql = "SELECT	teamID
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(platformID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 
 	
@@ -171,7 +166,7 @@ final class TeamUtil {
     public function getDummyTeamName() {
 
         $sql =		"SELECT	COUNT(teamname) AS count
-						FROM	teamsystem1_teams
+						FROM	tourneysystem1_team
 						WHERE	teamname LIKE 'DUMMY%'";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -188,7 +183,7 @@ final class TeamUtil {
     public function getDummyTeamTag() {
 
         $sql =		"SELECT	COUNT(teamname) AS count
-						FROM	teamsystem1_teams
+						FROM	tourneysystem1_team
 						WHERE	teamname LIKE 'DUMMY%'";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -204,7 +199,7 @@ final class TeamUtil {
      */
     public function getDummyTeamID() {
         $sql =		"SELECT	COUNT(teamname) AS count
-						FROM	teamsystem1_teams
+						FROM	tourneysystem1_team
 						WHERE	teamname LIKE 'DUMMY%'";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -222,7 +217,7 @@ final class TeamUtil {
     public static function getAllPlatforms() {
         $sql = /** @lang MySQL */
             "SELECT platformID
-                  FROM teamsystem1_platforms";
+                  FROM tourneysystem1_platform";
 
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array());
@@ -243,7 +238,7 @@ final class TeamUtil {
      */
     public static function isNotInTeam($teamID, $userID) {
         $sql = "SELECT	*
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND ((leaderID = ?) OR (player2ID = ?) OR (player3ID = ?) OR (player4ID = ?) OR (sub1ID = ?) OR (sub2ID = ?) OR (sub3ID = ?))";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -261,13 +256,30 @@ final class TeamUtil {
     public static function countTeams() {
 
         $sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams";
+				FROM	tourneysystem1_team";
 
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array());
         $row = $statement->fetchArray();
 
         return $row['count'];
+
+    }
+
+    /**
+     * @param $teamID
+     * @return bool
+     */
+    public static function hasMissingSub($teamID) {
+        $sql = "SELECT	COUNT(teamID) AS count
+				FROM	tourneysystem1_team
+				WHERE	(teamID = ?) AND ((sub1ID IS NULL) OR (sub2ID IS NULL) OR (sub3ID IS NULL))";
+
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($teamID));
+        $row = $statement->fetchArray();
+
+        return $row['count'] == 3;
 
     }
 }

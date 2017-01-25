@@ -5,13 +5,12 @@
  * Time: 11:39
  */
 
-namespace teamsystem\data\platform;
+namespace tourneysystem\data\platform;
 
-
-use teamsystem\data\TEAMSYSTEMDatabaseObject;
+use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use wcf\data\user\option\UserOption;
 
-class Platform extends TEAMSYSTEMDatabaseObject {
+class Platform extends TOURNEYSYSTEMDatabaseObject  {
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableName
      */

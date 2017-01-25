@@ -38,7 +38,7 @@
 
             {include file='userInformationButtons'}
 
-            {include file='playerInformationStatistics' application='teamsystem'}
+            {include file='playerInformationStatistics' application='tourneysystem'}
         </div>
     </div>
 </li>

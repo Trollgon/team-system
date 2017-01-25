@@ -2,56 +2,56 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userGroupOption.xsd">
 	<import>
 		<categories>
-			<category name="admin.teamSystem">
+			<category name="admin.tourneySystem">
 				<parent>admin</parent>
 			</category>
-			<category name="mod.teamSystem">
+			<category name="mod.tourneySystem">
 				<parent>mod</parent>
 			</category>
-			<category name="user.teamSystem">
+			<category name="user.tourneySystem">
 				<parent>user</parent>
 			</category>
 		</categories>
 		
 		<options>
-			<!-- user.teamSystem -->
-			<option name="user.teamSystem.canViewLists">
-				<categoryname>user.teamSystem</categoryname>
+			<!-- user.tourneySystem -->
+			<option name="user.tourneySystem.canViewLists">
+				<categoryname>user.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="user.teamSystem.canViewTeamPages">
-				<categoryname>user.teamSystem</categoryname>
+			<option name="user.tourneySystem.canViewTeamPages">
+				<categoryname>user.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="user.teamSystem.canCreateTeam">
-				<categoryname>user.teamSystem</categoryname>
+			<option name="user.tourneySystem.canCreateTeam">
+				<categoryname>user.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<!-- /user.teamSystem -->
+			<!-- /user.tourneySystem -->
 			
-			<!-- mod.teamSystem -->
-			<option name="mod.teamSystem.canEditTeams">
-				<categoryname>mod.teamSystem</categoryname>
+			<!-- mod.tourneySystem -->
+			<option name="mod.tourneySystem.canEditTeams">
+				<categoryname>mod.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<option name="mod.teamSystem.canCreateDummyTeams">
-				<categoryname>mod.teamSystem</categoryname>
+			<option name="mod.tourneySystem.canCreateDummyTeams">
+				<categoryname>mod.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<!-- /mod.teamSystem -->
+			<!-- /mod.tourneySystem -->
 
-			<!-- admin.teamSystem -->
-			<option name="admin.teamSystem.canEditPlatforms">
-				<categoryname>admin.teamSystem</categoryname>
+			<!-- admin.tourneySystem -->
+			<option name="admin.tourneySystem.canEditPlatforms">
+				<categoryname>admin.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<!-- /admin.teamSystem -->
+			<!-- /admin.tourneySystem -->
 		</options>
 	</import>
 </data>

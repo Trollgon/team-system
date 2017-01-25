@@ -1,11 +1,10 @@
 <?php
 
-namespace teamsystem\page;
+namespace tourneysystem\page;
 
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\page\SortablePage;
-use teamsystem\data\invitations\InvitationList;
 
 /**
  * Lists Invitations for a user.
@@ -13,7 +12,7 @@ use teamsystem\data\invitations\InvitationList;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
 
 class InvitationListPage extends SortablePage {
@@ -22,7 +21,7 @@ class InvitationListPage extends SortablePage {
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 
-	public $objectListClassName = 'teamsystem\data\invitations\InvitationList';
+	public $objectListClassName = 'tourneysystem\data\invitations\InvitationList';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage
@@ -39,7 +38,7 @@ class InvitationListPage extends SortablePage {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
     }
 
 	/**

@@ -1,7 +1,7 @@
 <?php
-namespace teamsystem\data\team\avatar;
-use teamsystem\data\team\Team;
-use teamsystem\data\team\TeamEditor;
+namespace tourneysystem\data\team\avatar;
+use tourneysystem\data\team\Team;
+use tourneysystem\data\team\TeamEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\SystemException;
@@ -15,7 +15,7 @@ use wcf\util\HTTPRequest;
 
 /**
  * Class TeamAvatarAction
- * @package wcf\data\team\avatar
+ * @package tourneysystem\data\team\avatar
  */
 class TeamAvatarAction extends AbstractDatabaseObjectAction {
     /**

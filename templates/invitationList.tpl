@@ -6,12 +6,12 @@
 	<div class="section sectionContainerList">
 		<ol class="containerList userList">
 			{foreach from=$objects item=invitation}
-  			   	{include file='invitationItem' application='teamsystem'}
+  			   	{include file='invitationItem' application='tourneysystem'}
 			{/foreach}
 		</ol>
 	</div>
 {else}
-    <p class="info">{lang}teamsystem.team.invitation.noInvitations{/lang}</p>
+    <p class="info">{lang}tourneysystem.team.invitation.noInvitations{/lang}</p>
 {/if}
 
 <div class="contentNavigation">

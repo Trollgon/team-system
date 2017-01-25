@@ -3,7 +3,7 @@
 {capture assign='contentHeader'}
 	<header class="contentHeader articleContentHeader">
 		<div class="contentHeaderTitle">
-			<h1 class="contentTitle" itemprop="name headline">{lang}teamsystem.team.invitation.form.title{/lang}</h1>
+			<h1 class="contentTitle" itemprop="name headline">{lang}tourneysystem.team.invitation.form.title{/lang}</h1>
 		</div>
 
 		{hascontent}
@@ -11,10 +11,10 @@
 				<ul>
 					{content}
 					{if $team->isTeamLeader()}
-						<li><a href="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}"
-							   title="{lang}teamsystem.team.page.edit{/lang}" class="button"><span
+						<li><a href="{link application='tourneysystem' controller='TeamEdit' teamID=$teamID}{/link}"
+							   title="{lang}tourneysystem.team.page.edit{/lang}" class="button"><span
 										class="icon icon16 fa-pencil"></span>
-								<span>{lang}teamsystem.team.page.edit{/lang}</span></a></li>
+								<span>{lang}tourneysystem.team.page.edit{/lang}</span></a></li>
 					{/if}
 					{event name='contentHeaderNavigation'}
 					{/content}
@@ -26,47 +26,47 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='teamSidebar'  application='teamsystem' assign='sidebar'}
+{include file='teamSidebar'  application='tourneysystem' assign='sidebar'}
 
 {include file='header' sidebarOrientation='right'}
 
 {include file='formError'}
 
-<form method="post" action="{link application='teamsystem' controller='TeamInvitation' teamID=$teamID}{/link}">
+<form method="post" action="{link application='tourneysystem' controller='TeamInvitation' teamID=$teamID}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}teamsystem.team.invitation.form{/lang}</legend>
+			<legend>{lang}tourneysystem.team.invitation.form{/lang}</legend>
 			
 			<dl{if $errorField == 'positionID'} class="formError"{/if}>
-				<dt><label for="positionID">{lang}teamsystem.team.invitation.position{/lang}</label></dt>
+				<dt><label for="positionID">{lang}tourneysystem.team.invitation.position{/lang}</label></dt>
 				<dd>
 					<select id="positionID" name="positionID">
-						<option value="" selected>{lang}teamsystem.team.invitation.position.choose{/lang}</option>
-						<option value="1" {if $positionID==1}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.player{/lang}</option>
-						<option value="2" {if $positionID==2}selected="selected"{/if}>{lang}teamsystem.team.invitation.position.sub{/lang}</option>
+						<option value="" selected>{lang}tourneysystem.team.invitation.position.choose{/lang}</option>
+						<option value="1" {if $positionID==1}selected="selected"{/if}>{lang}tourneysystem.team.invitation.position.player{/lang}</option>
+						<option value="2" {if $positionID==2}selected="selected"{/if}>{lang}tourneysystem.team.invitation.position.sub{/lang}</option>
 					</select>
 					{if $errorField == 'positionID'}
 							<small class="innerError">
 								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-								{if $errorType == 'notUnique'}{lang}teamsystem.team.invitation.position.error.notUnique{/lang}{/if}
+								{if $errorType == 'notUnique'}{lang}tourneysystem.team.invitation.position.error.notUnique{/lang}{/if}
 							</small>
 					{/if}
-					<small>{lang}teamsystem.team.invitation.position.description{/lang}</small>
+					<small>{lang}tourneysystem.team.invitation.position.description{/lang}</small>
 				</dd>
 			</dl>
 				
 			<dl{if $errorField == 'playername'} class="formError"{/if}>
-				<dt><label for="playername">{lang}teamsystem.team.invitation.playername{/lang}</label></dt>
+				<dt><label for="playername">{lang}tourneysystem.team.invitation.playername{/lang}</label></dt>
 				<dd>
 					<input type="text" id="playername" name="playername" value="{$playername}" class="medium" />
 					{if $errorField == playername}
 						<small class="innerError">
 							{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
-							{if $errorType == 'notValid'}{lang}teamsystem.team.invitation.playername.error.notValid{/lang}{/if}
-							{if $errorType == 'notUnique'}{lang}teamsystem.team.invitation.playername.error.notUnique{/lang}{/if}
+							{if $errorType == 'notValid'}{lang}tourneysystem.team.invitation.playername.error.notValid{/lang}{/if}
+							{if $errorType == 'notUnique'}{lang}tourneysystem.team.invitation.playername.error.notUnique{/lang}{/if}
 						</small>
 					{/if}
-					<small>{lang}teamsystem.team.invitation.playername.description{/lang}</small>
+					<small>{lang}tourneysystem.team.invitation.playername.description{/lang}</small>
 				</dd>
 			</dl>	
 				

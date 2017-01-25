@@ -5,12 +5,12 @@
  * Time: 14:16
  */
 
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
-use teamsystem\data\platform\Platform;
-use teamsystem\data\team\avatar\TeamAvatarAction;
-use teamsystem\data\team\Team;
-use teamsystem\data\team\TeamAction;
+use tourneysystem\data\platform\Platform;
+use tourneysystem\data\team\avatar\TeamAvatarAction;
+use tourneysystem\data\team\Team;
+use tourneysystem\data\team\TeamAction;
 use wcf\data\user\UserProfileList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -72,7 +72,7 @@ class TeamAvatarEditForm extends AbstractForm {
     public function show() {
         parent::show();
         if(!$this->team->isTeamLeader()) {
-            if (!WCF::getSession()->getPermission("mod.teamSystem.canEditTeams")) {
+            if (!WCF::getSession()->getPermission("mod.tourneySystem.canEditTeams")) {
                 throw new PermissionDeniedException();
             }
         }
@@ -140,8 +140,8 @@ class TeamAvatarEditForm extends AbstractForm {
      */
     public function readData() {
         parent::readData();
-        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
 
         if (empty($_POST)) {
             if ($this->team->avatarID) $this->avatarType = 'custom';

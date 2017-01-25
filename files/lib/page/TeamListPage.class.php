@@ -1,12 +1,11 @@
 <?php
 
-namespace teamsystem\page;
+namespace tourneysystem\page;
 
-use teamsystem\data\invitations\InvitationList;
-use teamsystem\data\team\TeamList;
-use wcf\system\page\PageLocationManager;
+use tourneysystem\data\invitations\InvitationList;
+use tourneysystem\data\team\TeamList;
 use wcf\system\WCF;
-use teamsystem\util\TeamUtil;
+use tourneysystem\util\TeamUtil;
 use wcf\page\SortablePage;
 
 /**
@@ -15,15 +14,14 @@ use wcf\page\SortablePage;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
-
 class TeamListPage extends SortablePage {
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'teamsystem\data\team\TeamList';
+	public $objectListClassName = 'tourneysystem\data\team\TeamList';
 	
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()
@@ -35,7 +33,7 @@ class TeamListPage extends SortablePage {
 
         $sql = /** @lang MySQL */
             "SELECT teamID
-                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  FROM tourneysystem1_user_to_team_to_position_to_platform
                   WHERE userID = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);

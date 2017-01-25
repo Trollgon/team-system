@@ -5,11 +5,11 @@
  * Time: 14:13
  */
 
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
 
-use teamsystem\data\team\TeamAction;
-use teamsystem\util\TeamUtil;
+use tourneysystem\data\team\TeamAction;
+use tourneysystem\util\TeamUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\LinkHandler;
@@ -20,20 +20,10 @@ class TeamCreateDummyForm extends AbstractForm {
     public $accept = false;
 
     /**
-     * @see	\wcf\page\AbstractPage::$activeMenuItem
-     */
-    public $activeMenuItem = 'teamsystem.header.menu.teams';
-
-    /**
-     * @see    \wcf\page\AbstractPage::$loginRequired
-     */
-    public $loginRequired = true;
-
-    /**
      * @see \wcf\page\AbstractPage::show()
      */
     public function show() {
-        if(!WCF::getSession()->getPermission("mod.teamSystem.canCreateDummyTeams")) {
+        if(!WCF::getSession()->getPermission("mod.tourneySystem.canCreateDummyTeams")) {
             throw new PermissionDeniedException();
         }
         parent::show();
@@ -70,9 +60,9 @@ class TeamCreateDummyForm extends AbstractForm {
         $action = new TeamAction(array(), 'create', $data);
         $action->executeAction();
         HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
-            'application' 	=> 'teamsystem',
+            'application' 	=> 'tourneysystem',
             'id'			=> TeamUtil::getTeamIDByName($name),
-        )),WCF::getLanguage()->get('teamsystem.team.create.successfulRedirect'), 10);
+        )),WCF::getLanguage()->get('tourneysystem.team.create.successfulRedirect'), 10);
         exit;
     }
 }

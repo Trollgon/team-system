@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
     <import>
-        <acpmenuitem name="wcf.acp.menu.link.teamsystem">
+        <acpmenuitem name="wcf.acp.menu.link.tourneysystem">
             <parent>wcf.acp.menu.link.application</parent>
         </acpmenuitem>
-        <acpmenuitem name="wcf.acp.menu.link.teamsystem.platform.list">
-            <controller>teamsystem\acp\page\PlatformListPage</controller>
-            <parent>wcf.acp.menu.link.teamsystem</parent>
-            <permissions>admin.teamSystem.canEditPlatforms</permissions>
+        <acpmenuitem name="wcf.acp.menu.link.tourneysystem.platform.list">
+            <controller>tourneysystem\acp\page\PlatformListPage</controller>
+            <parent>wcf.acp.menu.link.tourneysystem</parent>
+            <permissions>admin.tourneySystem.canEditPlatforms</permissions>
             <showorder>1</showorder>
         </acpmenuitem>
-        <acpmenuitem name="wcf.acp.menu.link.teamsystem.platform.add">
-            <controller>teamsystem\acp\form\PlatformAddForm</controller>
-            <parent>wcf.acp.menu.link.teamsystem.platform.list</parent>
-            <permissions>admin.teamSystem.canEditPlatforms</permissions>
+        <acpmenuitem name="wcf.acp.menu.link.tourneysystem.platform.add">
+            <controller>tourneysystem\acp\form\PlatformAddForm</controller>
+            <parent>wcf.acp.menu.link.tourneysystem.platform.list</parent>
+            <permissions>admin.tourneySystem.canEditPlatforms</permissions>
             <icon>fa-plus</icon>
         </acpmenuitem>
     </import>

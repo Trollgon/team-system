@@ -1,172 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
-	<category name="teamsystem.acp">
-		<item name="teamsystem.acp.index.system.software.appVersion"><![CDATA[Teamsystem Version]]></item>
-		<item name="teamsystem.acp.platform.error.notUnique"><![CDATA[Name is already in use.]]></item>
-		<item name="teamsystem.acp.platform.noContent"><![CDATA[No Content.]]></item>
-		<item name="teamsystem.acp.platform.save"><![CDATA[Platform has been saved.]]></item>
-		<item name="teamsystem.acp.platform.sure"><![CDATA[Do you really want to delete this platform?]]></item>
-		<item name="teamsystem.acp.platform.title"><![CDATA[Name]]></item>
-		<item name="teamsystem.acp.userOption.title"><![CDATA[Required contact field]]></item>
+	<category name="tourneysystem.acp">
+		<item name="tourneysystem.acp.index.system.software.appVersion"><![CDATA[Tourneysystem Version]]></item>
+		<item name="tourneysystem.acp.platform.error.notUnique"><![CDATA[Name is already in use.]]></item>
+		<item name="tourneysystem.acp.platform.noContent"><![CDATA[No Content.]]></item>
+		<item name="tourneysystem.acp.platform.save"><![CDATA[Platform has been saved.]]></item>
+		<item name="tourneysystem.acp.platform.sure"><![CDATA[Do you really want to delete this platform?]]></item>
+		<item name="tourneysystem.acp.platform.title"><![CDATA[Name]]></item>
+		<item name="tourneysystem.acp.userOption.title"><![CDATA[Required contact field]]></item>
 	</category>
 
-	<category name="teamsystem.copyright">
-		<item name="teamsystem.copyright.text"><![CDATA[<a href="https://www.ac-whispers.com/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>Software: <strong>Team System {@PACKAGE_VERSION}</strong>, developed by <strong>Trollgon</strong></a>]]></item>
+	<category name="tourneysystem.copyright">
+		<item name="tourneysystem.copyright.text"><![CDATA[<a href="https://www.ac-whispers.com/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>Software: <strong>Team System {@PACKAGE_VERSION}</strong>, developed by <strong>Trollgon</strong></a>]]></item>
 	</category>
 	
-	<category name="teamsystem.header">
-		<item name="teamsystem.header.createTeam"><![CDATA[Create new team]]></item>
-		<item name="teamsystem.header.editTeam"><![CDATA[Edit your team]]></item>
-		<item name="teamsystem.header.menu.teams"><![CDATA[Teams]]></item>
+	<category name="tourneysystem.header">
+		<item name="tourneysystem.header.createTeam"><![CDATA[Create new team]]></item>
+		<item name="tourneysystem.header.editTeam"><![CDATA[Edit your team]]></item>
+		<item name="tourneysystem.header.menu.teams"><![CDATA[Teams]]></item>
 	</category>
 	 
-	<category name="teamsystem.team">
-		<item name="teamsystem.team.position.player"><![CDATA[Player]]></item>
-		<item name="teamsystem.team.position.sub"><![CDATA[Substitute]]></item>
+	<category name="tourneysystem.team">
+		<item name="tourneysystem.team.position.player"><![CDATA[Player]]></item>
+		<item name="tourneysystem.team.position.sub"><![CDATA[Substitute]]></item>
 	</category>
 
-	<category name="teamsystem.team.avatar">
-		<item name="teamsystem.team.avatar.edit"><![CDATA[Teamavatar Management]]></item>
+	<category name="tourneysystem.team.avatar">
+		<item name="tourneysystem.team.avatar.edit"><![CDATA[Teamavatar Management]]></item>
 	</category>
 
-	<category name="teamsystem.team.create">
-		<item name="teamsystem.team.create"><![CDATA[Create new team]]></item>
-		<item name="teamsystem.team.create.dummy"><![CDATA[Create new dummy team]]></item>
-		<item name="teamsystem.team.create.name.error.notValid"><![CDATA[Teamname is invalid.]]></item>
-		<item name="teamsystem.team.create.name.error.notUnique"><![CDATA[Teamname is already in use.]]></item>
-		<item name="teamsystem.team.create.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
-		<item name="teamsystem.team.create.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
-		<item name="teamsystem.team.create.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
-		<item name="teamsystem.team.create.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/>It is now created.]]></item>
+	<category name="tourneysystem.team.create">
+		<item name="tourneysystem.team.create"><![CDATA[Create new team]]></item>
+		<item name="tourneysystem.team.create.dummy"><![CDATA[Create new dummy team]]></item>
+		<item name="tourneysystem.team.create.name.error.notValid"><![CDATA[Teamname is invalid.]]></item>
+		<item name="tourneysystem.team.create.name.error.notUnique"><![CDATA[Teamname is already in use.]]></item>
+		<item name="tourneysystem.team.create.tag.error.notValid"><![CDATA[Teamtag is invalid.]]></item>
+		<item name="tourneysystem.team.create.tag.error.notUnique"><![CDATA[Teamtag is already in use.]]></item>
+		<item name="tourneysystem.team.create.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
+		<item name="tourneysystem.team.create.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/>It is now created.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.edit">
-		<item name="teamsystem.team.edit.contact.description"><![CDATA[Select a contact person in case you are not online during a tournament.]]></item>
-		<item name="teamsystem.team.edit.description.description"><![CDATA[Describe your team in up to 400 characters.]]></item>
-		<item name="teamsystem.team.edit.general"><![CDATA[General]]></item>
-		<item name="teamsystem.team.edit.successfulRedirect"><![CDATA[Your team has been successfully edited.]]></item>
+	<category name="tourneysystem.team.edit">
+		<item name="tourneysystem.team.edit.contact.description"><![CDATA[Select a contact person in case you are not online during a tournament.]]></item>
+		<item name="tourneysystem.team.edit.description.description"><![CDATA[Describe your team in up to 400 characters.]]></item>
+		<item name="tourneysystem.team.edit.general"><![CDATA[General]]></item>
+		<item name="tourneysystem.team.edit.successfulRedirect"><![CDATA[Your team has been successfully edited.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.delete">
-		<item name="teamsystem.team.delete.header"><![CDATA[You are about to delete [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.delete.successfulRedirect"><![CDATA[Your team has been successfully deleted.]]></item>
-		<item name="teamsystem.team.delete.warning"><![CDATA[Heads up! This is a one time action and cannot be undone.]]></item>
+	<category name="tourneysystem.team.delete">
+		<item name="tourneysystem.team.delete.header"><![CDATA[You are about to delete [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.delete.successfulRedirect"><![CDATA[Your team has been successfully deleted.]]></item>
+		<item name="tourneysystem.team.delete.warning"><![CDATA[Heads up! This is a one time action and cannot be undone.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.leave">
-		<item name="teamsystem.team.leave.header"><![CDATA[You are about to leave [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.leave.successfulRedirect"><![CDATA[You have left your team successfully.]]></item>
-		<item name="teamsystem.team.leave.warning"><![CDATA[Heads up! It is impossible to join back by yourself. After leaving this team you need a new invitation by the team leader.]]></item>
+	<category name="tourneysystem.team.leave">
+		<item name="tourneysystem.team.leave.header"><![CDATA[You are about to leave [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.leave.successfulRedirect"><![CDATA[You have left your team successfully.]]></item>
+		<item name="tourneysystem.team.leave.warning"><![CDATA[Heads up! It is impossible to join back by yourself. After leaving this team you need a new invitation by the team leader.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.kick">
-		<item name="teamsystem.team.kick.header"><![CDATA[You are about to kick {@$playername} from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.kick.successfulRedirect"><![CDATA[Lineup change successfull.]]></item>
-		<item name="teamsystem.team.kick.warning"><![CDATA[Heads up! After kicking a player from your team you need to send him/her a new invitation and he/she needs to accept it again.]]></item>
+	<category name="tourneysystem.team.kick">
+		<item name="tourneysystem.team.kick.header"><![CDATA[You are about to kick {@$playername} from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.kick.successfulRedirect"><![CDATA[Lineup change successfull.]]></item>
+		<item name="tourneysystem.team.kick.warning"><![CDATA[Heads up! After kicking a player from your team you need to send him/her a new invitation and he/she needs to accept it again.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.invitationList">
-		<item name="teamsystem.team.invitationList.platform"><![CDATA[Plays on {$invitation->getPlatform()}]]></item>
+	<category name="tourneysystem.team.invitationList">
+		<item name="tourneysystem.team.invitationList.platform"><![CDATA[Plays on {$invitation->getPlatform()}]]></item>
 	</category>
 	
-	<category name="teamsystem.team.teamList">
-		<item name="teamsystem.team.teamList.leader"><![CDATA[Team leader:]]></item>
-		<item name="teamsystem.team.teamList.platform"><![CDATA[Platform: {$team->getPlatform()}]]></item>
+	<category name="tourneysystem.team.teamList">
+		<item name="tourneysystem.team.teamList.leader"><![CDATA[Team leader:]]></item>
+		<item name="tourneysystem.team.teamList.platform"><![CDATA[Platform: {$team->getPlatform()}]]></item>
 	</category>
 	
-	<category name="teamsystem.team.invitation">
-		<item name="teamsystem.team.invitation"><![CDATA[My invitations]]></item>
-		<item name="teamsystem.team.invitation.noInvitations"><![CDATA[There are no invitations for you.]]></item>
-		<item name="teamsystem.team.invitation.form"><![CDATA[Invitation]]></item>
-		<item name="teamsystem.team.invitation.form.title"><![CDATA[Invite players to [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.invitation.playername"><![CDATA[Player]]></item>
-		<item name="teamsystem.team.invitation.playername.description"><![CDATA[Name of the new player you want to invite.]]></item>
-		<item name="teamsystem.team.invitation.playername.error.notUnique"><![CDATA[This user is already in your team.]]></item>
-		<item name="teamsystem.team.invitation.playername.error.notValid"><![CDATA[This user does not exist.]]></item>
-		<item name="teamsystem.team.invitation.position"><![CDATA[Position]]></item>
-		<item name="teamsystem.team.invitation.position.choose"><![CDATA[]]></item>
-		<item name="teamsystem.team.invitation.position.description"><![CDATA[Pick the position this player will have.</br>
+	<category name="tourneysystem.team.invitation">
+		<item name="tourneysystem.team.invitation"><![CDATA[My invitations]]></item>
+		<item name="tourneysystem.team.invitation.noInvitations"><![CDATA[There are no invitations for you.]]></item>
+		<item name="tourneysystem.team.invitation.form"><![CDATA[Invitation]]></item>
+		<item name="tourneysystem.team.invitation.form.title"><![CDATA[Invite players to [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.invitation.playername"><![CDATA[Player]]></item>
+		<item name="tourneysystem.team.invitation.playername.description"><![CDATA[Name of the new player you want to invite.]]></item>
+		<item name="tourneysystem.team.invitation.playername.error.notUnique"><![CDATA[This user is already in your team.]]></item>
+		<item name="tourneysystem.team.invitation.playername.error.notValid"><![CDATA[This user does not exist.]]></item>
+		<item name="tourneysystem.team.invitation.position"><![CDATA[Position]]></item>
+		<item name="tourneysystem.team.invitation.position.choose"><![CDATA[]]></item>
+		<item name="tourneysystem.team.invitation.position.description"><![CDATA[Pick the position this player will have.</br>
 		You need three members to participate in a tourney. Substitutes are optional.]]></item>
-		<item name="teamsystem.team.invitation.position.error.notUnique"><![CDATA[This position is currently not free.]]></item>
-		<item name="teamsystem.team.invitation.position.player"><![CDATA[Player]]></item>
-		<item name="teamsystem.team.invitation.position.sub"><![CDATA[Substitute]]></item>
-		<item name="teamsystem.team.invitation.successfulRedirect"><![CDATA[The user has been invited.</br>He/She will join the team when he/she accepts it.]]></item>
-		<item name="teamsystem.team.invitation.title"><![CDATA[Your invitation to "[{$team->getTeamTag()}] - {$team->getTeamName()}" as a {if $positionID = 1}player{else}substitute{/if}]]></item>
+		<item name="tourneysystem.team.invitation.position.error.notUnique"><![CDATA[This position is currently not free.]]></item>
+		<item name="tourneysystem.team.invitation.position.player"><![CDATA[Player]]></item>
+		<item name="tourneysystem.team.invitation.position.sub"><![CDATA[Substitute]]></item>
+		<item name="tourneysystem.team.invitation.successfulRedirect"><![CDATA[The user has been invited.</br>He/She will join the team when he/she accepts it.]]></item>
+		<item name="tourneysystem.team.invitation.title"><![CDATA[Your invitation to "[{$team->getTeamTag()}] - {$team->getTeamName()}" as a {if $positionID = 1}player{else}substitute{/if}]]></item>
 	</category>
 	
-	<category name="teamsystem.team.join">
-		<item name="teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeam"><![CDATA[You are already in this team. The invitation got deleted.]]></item>
-		<item name="teamsystem.team.join.unsuccessfulRedirect.positionNotEmpty"><![CDATA[The position you got invited to has already been filled. The invitation got deleted.]]></item>
-		<item name="teamsystem.team.join.successfulRedirect"><![CDATA[You successfully joined the team.]]></item>
-		<item name="teamsystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam"><![CDATA[You already have a team on this platform. The invitation got deleted.]]></item>
+	<category name="tourneysystem.team.join">
+		<item name="tourneysystem.team.join.unsuccessfulRedirect.playerNotInThisTeam"><![CDATA[You are already in this team. The invitation got deleted.]]></item>
+		<item name="tourneysystem.team.join.unsuccessfulRedirect.positionNotEmpty"><![CDATA[The position you got invited to has already been filled. The invitation got deleted.]]></item>
+		<item name="tourneysystem.team.join.successfulRedirect"><![CDATA[You successfully joined the team.]]></item>
+		<item name="tourneysystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam"><![CDATA[You already have a team on this platform. The invitation got deleted.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.overview">
-		<item name="teamsystem.team.overview.basic"><![CDATA[Basic Information]]></item>
-		<item name="teamsystem.team.overview.name"><![CDATA[Teamname]]></item>
-		<item name="teamsystem.team.overview.name.description"><![CDATA[Teamname must be 3 up to 25 characters long and unique.]]></item>
-		<item name="teamsystem.team.overview.noTeams"><![CDATA[There are no teams so far.]]></item>
-		<item name="teamsystem.team.overview.platform"><![CDATA[Platform]]></item>
-		<item name="teamsystem.team.overview.platform.description"><![CDATA[Pick the platform your team will be competing on.]]></item>
-		<item name="teamsystem.team.overview.platform.choose"><![CDATA[]]></item>
-		<item name="teamsystem.team.overview.tag"><![CDATA[Teamtag]]></item>
-		<item name="teamsystem.team.overview.tag.description"><![CDATA[Teamtag must be 2 up to 4 characters long and unique.]]></item>
+	<category name="tourneysystem.team.overview">
+		<item name="tourneysystem.team.overview.basic"><![CDATA[Basic Information]]></item>
+		<item name="tourneysystem.team.overview.name"><![CDATA[Teamname]]></item>
+		<item name="tourneysystem.team.overview.name.description"><![CDATA[Teamname must be 3 up to 25 characters long and unique.]]></item>
+		<item name="tourneysystem.team.overview.noTeams"><![CDATA[There are no teams so far.]]></item>
+		<item name="tourneysystem.team.overview.platform"><![CDATA[Platform]]></item>
+		<item name="tourneysystem.team.overview.platform.description"><![CDATA[Pick the platform your team will be competing on.]]></item>
+		<item name="tourneysystem.team.overview.platform.choose"><![CDATA[]]></item>
+		<item name="tourneysystem.team.overview.tag"><![CDATA[Teamtag]]></item>
+		<item name="tourneysystem.team.overview.tag.description"><![CDATA[Teamtag must be 2 up to 4 characters long and unique.]]></item>
 	</category>
 	
-	<category name="teamsystem.team.page">
-		<item name="teamsystem.team.page.contact"><![CDATA[Contact]]></item>
-		<item name="teamsystem.team.page.delete"><![CDATA[Delete your team]]></item>
-		<item name="teamsystem.team.page.delete.header"><![CDATA[You are about to delete [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.page.delete.mod"><![CDATA[Delete this team]]></item>		
-		<item name="teamsystem.team.page.description"><![CDATA[About Us]]></item>
-		<item name="teamsystem.team.page.description.error.length"><![CDATA[Your description contains more than 400 characters.]]></item>
-		<item name="teamsystem.team.page.dummy"><![CDATA[This team is a dummy and only used for testing functions of the website.]]></item>
-		<item name="teamsystem.team.page.edit"><![CDATA[Edit your team]]></item>
-		<item name="teamsystem.team.page.edit.mod"><![CDATA[Edit this team]]></item>
-		<item name="teamsystem.team.page.gamertags"><![CDATA[Gamertags]]></item>
-		<item name="teamsystem.team.page.invitation"><![CDATA[Invite players]]></item>
-		<item name="teamsystem.team.page.invitation.mod"><![CDATA[Invite players]]></item>
-		<item name="teamsystem.team.page.kick"><![CDATA[Kick a player]]></item>
-		<item name="teamsystem.team.page.kick.header"><![CDATA[Kick a player from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="teamsystem.team.page.kick.mod"><![CDATA[Kick a player]]></item>
-		<item name="teamsystem.team.page.leave"><![CDATA[Leave the team]]></item>
-		<item name="teamsystem.team.page.members"><![CDATA[Member]]></item>
-		<item name="teamsystem.team.page.missingContactinfo"><![CDATA[At least one of your players did not set his/her gamertag on his profile.</br> 
+	<category name="tourneysystem.team.page">
+		<item name="tourneysystem.team.page.contact"><![CDATA[Contact]]></item>
+		<item name="tourneysystem.team.page.delete"><![CDATA[Delete your team]]></item>
+		<item name="tourneysystem.team.page.delete.header"><![CDATA[You are about to delete [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.page.delete.mod"><![CDATA[Delete this team]]></item>
+		<item name="tourneysystem.team.page.description"><![CDATA[About Us]]></item>
+		<item name="tourneysystem.team.page.description.error.length"><![CDATA[Your description contains more than 400 characters.]]></item>
+		<item name="tourneysystem.team.page.dummy"><![CDATA[This team is a dummy and only used for testing functions of the website.]]></item>
+		<item name="tourneysystem.team.page.edit"><![CDATA[Edit your team]]></item>
+		<item name="tourneysystem.team.page.edit.mod"><![CDATA[Edit this team]]></item>
+		<item name="tourneysystem.team.page.gamertags"><![CDATA[Gamertags]]></item>
+		<item name="tourneysystem.team.page.invitation"><![CDATA[Invite players]]></item>
+		<item name="tourneysystem.team.page.invitation.mod"><![CDATA[Invite players]]></item>
+		<item name="tourneysystem.team.page.kick"><![CDATA[Kick a player]]></item>
+		<item name="tourneysystem.team.page.kick.header"><![CDATA[Kick a player from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.page.kick.mod"><![CDATA[Kick a player]]></item>
+		<item name="tourneysystem.team.page.leave"><![CDATA[Leave the team]]></item>
+		<item name="tourneysystem.team.page.members"><![CDATA[Member]]></item>
+		<item name="tourneysystem.team.page.missingContactinfo"><![CDATA[At least one of your players did not set his/her gamertag on his profile.</br>
 		Players without naming their gamertag are not able to participate in a tournament.]]></item>
-		<item name="teamsystem.team.page.notEnoughMembers"><![CDATA[Your team has less than 4 members and is not able to participate in a tournament.]]></item>
-		<item name="teamsystem.team.page.noSubs"><![CDATA[You did not list any substitutes. This means your main team will be online during the whole tournament.]]></item>
-		<item name="teamsystem.team.page.missingContactinfo.player"><![CDATA[You did not set your gamertag on your profile!</br>
+		<item name="tourneysystem.team.page.notEnoughMembers"><![CDATA[Your team has less than 4 members and is not able to participate in a tournament.]]></item>
+		<item name="tourneysystem.team.page.noSubs"><![CDATA[You did not list any substitutes. This means your main team will be online during the whole tournament.]]></item>
+		<item name="tourneysystem.team.page.missingContactinfo.player"><![CDATA[You did not set your gamertag on your profile!</br>
 		This means you are not able to participate in a tournament.]]></item>
-		<item name="teamsystem.team.page.registrationDate"><![CDATA[Registered since {@$team->registrationDate|date}]]></item>
-		<item name="teamsystem.team.page.subs"><![CDATA[Substitute]]></item>
-		<item name="teamsystem.team.page.team"><![CDATA[Team]]></item>
-		<item name="teamsystem.team.page.user"><![CDATA[My team]]></item>
-		<item name="teamsystem.team.page.user.many"><![CDATA[My teams]]></item>
+		<item name="tourneysystem.team.page.registrationDate"><![CDATA[Registered since {@$team->registrationDate|date}]]></item>
+		<item name="tourneysystem.team.page.subs"><![CDATA[Substitute]]></item>
+		<item name="tourneysystem.team.page.team"><![CDATA[Team]]></item>
+		<item name="tourneysystem.team.page.user"><![CDATA[My team]]></item>
+		<item name="tourneysystem.team.page.user.many"><![CDATA[My teams]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.user.teamSystem"><![CDATA[Team System]]></item>
-		<item name="wcf.acp.group.option.user.teamSystem.canCreateTeam"><![CDATA[Can create a team]]></item>
-		<item name="wcf.acp.group.option.user.teamSystem.canViewLists"><![CDATA[Can view team lists]]></item>
-		<item name="wcf.acp.group.option.user.teamSystem.canViewTeamPages"><![CDATA[Can view team pages]]></item>
-		<item name="wcf.acp.group.option.category.mod.teamSystem"><![CDATA[Team System]]></item>
-		<item name="wcf.acp.group.option.mod.teamSystem.canEditTeams"><![CDATA[Can create a team]]></item>
-		<item name="wcf.acp.group.option.mod.teamSystem.canCreateDummyTeams"><![CDATA[Can create a dummy team]]></item>
-		<item name="wcf.acp.group.option.category.admin.teamSystem"><![CDATA[Team System]]></item>
-		<item name="wcf.acp.group.option.admin.teamSystem.canEditPlatforms"><![CDATA[Can edit platforms]]></item>
+		<item name="wcf.acp.group.option.category.user.tourneySystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.user.tourneySystem.canCreateTeam"><![CDATA[Can create a team]]></item>
+		<item name="wcf.acp.group.option.user.tourneySystem.canViewLists"><![CDATA[Can view team lists]]></item>
+		<item name="wcf.acp.group.option.user.tourneySystem.canViewTeamPages"><![CDATA[Can view team pages]]></item>
+		<item name="wcf.acp.group.option.category.mod.tourneySystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.mod.tourneySystem.canEditTeams"><![CDATA[Can create a team]]></item>
+		<item name="wcf.acp.group.option.mod.tourneySystem.canCreateDummyTeams"><![CDATA[Can create a dummy team]]></item>
+		<item name="wcf.acp.group.option.category.admin.tourneySystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.admin.tourneySystem.canEditPlatforms"><![CDATA[Can edit platforms]]></item>
 	</category>
 
 	<category name="wcf.acp.menu">
-		<item name="wcf.acp.menu.link.teamsystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem"><![CDATA[Tourneysystem]]></item>
 		<item name="wcf.acp.menu.link.platform.add"><![CDATA[Add platform]]></item>
 		<item name="wcf.acp.menu.link.platform.list"><![CDATA[Show platforms]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.category.teamsystem"><![CDATA[Teamsystem]]></item>
-		<item name="wcf.acp.option.category.teamsystem.platforms"><![CDATA[Platforms]]></item>
-		<item name="wcf.acp.option.category.teamsystem.general"><![CDATA[General]]></item>
-		<item name="wcf.acp.option.teamsystem_lock_teamEdit"><![CDATA[disable team edits by users]]></item>
+		<item name="wcf.acp.option.category.tourneysystem"><![CDATA[Tourneysystem]]></item>
+		<item name="wcf.acp.option.category.tourneysystem.platforms"><![CDATA[Platforms]]></item>
+		<item name="wcf.acp.option.category.tourneysystem.general"><![CDATA[General]]></item>
+		<item name="wcf.acp.option.tourneysystem_lock_teamEdit"><![CDATA[disable team edits by users]]></item>
 	</category>
 
 	<category name="wcf.user.option">

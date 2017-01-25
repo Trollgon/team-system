@@ -1,1 +1,1 @@
-{if $__teamsystem->isActiveApplication()}<address class="copyright marginTop">{lang}teamsystem.copyright.text{/lang}</address>{/if}
+{if $__tourneysystem->isActiveApplication()}<address class="copyright marginTop">{lang}tourneysystem.copyright.text{/lang}</address>{/if}

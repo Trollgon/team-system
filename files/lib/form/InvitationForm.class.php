@@ -1,21 +1,21 @@
 <?php
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
-use teamsystem\data\platform\Platform;
+use tourneysystem\data\platform\Platform;
 use wcf\data\user\UserProfileList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
-use teamsystem\data\invitations\Invitation;
+use tourneysystem\data\invitations\Invitation;
 use wcf\form\AbstractForm;
-use teamsystem\util\TeamInvitationUtil;
+use tourneysystem\util\TeamInvitationUtil;
 use wcf\util\HeaderUtil;
 use wcf\system\request\LinkHandler;
-use teamsystem\util\TeamUtil;
-use teamsystem\data\invitations\InvitationAction;
-use teamsystem\data\team\Team;
-use teamsystem\data\team\TeamAction;
+use tourneysystem\util\TeamUtil;
+use tourneysystem\data\invitations\InvitationAction;
+use tourneysystem\data\team\Team;
+use tourneysystem\data\team\TeamAction;
 
 /**
  * Shows the page of an invitation.
@@ -23,7 +23,7 @@ use teamsystem\data\team\TeamAction;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
 
 class InvitationForm extends AbstractForm {
@@ -41,16 +41,6 @@ class InvitationForm extends AbstractForm {
 	public $positionID = 0;
 	public $playerList = null;
 	public $userOption = '';
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'teamsystem.header.menu.teams';
-	
-	/**
-	 * @see \wcf\page\AbstractPage::$loginRequired
-	 */
-	public	$loginRequired = true;
 	
 	/**
 	 * @see \wcf\page\AbstractPage::readParameters()
@@ -89,14 +79,14 @@ class InvitationForm extends AbstractForm {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
     }
 
 	/**
 	 * @see \wcf\page\AbstractPage::show()
 	 */
 	public function show() {
-		if(!WCF::getSession()->getPermission("user.teamSystem.canViewTeamPages")) {
+		if(!WCF::getSession()->getPermission("user.tourneySystem.canViewTeamPages")) {
 			throw new PermissionDeniedException();
 		}
 		if(!WCF::getSession()->getUser()->getUserID() == $this->playerID)
@@ -141,8 +131,8 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('InvitationList', array(
-					'application' 	=> 'teamsystem',
-			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.positionNotEmpty'), 10, 'error');
+					'application' 	=> 'tourneysystem',
+			)),WCF::getLanguage()->get('tourneysystem.team.join.unsuccessfulRedirect.positionNotEmpty'), 10, 'error');
 		}
 		
 		elseif ($this->playerNotInThisTeam == false) {
@@ -151,8 +141,8 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('InvitationList', array(
-					'application' 	=> 'teamsystem',
-			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.playerNotInThisTeam'), 10, 'error');
+					'application' 	=> 'tourneysystem',
+			)),WCF::getLanguage()->get('tourneysystem.team.join.unsuccessfulRedirect.playerNotInThisTeam'), 10, 'error');
 		}
 		
 		elseif (!TeamUtil::isFreePlatformPlayer($this->platformID, WCF::getUser()->userID)) {
@@ -160,8 +150,8 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('InvitationList', array(
-					'application' 	=> 'teamsystem',
-			)),WCF::getLanguage()->get('teamsystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam'), 10, 'error');
+					'application' 	=> 'tourneysystem',
+			)),WCF::getLanguage()->get('tourneysystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam'), 10, 'error');
 		}
 		
 		else {
@@ -215,7 +205,7 @@ class InvitationForm extends AbstractForm {
 			$action = new TeamAction(array($this->teamID), 'update', $data);
 			$action->executeAction();
 
-            $sql = "INSERT INTO teamsystem1_user_to_team_to_position_to_platform (userID, teamID, platformID, positionID)
+            $sql = "INSERT INTO tourneysystem1_user_to_team_to_position_to_platform (userID, teamID, platformID, positionID)
                   VALUES (?, ?, ?, ?)";
             $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(WCF::getSession()->getUser()->getUserID(), TeamUtil::getPlayersTeamID($this->platformID, WCF::getSession()->getUser()->getUserID()), $this->platformID, $backendPositionID));
@@ -225,9 +215,9 @@ class InvitationForm extends AbstractForm {
 			$invitationAction->executeAction();
 			
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
-					'application' 	=> 'teamsystem',
+					'application' 	=> 'tourneysystem',
 					'id'			=> TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID),
-			)),WCF::getLanguage()->get('teamsystem.team.join.successfulRedirect'), 10);
+			)),WCF::getLanguage()->get('tourneysystem.team.join.successfulRedirect'), 10);
 			exit;
 		}
 		

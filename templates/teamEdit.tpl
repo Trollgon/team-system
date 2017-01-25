@@ -1,26 +1,26 @@
 {capture assign='contentHeader'}
 	<header class="contentHeader articleContentHeader">
 		<div class="contentHeaderTitle">
-			<h1 class="contentTitle" itemprop="name headline">{lang}teamsystem.header.editTeam{/lang}</h1>
+			<h1 class="contentTitle" itemprop="name headline">{lang}tourneysystem.header.editTeam{/lang}</h1>
 		</div>
 	</header>
 {/capture}
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='teamSidebar'  application='teamsystem' assign='sidebar'}
+{include file='teamSidebar'  application='tourneysystem' assign='sidebar'}
 
 {include file='header' sidebarOrientation='right'}
 
 {include file='formError'}
 
-<form method="post" action="{link application='teamsystem' controller='TeamEdit' teamID=$teamID}{/link}">
+<form method="post" action="{link application='tourneysystem' controller='TeamEdit' teamID=$teamID}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}teamsystem.team.edit.general{/lang}</legend>
+			<legend>{lang}tourneysystem.team.edit.general{/lang}</legend>
 			
 			<dl>
-				<dt><label for="contactForm">{lang}teamsystem.team.page.contact{/lang}</label></dt>
+				<dt><label for="contactForm">{lang}tourneysystem.team.page.contact{/lang}</label></dt>
 				<dd>
 					<select id="contact" name="contact">
 						<option value="0" {if $contactForm==0}selected="selected"{/if}>{@$team->getLeaderName()}</option>
@@ -31,20 +31,20 @@
 						{if ($team->sub2ID != NULL)}<option value="5" {if $contactForm==5}selected="selected"{/if}>{@$team->getSub2Name()}</option>{/if}
 						{if ($team->sub3ID != NULL)}<option value="6" {if $contactForm==6}selected="selected"{/if}>{@$team->getSub3Name()}</option>{/if}
 					</select>
-					<small>{lang}teamsystem.team.edit.contact.description{/lang}</small>
+					<small>{lang}tourneysystem.team.edit.contact.description{/lang}</small>
 				</dd>
 			</dl>
 			
 			<dl{if $errorField == 'description'} class="formError"{/if}>
-				<dt><label for="description">{lang}teamsystem.team.page.description{/lang}</label></dt>
+				<dt><label for="description">{lang}tourneysystem.team.page.description{/lang}</label></dt>
 				<dd>
 					<textarea id="description" name="description" rows="10" cols="40" maxlength="400">{@$team->teamDescription}</textarea>
 					{if $errorField == 'description'}
 							<small class="innerError">
-								{lang}teamsystem.team.page.description.error.length{/lang}
+								{lang}tourneysystem.team.page.description.error.length{/lang}
 							</small>
 					{/if}
-					<small>{lang}teamsystem.team.edit.description.description{/lang}</small>
+					<small>{lang}tourneysystem.team.edit.description.description{/lang}</small>
 				</dd>
 			</dl>					
 					

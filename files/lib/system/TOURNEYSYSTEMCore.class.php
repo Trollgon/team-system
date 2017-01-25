@@ -1,5 +1,5 @@
 <?php
-namespace teamsystem\system;
+namespace tourneysystem\system;
 use wcf\system\application\AbstractApplication;
 use wcf\system\page\PageLocationManager;
 
@@ -9,13 +9,13 @@ use wcf\system\page\PageLocationManager;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
-class TEAMSYSTEMCore extends AbstractApplication {
+class TOURNEYSYSTEMCore extends AbstractApplication {
 	/**
 	 * @see	\wcf\system\application\AbstractApplication::$abbreviation
 	 */
-	protected $abbreviation = 'teamsystem';
+	protected $abbreviation = 'tourneysystem';
 	
 	/**
 	 * @see \wcf\system\application\AbstractApplication::__run()
@@ -25,6 +25,6 @@ class TEAMSYSTEMCore extends AbstractApplication {
 			return;
 		}
 
-		PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+		PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
 	}
 }

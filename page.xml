@@ -2,10 +2,10 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/vortex/page.xsd">
     <import>
         <!-- Pages -->
-        <page identifier="de.trollgon.teamsystem.TeamList">
+        <page identifier="de.trollgon.tourneysystem.TeamList">
             <pageType>system</pageType>
-            <controller>teamsystem\page\TeamListPage</controller>
-            <handler>teamsystem\system\page\handler\TeamListPageHandler</handler>
+            <controller>tourneysystem\page\TeamListPage</controller>
+            <handler>tourneysystem\system\page\handler\TeamListPageHandler</handler>
             <name language="en">Teams</name>
 
             <content language="en">
@@ -13,10 +13,10 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.InvitationList">
+        <page identifier="de.trollgon.tourneysystem.InvitationList">
             <pageType>system</pageType>
-            <controller>teamsystem\page\InvitationListPage</controller>
-            <handler>teamsystem\system\page\handler\InvitationListPageHandler</handler>
+            <controller>tourneysystem\page\InvitationListPage</controller>
+            <handler>tourneysystem\system\page\handler\InvitationListPageHandler</handler>
             <name language="en">Invitation list</name>
 
             <content language="en">
@@ -24,9 +24,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamPage">
+        <page identifier="de.trollgon.tourneysystem.TeamPage">
             <pageType>system</pageType>
-            <controller>teamsystem\page\TeamPage</controller>
+            <controller>tourneysystem\page\TeamPage</controller>
             <name language="en">Team</name>
 
             <content language="en">
@@ -36,9 +36,9 @@
             <requireObjectID>1</requireObjectID>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamKickList">
+        <page identifier="de.trollgon.tourneysystem.TeamKickList">
             <pageType>system</pageType>
-            <controller>teamsystem\page\TeamKickListPage</controller>
+            <controller>tourneysystem\page\TeamKickListPage</controller>
             <name language="en">Management of team members</name>
 
             <content language="en">
@@ -47,9 +47,9 @@
         </page>
 
         <!-- Forms -->
-        <page identifier="de.trollgon.teamsystem.Invitation">
+        <page identifier="de.trollgon.tourneysystem.Invitation">
             <pageType>system</pageType>
-            <controller>teamsystem\form\InvitationForm</controller>
+            <controller>tourneysystem\form\InvitationForm</controller>
             <name language="en">Teaminvitation</name>
 
             <content language="en">
@@ -57,9 +57,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamAvatarEdit">
+        <page identifier="de.trollgon.tourneysystem.TeamAvatarEdit">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamAvatarEditForm</controller>
+            <controller>tourneysystem\form\TeamAvatarEditForm</controller>
             <name language="en">Teamavatar Management</name>
 
             <content language="en">
@@ -67,9 +67,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamCreateDummy">
+        <page identifier="de.trollgon.tourneysystem.TeamCreateDummy">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamCreateDummyForm</controller>
+            <controller>tourneysystem\form\TeamCreateDummyForm</controller>
             <name language="en">create a dummyteam</name>
 
             <content language="en">
@@ -77,9 +77,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamCreate">
+        <page identifier="de.trollgon.tourneysystem.TeamCreate">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamCreateForm</controller>
+            <controller>tourneysystem\form\TeamCreateForm</controller>
             <name language="en">create new team</name>
 
             <content language="en">
@@ -87,9 +87,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamDelete">
+        <page identifier="de.trollgon.tourneysystem.TeamDelete">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamDeleteForm</controller>
+            <controller>tourneysystem\form\TeamDeleteForm</controller>
             <name language="en">Team delete</name>
 
             <content language="en">
@@ -97,9 +97,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamEdit">
+        <page identifier="de.trollgon.tourneysystem.TeamEdit">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamEditForm</controller>
+            <controller>tourneysystem\form\TeamEditForm</controller>
             <name language="en">edit team</name>
 
             <content language="en">
@@ -107,9 +107,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamInvitation">
+        <page identifier="de.trollgon.tourneysystem.TeamInvitation">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamInvitationForm</controller>
+            <controller>tourneysystem\form\TeamInvitationForm</controller>
             <name language="en">send team invites</name>
 
             <content language="en">
@@ -117,9 +117,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamKick">
+        <page identifier="de.trollgon.tourneysystem.TeamKick">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamKickForm</controller>
+            <controller>tourneysystem\form\TeamKickForm</controller>
             <name language="en">jemanden vom Team entfernen</name>
 
             <content language="en">
@@ -127,9 +127,9 @@
             </content>
         </page>
 
-        <page identifier="de.trollgon.teamsystem.TeamLeave">
+        <page identifier="de.trollgon.tourneysystem.TeamLeave">
             <pageType>system</pageType>
-            <controller>teamsystem\form\TeamLeaveForm</controller>
+            <controller>tourneysystem\form\TeamLeaveForm</controller>
             <name language="en">leave a team</name>
 
             <content language="en">

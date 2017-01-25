@@ -5,10 +5,10 @@
  * Time: 19:46
  */
 
-namespace teamsystem\acp\form;
+namespace tourneysystem\acp\form;
 
 
-use teamsystem\data\platform\PlatformAction;
+use tourneysystem\data\platform\PlatformAction;
 use wcf\data\user\option\UserOptionList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
@@ -17,7 +17,7 @@ use wcf\util\StringUtil;
 
 class PlatformAddForm extends AbstractForm {
 
-    public $activeMenuItem = 'wcf.acp.menu.link.teamsystem.platform.add';
+    public $activeMenuItem = 'wcf.acp.menu.link.tourneysystem.platform.add';
 
     public $platformID = "";
     public $platformName = "";
@@ -48,7 +48,7 @@ class PlatformAddForm extends AbstractForm {
         }
 
         $sql =		"SELECT	COUNT(platformName) AS count
-						FROM	teamsystem1_platforms
+						FROM	tourneysystem1_platforms
 						WHERE	platformName = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);

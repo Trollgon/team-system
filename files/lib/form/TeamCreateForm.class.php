@@ -1,8 +1,8 @@
 <?php
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
-use teamsystem\data\platform\PlatformList;
-use teamsystem\util\TeamUtil;
+use tourneysystem\data\platform\PlatformList;
+use tourneysystem\util\TeamUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\page\PageLocationManager;
@@ -12,8 +12,7 @@ use wcf\system\WCF;
 use wcf\system\request\LinkHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\data\user\UserAction;
-use teamsystem\data\team\TeamAction;
+use tourneysystem\data\team\TeamAction;
 
 /**
  * Shows the Form to create a new team.
@@ -21,7 +20,7 @@ use teamsystem\data\team\TeamAction;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
 class TeamCreateForm extends AbstractForm {
 	
@@ -53,7 +52,7 @@ class TeamCreateForm extends AbstractForm {
 	 * @see \wcf\form\AbstractForm::show()
 	 */
 	public function show() {
-		if (!WCF::getSession()->getPermission("user.teamSystem.canCreateTeam")) {
+		if (!WCF::getSession()->getPermission("user.tourneySystem.canCreateTeam")) {
 			throw new PermissionDeniedException();
 		}
 		if (count(TeamUtil::getAllPlatforms()) == 0) {
@@ -68,7 +67,7 @@ class TeamCreateForm extends AbstractForm {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
     }
 	
 	/**
@@ -179,15 +178,15 @@ class TeamCreateForm extends AbstractForm {
 		);
 		$action = new TeamAction(array(), 'create', $data);
 		$action->executeAction();
-        $sql = "INSERT INTO teamsystem1_user_to_team_to_position_to_platform (userID, teamID, platformID, positionID)
+        $sql = "INSERT INTO tourneysystem1_user_to_team_to_position_to_platform (userID, teamID, platformID, positionID)
                   VALUES (?, ?, ?, ?)";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array(WCF::getSession()->getUser()->getUserID(), TeamUtil::getPlayersTeamID($this->platformID, WCF::getSession()->getUser()->getUserID()), $this->platformID, 0));
 
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Team', array(
-			'application' 	=> 'teamsystem',
+			'application' 	=> 'tourneysystem',
 			'id'			=> TeamUtil::getPlayersTeamID($this->platformID, WCF::getUser()->userID),
-		)),WCF::getLanguage()->get('teamsystem.team.create.successfulRedirect'), 10);				
+		)),WCF::getLanguage()->get('tourneysystem.team.create.successfulRedirect'), 10);
 		exit;
 	}
 	

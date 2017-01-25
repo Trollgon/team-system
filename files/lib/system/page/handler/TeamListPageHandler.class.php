@@ -5,10 +5,8 @@
  * Time: 13:22
  */
 
-namespace teamsystem\system\page\handler;
-
-
-use teamsystem\data\invitations\InvitationList;
+namespace tourneysystem\system\page\handler;
+use tourneysystem\data\invitations\InvitationList;
 use wcf\system\page\handler\AbstractMenuPageHandler;
 use wcf\system\WCF;
 

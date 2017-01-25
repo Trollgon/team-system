@@ -1,15 +1,15 @@
 <?php
-namespace teamsystem\data\team\avatar;
-use teamsystem\data\TEAMSYSTEMDatabaseObject;
+namespace tourneysystem\data\team\avatar;
+use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use wcf\data\user\avatar\IUserAvatar;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
 
 /**
  * Class TeamAvatar
- * @package teamsystem\data\team\avatar
+ * @package tourneysystem\data\team\avatar
  */
-class TeamAvatar extends TEAMSYSTEMDatabaseObject implements IUserAvatar  {
+class TeamAvatar extends TOURNEYSYSTEMDatabaseObject  implements IUserAvatar  {
 
     public static $databaseTableName = 'team_avatar';
     /**
@@ -46,7 +46,7 @@ class TeamAvatar extends TEAMSYSTEMDatabaseObject implements IUserAvatar  {
      * @return	string
      */
     public function getLocation($size = null) {
-        return RELATIVE_TEAMSYSTEM_DIR . 'images/avatars/' . $this->getFilename($size);
+        return RELATIVE_TOURNEYSYSTEM_DIR . 'images/avatars/' . $this->getFilename($size);
     }
 
     /**
@@ -63,7 +63,7 @@ class TeamAvatar extends TEAMSYSTEMDatabaseObject implements IUserAvatar  {
      * @inheritDoc
      */
     public function getURL($size = null) {
-        return WCF::getPath('teamsystem') . 'images/avatars/' . $this->getFilename();
+        return WCF::getPath('tourneysystem') . 'images/avatars/' . $this->getFilename();
     }
 
     /**

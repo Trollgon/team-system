@@ -1,25 +1,24 @@
 <?php
 
-namespace teamsystem\data\team;
+namespace tourneysystem\data\team;
 
-use teamsystem\data\platform\Platform;
+use tourneysystem\data\platform\Platform;
+use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use wcf\data\DatabaseObject;
 use wcf\data\ITitledLinkObject;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\system\request\IRouteController;
 use wcf\data\user\User;
-use teamsystem\data\TEAMSYSTEMDatabaseObject;
-use teamsystem\data\team\avatar\DefaultTeamAvatar;
-use teamsystem\data\team\avatar\TeamAvatar;
+use tourneysystem\data\team\avatar\DefaultTeamAvatar;
+use tourneysystem\data\team\avatar\TeamAvatar;
 use wcf\data\user\UserProfile;
 
 /**
  * Class Team
- * @package teamsystem\data\team
+ * @package tourneysystem\data\team
  */
-class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitledLinkObject {
+class Team extends TOURNEYSYSTEMDatabaseObject  implements IRouteController, ITitledLinkObject {
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
@@ -110,7 +109,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitled
      */
 	public function getPositionID($userID, $platformID, $teamID) {
         $sql =      "SELECT positionID
-                        FROM teamsystem1_user_to_team_to_position_to_platform 
+                        FROM tourneysystem1_user_to_team_to_position_to_platform 
                         WHERE userID = ? AND platformID = ? AND teamID = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -262,7 +261,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitled
 	public function countMembers() {
         $sql = /** @lang MySQL */
             "SELECT userID
-                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  FROM tourneysystem1_user_to_team_to_position_to_platform
                   WHERE teamID = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -283,7 +282,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitled
 	public function getPlayerIDs() {
         $sql = /** @lang MySQL */
             "SELECT userID
-                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  FROM tourneysystem1_user_to_team_to_position_to_platform
                   WHERE teamID = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -362,7 +361,7 @@ class Team extends TEAMSYSTEMDatabaseObject implements IRouteController, ITitled
      */
     public function getLink() {
         return LinkHandler::getInstance()->getLink('Team', [
-            'application' => 'teamsystem',
+            'application' => 'tourneysystem',
             'object' => $this,
             'forceFrontend' => true
         ]);
