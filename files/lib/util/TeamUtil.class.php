@@ -19,8 +19,9 @@ final class TeamUtil {
 		if (mb_strlen($name) < 2 || mb_strlen($name) > 32) {
 			return false;
 		}
+
 		// check illegal characters
-		if (!preg_match('/[A-Za-z0-9 ]+/g', $name)) {
+		if (!preg_match('/^[A-Z0-9 -]+$/ig', $name)) {
 			return false;
 		}
 
@@ -66,7 +67,7 @@ final class TeamUtil {
 		}
 
 		// check illegal characters
-		if (!preg_match('!^[^,\n]+$!', $tag)) {
+		if (!preg_match('^[A-Z0-9]+$', $tag)) {
 			return false;
 		}
 
