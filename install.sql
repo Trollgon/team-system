@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS teamsystem1_teams;
-CREATE TABLE teamsystem1_teams (
+DROP TABLE IF EXISTS tourneysystem1_team;
+CREATE TABLE tourneysystem1_team (
   teamID int(10) NOT NULL AUTO_INCREMENT,
   platformID int(10) NOT NULL,
   teamName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
@@ -20,8 +20,8 @@ CREATE TABLE teamsystem1_teams (
   UNIQUE KEY teamID (teamID)
 );
 
-DROP TABLE IF EXISTS teamsystem1_platforms;
-CREATE TABLE teamsystem1_platforms (
+DROP TABLE IF EXISTS tourneysystem1_platform;
+CREATE TABLE tourneysystem1_platform (
   platformID int(10) NOT NULL AUTO_INCREMENT,
   platformName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   optionID int(10) NOT NULL,
@@ -29,16 +29,16 @@ CREATE TABLE teamsystem1_platforms (
   UNIQUE KEY platformID (platformID),
 );
 
-DROP TABLE IF EXISTS teamsystem1_user_to_team_to_position_to_platform;
-CREATE TABLE teamsystem1_user_to_team_to_position_to_platform (
+DROP TABLE IF EXISTS tourneysystem1_user_to_team_to_position_to_platform;
+CREATE TABLE tourneysystem1_user_to_team_to_position_to_platform (
   userID INT(10) NOT NULL,
   teamID INT(10) NOT NULL,
   platformID INT(10) NOT NULL,
   positionID INT(10) NOT NULL
 );
 
-DROP TABLE IF EXISTS teamsystem1_invitations;
-CREATE TABLE teamsystem1_invitations (
+DROP TABLE IF EXISTS tourneysystem1_invitation;
+CREATE TABLE tourneysystem1_invitation (
   invitationID int(10) AUTO_INCREMENT,
   platformID int(10) NOT NULL,
   teamID int(10) NOT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE teamsystem1_invitations (
   UNIQUE KEY invitationID (invitationID)
 );
 
-DROP TABLE IF EXISTS teamsystem1_team_avatar;
-CREATE TABLE teamsystem1_team_avatar (
+DROP TABLE IF EXISTS tourneysystem1_team_avatar;
+CREATE TABLE tourneysystem1_team_avatar (
   avatarID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   avatarName VARCHAR(255) NOT NULL DEFAULT '',
   avatarExtension VARCHAR(7) NOT NULL DEFAULT '',
@@ -61,25 +61,25 @@ CREATE TABLE teamsystem1_team_avatar (
   cropY SMALLINT(5) NOT NULL DEFAULT 0
 );
 
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (contactID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (platformID) REFERENCES teamsystem1_platforms (platformID) ON DELETE CASCADE;
-ALTER TABLE teamsystem1_teams ADD FOREIGN KEY (avatarID) REFERENCES teamsystem1_team_avatar (avatarID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player4ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (sub1ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (sub2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (contactID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (platformID) REFERENCES tourneysystem1_platform (platformID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (avatarID) REFERENCES tourneysystem1_team_avatar (avatarID) ON DELETE SET NULL;
 
-ALTER TABLE teamsystem1_platforms ADD FOREIGN KEY (optionID) REFERENCES wcf1_user_option (optionID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_platform ADD FOREIGN KEY (optionID) REFERENCES wcf1_user_option (optionID) ON DELETE CASCADE;
 
-ALTER TABLE teamsystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE teamsystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (teamID) REFERENCES teamsystem1_teams (teamID) ON DELETE CASCADE;
-ALTER TABLE teamsystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (platformID) REFERENCES teamsystem1_platforms (platformID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (teamID) REFERENCES tourneysystem1_team (teamID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (platformID) REFERENCES tourneysystem1_platform (platformID) ON DELETE CASCADE;
 
-ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (platformID) REFERENCES teamsystem1_platforms (platformID) ON DELETE CASCADE;
-ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (teamID) REFERENCES teamsystem1_teams (teamID) ON DELETE CASCADE;
-ALTER TABLE teamsystem1_invitations ADD FOREIGN KEY (playerID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_invitation ADD FOREIGN KEY (platformID) REFERENCES tourneysystem1_platform (platformID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_invitation ADD FOREIGN KEY (teamID) REFERENCES tourneysystem1_team (teamID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_invitation ADD FOREIGN KEY (playerID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 
-ALTER TABLE teamsystem1_team_avatar ADD FOREIGN KEY (teamID) REFERENCES teamsystem1_teams (teamID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_team_avatar ADD FOREIGN KEY (teamID) REFERENCES tourneysystem1_team (teamID) ON DELETE CASCADE;
