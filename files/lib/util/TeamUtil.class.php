@@ -20,7 +20,7 @@ final class TeamUtil {
 			return false;
 		}
 		// check illegal characters
-		if (!preg_match('!^[^,\n]+$!', $name)) {
+		if (!preg_match('/[A-Za-z0-9 ]+/g', $name)) {
 			return false;
 		}
 
