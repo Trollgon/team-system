@@ -5,6 +5,7 @@ use tourneysystem\data\platform\Platform;
 use wcf\data\user\UserProfileList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;

@@ -52,6 +52,9 @@ class TeamCreateForm extends AbstractForm {
 	 * @see \wcf\form\AbstractForm::show()
 	 */
 	public function show() {
+        if (WCF::getUser()->getUserID() == 0) {
+            throw new PermissionDeniedException();
+        }
 		if (!WCF::getSession()->getPermission("user.tourneySystem.canCreateTeam")) {
 			throw new PermissionDeniedException();
 		}

@@ -112,7 +112,6 @@ class TeamDeleteForm extends AbstractForm {
 	/**
 	 * @see \wcf\form\AbstractForm::assignVariables()
 	 */
-	
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
