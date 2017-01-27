@@ -14,7 +14,7 @@ class Platform extends TOURNEYSYSTEMDatabaseObject  {
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableName
      */
-    protected static $databaseTableName = 'platforms';
+    protected static $databaseTableName = 'platform';
 
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableIndexName

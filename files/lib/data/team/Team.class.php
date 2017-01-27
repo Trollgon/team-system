@@ -23,7 +23,7 @@ class Team extends TOURNEYSYSTEMDatabaseObject  implements IRouteController, ITi
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
-	protected static $databaseTableName = 'teams';
+	protected static $databaseTableName = 'team';
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName

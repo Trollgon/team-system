@@ -4,8 +4,6 @@ namespace tourneysystem\data\invitations;
 
 use tourneysystem\data\platform\Platform;
 use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
-use wcf\data\DatabaseObject;
-use wcf\system\WCF;
 use wcf\system\request\IRouteController;
 use tourneysystem\data\team\Team;
 
@@ -14,7 +12,7 @@ class Invitation extends TOURNEYSYSTEMDatabaseObject implements IRouteController
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
-	protected static $databaseTableName = 'invitations';
+	protected static $databaseTableName = 'invitation';
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
