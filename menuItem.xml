@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/pagemenu.xsd">
 	<import>
-		<item identifier="de.trollgon.tourneysystem.HeaderLinks">
+		<!-- Team menu-->
+		<item identifier="de.trollgon.tourneysystem.HeaderLinks.team">
 			<menu>com.woltlab.wcf.MainMenu</menu>
 			<title language="en">Teams</title>
 			<page>de.trollgon.tourneysystem.TeamList</page>
 		</item>
-		<item identifier="de.trollgon.tourneysystem.InvitationList">
-			<parent>de.trollgon.tourneysystem.HeaderLinks</parent>
+		<item identifier="de.trollgon.tourneysystem.team.InvitationList">
+			<parent>de.trollgon.tourneysystem.HeaderLinks.team</parent>
 			<title language="en">Invitations</title>
 			<page>de.trollgon.tourneysystem.InvitationList</page>
 		</item>
