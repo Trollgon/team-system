@@ -2,6 +2,7 @@
 
 namespace tourneysystem\page;
 
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\page\SortablePage;
@@ -33,6 +34,16 @@ class InvitationListPage extends SortablePage {
 	public $validSortFields = array('teamID');
 
     /**
+     * @see \wcf\form\AbstractForm::show()
+     */
+    public function show() {
+        if (WCF::getUser()->getUserID() == 0) {
+            throw new PermissionDeniedException();
+        }
+        parent::show();
+    }
+
+    /**
      * @see \wcf\page\AbstractPage::readData()
      */
     public function readData() {
@@ -47,7 +58,7 @@ class InvitationListPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("invitations.playerID = ?", array(WCF::getUser()->getUserID()));
+		$this->objectList->getConditionBuilder()->add("invitation.playerID = ?", array(WCF::getUser()->getUserID()));
 	}
 }
 

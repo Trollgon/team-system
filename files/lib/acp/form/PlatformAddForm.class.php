@@ -48,7 +48,7 @@ class PlatformAddForm extends AbstractForm {
         }
 
         $sql =		"SELECT	COUNT(platformName) AS count
-						FROM	tourneysystem1_platforms
+						FROM	tourneysystem1_platform
 						WHERE	platformName = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);

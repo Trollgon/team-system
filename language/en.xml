@@ -158,8 +158,8 @@
 
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.tourneysystem"><![CDATA[Tourneysystem]]></item>
-		<item name="wcf.acp.menu.link.platform.add"><![CDATA[Add platform]]></item>
-		<item name="wcf.acp.menu.link.platform.list"><![CDATA[Show platforms]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.platform.add"><![CDATA[Add platform]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.platform.list"><![CDATA[Show platforms]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">

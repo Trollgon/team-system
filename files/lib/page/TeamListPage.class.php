@@ -46,13 +46,9 @@ class TeamListPage extends SortablePage {
         $teamList->setObjectIDs($array);
         $teamList->readObjects();
 
-        $invitationsList = new InvitationList();
-        $invitationsList->getConditionBuilder()->add("invitations.playerID = ?", array(WCF::getUser()->getUserID()));
-
 		WCF::getTPL()->assign(array(
 		    'teamsCount'        =>  TeamUtil::countTeams(),
 			'teamList'          =>  $teamList,
-            'invitations'       =>  $invitationsList->countObjects(),
 		));
 	}
 

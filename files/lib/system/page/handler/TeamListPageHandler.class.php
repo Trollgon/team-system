@@ -14,7 +14,7 @@ class TeamListPageHandler extends AbstractMenuPageHandler {
 
     public function getOutstandingItemCount($objectID = null) {
         $invitationsList = new InvitationList();
-        $invitationsList->getConditionBuilder()->add("invitations.playerID = ?", array(WCF::getUser()->getUserID()));
+        $invitationsList->getConditionBuilder()->add("invitation.playerID = ?", array(WCF::getUser()->getUserID()));
         return $invitationsList->countObjects();
     }
 }

@@ -31,7 +31,7 @@ TOURNEYSYSTEM.Team.Avatar.Upload = WCF.Upload.extend({
 	 * @param	integer			teamID
 	 */
 	init: function(teamID) {
-		this._super($('#avatarUpload > dd > div'), undefined, 'TOURNEYSYSTEM\\data\\team\\avatar\\TeamAvatarAction');
+		this._super($('#avatarUpload > dd > div'), undefined, 'tourneysystem\\data\\team\\avatar\\TeamAvatarAction');
 		this._teamID = teamID || 0;
 
 		$('#avatarForm input[type=radio]').change(function() {
