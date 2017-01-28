@@ -11,6 +11,7 @@ use tourneysystem\data\platform\Platform;
 use tourneysystem\data\team\avatar\TeamAvatarAction;
 use tourneysystem\data\team\Team;
 use tourneysystem\data\team\TeamAction;
+use tourneysystem\util\TeamInvitationUtil;
 use wcf\data\user\UserProfileList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -163,6 +164,8 @@ class TeamAvatarEditForm extends AbstractForm {
 			'user'			=> $this->team->getContactProfile(),
 			'playerList'	=> $this->playerList,
 			'userOption'	=> $this->userOption,
+            'teamIsFull'	=> (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2)),
+            'teamIsEmpty'   => ($this->team->countMembers() < 2),
         ));
     }
 }

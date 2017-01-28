@@ -218,7 +218,8 @@ class TeamPage extends SortablePage {
 				'subMissing'				=> $subMissing,
 				'missingContactInfo'		=> $this->missingContactInfo,
 				'playerMissingContactInfo'	=> $this->playerMissingContactInfo,
-                'teamIsFull'	            => (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2))
+                'teamIsFull'	            => (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2)),
+                'teamIsEmpty'               => ($this->team->countMembers() < 2),
 		));
 	}
 	

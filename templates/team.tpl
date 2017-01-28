@@ -51,10 +51,12 @@
 														<span>{lang}tourneysystem.team.page.invitation{/lang}</span></a>
 												</li>
 											{/if}
+											{if $teamIsEmpty != true}
 											<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamKickList' teamID=$teamID}{/link}"
 																   title="{lang}tourneysystem.team.page.kick{/lang}" class="box24">
 													<span>{lang}tourneysystem.team.page.kick{/lang}</span></a>
 											</li>
+											{/if}
 											<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamDelete' teamID=$teamID}{/link}"
 																   title="{lang}tourneysystem.team.page.delete{/lang}" class="box24">
 													<span>{lang}tourneysystem.team.page.delete{/lang}</span></a>
@@ -86,10 +88,12 @@
 													<span>{lang}tourneysystem.team.page.invitation.mod{/lang}</span></a>
 											</li>
 										{/if}
+										{if $teamIsEmpty != true}
 											<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamKickList' teamID=$teamID}{/link}"
-																   title="{lang}tourneysystem.team.page.kick.mod{/lang}" class="box24">
-													<span>{lang}tourneysystem.team.page.kick.mod{/lang}</span></a>
+																   title="{lang}tourneysystem.team.page.kick{/lang}" class="box24">
+													<span>{lang}tourneysystem.team.page.kick{/lang}</span></a>
 											</li>
+										{/if}
 											<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamDelete' teamID=$teamID}{/link}"
 																   title="{lang}tourneysystem.team.page.delete.mod{/lang}" class="box24">
 													<span>{lang}tourneysystem.team.page.delete.mod{/lang}</span></a>

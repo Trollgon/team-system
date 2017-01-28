@@ -2,6 +2,7 @@
 namespace tourneysystem\form;
 
 use tourneysystem\data\platform\Platform;
+use tourneysystem\util\TeamInvitationUtil;
 use wcf\data\user\UserProfileList;
 use wcf\form\AbstractForm;
 use wcf\system\page\PageLocationManager;
@@ -163,6 +164,8 @@ class TeamEditForm extends AbstractForm {
 			'user'			=> $this->team->getContactProfile(),
 			'playerList'	=> $this->playerList,
 			'userOption'	=> $this->userOption,
+            'teamIsFull'	=> (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2)),
+            'teamIsEmpty'   => ($this->team->countMembers() < 2),
 		));
 	}
 

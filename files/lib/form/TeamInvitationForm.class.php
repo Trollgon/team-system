@@ -185,6 +185,7 @@ class TeamInvitationForm extends AbstractForm {
 				'user'			=> $this->team->getContactProfile(),
 				'playerList'	=> $this->playerList,
 				'userOption'	=> $this->userOption,
+                'teamIsEmpty'   => ($this->team->countMembers() < 2),
 		));
 	}
 

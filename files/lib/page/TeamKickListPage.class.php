@@ -102,6 +102,7 @@ class TeamKickListPage extends AbstractPage {
 				'user'				=> $this->team->getContactProfile(),
 				'playerList'		=> $this->playerList,
 				'userOption'		=> $this->userOption,
+                'teamIsFull'	    => (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2))
 		));
 	}
 	

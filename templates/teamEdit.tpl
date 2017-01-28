@@ -3,6 +3,43 @@
 		<div class="contentHeaderTitle">
 			<h1 class="contentTitle" itemprop="name headline">{lang}tourneysystem.header.editTeam{/lang}</h1>
 		</div>
+
+		<nav class="contentHeaderNavigation">
+			<ul class="userProfileButtonContainer">
+				{hascontent}
+					<li class="dropdown">
+						<a class="button dropdownToggle" title="{lang}tourneysystem.team.page.edit{/lang}">
+							<span class="icon icon32 fa-pencil"></span>
+						</a>
+						<ul class="dropdownMenu userProfileButtonMenu">
+							{content}
+							{event name='menuCustomization'}
+								<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamAvatarEdit' teamID=$teamID}{/link}"
+													   title="{lang}tourneysystem.team.avatar.edit{/lang}" class="box24">
+										<span>{lang}tourneysystem.team.avatar.edit{/lang}</span></a>
+								</li>
+							{if $teamIsFull != true}
+								<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamInvitation' teamID=$teamID}{/link}"
+													   title="{lang}tourneysystem.team.page.invitation{/lang}" class="box24">
+										<span>{lang}tourneysystem.team.page.invitation{/lang}</span></a>
+								</li>
+							{/if}
+							{if $teamIsEmpty != true}
+								<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamKickList' teamID=$teamID}{/link}"
+													   title="{lang}tourneysystem.team.page.kick{/lang}" class="box24">
+										<span>{lang}tourneysystem.team.page.kick{/lang}</span></a>
+								</li>
+							{/if}
+								<li class="boxFlag"><a href="{link application='tourneysystem' controller='TeamDelete' teamID=$teamID}{/link}"
+													   title="{lang}tourneysystem.team.page.delete{/lang}" class="box24">
+										<span>{lang}tourneysystem.team.page.delete{/lang}</span></a>
+								</li>
+							{/content}
+						</ul>
+					</li>
+				{/hascontent}
+			</ul>
+		</nav>
 	</header>
 {/capture}
 
