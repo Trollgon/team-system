@@ -21,7 +21,7 @@ final class TeamUtil {
 		}
 
 		// check illegal characters
-		if (!preg_match('/^[A-Z0-9 -]+$/ig', $name)) {
+		if (!preg_match('/^[A-Z0-9 -]+$/i', $name)) {
 			return false;
 		}
 
@@ -67,7 +67,7 @@ final class TeamUtil {
 		}
 
 		// check illegal characters
-		if (!preg_match('^[A-Z0-9]+$', $tag)) {
+		if (!preg_match('^[A-Z0-9]+$^', $tag)) {
 			return false;
 		}
 
