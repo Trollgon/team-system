@@ -44,7 +44,7 @@ class TeamAvatarAction extends AbstractDatabaseObjectAction {
 
         // check max filesize, allowed file extensions etc.
         /** @noinspection PhpUndefinedMethodInspection */
-        $this->parameters['__files']->validateFiles(new AvatarUploadFileValidationStrategy(PHP_INT_MAX, explode("\n", WCF::getSession()->getPermission('team.profile.avatar.allowedFileExtensions'))));
+        $this->parameters['__files']->validateFiles(new AvatarUploadFileValidationStrategy(PHP_INT_MAX, explode("\n", WCF::getSession()->getPermission('user.profile.avatar.allowedFileExtensions'))));
     }
 
     /**

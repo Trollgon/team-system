@@ -91,12 +91,11 @@ class TeamAvatarEditForm extends AbstractForm {
      */
     public function validate() {
         parent::validate();
-        if ($this->avatarType != 'custom' && $this->avatarType != 'gravatar') $this->avatarType = 'none';
-        switch ($this->avatarType) {
-            case 'custom':
-                if (!$this->team->avatarID) {
-                    throw new UserInputException('custom');
-                }
+        if ($this->avatarType != 'custom') {
+            $this->avatarType = 'none';
+        }
+        elseif (!$this->team->avatarID) {
+            throw new UserInputException('custom');
         }
     }
 
