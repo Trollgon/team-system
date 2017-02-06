@@ -104,7 +104,7 @@
 	<category name="tourneysystem.team.overview">
 		<item name="tourneysystem.team.overview.basic"><![CDATA[Basic Information]]></item>
 		<item name="tourneysystem.team.overview.name"><![CDATA[Teamname]]></item>
-		<item name="tourneysystem.team.overview.name.description"><![CDATA[Teamname must be 3 up to 25 characters long and unique.]]></item>
+		<item name="tourneysystem.team.overview.name.description"><![CDATA[Teamname must be 3 up to 32 characters long and unique.]]></item>
 		<item name="tourneysystem.team.overview.noTeams"><![CDATA[There are no teams so far.]]></item>
 		<item name="tourneysystem.team.overview.platform"><![CDATA[Platform]]></item>
 		<item name="tourneysystem.team.overview.platform.description"><![CDATA[Pick the platform your team will be competing on.]]></item>
@@ -145,15 +145,21 @@
 	</category>
 	
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.user.tourneySystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.category.user.tourneySystem"><![CDATA[Tourney System]]></item>
 		<item name="wcf.acp.group.option.user.tourneySystem.canCreateTeam"><![CDATA[Can create a team]]></item>
 		<item name="wcf.acp.group.option.user.tourneySystem.canViewLists"><![CDATA[Can view team lists]]></item>
 		<item name="wcf.acp.group.option.user.tourneySystem.canViewTeamPages"><![CDATA[Can view team pages]]></item>
-		<item name="wcf.acp.group.option.category.mod.tourneySystem"><![CDATA[Team System]]></item>
-		<item name="wcf.acp.group.option.mod.tourneySystem.canEditTeams"><![CDATA[Can create a team]]></item>
+		<item name="wcf.acp.group.option.category.mod.tourneySystem"><![CDATA[Tourney System]]></item>
+		<item name="wcf.acp.group.option.mod.tourneySystem.canCreateTourneys"><![CDATA[Can create tourneys]]></item>
+        <item name="wcf.acp.group.option.mod.tourneySystem.canCreateOfficialTourneys"><![CDATA[Can create official tourneys]]></item>
+        <item name="wcf.acp.group.option.mod.tourneySystem.canEditTeams"><![CDATA[Can edit teams]]></item>
 		<item name="wcf.acp.group.option.mod.tourneySystem.canCreateDummyTeams"><![CDATA[Can create a dummy team]]></item>
-		<item name="wcf.acp.group.option.category.admin.tourneySystem"><![CDATA[Team System]]></item>
+		<item name="wcf.acp.group.option.category.admin.tourneySystem"><![CDATA[Tourney System]]></item>
+        <item name="wcf.acp.group.option.admin.tourneySystem.canCreateRulebooks"><![CDATA[Can create rulebooks]]></item>
+        <item name="wcf.acp.group.option.admin.tourneySystem.canCreateOfficialRulebooks"><![CDATA[Can create official rulebooks]]></item>
 		<item name="wcf.acp.group.option.admin.tourneySystem.canEditPlatforms"><![CDATA[Can edit platforms]]></item>
+		<item name="wcf.acp.group.option.admin.tourneySystem.canEditGames"><![CDATA[Can edit games]]></item>
+		<item name="wcf.acp.group.option.admin.tourneySystem.canEditGamemodes"><![CDATA[Can edit game modes]]></item>
 	</category>
 
 	<category name="wcf.acp.menu">

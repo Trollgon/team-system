@@ -1,3 +1,33 @@
+/* Tourneys */
+
+DROP TABLE IF EXISTS tourneysystem1_game;
+CREATE TABLE tourneysystem1_game (
+  gameID int(10) NOT NULL AUTO_INCREMENT,
+  gameName VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (gameID),
+  UNIQUE KEY gameID (gameID)
+);
+
+DROP TABLE IF EXISTS tourneysystem1_gamemode;
+CREATE TABLE tourneysystem1_gamemode (
+  gamemodeID int(10) NOT NULL AUTO_INCREMENT,
+  gamemodeName VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (gamemodeID),
+  UNIQUE KEY gamemodeID (gamemodeID)
+);
+
+DROP TABLE IF EXISTS tourneysystem1_rulebook;
+CREATE TABLE tourneysystem1_rulebook (
+  rulebookID int(10) NOT NULL AUTO_INCREMENT,
+  rulebookName VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  creatorID int(10) NOT NULL,
+  officialRulebook BOOLEAN DEFAULT 0,
+  PRIMARY KEY (rulebookID),
+  UNIQUE KEY rulebookID (rulebookID)
+);
+
+/* Teams */
+
 DROP TABLE IF EXISTS tourneysystem1_team;
 CREATE TABLE tourneysystem1_team (
   teamID int(10) NOT NULL AUTO_INCREMENT,
@@ -26,7 +56,7 @@ CREATE TABLE tourneysystem1_platform (
   platformName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   optionID int(10) NOT NULL,
   PRIMARY KEY (platformID),
-  UNIQUE KEY platformID (platformID),
+  UNIQUE KEY platformID (platformID)
 );
 
 DROP TABLE IF EXISTS tourneysystem1_user_to_team_to_position_to_platform;
@@ -60,6 +90,8 @@ CREATE TABLE tourneysystem1_team_avatar (
   cropX SMALLINT(5) NOT NULL DEFAULT 0,
   cropY SMALLINT(5) NOT NULL DEFAULT 0
 );
+
+/* Foreign Keys */
 
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
