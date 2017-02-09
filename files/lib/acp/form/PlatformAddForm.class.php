@@ -7,7 +7,6 @@
 
 namespace tourneysystem\acp\form;
 
-
 use tourneysystem\data\platform\PlatformAction;
 use wcf\data\user\option\UserOptionList;
 use wcf\form\AbstractForm;
@@ -17,9 +16,17 @@ use wcf\util\StringUtil;
 
 class PlatformAddForm extends AbstractForm {
 
+    /**
+     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     */
     public $activeMenuItem = 'wcf.acp.menu.link.tourneysystem.platform.add';
 
-    public $platformID = "";
+    /**
+     * @see wcf\page\AbstractPage::$neededPermissions
+     */
+    public $neededPermissions = array('admin.tourneySystem.canEditPlatforms');
+
+    public $platformID = 0;
     public $platformName = "";
     public $userOption = "";
 
@@ -95,6 +102,7 @@ class PlatformAddForm extends AbstractForm {
         $userOptionArray->readObjects();
 
         WCF::getTPL()->assign(array(
+            'action'            =>  'add',
             'platformName'      =>  $this->platformName,
             'optionID'          =>  $this->userOption,
             'userOptionArray'   =>  $userOptionArray

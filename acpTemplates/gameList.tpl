@@ -1,21 +1,21 @@
-{include file='header' pageTitle='wcf.acp.menu.link.platform.list'}
+{include file='header' pageTitle='wcf.acp.menu.link.tourneysystem.game.list'}
 
 <script data-relocate="true">
     $(function () {
-        new WCF.Action.Delete('tourneysystem\\data\\platform\\PlatformAction', '.jsPlatformRow');
+        new WCF.Action.Delete('tourneysystem\\data\\game\\GameAction', '.jsGameRow');
     });
 </script>
 
 <header class="contentHeader">
     <div class="contentHeaderTitle">
-        <h1 class="contentTitle">{lang}wcf.acp.menu.link.platform.list{/lang}</h1>
+        <h1 class="contentTitle">{lang}wcf.acp.menu.link.tourneysystem.game.list{/lang}</h1>
     </div>
 
     <nav class="contentHeaderNavigation">
         <ul>
-            <li><a href="{link application='tourneysystem' controller='PlatformAdd'}{/link}" class="button"><span
+            <li><a href="{link application='tourneysystem' controller='GameAdd'}{/link}" class="button"><span
                             class="icon icon16 fa-plus"></span>
-                    <span>{lang}wcf.acp.menu.link.platform.add{/lang}</span></a></li>
+                    <span>{lang}wcf.acp.menu.link.tourneysystem.game.add{/lang}</span></a></li>
 
             {event name='contentHeaderNavigation'}
         </ul>
@@ -36,16 +36,16 @@
                 {event name='headColumns'} </tr>
             </thead>
             <tbody>
-            {foreach from=$objects item=platform}
-                <tr class="jsPlatformRow">
+            {foreach from=$objects item=game}
+                <tr class="jsGameRow">
                     <td class="columnIcon">
                         {* toggle, edit, delete *}
-                            <a href="{link application='tourneysystem' controller='PlatformEdit' object=$platform}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-                            <span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$platform->platformID}" data-confirm-message-html="{lang __encode=true}tourneysystem.acp.platform.save{/lang}"></span>
+                        <a href="{link application='tourneysystem' controller='GameEdit' object=$game}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+                        <span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$game->gameID}" data-confirm-message-html="{lang __encode=true}tourneysystem.acp.game.sure{/lang}"></span>
                         {event name='buttons'}
                     </td>
-                    <td class="columnID"><p>{@$platform->platformID}</p></td>
-                    <td class="columnText columnClassName"><p>{$platform->platformName}</p></td>
+                    <td class="columnID"><p>{@$game->gameID}</p></td>
+                    <td class="columnText columnClassName"><p>{$game->gameName}</p></td>
                     {event name='columns'} </tr>
             {/foreach}
             </tbody>
@@ -59,9 +59,9 @@
             <nav class="contentFooterNavigation">
                 <ul>
                     {content}
-                        <li><a href="{link application='tourneysystem' controller='PlatformAdd'}{/link}" class="button"><span
+                        <li><a href="{link application='tourneysystem' controller='GameAdd'}{/link}" class="button"><span
                                         class="icon icon16 fa-plus"></span>
-                                <span>{lang}wcf.acp.menu.link.platform.add{/lang}</span></a></li>
+                                <span>{lang}wcf.acp.menu.link.tourneysystem.game.add{/lang}</span></a></li>
                     {event name='contentFooterNavigation'}
                     {/content}
                 </ul>

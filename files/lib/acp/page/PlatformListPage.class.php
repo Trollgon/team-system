@@ -6,12 +6,11 @@
  */
 
 namespace tourneysystem\acp\page;
+
 use wcf\page\SortablePage;
 
 class PlatformListPage extends SortablePage {
-
     public $activeMenuItem = 'wcf.acp.menu.link.tourneysystem.platform.list';
 
     public $objectListClassName = 'tourneysystem\data\platform\PlatformList';
-
 }

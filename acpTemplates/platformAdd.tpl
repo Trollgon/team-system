@@ -20,10 +20,10 @@
     <p class="success">{lang}tourneysystem.acp.platform.save{/lang}</p>
 {/if}
 
-<form method="post" action="{link application='tourneysystem' controller='PlatformAdd'}{/link}">
+<form method="post" action="{if $action == 'add'}{link application='tourneysystem' controller='PlatformAdd'}{/link}{else}{link application='tourneysystem' controller='PlatformEdit' object=$platform}{/link}{/if}">
     <fieldset>
         <dl>
-            <dt><label for="platformName">{lang}tourneysystem.acp.platform.title{/lang}</label></dt>
+            <dt><label for="platformName">{lang}tourneysystem.acp.general.title{/lang}</label></dt>
             <dd>
                 <input type="text" id="platformName" name="platformName" value="{$platformName}" class="long">
                 {if $errorField == 'platformName'}

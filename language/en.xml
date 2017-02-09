@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="tourneysystem.acp">
+		<item name="tourneysystem.acp.game.save"><![CDATA[Game has been saved.]]></item>
+		<item name="tourneysystem.acp.game.sure"><![CDATA[Do you really want to delete this game?]]></item>
+		<item name="tourneysystem.acp.gamemode.save"><![CDATA[Gamemode has been saved.]]></item>
+		<item name="tourneysystem.acp.gamemode.sure"><![CDATA[Do you really want to delete this gamemode?]]></item>
+		<item name="tourneysystem.acp.general.list"><![CDATA[List Items]]></item>
+		<item name="tourneysystem.acp.general.noContent"><![CDATA[No Content.]]></item>
+		<item name="tourneysystem.acp.general.title"><![CDATA[Name]]></item>
 		<item name="tourneysystem.acp.index.system.software.appVersion"><![CDATA[Tourneysystem Version]]></item>
 		<item name="tourneysystem.acp.platform.error.notUnique"><![CDATA[Name is already in use.]]></item>
 		<item name="tourneysystem.acp.platform.noContent"><![CDATA[No Content.]]></item>
 		<item name="tourneysystem.acp.platform.save"><![CDATA[Platform has been saved.]]></item>
 		<item name="tourneysystem.acp.platform.sure"><![CDATA[Do you really want to delete this platform?]]></item>
-		<item name="tourneysystem.acp.platform.title"><![CDATA[Name]]></item>
+		<item name="tourneysystem.acp.rulebook.error.notUnique"><![CDATA[Name is already in use.]]></item>
+		<item name="tourneysystem.acp.rulebook.official"><![CDATA[Is an official rulebook]]></item>
+		<item name="tourneysystem.acp.rulebook.save"><![CDATA[Rulebook has been saved.]]></item>
+		<item name="tourneysystem.acp.rulebook.sure"><![CDATA[Do you really want to delete this rulebook?]]></item>
+		<item name="tourneysystem.acp.rulebookArticle.articleOrder"><![CDATA[Order]]></item>
+		<item name="tourneysystem.acp.rulebookArticle.save"><![CDATA[Article has been saved.]]></item>
+		<item name="tourneysystem.acp.rulebookArticle.sure"><![CDATA[Do you really want to delete this article?]]></item>
+		<item name="tourneysystem.acp.rulebookRule.ruleOrder"><![CDATA[Order]]></item>
+		<item name="tourneysystem.acp.rulebookRule.save"><![CDATA[Rule has been saved.]]></item>
+		<item name="tourneysystem.acp.rulebookRule.sure"><![CDATA[Do you really want to delete this rule?]]></item>
+		<item name="tourneysystem.acp.rulebookRule.text"><![CDATA[Rule]]></item>
 		<item name="tourneysystem.acp.userOption.title"><![CDATA[Required contact field]]></item>
 	</category>
 
 	<category name="tourneysystem.copyright">
-		<item name="tourneysystem.copyright.text"><![CDATA[<a href="https://www.ac-whispers.com/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>Software: <strong>Team System {@PACKAGE_VERSION}</strong>, developed by <strong>Trollgon</strong></a>]]></item>
+		<item name="tourneysystem.copyright.text"><![CDATA[<a href="https://www.ac-whispers.com/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>Software: <strong>Tourney System {@PACKAGE_VERSION}</strong>, developed by <strong>Trollgon</strong></a>]]></item>
 	</category>
 	
 	<category name="tourneysystem.header">
@@ -157,6 +174,7 @@
 		<item name="wcf.acp.group.option.category.admin.tourneySystem"><![CDATA[Tourney System]]></item>
         <item name="wcf.acp.group.option.admin.tourneySystem.canCreateRulebooks"><![CDATA[Can create rulebooks]]></item>
         <item name="wcf.acp.group.option.admin.tourneySystem.canCreateOfficialRulebooks"><![CDATA[Can create official rulebooks]]></item>
+		<item name="wcf.acp.group.option.admin.tourneySystem.canEditAllRulebooks"><![CDATA[Can edit all rulebooks]]></item>
 		<item name="wcf.acp.group.option.admin.tourneySystem.canEditPlatforms"><![CDATA[Can edit platforms]]></item>
 		<item name="wcf.acp.group.option.admin.tourneySystem.canEditGames"><![CDATA[Can edit games]]></item>
 		<item name="wcf.acp.group.option.admin.tourneySystem.canEditGamemodes"><![CDATA[Can edit game modes]]></item>
@@ -164,8 +182,18 @@
 
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.tourneysystem"><![CDATA[Tourneysystem]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.game.add"><![CDATA[Add game]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.game.list"><![CDATA[Show games]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.gamemode.add"><![CDATA[Add gamemode]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.gamemode.list"><![CDATA[Show gamemodes]]></item>
 		<item name="wcf.acp.menu.link.tourneysystem.platform.add"><![CDATA[Add platform]]></item>
 		<item name="wcf.acp.menu.link.tourneysystem.platform.list"><![CDATA[Show platforms]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.rulebook.add"><![CDATA[Add rulebook]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.rulebook.list"><![CDATA[Show rulebooks]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.rulebookArticle.add"><![CDATA[Add article]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.rulebookArticle.list"><![CDATA[Show articles of {@$rulebook->rulebookName}]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.rulebookRule.add"><![CDATA[Add rule]]></item>
+		<item name="wcf.acp.menu.link.tourneysystem.rulebookRule.list"><![CDATA[Show rules of {@$article->rulebookArticleName}]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">

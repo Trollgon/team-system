@@ -9,8 +9,9 @@ namespace tourneysystem\data\gamemode;
 
 
 use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
+use wcf\system\request\IRouteController;
 
-class Gamemode extends TOURNEYSYSTEMDatabaseObject {
+class Gamemode extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableName
      */
@@ -20,4 +21,18 @@ class Gamemode extends TOURNEYSYSTEMDatabaseObject {
      * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'gamemodeID';
+
+    /**
+     * @see wcf\system\request\IRouteController::getTitle()
+     */
+    public function getTitle() {
+        return $this->gamemodeName;
+    }
+
+    /**
+     * @see wcf\system\request\IRouteController::getID()
+     */
+    public function getID() {
+        return $this->gamemodeID;
+    }
 }

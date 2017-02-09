@@ -7,9 +7,11 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
+          <root url="file://$MODULE_DIR$/../wbb" />
           <root url="file://$MODULE_DIR$/../wcf" />
         </CLASSES>
         <SOURCES>
+          <root url="file://$MODULE_DIR$/../wbb" />
           <root url="file://$MODULE_DIR$/../wcf" />
         </SOURCES>
       </library>

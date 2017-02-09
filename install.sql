@@ -20,11 +20,37 @@ DROP TABLE IF EXISTS tourneysystem1_rulebook;
 CREATE TABLE tourneysystem1_rulebook (
   rulebookID int(10) NOT NULL AUTO_INCREMENT,
   rulebookName VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  creatorID int(10) NOT NULL,
+  creatorID int(10) NOT NULL DEFAULT 1,
   officialRulebook BOOLEAN DEFAULT 0,
   PRIMARY KEY (rulebookID),
   UNIQUE KEY rulebookID (rulebookID)
 );
+
+DROP TABLE IF EXISTS tourneysystem1_rulebook_article;
+CREATE TABLE tourneysystem1_rulebook_article (
+  rulebookArticleID int(10) NOT NULL AUTO_INCREMENT,
+  articleOrder int(10) NOT NULL,
+  rulebookArticleName VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  rulebookID int(10) NOT NULL,
+  PRIMARY KEY (rulebookArticleID),
+  UNIQUE KEY rulebookArticleID (rulebookArticleID)
+);
+
+DROP TABLE IF EXISTS tourneysystem1_rulebook_rule;
+CREATE TABLE tourneysystem1_rulebook_rule (
+  ruleID int(10) NOT NULL AUTO_INCREMENT,
+  ruleOrder int(10) NOT NULL,
+  text MEDIUMTEXT COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  articleID int(10) NOT NULL,
+  PRIMARY KEY (ruleID),
+  UNIQUE KEY ruleID (ruleID)
+);
+
+ALTER TABLE tourneysystem1_rulebook ADD FOREIGN KEY (creatorID) REFERENCES wcf1_user (userID) ON DELETE SET DEFAULT;
+
+ALTER TABLE tourneysystem1_rulebook_article ADD FOREIGN KEY (rulebookID) REFERENCES tourneysystem1_rulebook (rulebookID) ON DELETE CASCADE;
+
+ALTER TABLE tourneysystem1_rulebook_rule ADD FOREIGN KEY (articleID) REFERENCES tourneysystem1_rulebook_article (rulebookArticleID) ON DELETE CASCADE;
 
 /* Teams */
 

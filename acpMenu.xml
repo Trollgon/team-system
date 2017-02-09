@@ -5,26 +5,12 @@
             <parent>wcf.acp.menu.link.application</parent>
         </acpmenuitem>
 
-        <!-- Platforms -->
-        <acpmenuitem name="wcf.acp.menu.link.tourneysystem.platform.list">
-            <controller>tourneysystem\acp\page\PlatformListPage</controller>
-            <parent>wcf.acp.menu.link.tourneysystem</parent>
-            <permissions>admin.tourneySystem.canEditPlatforms</permissions>
-            <showorder>1</showorder>
-        </acpmenuitem>
-        <acpmenuitem name="wcf.acp.menu.link.tourneysystem.platform.add">
-            <controller>tourneysystem\acp\form\PlatformAddForm</controller>
-            <parent>wcf.acp.menu.link.tourneysystem.platform.list</parent>
-            <permissions>admin.tourneySystem.canEditPlatforms</permissions>
-            <icon>fa-plus</icon>
-        </acpmenuitem>
-
         <!-- Game -->
         <acpmenuitem name="wcf.acp.menu.link.tourneysystem.game.list">
             <controller>tourneysystem\acp\page\GameListPage</controller>
             <parent>wcf.acp.menu.link.tourneysystem</parent>
             <permissions>admin.tourneySystem.canEditGames</permissions>
-            <showorder>2</showorder>
+            <showorder>1</showorder>
         </acpmenuitem>
         <acpmenuitem name="wcf.acp.menu.link.tourneysystem.game.add">
             <controller>tourneysystem\acp\form\GameAddForm</controller>
@@ -38,7 +24,7 @@
             <controller>tourneysystem\acp\page\GamemodeListPage</controller>
             <parent>wcf.acp.menu.link.tourneysystem</parent>
             <permissions>admin.tourneySystem.canEditGamemodes</permissions>
-            <showorder>3</showorder>
+            <showorder>2</showorder>
         </acpmenuitem>
         <acpmenuitem name="wcf.acp.menu.link.tourneysystem.gamemode.add">
             <controller>tourneysystem\acp\form\GamemodeAddForm</controller>
@@ -47,12 +33,26 @@
             <icon>fa-plus</icon>
         </acpmenuitem>
 
+        <!-- Platforms -->
+        <acpmenuitem name="wcf.acp.menu.link.tourneysystem.platform.list">
+            <controller>tourneysystem\acp\page\PlatformListPage</controller>
+            <parent>wcf.acp.menu.link.tourneysystem</parent>
+            <permissions>admin.tourneySystem.canEditPlatforms</permissions>
+            <showorder>3</showorder>
+        </acpmenuitem>
+        <acpmenuitem name="wcf.acp.menu.link.tourneysystem.platform.add">
+            <controller>tourneysystem\acp\form\PlatformAddForm</controller>
+            <parent>wcf.acp.menu.link.tourneysystem.platform.list</parent>
+            <permissions>admin.tourneySystem.canEditPlatforms</permissions>
+            <icon>fa-plus</icon>
+        </acpmenuitem>
+
         <!-- Rulebook -->
         <acpmenuitem name="wcf.acp.menu.link.tourneysystem.rulebook.list">
             <controller>tourneysystem\acp\page\RulebookListPage</controller>
             <parent>wcf.acp.menu.link.tourneysystem</parent>
             <permissions>admin.tourneySystem.canCreateRulebooks</permissions>
-            <showorder>3</showorder>
+            <showorder>4</showorder>
         </acpmenuitem>
         <acpmenuitem name="wcf.acp.menu.link.tourneysystem.rulebook.add">
             <controller>tourneysystem\acp\form\RulebookAddForm</controller>

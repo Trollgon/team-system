@@ -13,7 +13,7 @@ class GamemodeAction extends AbstractDatabaseObjectAction {
     /**
      * @see	\wcf\data\AbstractDatabaseObjectAction::$className
      */
-    public $className = 'tourneysystem\data\gamemode\GameModeEditor';
+    public $className = 'tourneysystem\data\gamemode\GamemodeEditor';
 
     /**
      * @see \wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
