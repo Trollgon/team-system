@@ -7,13 +7,13 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
-use tourneysystem\data\invitations\Invitation;
+use tourneysystem\data\invitation\Invitation;
 use wcf\form\AbstractForm;
 use tourneysystem\util\TeamInvitationUtil;
 use wcf\util\HeaderUtil;
 use wcf\system\request\LinkHandler;
 use tourneysystem\util\TeamUtil;
-use tourneysystem\data\invitations\InvitationAction;
+use tourneysystem\data\invitation\InvitationAction;
 use tourneysystem\data\team\Team;
 use tourneysystem\data\team\TeamAction;
 

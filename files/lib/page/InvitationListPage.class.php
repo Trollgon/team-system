@@ -22,7 +22,7 @@ class InvitationListPage extends SortablePage {
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 
-	public $objectListClassName = 'tourneysystem\data\invitations\InvitationList';
+	public $objectListClassName = 'tourneysystem\data\invitation\InvitationList';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage

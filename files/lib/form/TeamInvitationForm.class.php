@@ -11,7 +11,7 @@ use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
-use tourneysystem\data\invitations\InvitationAction;
+use tourneysystem\data\invitation\InvitationAction;
 use tourneysystem\util\TeamInvitationUtil;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;

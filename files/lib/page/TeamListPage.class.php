@@ -2,7 +2,7 @@
 
 namespace tourneysystem\page;
 
-use tourneysystem\data\invitations\InvitationList;
+use tourneysystem\data\invitation\InvitationList;
 use tourneysystem\data\team\TeamList;
 use wcf\system\WCF;
 use tourneysystem\util\TeamUtil;

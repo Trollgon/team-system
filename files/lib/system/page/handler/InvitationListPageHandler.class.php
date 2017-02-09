@@ -6,7 +6,7 @@
  */
 
 namespace tourneysystem\system\page\handler;
-use tourneysystem\data\invitations\InvitationList;
+use tourneysystem\data\invitation\InvitationList;
 use wcf\system\page\handler\AbstractMenuPageHandler;
 use wcf\system\WCF;
 
