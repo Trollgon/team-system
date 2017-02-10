@@ -80,6 +80,7 @@ class InvitationForm extends AbstractForm {
         parent::readData();
 
         PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 
 	/**

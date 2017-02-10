@@ -142,6 +142,7 @@ class TeamAvatarEditForm extends AbstractForm {
         parent::readData();
         PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
         PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
 
         if (empty($_POST)) {
             if ($this->team->avatarID) $this->avatarType = 'custom';

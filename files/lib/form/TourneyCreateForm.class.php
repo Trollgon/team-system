@@ -76,6 +76,7 @@ class TourneyCreateForm extends AbstractForm {
         parent::readData();
 
         PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 
     /**

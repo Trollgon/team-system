@@ -62,6 +62,7 @@ class TeamKickListPage extends AbstractPage {
 
         PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
         PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 
 	/**
