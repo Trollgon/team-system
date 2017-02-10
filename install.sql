@@ -16,6 +16,15 @@ CREATE TABLE tourneysystem1_gamemode (
   UNIQUE KEY gamemodeID (gamemodeID)
 );
 
+DROP TABLE IF EXISTS tourneysystem1_platform;
+CREATE TABLE tourneysystem1_platform (
+  platformID int(10) NOT NULL AUTO_INCREMENT,
+  platformName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  optionID int(10) NOT NULL,
+  PRIMARY KEY (platformID),
+  UNIQUE KEY platformID (platformID)
+);
+
 DROP TABLE IF EXISTS tourneysystem1_rulebook;
 CREATE TABLE tourneysystem1_rulebook (
   rulebookID int(10) NOT NULL AUTO_INCREMENT,
@@ -46,11 +55,54 @@ CREATE TABLE tourneysystem1_rulebook_rule (
   UNIQUE KEY ruleID (ruleID)
 );
 
-ALTER TABLE tourneysystem1_rulebook ADD FOREIGN KEY (creatorID) REFERENCES wcf1_user (userID) ON DELETE SET DEFAULT;
+DROP TABLE IF EXISTS tourneysystem1_tourney;
+CREATE TABLE tourneysystem1_tourney (
+  tourneyID int(10) NOT NULL AUTO_INCREMENT,
+  platformID int(10) NOT NULL,
+  gameID int(10) NOT NULL,
+  gamemodeID int(10) NOT NULL,
+  tourneyName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  participantType INT(10),
+  avatarID INT(10),
+  rulebookID INT(10),
+  tourneyDescription MEDIUMTEXT,
+  firstTourneyMode INT(10) NOT NULL,
+  tourneyStartTime INT(10),
+  tourneyStatus INT(10),
+  minParticipants INT(10),
+  maxParticipants INT(10),
+  creatorID INT(10),
+  officialTourney BOOLEAN DEFAULT 0,
+  PRIMARY KEY (tourneyID),
+  UNIQUE KEY tourneyID (tourneyID)
+);
 
-ALTER TABLE tourneysystem1_rulebook_article ADD FOREIGN KEY (rulebookID) REFERENCES tourneysystem1_rulebook (rulebookID) ON DELETE CASCADE;
+DROP TABLE tourneysystem1_match_day;
+CREATE TABLE tourneysystem1_match_day (
+  matchDayID INT(10) NOT NULL AUTO_INCREMENT,
+  tourneyID int(10) NOT NULL,
+  startDate DATETIME,
+  endDate DATETIME,
+  PRIMARY KEY (matchDayID),
+  UNIQUE KEY matchDayID (matchDayID)
+);
 
-ALTER TABLE tourneysystem1_rulebook_rule ADD FOREIGN KEY (articleID) REFERENCES tourneysystem1_rulebook_article (rulebookArticleID) ON DELETE CASCADE;
+DROP TABLE IF EXISTS tourneysystem1_match;
+CREATE TABLE tourneysystem1_match (
+  matchID int(10) NOT NULL AUTO_INCREMENT,
+  tourneyID int(10) NOT NULL,
+  matchDayID int(10),
+  participantTypeID int(10) NOT NULL,
+  numberOfMaxSessions int(10) NOT NULL DEFAULT 1,
+  PRIMARY KEY (matchID),
+  UNIQUE KEY matchID (matchID)
+);
+
+DROP TABLE IF EXISTS tourneysystem1_participant_to_match;
+CREATE TABLE tourneysystem1_participant_to_match (
+  matchID int(10) NOT NULL,
+  participantID int(10) NOT NULL
+);
 
 /* Teams */
 
@@ -74,15 +126,6 @@ CREATE TABLE tourneysystem1_team (
   dummyTeam BOOLEAN DEFAULT 0,
   PRIMARY KEY (teamID),
   UNIQUE KEY teamID (teamID)
-);
-
-DROP TABLE IF EXISTS tourneysystem1_platform;
-CREATE TABLE tourneysystem1_platform (
-  platformID int(10) NOT NULL AUTO_INCREMENT,
-  platformName varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  optionID int(10) NOT NULL,
-  PRIMARY KEY (platformID),
-  UNIQUE KEY platformID (platformID)
 );
 
 DROP TABLE IF EXISTS tourneysystem1_user_to_team_to_position_to_platform;
@@ -119,6 +162,25 @@ CREATE TABLE tourneysystem1_team_avatar (
 
 /* Foreign Keys */
 
+ALTER TABLE tourneysystem1_platform ADD FOREIGN KEY (optionID) REFERENCES wcf1_user_option (optionID) ON DELETE CASCADE;
+
+ALTER TABLE tourneysystem1_rulebook ADD FOREIGN KEY (creatorID) REFERENCES wcf1_user (userID) ON DELETE SET DEFAULT;
+
+ALTER TABLE tourneysystem1_rulebook_article ADD FOREIGN KEY (rulebookID) REFERENCES tourneysystem1_rulebook (rulebookID) ON DELETE CASCADE;
+
+ALTER TABLE tourneysystem1_rulebook_rule ADD FOREIGN KEY (articleID) REFERENCES tourneysystem1_rulebook_article (rulebookArticleID) ON DELETE CASCADE;
+
+ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (platformID) REFERENCES tourneysystem1_platform (platformID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (gameID) REFERENCES tourneysystem1_game (gameID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (gamemodeID) REFERENCES tourneysystem1_gamemode (gamemodeID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (rulebookID) REFERENCES tourneysystem1_rulebook (rulebookID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (creatorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+
+ALTER TABLE tourneysystem1_match_day ADD FOREIGN KEY (tourneyID) REFERENCES tourneysystem1_tourney (tourneyID) ON DELETE CASCADE;
+
+ALTER TABLE tourneysystem1_match ADD FOREIGN KEY (tourneyID) REFERENCES tourneysystem1_tourney (tourneyID) ON DELETE CASCADE;
+ALTER TABLE tourneysystem1_match ADD FOREIGN KEY (matchDayID) REFERENCES tourneysystem1_match_day (matchDayID) ON DELETE CASCADE;
+
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player3ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
@@ -129,8 +191,6 @@ ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (sub3ID) REFERENCES wcf1_user (u
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (contactID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (platformID) REFERENCES tourneysystem1_platform (platformID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (avatarID) REFERENCES tourneysystem1_team_avatar (avatarID) ON DELETE SET NULL;
-
-ALTER TABLE tourneysystem1_platform ADD FOREIGN KEY (optionID) REFERENCES wcf1_user_option (optionID) ON DELETE CASCADE;
 
 ALTER TABLE tourneysystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_user_to_team_to_position_to_platform ADD FOREIGN KEY (teamID) REFERENCES tourneysystem1_team (teamID) ON DELETE CASCADE;

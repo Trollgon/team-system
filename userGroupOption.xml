@@ -45,18 +45,6 @@
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="mod.tourneySystem.canCreateTourneys">
-				<categoryname>mod.tourneySystem</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="mod.tourneySystem.canCreateOfficialTourneys">
-				<categoryname>mod.tourneySystem</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
 			<!-- /mod.tourneySystem -->
 
 			<!-- admin.tourneySystem -->
@@ -91,6 +79,18 @@
 				<admindefaultvalue>1</admindefaultvalue>
             </option>
 			<option name="admin.tourneySystem.canCreateOfficialRulebooks">
+				<categoryname>admin.tourneySystem</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.tourneySystem.canCreateTourneys">
+				<categoryname>admin.tourneySystem</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.tourneySystem.canCreateOfficialTourneys">
 				<categoryname>admin.tourneySystem</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>

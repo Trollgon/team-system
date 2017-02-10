@@ -198,7 +198,6 @@ class TeamPage extends SortablePage {
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()
 	 */
-	
 	public function assignVariables() {
 		parent::assignVariables();
 		

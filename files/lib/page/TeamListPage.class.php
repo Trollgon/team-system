@@ -2,7 +2,6 @@
 
 namespace tourneysystem\page;
 
-use tourneysystem\data\invitation\InvitationList;
 use tourneysystem\data\team\TeamList;
 use wcf\system\WCF;
 use tourneysystem\util\TeamUtil;
@@ -22,7 +21,7 @@ class TeamListPage extends SortablePage {
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'tourneysystem\data\team\TeamList';
-	
+
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()
 	 */

@@ -35,6 +35,7 @@
 		<item name="tourneysystem.header.createTeam"><![CDATA[Create new team]]></item>
 		<item name="tourneysystem.header.editTeam"><![CDATA[Edit your team]]></item>
 		<item name="tourneysystem.header.menu.teams"><![CDATA[Teams]]></item>
+		<item name="tourneysystem.header.menu.tourneys"><![CDATA[Tourneys]]></item>
 	</category>
 	 
 	<category name="tourneysystem.team">
@@ -56,39 +57,18 @@
 		<item name="tourneysystem.team.create.platform.error.notUnique"><![CDATA[You are already part of a team on this platform.]]></item>
 		<item name="tourneysystem.team.create.successfulRedirect"><![CDATA[Thank you for creating your new team.<br/>It is now created.]]></item>
 	</category>
-	
-	<category name="tourneysystem.team.edit">
-		<item name="tourneysystem.team.edit.contact.description"><![CDATA[Select a contact person in case you are not online during a tournament.]]></item>
-		<item name="tourneysystem.team.edit.description.description"><![CDATA[Describe your team in up to 400 characters.]]></item>
-		<item name="tourneysystem.team.edit.general"><![CDATA[General]]></item>
-		<item name="tourneysystem.team.edit.successfulRedirect"><![CDATA[Your team has been successfully edited.]]></item>
-	</category>
-	
+
 	<category name="tourneysystem.team.delete">
 		<item name="tourneysystem.team.delete.header"><![CDATA[You are about to delete [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
 		<item name="tourneysystem.team.delete.successfulRedirect"><![CDATA[Your team has been successfully deleted.]]></item>
 		<item name="tourneysystem.team.delete.warning"><![CDATA[Heads up! This is a one time action and cannot be undone.]]></item>
 	</category>
 	
-	<category name="tourneysystem.team.leave">
-		<item name="tourneysystem.team.leave.header"><![CDATA[You are about to leave [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="tourneysystem.team.leave.successfulRedirect"><![CDATA[You have left your team successfully.]]></item>
-		<item name="tourneysystem.team.leave.warning"><![CDATA[Heads up! It is impossible to join back by yourself. After leaving this team you need a new invitation by the team leader.]]></item>
-	</category>
-	
-	<category name="tourneysystem.team.kick">
-		<item name="tourneysystem.team.kick.header"><![CDATA[You are about to kick {@$playername} from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
-		<item name="tourneysystem.team.kick.successfulRedirect"><![CDATA[Lineup change successfull.]]></item>
-		<item name="tourneysystem.team.kick.warning"><![CDATA[Heads up! After kicking a player from your team you need to send him/her a new invitation and he/she needs to accept it again.]]></item>
-	</category>
-	
-	<category name="tourneysystem.team.invitationList">
-		<item name="tourneysystem.team.invitationList.platform"><![CDATA[Plays on {$invitation->getPlatform()}]]></item>
-	</category>
-	
-	<category name="tourneysystem.team.teamList">
-		<item name="tourneysystem.team.teamList.leader"><![CDATA[Team leader:]]></item>
-		<item name="tourneysystem.team.teamList.platform"><![CDATA[Platform: {$team->getPlatform()}]]></item>
+	<category name="tourneysystem.team.edit">
+		<item name="tourneysystem.team.edit.contact.description"><![CDATA[Select a contact person in case you are not online during a tournament.]]></item>
+		<item name="tourneysystem.team.edit.description.description"><![CDATA[Describe your team in up to 400 characters.]]></item>
+		<item name="tourneysystem.team.edit.general"><![CDATA[General]]></item>
+		<item name="tourneysystem.team.edit.successfulRedirect"><![CDATA[Your team has been successfully edited.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.invitation">
@@ -110,12 +90,28 @@
 		<item name="tourneysystem.team.invitation.successfulRedirect"><![CDATA[The user has been invited.</br>He/She will join the team when he/she accepts it.]]></item>
 		<item name="tourneysystem.team.invitation.title"><![CDATA[Your invitation to "[{$team->getTeamTag()}] - {$team->getTeamName()}" as a {if $positionID = 1}player{else}substitute{/if}]]></item>
 	</category>
+
+	<category name="tourneysystem.team.invitationList">
+		<item name="tourneysystem.team.invitationList.platform"><![CDATA[Plays on {$invitation->getPlatform()}]]></item>
+	</category>
 	
 	<category name="tourneysystem.team.join">
 		<item name="tourneysystem.team.join.unsuccessfulRedirect.playerNotInThisTeam"><![CDATA[You are already in this team. The invitation got deleted.]]></item>
 		<item name="tourneysystem.team.join.unsuccessfulRedirect.positionNotEmpty"><![CDATA[The position you got invited to has already been filled. The invitation got deleted.]]></item>
 		<item name="tourneysystem.team.join.successfulRedirect"><![CDATA[You successfully joined the team.]]></item>
 		<item name="tourneysystem.team.join.unsuccessfulRedirect.playerAlreadyHasTeam"><![CDATA[You already have a team on this platform. The invitation got deleted.]]></item>
+	</category>
+
+	<category name="tourneysystem.team.kick">
+		<item name="tourneysystem.team.kick.header"><![CDATA[You are about to kick {@$playername} from [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.kick.successfulRedirect"><![CDATA[Lineup change successfull.]]></item>
+		<item name="tourneysystem.team.kick.warning"><![CDATA[Heads up! After kicking a player from your team you need to send him/her a new invitation and he/she needs to accept it again.]]></item>
+	</category>
+
+	<category name="tourneysystem.team.leave">
+		<item name="tourneysystem.team.leave.header"><![CDATA[You are about to leave [{$team->getTeamTag()}] - {$team->getTeamName()}]]></item>
+		<item name="tourneysystem.team.leave.successfulRedirect"><![CDATA[You have left your team successfully.]]></item>
+		<item name="tourneysystem.team.leave.warning"><![CDATA[Heads up! It is impossible to join back by yourself. After leaving this team you need a new invitation by the team leader.]]></item>
 	</category>
 	
 	<category name="tourneysystem.team.overview">
@@ -159,6 +155,30 @@
 		<item name="tourneysystem.team.page.team"><![CDATA[Team]]></item>
 		<item name="tourneysystem.team.page.user"><![CDATA[My team]]></item>
 		<item name="tourneysystem.team.page.user.many"><![CDATA[My teams]]></item>
+	</category>
+
+	<category name="tourneysystem.team.teamList">
+		<item name="tourneysystem.team.teamList.leader"><![CDATA[Team leader:]]></item>
+		<item name="tourneysystem.team.teamList.platform"><![CDATA[Platform: {$team->getPlatform()}]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.create">
+		<item name="tourneysystem.tourney.create.game"><![CDATA[Game]]></item>
+		<item name="tourneysystem.tourney.create.game.description"><![CDATA[Pick the game the teams will be competing on.]]></item>
+		<item name="tourneysystem.tourney.create.gameMode"><![CDATA[Gamemode]]></item>
+		<item name="tourneysystem.tourney.create.gameMode.description"><![CDATA[Pick the gamemode the teams will be competing in.]]></item>
+		<item name="tourneysystem.tourney.create.platform.description"><![CDATA[Pick the platform the teams will be competing on.]]></item>
+		<item name="tourneysystem.tourney.create.officialTourney"><![CDATA[Is an official tourney]]></item>
+		<item name="tourneysystem.tourney.create.name"><![CDATA[Name]]></item>
+		<item name="tourneysystem.tourney.create.settings"><![CDATA[Settings]]></item>
+		<item name="tourneysystem.tourney.create.minParticipants"><![CDATA[Required number of participants]]></item>
+		<item name="tourneysystem.tourney.create.maxParticipants"><![CDATA[Maximum number of participants]]></item>
+		<item name="tourneysystem.tourney.create.enableMaxParticipants"><![CDATA[Set a maximum number of participants]]></item>
+		<item name="tourneysystem.tourney.create.successfulRedirect"><![CDATA[Tourney created.]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.list">
+		<item name="tourneysystem.tourney.list.noTourneys"><![CDATA[There are no tourneys so far.]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
