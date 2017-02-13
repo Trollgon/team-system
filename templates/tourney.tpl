@@ -24,11 +24,21 @@
                 <nav class="contentHeaderNavigation">
                     <ul>
                         {content}
-                        {if $tourney->isReferee($__wcf->user->userID)}
-                            <li><a href="{link application='tourneysystem' controller='TourneySettings' tourneyID=$tourney->tourneyID}{/link}"
+                        {if $tourney->rulebookID != null}
+                            <li><a href="{link application='tourneysystem' controller='Rulebook' object=$rulebook}{/link}"
+                                   title="{lang}tourneysystem.tourney.rulebook.header{/lang}" class="button"><span
+                                            class="icon icon16 fa-book"></span>
+                                    <span>{lang}tourneysystem.tourney.rulebook.header{/lang}</span></a></li>
+                        {/if}
+                        {if $tourney->creatorID == $__wcf->user->userID}
+                            <li><a href="{link application='tourneysystem' controller='TourneyEdit' object=$tourney}{/link}"
                                    title="{lang}tourneysystem.tourney.settings.header{/lang}" class="button"><span
                                             class="icon icon16 fa-cog"></span>
                                     <span>{lang}tourneysystem.tourney.settings.header{/lang}</span></a></li>
+                            <li><a href="{link application='tourneysystem' controller='RefereeList' tourneyID=$tourney->tourneyID}{/link}"
+                                   title="{lang}tourneysystem.tourney.referee.manage{/lang}" class="button"><span
+                                            class="icon icon16 fa-gavel"></span>
+                                    <span>{lang}tourneysystem.tourney.referee.manage{/lang}</span></a></li>
                         {/if}
                         {if $tourney->getTourneyStatusID() == 1}
                             {if $canSignUp == true}
@@ -61,7 +71,7 @@
 
 {if $tourney->getTourneyStatusID() == 0}
     <div class="container marginTop">
-        TBD
+        <p class="info">{lang}tourneysystem.tourney.page.invisible{/lang}</p>
     </div>
 {elseif $tourney->getTourneyStatusID() < 3 && $signUp->count() > 0}
 

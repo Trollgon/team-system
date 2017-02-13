@@ -69,6 +69,17 @@
             <requireObjectID>1</requireObjectID>
         </page>
 
+        <page identifier="de.trollgon.tourneysystem.RefereeList">
+            <pageType>system</pageType>
+            <controller>tourneysystem\page\RefereeListPage</controller>
+
+            <content language="en">
+                <title>Manage referees</title>
+            </content>
+
+            <name language="en">Manage referees of a tourney</name>
+        </page>
+
         <!-- Forms -->
         <page identifier="de.trollgon.tourneysystem.Invitation">
             <pageType>system</pageType>
@@ -167,6 +178,32 @@
 
             <content language="en">
                 <title>Create new tourney</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.tourneysystem.TourneyEdit">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\TourneyEditForm</controller>
+            <name language="en">Edit a tourney</name>
+        </page>
+
+        <page identifier="de.trollgon.tourneysystem.RefereeAdd">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\RefereeAddForm</controller>
+            <name language="en">Add a referee</name>
+
+            <content language="en">
+                <title>Add a referee</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.tourneysystem.RefereeKick">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\RefereeKickForm</controller>
+            <name language="en">Kick a referee</name>
+
+            <content language="en">
+                <title>Kick a referee</title>
             </content>
         </page>
     </import>

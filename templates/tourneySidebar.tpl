@@ -33,16 +33,18 @@
     </div>
 </section>
 
-{if $juryArray}
-    <section class="box">
-        <h2 class="boxTitle">{lang}tourneysystem.tourney.jury{/lang} <span class="badge">{$juryArray->count()}</span></h2>
+{if ($templateName != 'refereeList' && $templateName != 'refereeAdd' && $templateName != 'refereeKick')}
+    {if $juryArray}
+        <section class="box">
+            <h2 class="boxTitle">{lang}tourneysystem.tourney.referees{/lang} <span class="badge">{$juryArray->count()}</span></h2>
 
-        <div class="boxContent">
-            <ul class="userAvatarList">
-                {foreach from=$juryArray item=member}
-                    <li><a href="{link controller='User' object=$member}{/link}" title="{$member->username}" class="jsTooltip">{@$member->getAvatar()->getImageTag(48)}</a></li>
-                {/foreach}
-            </ul>
-        </div>
-    </section>
+            <div class="boxContent">
+                <ul class="userAvatarList">
+                    {foreach from=$juryArray item=member}
+                        <li><a href="{link controller='User' object=$member}{/link}" title="{$member->username}" class="jsTooltip">{@$member->getAvatar()->getImageTag(48)}</a></li>
+                    {/foreach}
+                </ul>
+            </div>
+        </section>
+    {/if}
 {/if}

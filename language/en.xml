@@ -164,7 +164,7 @@
 
 	<category name="tourneysystem.tourney">
 		<item name="tourneysystem.tourney.details"><![CDATA[Details]]></item>
-		<item name="tourneysystem.tourney.jury"><![CDATA[Jury]]></item>
+		<item name="tourneysystem.tourney.referees"><![CDATA[Jury]]></item>
 		<item name="tourneysystem.tourney.minParticipants"><![CDATA[Required number of participants]]></item>
 		<item name="tourneysystem.tourney.official"><![CDATA[Official tourney]]></item>
 		<item name="tourneysystem.tourney.participants"><![CDATA[Participants]]></item>
@@ -172,11 +172,14 @@
 	</category>
 
 	<category name="tourneysystem.tourney.create">
+		<item name="tourneysystem.tourney.create"><![CDATA[Create new tourney]]></item>
 		<item name="tourneysystem.tourney.create.game"><![CDATA[Game]]></item>
 		<item name="tourneysystem.tourney.create.game.description"><![CDATA[Pick the game the teams will be competing on.]]></item>
 		<item name="tourneysystem.tourney.create.gameMode"><![CDATA[Gamemode]]></item>
 		<item name="tourneysystem.tourney.create.gameMode.description"><![CDATA[Pick the gamemode the teams will be competing in.]]></item>
 		<item name="tourneysystem.tourney.create.platform.description"><![CDATA[Pick the platform the teams will be competing on.]]></item>
+		<item name="tourneysystem.tourney.create.rulebook"><![CDATA[Rulebook]]></item>
+		<item name="tourneysystem.tourney.create.rulebook.description"><![CDATA[Pick the rulebook this tourney will use.]]></item>
 		<item name="tourneysystem.tourney.create.officialTourney"><![CDATA[Is an official tourney]]></item>
 		<item name="tourneysystem.tourney.create.name"><![CDATA[Name]]></item>
 		<item name="tourneysystem.tourney.create.settings"><![CDATA[Settings]]></item>

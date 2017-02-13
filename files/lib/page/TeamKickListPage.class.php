@@ -2,6 +2,7 @@
 namespace tourneysystem\page;
 
 use tourneysystem\data\platform\Platform;
+use tourneysystem\util\TeamInvitationUtil;
 use wcf\data\user\UserProfileList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;

@@ -7,6 +7,7 @@
 
 namespace tourneysystem\page;
 
+use tourneysystem\data\rulebook\Rulebook;
 use tourneysystem\data\team\TeamList;
 use tourneysystem\data\tourney\Tourney;
 use wcf\page\AbstractPage;
@@ -16,7 +17,8 @@ use wcf\system\WCF;
 
 class TourneyPage extends AbstractPage {
 
-    public $tourney = null;
+    public $rulebook;
+    public $tourney;
     public $tourneyID = 0;
 
     /**
@@ -30,6 +32,10 @@ class TourneyPage extends AbstractPage {
             throw new IllegalLinkException();
         }
         $this->tourney = new Tourney($this->tourneyID);
+
+        if ($this->tourney->rulebookID != null) {
+            $this->rulebook = new Rulebook($this->tourney->rulebookID);
+        }
     }
 
     /**
@@ -53,8 +59,9 @@ class TourneyPage extends AbstractPage {
             'canSignUp' =>  $this->tourney->userCanSignUp(WCF::getUser()->getUserID()),
             'canSignOff'    =>  $this->tourney->userCanSignOff(WCF::getUser()->getUserID()),
             'juryArray' =>  $this->tourney->getReferees(),
-            'tourney'   =>  $this->tourney,
+            'rulebook'  =>  $this->rulebook,
             'signUp'    =>  $signUp,
+            'tourney'   =>  $this->tourney,
         ));
     }
 }

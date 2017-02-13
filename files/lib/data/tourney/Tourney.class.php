@@ -160,13 +160,35 @@ class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
         else {
             $sql = /** @lang MySQL */
                 "SELECT COUNT(tourneyID)  AS count
-                        FROM    tourneysystem1_referees
+                        FROM    tourneysystem1_referee_to_tourney
                         WHERE   userID = ?";
             $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array($userID));
             $row = $statement->fetchArray();
             return $row['count'] == 1;
         }
+    }
+
+    /**
+     * @param $userID
+     * @return bool
+     */
+    public function addReferee($userID) {
+        $sql = "INSERT INTO tourneysystem1_referee_to_tourney (userID, tourneyID)
+                  VALUES (?, ?)";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($userID, $this->getID()));
+    }
+
+    /**
+     * @param $userID
+     * @return bool
+     */
+    public function kickReferee($userID) {
+        $sql = "DELETE FROM tourneysystem1_referee_to_tourney
+                  WHERE userID = ? AND tourneyID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($userID, $this->getID()));
     }
 
     /**

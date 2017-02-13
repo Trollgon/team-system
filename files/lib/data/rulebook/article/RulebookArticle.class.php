@@ -44,7 +44,8 @@ class RulebookArticle extends TOURNEYSYSTEMDatabaseObject implements IRouteContr
 
     public function getRules() {
         $objectList = new RulebookRuleList();
-        $objectList->getConditionBuilder()->add('tourneysystem1_rulebook_rule.articleID = ?', array($this->rulebookArticleID));
+        $objectList->getConditionBuilder()->add('articleID = ?', array($this->rulebookArticleID));
+        $objectList->readObjects();
         return $objectList;
     }
 }
