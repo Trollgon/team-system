@@ -192,6 +192,10 @@ class TourneyCreateForm extends AbstractForm {
 
         $tourney = new Tourney(TourneyUtil::getTourneyIdByName($this->tourneyName));
 
+        $sql = "INSERT INTO tourneysystem1_referee_to_tourney (userID, tourneyID)
+                  VALUES (?, ?)";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array(WCF::getSession()->getUser()->getUserID(), $tourney->getID()));
 
         HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('Tourney', array(
             'application' 	=> 'tourneysystem',

@@ -77,6 +77,17 @@ CREATE TABLE tourneysystem1_tourney (
   UNIQUE KEY tourneyID (tourneyID)
 );
 
+DROP TABLE IF EXISTS tourneysystem1_referee_to_tourney;
+CREATE TABLE tourneysystem1_referee_to_tourney (
+  userID int(10) NOT NULL,
+  tourneyID int(10) NOT NULL
+);
+
+CREATE TABLE tourneysystem1_sign_up (
+  tourneyID int(10) NOT NULL,
+  participantID    INT(10) NOT NULL
+);
+
 DROP TABLE tourneysystem1_match_day;
 CREATE TABLE tourneysystem1_match_day (
   matchDayID INT(10) NOT NULL AUTO_INCREMENT,

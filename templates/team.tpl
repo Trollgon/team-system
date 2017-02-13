@@ -136,10 +136,6 @@
 	{if $team->isTeamLeader()}
 		{if $memberMissing == true}
 			<p class="warning">{lang}tourneysystem.team.page.notEnoughMembers{/lang}</p>
-		{else}
-			{if $subMissing == true}
-				<p class="info">{lang}tourneysystem.team.page.noSubs{/lang}</p>
-			{/if}
 		{/if}
 		{if $missingContactInfo == true}
 			<p class="warning">{lang}tourneysystem.team.page.missingContactinfo{/lang}</p>

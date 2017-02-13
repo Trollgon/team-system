@@ -147,7 +147,7 @@
 		<item name="tourneysystem.team.page.missingContactinfo"><![CDATA[At least one of your players did not set his/her gamertag on his profile.</br>
 		Players without naming their gamertag are not able to participate in a tournament.]]></item>
 		<item name="tourneysystem.team.page.notEnoughMembers"><![CDATA[Your team has less than 4 members and is not able to participate in a tournament.]]></item>
-		<item name="tourneysystem.team.page.noSubs"><![CDATA[You did not list any substitutes. This means your main team will be online during the whole tournament.]]></item>
+		<item name="tourneysystem.team.page.noSubs"><![CDATA[You did not list any substitutes. This means your main team must be online during the whole tournament.]]></item>
 		<item name="tourneysystem.team.page.missingContactinfo.player"><![CDATA[You did not set your gamertag on your profile!</br>
 		This means you are not able to participate in a tournament.]]></item>
 		<item name="tourneysystem.team.page.registrationDate"><![CDATA[Registered since {@$team->registrationDate|date}]]></item>
@@ -160,6 +160,15 @@
 	<category name="tourneysystem.team.teamList">
 		<item name="tourneysystem.team.teamList.leader"><![CDATA[Team leader:]]></item>
 		<item name="tourneysystem.team.teamList.platform"><![CDATA[Platform: {$team->getPlatform()}]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney">
+		<item name="tourneysystem.tourney.details"><![CDATA[Details]]></item>
+		<item name="tourneysystem.tourney.jury"><![CDATA[Jury]]></item>
+		<item name="tourneysystem.tourney.minParticipants"><![CDATA[Required number of participants]]></item>
+		<item name="tourneysystem.tourney.official"><![CDATA[Official tourney]]></item>
+		<item name="tourneysystem.tourney.participants"><![CDATA[Participants]]></item>
+		<item name="tourneysystem.tourney.type"><![CDATA[Type]]></item>
 	</category>
 
 	<category name="tourneysystem.tourney.create">
@@ -179,6 +188,22 @@
 
 	<category name="tourneysystem.tourney.list">
 		<item name="tourneysystem.tourney.list.noTourneys"><![CDATA[There are no tourneys so far.]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.settings">
+		<item name="tourneysystem.tourney.settings.header"><![CDATA[Settings]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.signOff">
+		<item name="tourneysystem.tourney.signOff.header"><![CDATA[Sign off]]></item>
+		<item name="tourneysystem.tourney.signOff.successfulRedirect"><![CDATA[Sign off successful.]]></item>
+		<item name="tourneysystem.tourney.signOff.title"><![CDATA[Sign off {@$team->teamName} from {@$tourney->tourneyName}]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.signUp">
+		<item name="tourneysystem.tourney.signUp.header"><![CDATA[Register]]></item>
+		<item name="tourneysystem.tourney.signUp.successfulRedirect"><![CDATA[Registration successful.]]></item>
+		<item name="tourneysystem.tourney.signUp.title"><![CDATA[Register {@$team->teamName} for {@$tourney->tourneyName}]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">

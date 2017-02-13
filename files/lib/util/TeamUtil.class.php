@@ -274,13 +274,13 @@ final class TeamUtil {
     public static function hasMissingSub($teamID) {
         $sql = "SELECT	COUNT(teamID) AS count
 				FROM	tourneysystem1_team
-				WHERE	(teamID = ?) AND ((sub1ID IS NULL) OR (sub2ID IS NULL) OR (sub3ID IS NULL))";
+				WHERE	(teamID = ?) AND (sub1ID IS NULL) AND (sub2ID IS NULL) AND (sub3ID IS NULL)";
 
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array($teamID));
         $row = $statement->fetchArray();
 
-        return $row['count'] == 3;
+        return $row['count'] == 1;
 
     }
 }
