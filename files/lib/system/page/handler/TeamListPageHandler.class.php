@@ -5,10 +5,8 @@
  * Time: 13:22
  */
 
-namespace teamsystem\system\page\handler;
-
-
-use teamsystem\data\invitations\InvitationList;
+namespace tourneysystem\system\page\handler;
+use tourneysystem\data\invitation\InvitationList;
 use wcf\system\page\handler\AbstractMenuPageHandler;
 use wcf\system\WCF;
 
@@ -16,7 +14,7 @@ class TeamListPageHandler extends AbstractMenuPageHandler {
 
     public function getOutstandingItemCount($objectID = null) {
         $invitationsList = new InvitationList();
-        $invitationsList->getConditionBuilder()->add("invitations.playerID = ?", array(WCF::getUser()->getUserID()));
+        $invitationsList->getConditionBuilder()->add("invitation.playerID = ?", array(WCF::getUser()->getUserID()));
         return $invitationsList->countObjects();
     }
 }

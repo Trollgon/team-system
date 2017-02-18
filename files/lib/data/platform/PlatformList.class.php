@@ -5,7 +5,7 @@
  * Time: 13:40
  */
 
-namespace teamsystem\data\platform;
+namespace tourneysystem\data\platform;
 
 
 use wcf\data\DatabaseObjectList;
@@ -14,5 +14,5 @@ class PlatformList extends DatabaseObjectList {
     /**
      * @see    \wcf\data\DatabaseObjectList::$className
      */
-    public $className = 'teamsystem\data\platform\Platform';
+    public $className = 'tourneysystem\data\platform\Platform';
 }

@@ -5,13 +5,12 @@
  * Time: 15:52
  */
 
-namespace teamsystem\acp\page;
+namespace tourneysystem\acp\page;
+
 use wcf\page\SortablePage;
 
 class PlatformListPage extends SortablePage {
+    public $activeMenuItem = 'wcf.acp.menu.link.tourneysystem.platform.list';
 
-    public $activeMenuItem = 'wcf.acp.menu.link.teamsystem.platform.list';
-
-    public $objectListClassName = 'teamsystem\data\platform\PlatformList';
-
+    public $objectListClassName = 'tourneysystem\data\platform\PlatformList';
 }

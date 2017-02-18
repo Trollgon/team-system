@@ -1,19 +1,24 @@
 /**
- * Initialize the TEAMSYSTEM namespace
+ * Initialize the TOURNEYSYSTEM namespace
  */
-var TEAMSYSTEM = {};
+var TOURNEYSYSTEM = {};
+
+/**
+ * Namespace for team functions.
+ */
+TOURNEYSYSTEM.Team = {};
 
 /**
  * Namespace for avatar functions.
  */
-TEAMSYSTEM.Avatar = {};
+TOURNEYSYSTEM.Team.Avatar = {};
 
 /**
  * Avatar upload function
  *
  * @see	WCF.Upload
  */
-TEAMSYSTEM.Avatar.Upload = WCF.Upload.extend({
+TOURNEYSYSTEM.Team.Avatar.Upload = WCF.Upload.extend({
 	/**
 	 * team id of avatar owner
 	 * @var	integer
@@ -21,12 +26,12 @@ TEAMSYSTEM.Avatar.Upload = WCF.Upload.extend({
 	_teamID: 0,
 
 	/**
-	 * Initalizes a new TEAMSYSTEM.Avatar.Upload object.
+	 * Initalizes a new TOURNEYSYSTEM.Avatar.Upload object.
 	 *
 	 * @param	integer			teamID
 	 */
 	init: function(teamID) {
-		this._super($('#avatarUpload > dd > div'), undefined, 'teamsystem\\data\\team\\avatar\\TeamAvatarAction');
+		this._super($('#avatarUpload > dd > div'), undefined, 'tourneysystem\\data\\team\\avatar\\TeamAvatarAction');
 		this._teamID = teamID || 0;
 
 		$('#avatarForm input[type=radio]').change(function() {

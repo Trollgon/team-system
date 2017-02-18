@@ -1,23 +1,21 @@
 <?php
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
-use teamsystem\data\platform\Platform;
-use teamsystem\util\TeamUtil;
+use tourneysystem\data\platform\Platform;
+use tourneysystem\util\TeamUtil;
 use wcf\data\user\User;
 use wcf\data\user\UserProfileList;
 use wcf\form\AbstractForm;
-use wcf\page\AbstractPage;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
-use teamsystem\data\invitations\InvitationAction;
-use teamsystem\util\TeamInvitationUtil;
+use tourneysystem\data\invitation\InvitationAction;
+use tourneysystem\util\TeamInvitationUtil;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
-use teamsystem\data\team\Team;
+use tourneysystem\data\team\Team;
 use wcf\system\exception\PermissionDeniedException;
 
 /**
@@ -26,7 +24,7 @@ use wcf\system\exception\PermissionDeniedException;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
 class TeamInvitationForm extends AbstractForm {
 	
@@ -78,8 +76,9 @@ class TeamInvitationForm extends AbstractForm {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 	
 	/**
@@ -87,10 +86,10 @@ class TeamInvitationForm extends AbstractForm {
 	 */
 	public function show() {
 		if (!$this->team->isTeamLeader()) {
-				WCF::getSession()->checkPermissions(array("mod.teamSystem.canEditTeams"));
+				WCF::getSession()->checkPermissions(array("mod.tourneySystem.canEditTeams"));
 			}
 		else {
-			if (TEAMSYSTEM_LOCK_TEAMEDIT == true) {
+			if (TOURNEYSYSTEM_LOCK_TEAMEDIT == true) {
 				throw new PermissionDeniedException();
 			}
 		}
@@ -165,9 +164,9 @@ class TeamInvitationForm extends AbstractForm {
 		$action = new InvitationAction(array(), 'create', $data);
 		$action->executeAction();
 		HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('teamInvitation', array(
-				'application' 	=> 'teamsystem',
+				'application' 	=> 'tourneysystem',
 				'teamID'		=> $this->teamID,
-		)),WCF::getLanguage()->get('teamsystem.team.invitation.successfulRedirect'), 10);
+		)),WCF::getLanguage()->get('tourneysystem.team.invitation.successfulRedirect'), 10);
 		exit;
 	}
 	
@@ -187,6 +186,7 @@ class TeamInvitationForm extends AbstractForm {
 				'user'			=> $this->team->getContactProfile(),
 				'playerList'	=> $this->playerList,
 				'userOption'	=> $this->userOption,
+                'teamIsEmpty'   => ($this->team->countMembers() < 2),
 		));
 	}
 

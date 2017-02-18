@@ -1,11 +1,11 @@
 <?php
-namespace teamsystem\data\team\avatar;
+namespace tourneysystem\data\team\avatar;
 use wcf\data\DatabaseObjectEditor;
 use wcf\system\WCF;
 
 /**
  * Class TeamAvatarEditor
- * @package teamsystem\data\team\avatar
+ * @package tourneysystem\data\team\avatar
  */
 class TeamAvatarEditor extends DatabaseObjectEditor {
 
@@ -18,7 +18,7 @@ class TeamAvatarEditor extends DatabaseObjectEditor {
      * @inheritDoc
      */
     public function delete() {
-        $sql = "DELETE FROM	teamsystem_team_avatar
+        $sql = "DELETE FROM	tourneysystem1_team_avatar
 			WHERE		avatarID = ?";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute([$this->avatarID]);
@@ -31,7 +31,7 @@ class TeamAvatarEditor extends DatabaseObjectEditor {
      */
     public static function deleteAll(array $objectIDs = []) {
         $sql = "SELECT	*
-			FROM	teamsystem1_team_avatar
+			FROM	tourneysystem1_team_avatar
 			WHERE	avatarID IN (".str_repeat('?,', count($objectIDs) - 1)."?)";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute($objectIDs);

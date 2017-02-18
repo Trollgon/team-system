@@ -5,10 +5,9 @@
  * Time: 19:46
  */
 
-namespace teamsystem\acp\form;
+namespace tourneysystem\acp\form;
 
-
-use teamsystem\data\platform\PlatformAction;
+use tourneysystem\data\platform\PlatformAction;
 use wcf\data\user\option\UserOptionList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
@@ -17,9 +16,17 @@ use wcf\util\StringUtil;
 
 class PlatformAddForm extends AbstractForm {
 
-    public $activeMenuItem = 'wcf.acp.menu.link.teamsystem.platform.add';
+    /**
+     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     */
+    public $activeMenuItem = 'wcf.acp.menu.link.tourneysystem.platform.add';
 
-    public $platformID = "";
+    /**
+     * @see wcf\page\AbstractPage::$neededPermissions
+     */
+    public $neededPermissions = array('admin.tourneySystem.canEditPlatforms');
+
+    public $platformID = 0;
     public $platformName = "";
     public $userOption = "";
 
@@ -48,7 +55,7 @@ class PlatformAddForm extends AbstractForm {
         }
 
         $sql =		"SELECT	COUNT(platformName) AS count
-						FROM	teamsystem1_platforms
+						FROM	tourneysystem1_platform
 						WHERE	platformName = ?";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -95,6 +102,7 @@ class PlatformAddForm extends AbstractForm {
         $userOptionArray->readObjects();
 
         WCF::getTPL()->assign(array(
+            'action'            =>  'add',
             'platformName'      =>  $this->platformName,
             'optionID'          =>  $this->userOption,
             'userOptionArray'   =>  $userOptionArray

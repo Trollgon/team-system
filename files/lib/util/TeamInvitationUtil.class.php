@@ -1,16 +1,10 @@
 <?php
-namespace teamsystem\util;
+namespace tourneysystem\util;
 use wcf\system\WCF;
 
 /**
- * Contains team-invitation-related functions.
- * 
- * @author	Trollgon
- * @copyright	2001-2015 WoltLab GmbH
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf
- * @subpackage	util
- * @category	Community Framework
+ * Class TeamInvitationUtil
+ * @package tourneysystem\util
  */
 final class TeamInvitationUtil {
 
@@ -25,12 +19,12 @@ final class TeamInvitationUtil {
 		switch ($positionID) {
 			case 1:
 				$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND ((player2ID IS NULL) OR (player3ID IS NULL) OR (player4ID IS NULL))";
 				break;
 			case 2:
 				$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND ((sub1ID IS NULL) OR (sub2ID IS NULL) OR (sub3ID IS NULL))";
 				break;			
 		}
@@ -53,7 +47,7 @@ final class TeamInvitationUtil {
 		switch ($position) {
 			case 1:
 				$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND (player2ID IS NULL)";
 				
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -66,7 +60,7 @@ final class TeamInvitationUtil {
 				}
 				
 				$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND (player3ID IS NULL)";
 				
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -79,7 +73,7 @@ final class TeamInvitationUtil {
 				}
 				
 						$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND (player4ID IS NULL)";
 				
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -94,7 +88,7 @@ final class TeamInvitationUtil {
 				break;
 			case 2:
 				$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND (sub1ID IS NULL)";
 				
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -107,7 +101,7 @@ final class TeamInvitationUtil {
 				}
 				
 		$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND (sub2ID IS NULL)";
 				
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -120,7 +114,7 @@ final class TeamInvitationUtil {
 				}
 				
 				$sql = "SELECT	COUNT(teamID) AS count
-				FROM	teamsystem1_teams
+				FROM	tourneysystem1_team
 				WHERE	(teamID = ?) AND (sub3ID IS NULL)";
 				
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -146,7 +140,7 @@ final class TeamInvitationUtil {
 	public static function checkDoubleInvitations($teamID, $userID) {
 
         $sql = "SELECT	COUNT(invitationID) AS count
-				FROM	teamsystem1_invitations
+				FROM	tourneysystem1_invitation
 				WHERE	(teamID = ?) AND (playerID = ?)";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -166,7 +160,7 @@ final class TeamInvitationUtil {
     public static function countInvitations($userID) {
 
         $sql = "SELECT	COUNT(invitationID) AS count
-				FROM	teamsystem1_invitations
+				FROM	tourneysystem1_invitation
 				WHERE	(playerID = ?)";
 
         $statement = WCF::getDB()->prepareStatement($sql);

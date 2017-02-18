@@ -5,12 +5,13 @@
  * Time: 14:16
  */
 
-namespace teamsystem\form;
+namespace tourneysystem\form;
 
-use teamsystem\data\platform\Platform;
-use teamsystem\data\team\avatar\TeamAvatarAction;
-use teamsystem\data\team\Team;
-use teamsystem\data\team\TeamAction;
+use tourneysystem\data\platform\Platform;
+use tourneysystem\data\team\avatar\TeamAvatarAction;
+use tourneysystem\data\team\Team;
+use tourneysystem\data\team\TeamAction;
+use tourneysystem\util\TeamInvitationUtil;
 use wcf\data\user\UserProfileList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -72,7 +73,7 @@ class TeamAvatarEditForm extends AbstractForm {
     public function show() {
         parent::show();
         if(!$this->team->isTeamLeader()) {
-            if (!WCF::getSession()->getPermission("mod.teamSystem.canEditTeams")) {
+            if (!WCF::getSession()->getPermission("mod.tourneySystem.canEditTeams")) {
                 throw new PermissionDeniedException();
             }
         }
@@ -91,12 +92,11 @@ class TeamAvatarEditForm extends AbstractForm {
      */
     public function validate() {
         parent::validate();
-        if ($this->avatarType != 'custom' && $this->avatarType != 'gravatar') $this->avatarType = 'none';
-        switch ($this->avatarType) {
-            case 'custom':
-                if (!$this->team->avatarID) {
-                    throw new UserInputException('custom');
-                }
+        if ($this->avatarType != 'custom') {
+            $this->avatarType = 'none';
+        }
+        elseif (!$this->team->avatarID) {
+            throw new UserInputException('custom');
         }
     }
 
@@ -140,8 +140,9 @@ class TeamAvatarEditForm extends AbstractForm {
      */
     public function readData() {
         parent::readData();
-        PageLocationManager::getInstance()->addParentLocation('de.trollgon.teamsystem.TeamPage', $this->teamID, $this->team);
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation('de.trollgon.tourneysystem.TeamPage', $this->teamID, $this->team);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
 
         if (empty($_POST)) {
             if ($this->team->avatarID) $this->avatarType = 'custom';
@@ -164,6 +165,8 @@ class TeamAvatarEditForm extends AbstractForm {
 			'user'			=> $this->team->getContactProfile(),
 			'playerList'	=> $this->playerList,
 			'userOption'	=> $this->userOption,
+            'teamIsFull'	=> (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2)),
+            'teamIsEmpty'   => ($this->team->countMembers() < 2),
         ));
     }
 }

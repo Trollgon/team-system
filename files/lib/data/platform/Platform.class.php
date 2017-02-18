@@ -5,17 +5,17 @@
  * Time: 11:39
  */
 
-namespace teamsystem\data\platform;
+namespace tourneysystem\data\platform;
 
-
-use teamsystem\data\TEAMSYSTEMDatabaseObject;
+use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use wcf\data\user\option\UserOption;
+use wcf\system\request\IRouteController;
 
-class Platform extends TEAMSYSTEMDatabaseObject {
+class Platform extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableName
      */
-    protected static $databaseTableName = 'platforms';
+    protected static $databaseTableName = 'platform';
 
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
@@ -35,5 +35,19 @@ class Platform extends TEAMSYSTEMDatabaseObject {
     public function getPlatformUserOption() {
         $option = new UserOption($this->optionID);
         return $option;
+    }
+
+    /**
+     * @see wcf\system\request\IRouteController::getTitle()
+     */
+    public function getTitle() {
+        return $this->platformName;
+    }
+
+    /**
+     * @see wcf\system\request\IRouteController::getID()
+     */
+    public function getID() {
+        return $this->platformID;
     }
 }

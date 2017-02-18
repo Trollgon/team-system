@@ -1,15 +1,14 @@
 <?php
-namespace teamsystem\data\team;
+namespace tourneysystem\data\team;
 use wcf\data\DatabaseObjectList;
-use wcf\system\WCF;
 
 /**
  * Class TeamList
- * @package teamsystem\data\team
+ * @package tourneysystem\data\team
  */
 class TeamList extends DatabaseObjectList {
 	/**
 	 * @see    \wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'teamsystem\data\team\Team';
+	public $className = 'tourneysystem\data\team\Team';
 }

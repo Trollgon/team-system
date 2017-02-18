@@ -1,7 +1,8 @@
 <?php
-namespace teamsystem\page;
+namespace tourneysystem\page;
 
-use teamsystem\data\platform\Platform;
+use tourneysystem\data\platform\Platform;
+use tourneysystem\util\TeamUtil;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
@@ -9,9 +10,9 @@ use wcf\system\WCF;
 use wcf\data\user\User;
 use wcf\page\SortablePage;
 use wcf\data\user\UserProfileList;
-use teamsystem\data\team\Team;
-use teamsystem\util\TeamInvitationUtil;
-use teamsystem\util\TeamContactsUtil;
+use tourneysystem\data\team\Team;
+use tourneysystem\util\TeamInvitationUtil;
+use tourneysystem\util\TeamContactsUtil;
 
 /**
  * Shows the page of a team.
@@ -19,9 +20,8 @@ use teamsystem\util\TeamContactsUtil;
  * @author	Trollgon
  * @copyright	Trollgon
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.trollgon.teamsystem
+ * @package	de.trollgon.tourneysystem
  */
-
 class TeamPage extends SortablePage {
 	
 	public $teamID = 0;
@@ -144,7 +144,7 @@ class TeamPage extends SortablePage {
 
         $sql = /** @lang MySQL */
             "SELECT userID
-                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  FROM tourneysystem1_user_to_team_to_position_to_platform
                   WHERE teamID = ? AND positionID < 4";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -160,7 +160,7 @@ class TeamPage extends SortablePage {
 
         $sql = /** @lang MySQL */
             "SELECT userID
-                  FROM teamsystem1_user_to_team_to_position_to_platform
+                  FROM tourneysystem1_user_to_team_to_position_to_platform
                   WHERE teamID = ? AND positionID > 3";
 
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -180,7 +180,7 @@ class TeamPage extends SortablePage {
 	 * @see \wcf\page\AbstractPage::show()
 	 */
 	public function show() {
-		if(!WCF::getSession()->getPermission("user.teamSystem.canViewTeamPages")) {
+		if(!WCF::getSession()->getPermission("user.tourneySystem.canViewTeamPages")) {
 			throw new PermissionDeniedException();
 		}
 		parent::show();
@@ -192,18 +192,18 @@ class TeamPage extends SortablePage {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.teamsystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TeamList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 	
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()
 	 */
-	
 	public function assignVariables() {
 		parent::assignVariables();
 		
 		$memberMissing = TeamInvitationUtil::isEmptyPosition($this->teamID, 1);
-		$subMissing = TeamContactsUtil::hasMissingSub($this->teamID);
+		$subMissing = TeamUtil::hasMissingSub($this->teamID);
 		WCF::getTPL()->assign(array(
 				'team' 						=> $this->team,
 				'teamID'					=> $this->teamID,
@@ -218,7 +218,8 @@ class TeamPage extends SortablePage {
 				'subMissing'				=> $subMissing,
 				'missingContactInfo'		=> $this->missingContactInfo,
 				'playerMissingContactInfo'	=> $this->playerMissingContactInfo,
-                'teamIsFull'	            => (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2))
+                'teamIsFull'	            => (!TeamInvitationUtil::isEmptyPosition($this->teamID, 1) && !TeamInvitationUtil::isEmptyPosition($this->teamID, 2)),
+                'teamIsEmpty'               => ($this->team->countMembers() < 2),
 		));
 	}
 	
