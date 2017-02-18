@@ -4,8 +4,8 @@
 		<packagename>Tourneysystem</packagename>
 		<packagedescription>Tourneysystem for WoltLab Community Framework™</packagedescription>
 		<isapplication>1</isapplication>
-		<version>1.0.1 Alpha 6</version>
-		<date>2017-01-24</date>
+		<version>1.0.0</version>
+		<date>2017-02-18</date>
 	</packageinformation>
 	
 	<authorinformation>
