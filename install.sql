@@ -88,33 +88,6 @@ CREATE TABLE tourneysystem1_sign_up (
   participantID    INT(10) NOT NULL
 );
 
-DROP TABLE tourneysystem1_match_day;
-CREATE TABLE tourneysystem1_match_day (
-  matchDayID INT(10) NOT NULL AUTO_INCREMENT,
-  tourneyID int(10) NOT NULL,
-  startDate DATETIME,
-  endDate DATETIME,
-  PRIMARY KEY (matchDayID),
-  UNIQUE KEY matchDayID (matchDayID)
-);
-
-DROP TABLE IF EXISTS tourneysystem1_match;
-CREATE TABLE tourneysystem1_match (
-  matchID int(10) NOT NULL AUTO_INCREMENT,
-  tourneyID int(10) NOT NULL,
-  matchDayID int(10),
-  participantTypeID int(10) NOT NULL,
-  numberOfMaxSessions int(10) NOT NULL DEFAULT 1,
-  PRIMARY KEY (matchID),
-  UNIQUE KEY matchID (matchID)
-);
-
-DROP TABLE IF EXISTS tourneysystem1_participant_to_match;
-CREATE TABLE tourneysystem1_participant_to_match (
-  matchID int(10) NOT NULL,
-  participantID int(10) NOT NULL
-);
-
 /* Teams */
 
 DROP TABLE IF EXISTS tourneysystem1_team;
@@ -186,11 +159,6 @@ ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (gameID) REFERENCES tourneysy
 ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (gamemodeID) REFERENCES tourneysystem1_gamemode (gamemodeID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (rulebookID) REFERENCES tourneysystem1_rulebook (rulebookID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_tourney ADD FOREIGN KEY (creatorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-
-ALTER TABLE tourneysystem1_match_day ADD FOREIGN KEY (tourneyID) REFERENCES tourneysystem1_tourney (tourneyID) ON DELETE CASCADE;
-
-ALTER TABLE tourneysystem1_match ADD FOREIGN KEY (tourneyID) REFERENCES tourneysystem1_tourney (tourneyID) ON DELETE CASCADE;
-ALTER TABLE tourneysystem1_match ADD FOREIGN KEY (matchDayID) REFERENCES tourneysystem1_match_day (matchDayID) ON DELETE CASCADE;
 
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (leaderID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE tourneysystem1_team ADD FOREIGN KEY (player2ID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
