@@ -30,10 +30,7 @@
     <div class="section sectionContainerList">
         <ol class="containerList userList">
             {foreach from=$objects item=tourney}
-                <tr class="appRow">
-                    <td class="columnName"><a href="{link controller='Tourney' application='tourneysystem' object=$tourney}{/link}">{@$tourney->tourneyName}</a></td>
-                    {event name='columns'}
-                </tr>
+                {include file='tourneyItem' application='tourneysystem'}
             {/foreach}
         </ol>
     </div>

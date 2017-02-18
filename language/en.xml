@@ -171,6 +171,10 @@
 		<item name="tourneysystem.tourney.type"><![CDATA[Type]]></item>
 	</category>
 
+	<category name="tourneysystem.tourney.controlpanel">
+		<item name="tourneysystem.tourney.controlpanel.header"><![CDATA[Control Panel]]></item>
+	</category>
+
 	<category name="tourneysystem.tourney.create">
 		<item name="tourneysystem.tourney.create"><![CDATA[Create new tourney]]></item>
 		<item name="tourneysystem.tourney.create.game"><![CDATA[Game]]></item>
@@ -191,6 +195,20 @@
 
 	<category name="tourneysystem.tourney.list">
 		<item name="tourneysystem.tourney.list.noTourneys"><![CDATA[There are no tourneys so far.]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.page">
+		<item name="tourneysystem.tourney.page.invisible"><![CDATA[Tourney is invisible until setup is finished.]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.referee">
+		<item name="tourneysystem.tourney.referee.add"><![CDATA[Add referee]]></item>
+		<item name="tourneysystem.tourney.referee.kick.this"><![CDATA[Kick this referee]]></item>
+		<item name="tourneysystem.tourney.referee.manage"><![CDATA[Manage referees]]></item>
+	</category>
+
+	<category name="tourneysystem.tourney.rulebook">
+		<item name="tourneysystem.tourney.rulebook.header"><![CDATA[Rulebook]]></item>
 	</category>
 
 	<category name="tourneysystem.tourney.settings">

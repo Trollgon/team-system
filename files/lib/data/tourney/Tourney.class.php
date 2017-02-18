@@ -12,6 +12,7 @@ use tourneysystem\data\gamemode\Gamemode;
 use tourneysystem\data\platform\Platform;
 use tourneysystem\data\team\Team;
 use tourneysystem\data\team\TeamList;
+use tourneysystem\data\tourney\avatar\DefaultTourneyAvatar;
 use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use tourneysystem\util\TeamUtil;
 use wcf\data\user\UserProfileList;
@@ -28,6 +29,12 @@ class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
      * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'tourneyID';
+
+    /**
+     * team avatar
+     * @var	\wcf\data\user\avatar\IUserAvatar
+     */
+    protected $avatar = null;
 
     /**
      * @see wcf\system\request\IRouteController::getID()
@@ -216,5 +223,18 @@ class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
 
             return $list;
         }
+    }
+
+    /**
+     * Returns the team's avatar.
+     *
+     * @return DefaultTourneyAvatar
+     */
+    public function getAvatar() {
+        // use default avatar
+        if ($this->avatar === null) {
+            $this->avatar = new DefaultTourneyAvatar();
+        }
+        return $this->avatar;
     }
 }
