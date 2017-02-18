@@ -12,6 +12,7 @@ use tourneysystem\data\team\TeamList;
 use tourneysystem\data\tourney\Tourney;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
@@ -36,6 +37,17 @@ class TourneyPage extends AbstractPage {
         if ($this->tourney->rulebookID != null) {
             $this->rulebook = new Rulebook($this->tourney->rulebookID);
         }
+    }
+
+    /**
+     * @see \wcf\page\AbstractPage::show()
+     */
+    public function show() {
+        if ($this->tourney->getTourneyStatusID() == 0 && !$this->tourney->isReferee(WCF::getUser()->getUserID())) {
+            throw new PermissionDeniedException();
+        }
+
+        parent::show();
     }
 
     /**
