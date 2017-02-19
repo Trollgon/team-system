@@ -35,11 +35,4 @@
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
 	</instructions>
-
-	<instructions type="update" fromversion="1.0.1 Alpha 5">
-		<instruction type="file"/>
-		<instruction type="template"/>
-		<instruction type="language"/>
-		<instruction type="page"/>
-	</instructions>
 </package>
