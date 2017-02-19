@@ -148,10 +148,10 @@ class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
             $array[] = $row['userID'];
         }
         $creator = array($this->creatorID);
-        array_merge($creator, $array);
+        $final = array_merge($creator, $array);
 
         $list = new UserProfileList();
-        $list->setObjectIDs($array);
+        $list->setObjectIDs($final);
         $list->readObjects();
         return $list;
     }
