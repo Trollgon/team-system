@@ -69,6 +69,16 @@
             <requireObjectID>1</requireObjectID>
         </page>
 
+        <page identifier="de.trollgon.tourneysystem.TourneyRefereeList">
+            <pageType>system</pageType>
+            <controller>tourneysystem\page\RefereeListPage</controller>
+            <name language="en">Tourneys</name>
+
+            <content language="en">
+                <title>Tourneys</title>
+            </content>
+        </page>
+
         <page identifier="de.trollgon.tourneysystem.RefereeList">
             <pageType>system</pageType>
             <controller>tourneysystem\page\RefereeListPage</controller>

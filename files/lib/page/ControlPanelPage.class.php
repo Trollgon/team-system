@@ -12,6 +12,7 @@ use tourneysystem\data\tourney\Tourney;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
 class ControlPanelPage extends AbstractPage {
@@ -47,6 +48,16 @@ class ControlPanelPage extends AbstractPage {
         }
 
         parent::show();
+    }
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyPage", $this->tourneyID, $this->tourney);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 
     /**

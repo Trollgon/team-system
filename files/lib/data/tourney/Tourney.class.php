@@ -15,11 +15,13 @@ use tourneysystem\data\team\TeamList;
 use tourneysystem\data\tourney\avatar\DefaultTourneyAvatar;
 use tourneysystem\data\TOURNEYSYSTEMDatabaseObject;
 use tourneysystem\util\TeamUtil;
+use wcf\data\ITitledLinkObject;
 use wcf\data\user\UserProfileList;
 use wcf\system\request\IRouteController;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
-class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
+class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController, ITitledLinkObject  {
     /**
      * @see	\wcf\data\DatabaseObject::$databaseTableName
      */
@@ -236,5 +238,18 @@ class Tourney extends TOURNEYSYSTEMDatabaseObject implements IRouteController {
             $this->avatar = new DefaultTourneyAvatar();
         }
         return $this->avatar;
+    }
+
+    /**
+     * Returns the link to the object.
+     *
+     * @return    string
+     */
+    public function getLink() {
+        return LinkHandler::getInstance()->getLink('Tourney', [
+            'application' => 'tourneysystem',
+            'object' => $this,
+            'forceFrontend' => true
+        ]);
     }
 }
