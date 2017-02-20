@@ -16,15 +16,4 @@ class TOURNEYSYSTEMCore extends AbstractApplication {
 	 * @see	\wcf\system\application\AbstractApplication::$abbreviation
 	 */
 	protected $abbreviation = 'tourneysystem';
-	
-	/**
-	 * @see \wcf\system\application\AbstractApplication::__run()
-	 */
-	public function __run() {
-		if (!$this->isActiveApplication()) {
-			return;
-		}
-
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
-	}
 }
