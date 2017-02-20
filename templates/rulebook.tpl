@@ -15,14 +15,14 @@
 {include file='header'}
 
 <div class="section htmlContent">
-    {foreach from=$rulebook->getArticles() item=article key=key}
+    {foreach from=$rulebook->getArticles() item=article}
         <header class="boxHeadline boxSubHeadline">
-            <h2>§{@$key} {@$article->getTitle()}</h2>
+            <h2>§{@$article->articleOrder}: {@$article->getTitle()}</h2>
         </header>
         <div class="container marginTop">
             <ol class="containerList userList">
                 {foreach from=$article->getRules() item=rule}
-                    <p>({@$rule->ruleOrder}) {@$rule->text}</p>
+                    <p>{if $rule->ruleOrder > 0}({@$rule->ruleOrder}) {/if}{@$rule->text}</p>
                 {/foreach}
             </ol>
         </div>
