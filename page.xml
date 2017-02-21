@@ -210,6 +210,26 @@
                 <title>Kick a referee</title>
             </content>
         </page>
+
+        <page identifier="de.trollgon.tourneysystem.SignUp">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\TourneySignUpForm</controller>
+            <name language="en">Sign Up for a tourney</name>
+
+            <content language="en">
+                <title>Sign Up for a tourney</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.tourneysystem.SignOff">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\TourneySignUpForm</controller>
+            <name language="en">Sign off from a tourney</name>
+
+            <content language="en">
+                <title>Sign off from a tourney</title>
+            </content>
+        </page>
     </import>
 </data>
 
