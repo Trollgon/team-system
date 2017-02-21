@@ -98,7 +98,7 @@ class RefereeKickForm extends AbstractForm {
     public function readData() {
         parent::readData();
 
-        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyRefereeList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.RefereeList");
         PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyPage", $this->tourneyID, $this->tourney);
         PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
