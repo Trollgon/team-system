@@ -71,9 +71,9 @@ class TeamPage extends SortablePage {
             $player2 = new User($this->team->player2ID);
             if ($player2->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            if ($this->team->player2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
+                if ($this->team->player2ID == WCF::getUser()->getUserID()) {
+                    $this->playerMissingContactInfo = true;
+                }
             }
         }
 
@@ -81,9 +81,9 @@ class TeamPage extends SortablePage {
             $player3 = new User($this->team->player3ID);
             if ($player3->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            if ($this->team->player3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
+                if ($this->team->player3ID == WCF::getUser()->getUserID()) {
+                    $this->playerMissingContactInfo = true;
+                }
             }
         }
 
@@ -91,9 +91,9 @@ class TeamPage extends SortablePage {
             $player4 = new User($this->team->player4ID);
             if ($player4->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            if ($this->team->player4ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
+                if ($this->team->player4ID == WCF::getUser()->getUserID()) {
+                    $this->playerMissingContactInfo = true;
+                }
             }
         }
 
@@ -101,9 +101,9 @@ class TeamPage extends SortablePage {
 		    $sub1 = new User($this->team->sub1ID);
             if ($sub1->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            if ($this->team->sub1ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
+                if ($this->team->sub1ID == WCF::getUser()->getUserID()) {
+                    $this->playerMissingContactInfo = true;
+                }
             }
 		}
 
@@ -111,9 +111,9 @@ class TeamPage extends SortablePage {
             $sub2 = new User($this->team->sub2ID);
             if ($sub2->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            if ($this->team->sub2ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
+                if ($this->team->sub2ID == WCF::getUser()->getUserID()) {
+                    $this->playerMissingContactInfo = true;
+                }
             }
         }
 
@@ -121,9 +121,9 @@ class TeamPage extends SortablePage {
             $sub3 = new User($this->team->sub3ID);
             if ($sub3->getUserOption($userOptionName) == NULL) {
                 $this->missingContactInfo = true;
-            }
-            if ($this->team->sub3ID == WCF::getUser()->getUserID()) {
-                $this->playerMissingContactInfo = true;
+                if ($this->team->sub3ID == WCF::getUser()->getUserID()) {
+                    $this->playerMissingContactInfo = true;
+                }
             }
         }
 
