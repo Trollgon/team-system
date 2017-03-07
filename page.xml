@@ -185,6 +185,10 @@
             <pageType>system</pageType>
             <controller>tourneysystem\form\TourneyEditForm</controller>
             <name language="en">Edit a tourney</name>
+
+            <content language="en">
+                <title>Edit a tourney</title>
+            </content>
         </page>
 
         <page identifier="de.trollgon.tourneysystem.RefereeAdd">
@@ -204,6 +208,26 @@
 
             <content language="en">
                 <title>Kick a referee</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.tourneysystem.SignUp">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\TourneySignUpForm</controller>
+            <name language="en">Sign Up for a tourney</name>
+
+            <content language="en">
+                <title>Sign Up for a tourney</title>
+            </content>
+        </page>
+
+        <page identifier="de.trollgon.tourneysystem.SignOff">
+            <pageType>system</pageType>
+            <controller>tourneysystem\form\TourneySignUpForm</controller>
+            <name language="en">Sign off from a tourney</name>
+
+            <content language="en">
+                <title>Sign off from a tourney</title>
             </content>
         </page>
     </import>

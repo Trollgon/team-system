@@ -32,7 +32,7 @@
         <dl{if $errorField == 'text'} class="formError"{/if}>
             <dt><label for="text">{lang}tourneysystem.acp.rulebookRule.text{/lang}</label></dt>
             <dd>
-                <textarea id="text" name="text" rows="10" cols="40" maxlength="400">{@$text}</textarea>
+                <textarea id="text" name="text" rows="10" cols="40" maxlength="4200">{@$text}</textarea>
                 {if $errorField == 'text'}
                     <small class="innerError">
                         {lang}tourneysystem.team.page.description.error.length{/lang}

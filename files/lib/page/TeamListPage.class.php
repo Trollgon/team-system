@@ -3,6 +3,7 @@
 namespace tourneysystem\page;
 
 use tourneysystem\data\team\TeamList;
+use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 use tourneysystem\util\TeamUtil;
 use wcf\page\SortablePage;
@@ -21,6 +22,15 @@ class TeamListPage extends SortablePage {
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'tourneysystem\data\team\TeamList';
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
+    }
 
 	/**
 	 * @see \wcf\page\AbstractPage::assignVariables()

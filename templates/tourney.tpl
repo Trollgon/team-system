@@ -100,17 +100,23 @@
     <div class="container marginTop">
         <p class="info">{lang}tourneysystem.tourney.page.invisible{/lang}</p>
     </div>
-{elseif $tourney->getTourneyStatusID() < 3 && $signUp->count() > 0}
+{elseif $tourney->getTourneyStatusID() < 3}
 
     <header class="boxHeadline boxSubHeadline">
-        <h2>{lang}tourneysystem.tourney.signUp.header{/lang} <span class="badge">{$signUp->count()}</span></h2>
+        <h2>{lang}tourneysystem.tourney.participants{/lang} <span class="badge">{$signUp->count()}</span></h2>
     </header>
 
-    <ol class="containerList userList">
-        {foreach from=$signUp item=team}
-            {include file='teamItem' application='tourneysystem'}
-        {/foreach}
-    </ol>
+    {if $signUp|count > 0}
+        <div class="section sectionContainerList">
+            <ol class="containerList userList">
+                {foreach from=$signUp item=team}
+                    {include file='teamItem' application='tourneysystem'}
+                {/foreach}
+            </ol>
+        </div>
+    {else}
+        <p class="info">{lang}tourneysystem.team.overview.noTeams{/lang}</p>
+    {/if}
 
 {/if}
 

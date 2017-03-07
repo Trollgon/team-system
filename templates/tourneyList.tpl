@@ -1,7 +1,7 @@
 {capture assign='contentHeader'}
     <header class="contentHeader articleContentHeader">
         <div class="contentHeaderTitle">
-            <h1 class="contentTitle" itemprop="name headline">{lang}tourneysystem.header.menu.tourneys{/lang}</h1>
+            <h1 class="contentTitle" itemprop="name headline">{lang}tourneysystem.header.menu.tourneys{/lang} <span class="badge">{$objects|count}</span></h1>
         </div>
 
         {if $__wcf->getUser()->getUserID() != 0}

@@ -12,6 +12,7 @@ use tourneysystem\data\tourney\TourneyAction;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -102,6 +103,9 @@ class TourneyEditForm extends TourneyCreateForm {
      */
     public function readData() {
         parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyPage", $this->tourneyID, $this->tourney);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
 
         $this->gameID = $this->tourney->gameID;
         $this->gamemodeID = $this->tourney->gamemodeID;

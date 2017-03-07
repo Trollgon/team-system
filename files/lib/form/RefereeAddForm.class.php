@@ -13,6 +13,7 @@ use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -101,6 +102,17 @@ class RefereeAddForm extends AbstractForm {
             'tourneyID'		=> $this->tourneyID,
         )),WCF::getLanguage()->get('tourneysystem.tourney.referee.add.successfulRedirect'), 10);
         exit;
+    }
+
+    /**
+     * @see \wcf\page\AbstractPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.RefereeList");
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyPage", $this->tourneyID, $this->tourney);
+        PageLocationManager::getInstance()->addParentLocation("de.trollgon.tourneysystem.TourneyList");
     }
 
     /**
